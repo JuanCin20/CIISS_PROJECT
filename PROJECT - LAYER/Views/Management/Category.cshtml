@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Category";
-    ViewData["Nombre_Apellido_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
+    ViewData["Nombre_Apellido_Usuario_String"] =
+    this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
     ViewData["E_Mail_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("E_Mail_Usuario_String");
     ViewData["Imagen_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("Imagen_Usuario_String");
 }
@@ -37,13 +38,13 @@
 
 <!--Vertically Centered Modal-->
 <div class="modal fade" id="Form_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-     data-bs-backdrop="static">
+    data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Categoría del Insumo</h1>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    aria-label="Close"></button>
             </div>
             <form id="Form_Category" class="needs-validation" novalidate>
                 <div class="modal-body">
@@ -52,7 +53,7 @@
                         <div class="col-sm-6">
                             <label for="Estado_Categoria_Insumo" class="form-label">Estado:</label>
                             <select class="form-select" id="Estado_Categoria_Insumo" name="Estado_Categoria_Insumo"
-                                    aria-label="Default select example">
+                                aria-label="Default select example">
                                 <option value="0" selected disabled>Seleccionar</option>
                                 <option value="Available">Disponible</option>
                                 <option value="Not_Available">No Disponible</option>
@@ -61,13 +62,13 @@
                         <div class="col-sm-6">
                             <label for="Nombre_Categoria_Insumo" class="form-label">Nombre:</label>
                             <input type="text" class="form-control" id="Nombre_Categoria_Insumo"
-                                   name="Nombre_Categoria_Insumo" placeholder="Nombre" autocomplete="off">
+                                name="Nombre_Categoria_Insumo" placeholder="Nombre" autocomplete="off">
                         </div>
                         <div class="col-sm-12">
                             <label for="Descripcion_Categoria_Insumo" class="form-label">Descripción:</label>
                             <textarea class="form-control" id="Descripcion_Categoria_Insumo"
-                                      name="Descripcion_Categoria_Insumo" placeholder="Descripción"
-                                      autocomplete="off"></textarea>
+                                name="Descripcion_Categoria_Insumo" placeholder="Descripción"
+                                autocomplete="off"></textarea>
                         </div>
                     </div>
                 </div>

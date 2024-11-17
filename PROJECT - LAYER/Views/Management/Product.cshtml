@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Product";
-    ViewData["Nombre_Apellido_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
+    ViewData["Nombre_Apellido_Usuario_String"] =
+    this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
     ViewData["E_Mail_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("E_Mail_Usuario_String");
     ViewData["Imagen_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("Imagen_Usuario_String");
 }
@@ -40,13 +41,13 @@
 
 <!--Vertically Centered Modal-->
 <div class="modal fade" id="Form_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-     data-bs-backdrop="static">
+    data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Producto</h1>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    aria-label="Close"></button>
             </div>
             <form id="Form_Product" class="needs-validation" novalidate>
                 <div class="modal-body">
@@ -55,7 +56,7 @@
                         <div class="col-sm-6">
                             <label for="Estado_Producto" class="form-label">Estado:</label>
                             <select class="form-select" id="Estado_Producto" name="Estado_Producto"
-                                    aria-label="Default select example">
+                                aria-label="Default select example">
                                 <option value="0" selected disabled>Seleccionar</option>
                                 <option value="Available">Disponible</option>
                                 <option value="Not_Available">No Disponible</option>
@@ -64,40 +65,41 @@
                         <div class="col-sm-6">
                             <label for="Nombre_Producto" class="form-label">Nombre:</label>
                             <input type="text" class="form-control" id="Nombre_Producto" name="Nombre_Producto"
-                                   placeholder="Nombre" autocomplete="off">
+                                placeholder="Nombre" autocomplete="off">
                         </div>
                         <div class="col-sm-6">
                             <label for="Categoria_Producto" class="form-label">Categoría:</label>
                             <select class="form-select" id="Categoria_Producto" name="Categoria_Producto"
-                                    aria-label="Default select example">
+                                aria-label="Default select example">
                             </select>
                         </div>
                         <div class="col-sm-6">
                             <label for="Marca_Producto" class="form-label">Marca:</label>
                             <select class="form-select" id="Marca_Producto" name="Marca_Producto"
-                                    aria-label="Default select example">
+                                aria-label="Default select example">
                             </select>
                         </div>
                         <div class="col-sm-6">
                             <label for="Precio_Producto" class="form-label">Precio:</label>
                             <input type="number" class="form-control" id="Precio_Producto" name="Precio_Producto"
-                                   placeholder="Precio" autocomplete="off">
+                                placeholder="Precio" autocomplete="off">
                         </div>
                         <div class="col-sm-6">
                             <label for="Stock_Producto" class="form-label">Stock:</label>
                             <input type="number" class="form-control" id="Stock_Producto" name="Stock_Producto"
-                                   placeholder="Stock" autocomplete="off">
+                                placeholder="Stock" autocomplete="off">
                         </div>
                         <div class="col-sm-12 d-flex flex-column align-items-center gap-2">
                             <img id="Imagen_Producto" style="width: 200px; height: 200px;"
-                                 class="border rounded mx-auto d-block img-fluid">
-                            <input type="file" class="form-control" id="Imagen_Producto_Input" name="Imagen_Producto_Input"
-                                   accept="image/png, image/jpg, image/jpeg" onchange="Show_Product_Image(this)">
+                                class="border rounded mx-auto d-block img-fluid">
+                            <input type="file" class="form-control" id="Imagen_Producto_Input"
+                                name="Imagen_Producto_Input" accept="image/png, image/jpg, image/jpeg"
+                                onchange="Show_Product_Image(this)">
                         </div>
                         <div class="col-sm-12">
                             <label for="Descripcion_Producto" class="form-label">Descripción:</label>
                             <textarea class="form-control" id="Descripcion_Producto" name="Descripcion_Producto"
-                                      placeholder="Descripción" autocomplete="off"></textarea>
+                                placeholder="Descripción" autocomplete="off"></textarea>
                         </div>
                     </div>
                 </div>

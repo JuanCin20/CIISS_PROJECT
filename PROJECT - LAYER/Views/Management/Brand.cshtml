@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Brand";
-    ViewData["Nombre_Apellido_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
+    ViewData["Nombre_Apellido_Usuario_String"] =
+    this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
     ViewData["E_Mail_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("E_Mail_Usuario_String");
     ViewData["Imagen_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("Imagen_Usuario_String");
 }
@@ -38,12 +39,13 @@
 
 <!--Vertically Centered Modal-->
 <div class="modal fade" id="Form_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-     data-bs-backdrop="static">
+    data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-dark text-white">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Marca del Producto</h1>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
             </div>
             <form id="Form_Brand" class="needs-validation" novalidate>
                 <div class="modal-body">
@@ -52,7 +54,7 @@
                         <div class="col-sm-6">
                             <label for="Estado_Marca_Producto" class="form-label">Estado:</label>
                             <select class="form-select" id="Estado_Marca_Producto" name="Estado_Marca_Producto"
-                                    aria-label="Default select example">
+                                aria-label="Default select example">
                                 <option value="0" selected disabled>Seleccionar</option>
                                 <option value="Available">Disponible</option>
                                 <option value="Not_Available">No Disponible</option>
@@ -60,23 +62,23 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="Nombre_Marca_Producto" class="form-label">Nombre:</label>
-                            <input type="text" class="form-control" id="Nombre_Marca_Producto" name="Nombre_Marca_Producto"
-                                   placeholder="Nombre" autocomplete="off">
+                            <input type="text" class="form-control" id="Nombre_Marca_Producto"
+                                name="Nombre_Marca_Producto" placeholder="Nombre" autocomplete="off">
                         </div>
                         <div class="col-sm-6">
                             <label for="Telefono_Marca_Producto" class="form-label">Teléfono:</label>
-                            <input type="number" class="form-control" id="Telefono_Marca_Producto" name="Telefono_Marca_Producto"
-                                   placeholder="Teléfono" autocomplete="off">
+                            <input type="number" class="form-control" id="Telefono_Marca_Producto"
+                                name="Telefono_Marca_Producto" placeholder="Teléfono" autocomplete="off">
                         </div>
                         <div class="col-sm-6">
                             <label for="E_Mail_Marca_Producto" class="form-label">E-Mail:</label>
-                            <input type="text" class="form-control" id="E_Mail_Marca_Producto" name="E_Mail_Marca_Producto"
-                                   placeholder="name@gmail.com" autocomplete="off">
+                            <input type="text" class="form-control" id="E_Mail_Marca_Producto"
+                                name="E_Mail_Marca_Producto" placeholder="name@gmail.com" autocomplete="off">
                         </div>
                         <div class="col-sm-12">
                             <label for="Direccion_Marca_Producto" class="form-label">Dirección:</label>
                             <textarea class="form-control" id="Direccion_Marca_Producto" name="Direccion_Marca_Producto"
-                                      placeholder="Dirección" autocomplete="off"></textarea>
+                                placeholder="Dirección" autocomplete="off"></textarea>
                         </div>
                     </div>
                 </div>

@@ -10,12 +10,18 @@
     <link rel="stylesheet" href="~/lib/Real_Use/Fontawesome_v6.6.0/css/all.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/Real_Use/Bootstrap_v5.3.3/Content/bootstrap.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/Real_Use/JQuery_Datatables_v1.10.15/Content/DataTables/css/jquery.dataTables.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/Real_Use/JQuery_Datatables_v1.10.15/Content/DataTables/css/responsive.dataTables.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/Real_Use/Sweet_Alert_2_v1.0.1/staticwebassets/bootstrap4Theme.min.css" asp-append-version="true" />
+    <link rel="stylesheet"
+        href="~/lib/Real_Use/JQuery_Datatables_v1.10.15/Content/DataTables/css/jquery.dataTables.min.css"
+        asp-append-version="true" />
+    <link rel="stylesheet"
+        href="~/lib/Real_Use/JQuery_Datatables_v1.10.15/Content/DataTables/css/responsive.dataTables.min.css"
+        asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/Real_Use/Sweet_Alert_2_v1.0.1/staticwebassets/bootstrap4Theme.min.css"
+        asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/Real_Use/Toastr_v2.1.1/content/toastr.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Extra.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/Real_Use/JQuery_UI_Combined_v1.13.3/Content/themes/base/jquery-ui.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/Real_Use/JQuery_UI_Combined_v1.13.3/Content/themes/base/jquery-ui.min.css"
+        asp-append-version="true" />
 </head>
 
 <body id="page-top">
@@ -27,7 +33,8 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-area="" asp-controller="Home" asp-action="Index">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-area="" asp-controller="Home"
+                asp-action="Index">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fa-brands fa-wolf-pack-battalion fa-2xl"></i>
                 </div>
@@ -57,7 +64,7 @@
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#/" data-toggle="collapse" data-target="#collapseTwo"
-                       aria-expanded="true" aria-controls="collapseTwo">
+                        aria-expanded="true" aria-controls="collapseTwo">
                         <i class="fa-solid fa-users"></i>&nbsp;&nbsp;<span>Personal</span>
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -80,15 +87,18 @@
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#/" data-toggle="collapse" data-target="#collapsePages"
-                   aria-expanded="true" aria-controls="collapsePages">
+                    aria-expanded="true" aria-controls="collapsePages">
                     <i class="fa-solid fa-boxes-stacked"></i>&nbsp;&nbsp;<span>Mantenimiento</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Administrar Recursos:</h6>
-                        <a class="collapse-item" asp-area="" asp-controller="Management" asp-action="Category">Categorías de Productos</a>
-                        <a class="collapse-item" asp-area="" asp-controller="Management" asp-action="Brand">Marcas de Productos</a>
-                        <a class="collapse-item" asp-area="" asp-controller="Management" asp-action="Product">Productos</a>
+                        <a class="collapse-item" asp-area="" asp-controller="Management"
+                            asp-action="Category">Categorías de Productos</a>
+                        <a class="collapse-item" asp-area="" asp-controller="Management" asp-action="Brand">Marcas de
+                            Productos</a>
+                        <a class="collapse-item" asp-area="" asp-controller="Management"
+                            asp-action="Product">Productos</a>
                     </div>
                 </div>
             </li>
@@ -109,7 +119,8 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow d-flex flex-row justify-content-between p-3">
+                <nav
+                    class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow d-flex flex-row justify-content-between p-3">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -152,14 +163,15 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#/" id="userDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@ViewData["Nombre_Apellido_Usuario_String"]</span>
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">@ViewData["Nombre_Apellido_Usuario_String"]</span>
                                 <img class="img-profile rounded-circle"
-                                     src="~/User_Images/@ViewData["Imagen_Usuario_String"]">
+                                    src="~/User_Images/@ViewData["Imagen_Usuario_String"]">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                 aria-labelledby="userDropdown">
+                                aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#/">
                                     <i class="fa-solid fa-user"></i>&nbsp;&nbsp;@ViewData["E_Mail_Usuario_String"]
                                 </a>
@@ -207,7 +219,7 @@
 
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -219,23 +231,30 @@
                 <div class="modal-body">Seleccione "Cerrar Sesión" Para Salir del Sistema</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" asp-area="" asp-controller="Access" asp-action="Access_Controller_Log_Out">Cerrar Sesión</a>
+                    <a class="btn btn-primary" asp-area="" asp-controller="Access"
+                        asp-action="Access_Controller_Log_Out">Cerrar Sesión</a>
                 </div>
             </div>
         </div>
     </div>
     <script src="~/lib/Real_Use/JQuery_v3.7.1/Scripts/jquery-3.7.1.min.js" asp-append-version="true"></script>
     <script src="~/js/Extra.js" asp-append-version="true"></script>
-    <script src="~/lib/Real_Use/JQuery_UI_Combined_v1.13.3/Scripts/jquery-ui-1.13.3.min.js" asp-append-version="true"></script>
+    <script src="~/lib/Real_Use/JQuery_UI_Combined_v1.13.3/Scripts/jquery-ui-1.13.3.min.js"
+        asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/Real_Use/Bootstrap_v5.3.3/Scripts/bootstrap.bundle.min.js" asp-append-version="true"></script>
-    <script src="~/lib/Real_Use/JQuery_Datatables_v1.10.15/Scripts/DataTables/jquery.dataTables.min.js" asp-append-version="true"></script>
-    <script src="~/lib/Real_Use/JQuery_Datatables_v1.10.15/Scripts/DataTables/dataTables.responsive.min.js" asp-append-version="true"></script>
-    <script src="~/lib/Real_Use/JQuery_Loading_Overlay_v2.1.5/Scripts/loadingoverlay.min.js" asp-append-version="true"></script>
-    <script src="~/lib/Real_Use/Sweet_Alert_2_v1.0.1/staticwebassets/sweetAlert2.min.js" asp-append-version="true"></script>
+    <script src="~/lib/Real_Use/JQuery_Datatables_v1.10.15/Scripts/DataTables/jquery.dataTables.min.js"
+        asp-append-version="true"></script>
+    <script src="~/lib/Real_Use/JQuery_Datatables_v1.10.15/Scripts/DataTables/dataTables.responsive.min.js"
+        asp-append-version="true"></script>
+    <script src="~/lib/Real_Use/JQuery_Loading_Overlay_v2.1.5/Scripts/loadingoverlay.min.js"
+        asp-append-version="true"></script>
+    <script src="~/lib/Real_Use/Sweet_Alert_2_v1.0.1/staticwebassets/sweetAlert2.min.js"
+        asp-append-version="true"></script>
     <script src="~/lib/Real_Use/Toastr_v2.1.1/scripts/toastr.min.js" asp-append-version="true"></script>
     <script src="~/lib/Real_Use/Fontawesome_v6.6.0/js/all.min.js" asp-append-version="true"></script>
-    <script src="~/lib/Real_Use/JQuery_Validation_v1.19.5/dist/jquery.validate.min.js" asp-append-version="true"></script>
+    <script src="~/lib/Real_Use/JQuery_Validation_v1.19.5/dist/jquery.validate.min.js"
+        asp-append-version="true"></script>
     <script src="~/lib/Real_Use/Chart.js_v3.7.1/3.7.1/content/Scripts/chart.min.js" asp-append-version="true"></script>
     @RenderSection("Java_Script", required: false)
 </body>

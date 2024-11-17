@@ -4,6 +4,7 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
@@ -24,22 +25,26 @@
                                     <h3 class="text-center font-weight-light my-4">Iniciar Sesión</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form id="Form_Log_In" class="needs-validation" asp-area="" asp-controller="Access" asp-action="Access_Controller_Log_In" method="POST"
-                                          novalidate>
+                                    <form id="Form_Log_In" class="needs-validation" asp-area="" asp-controller="Access"
+                                        asp-action="Access_Controller_Log_In" method="POST" novalidate>
                                         <div class="form-floating mb-3">
                                             <input class="form-control" id="E_Mail_Usuario" name="E_Mail_Usuario"
-                                                   type="text" placeholder="name@gmail.com" autocomplete="off" />
+                                                type="text" placeholder="name@gmail.com" autocomplete="off" />
                                             <label for="E_Mail_Usuario">Correo Electrónico:</label>
                                         </div>
 
                                         <div class="d-flex flex-row align-items-center">
                                             <div class="d-flex flex-row justify-content-center col-2">
-                                                <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
-                                                <label class="btn btn-outline-secondary" id="Input_Password_Usuario" for="btn-check-outlined"><i id="Control_Eye" class="fa-solid fa-eye"></i></label><br>
+                                                <input type="checkbox" class="btn-check" id="btn-check-outlined"
+                                                    autocomplete="off">
+                                                <label class="btn btn-outline-secondary" id="Input_Password_Usuario"
+                                                    for="btn-check-outlined"><i id="Control_Eye"
+                                                        class="fa-solid fa-eye"></i></label><br>
                                             </div>
                                             <div class="form-floating col-10">
-                                                <input class="form-control" id="Password_Usuario" name="Password_Usuario"
-                                                       type="password" placeholder="•••••" autocomplete="off" />
+                                                <input class="form-control" id="Password_Usuario"
+                                                    name="Password_Usuario" type="password" placeholder="•••••"
+                                                    autocomplete="off" />
                                                 <label for="Password_Usuario">Contraseña:</label>
                                             </div>
                                         </div>
@@ -54,18 +59,22 @@
                                         }
                                         <div class="d-flex flex-column gap-2 mt-4 mb-0">
                                             <div class="d-flex flex-row justify-content-between align-items-center">
-                                                <a asp-area="" asp-controller="Access" asp-action="Reset_Password" class="small">¿Olvidaste tu Contraseña?</a>
+                                                <a asp-area="" asp-controller="Access" asp-action="Reset_Password"
+                                                    class="small">¿Olvidaste tu Contraseña?</a>
                                                 <button type="submit" class="btn btn-primary">Acceder</button>
                                             </div>
                                             <div class="small Invisible text-center">
-                                                ¿No Tienes una Cuenta?&nbsp;&nbsp;<a asp-area="" asp-controller="Access" asp-action="Sign_Up">Regístrate</a>
+                                                ¿No Tienes una Cuenta?&nbsp;&nbsp;<a asp-area="" asp-controller="Access"
+                                                    asp-action="Sign_Up">Regístrate</a>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="card-footer text-center py-3">
                                     <div class="small">
-                                        Con el Apollo de: <a href="https://utp.edu.pe/?dclid=&gclid=Cj0KCQiA_qG5BhDTARIsAA0UHSJGs-4oqnAi11HvWet1L22XvjFT8z_XkhfKfnsVRmNFppX2vn21ox8aAh2TEALw_wcB&gclsrc=aw.ds"> Universidad Tecnológica del Perú </a>
+                                        Con el Apollo de: <a
+                                            href="https://utp.edu.pe/?dclid=&gclid=Cj0KCQiA_qG5BhDTARIsAA0UHSJGs-4oqnAi11HvWet1L22XvjFT8z_XkhfKfnsVRmNFppX2vn21ox8aAh2TEALw_wcB&gclsrc=aw.ds">
+                                            Universidad Tecnológica del Perú </a>
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +90,8 @@
                         <div class="text-muted">&copy; @DateTime.Now.Year Sistema de Inventario</div>
                         <div>
                             <!--Button Trigger Modal-->
-                            <a href="#/" data-bs-toggle="modal" data-bs-target="#exampleModal">Política de Privacidad</a>
+                            <a href="#/" data-bs-toggle="modal" data-bs-target="#exampleModal">Política de
+                                Privacidad</a>
                         </div>
                     </div>
                 </div>
@@ -291,7 +301,9 @@
     <script src="~/lib/Real_Use/Bootstrap_v5.3.3/Scripts/bootstrap.min.js" asp-append-version="true"></script>
     <script src="~/lib/Real_Use/JQuery_v3.7.1/Scripts/jquery-3.7.1.min.js" asp-append-version="true"></script>
     <script src="~/lib/Real_Use/Fontawesome_v6.6.0/js/all.min.js" asp-append-version="true"></script>
-    <script src="~/lib/Real_Use/JQuery_Validation_v1.19.5/dist/jquery.validate.min.js" asp-append-version="true"></script>
+    <script src="~/lib/Real_Use/JQuery_Validation_v1.19.5/dist/jquery.validate.min.js"
+        asp-append-version="true"></script>
     <script src="~/js/Log_In.js" asp-append-version="true"></script>
 </body>
+
 </html>
