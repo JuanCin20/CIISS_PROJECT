@@ -1,0 +1,132 @@
+﻿@{
+    ViewData["Title"] = "User";
+    ViewData["Nombre_Apellido_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
+    ViewData["E_Mail_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("E_Mail_Usuario_String");
+    ViewData["Imagen_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("Imagen_Usuario_String");
+}
+
+<div class="card">
+    <div class="card-header">
+        <i class="fa-solid fa-users"></i>&nbsp;&nbsp;Usuarios Registrados
+    </div>
+    <div class="card-body">
+        <div class="row align-items-end">
+            <div class="col-sm-2">
+                <div class="d-grid mb-2">
+                    <button type="button" class="btn btn-success" onclick="Open_Form_Modal(@null)">
+                        <i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Insertar Usuario
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="d-grid mb-2">
+                    <button type="button" class="btn btn-danger" onclick="Open_Form_Modal_Alternative()">
+                        <i class="fa-regular fa-circle"></i>&nbsp;&nbsp;Usuarios Eliminados
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <table id="Table_Usuario" class="display cell-border" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>ID:</th>
+                    <th>Estado:</th>
+                    <th>Nombres:</th>
+                    <th>Apellidos:</th>
+                    <th>E-Mail:</th>
+                    <th>Imagen:</th>
+                    <th>Operaciones:</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Vertically Centered Modal -->
+<div class="modal fade" id="Form_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+     data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Usuario</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <form id="Form_User" class="needs-validation" novalidate>
+                <div class="modal-body">
+                    <!----><input id="ID_Usuario" type="hidden" value="0" /><!---->
+                    <!----><input id="ID_Tipo_Usuario" type="hidden" value="2" /><!---->
+                    <!----><input id="Nombre_Tipo_Usuario" type="hidden" value="Empleado" /><!---->
+                    <div class="row g-2">
+                        <div class="col-sm-6">
+                            <label for="Nombre_Usuario" class="form-label">Nombres:</label>
+                            <input type="text" class="form-control" id="Nombre_Usuario" name="Nombre_Usuario"
+                                   placeholder="Nombres" autocomplete="off">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="Apellido_Usuario" class="form-label">Apellidos:</label>
+                            <input type="text" class="form-control" id="Apellido_Usuario" name="Apellido_Usuario"
+                                   placeholder="Apellidos" autocomplete="off">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="E_Mail_Usuario" class="form-label">E-Mail:</label>
+                            <input type="text" class="form-control" id="E_Mail_Usuario" name="E_Mail_Usuario"
+                                   placeholder="name@gmail.com" autocomplete="off">
+                        </div>
+                        <div class="col-sm-12 d-flex flex-column align-items-center gap-2">
+                            <img id="Imagen_Usuario" style="width: 200px; height: 200px;"
+                                 class="border rounded mx-auto d-block img-fluid">
+                            <input type="file" class="form-control" id="Imagen_Usuario_Input"
+                                   name="Imagen_Usuario_Input" accept="image/png, image/jpg, image/jpeg"
+                                   onchange="Show_User_Image(this)">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" onclick="Procesar()">Procesar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Vertically Centered Modal -->
+<!-- Modal -->
+<div class="modal fade" id="Static_Backdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Usuarios Eliminados</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table id="Table_Usuario_Alternative" class="display cell-border" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>ID:</th>
+                            <th>Estado:</th>
+                            <th>Nombres:</th>
+                            <th>Apellidos:</th>
+                            <th>E-Mail:</th>
+                            <th>Imagen:</th>
+                            <th>Operación:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Java_Script {
+    <script src="~/js/User.js" asp-append-version="true"></script>
+}

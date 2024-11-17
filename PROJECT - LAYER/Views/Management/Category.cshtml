@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Category";
+    ViewData["Nombre_Apellido_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
+    ViewData["E_Mail_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("E_Mail_Usuario_String");
+    ViewData["Imagen_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("Imagen_Usuario_String");
+}
+
+<div class="card">
+    <div class="card-header">
+        <i class="fa-solid fa-table"></i> Categorías de Insumos Registradas
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-success" onclick="Open_Form_Modal(@null)">
+                    <i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Insertar Categoría de
+                </button>
+            </div>
+        </div>
+
+        <hr />
+
+        <table id="Table_Categoria_Insumo" class="display cell-border" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>ID:</th>
+                    <th>Nombre:</th>
+                    <th>Estado:</th>
+                    <th>Operaciones:</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--Vertically Centered Modal-->
+<div class="modal fade" id="Form_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+     data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Categoría del Insumo</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <form id="Form_Category" class="needs-validation" novalidate>
+                <div class="modal-body">
+                    <!----><input id="ID_Categoria_Insumo" type="hidden" value="0" /><!---->
+                    <div class="row g-2">
+                        <div class="col-sm-6">
+                            <label for="Estado_Categoria_Insumo" class="form-label">Estado:</label>
+                            <select class="form-select" id="Estado_Categoria_Insumo" name="Estado_Categoria_Insumo"
+                                    aria-label="Default select example">
+                                <option value="0" selected disabled>Seleccionar</option>
+                                <option value="Available">Disponible</option>
+                                <option value="Not_Available">No Disponible</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="Nombre_Categoria_Insumo" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="Nombre_Categoria_Insumo"
+                                   name="Nombre_Categoria_Insumo" placeholder="Nombre" autocomplete="off">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="Descripcion_Categoria_Insumo" class="form-label">Descripción:</label>
+                            <textarea class="form-control" id="Descripcion_Categoria_Insumo"
+                                      name="Descripcion_Categoria_Insumo" placeholder="Descripción"
+                                      autocomplete="off"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" onclick="Procesar()">Procesar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Vertically Centered Modal-->
+@section Java_Script {
+    <script src="~/js/Category.js" asp-append-version="true"></script>
+}

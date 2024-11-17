@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-3.7.1.js"
+    ></script>
+    <script
+      src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"
+      type="text/javascript"
+    ></script>
+    <link
+      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <title>Test</title>
+  </head>
+  <style>
+    .Title_Background {
+      background-color: rgb(0, 0, 255);
+    }
+  </style>
+  <body>
+    <div class="container">
+      <button id="Open_Modal">Open Modal</button>
+      <div id="Modal_Dialog" title="JuanCin20">JuanCin20</div>
+    <script>
+      $(document).ready(function () {
+        $("#Modal_Dialog").dialog({
+          autoOpen: false,
+          // classes: {
+          //   "ui-dialog-titlebar": "Title_Background",
+          // },
+          // buttons: [
+          //   {
+          //     text: "Ok",
+          //     icon: "ui-icon-heart",
+          //     click: function () {
+          //       $(this).dialog("close");
+          //     },
+          //   },
+          // ],
+        });
+        $("#Open_Modal").click(function () {
+          $("#Modal_Dialog").dialog("open");
+        });
+        // $(".ui-dialog-titlebar").css("background-color", "rgb(255, 0, 0)");
+        // Getter
+        var Button = $(".ui-dialog-content").dialog("option", "buttons");
+
+        // Setter
+        $(".ui-dialog-content").dialog("option", "buttons", [
+          {
+            text: "Ok",
+            icon: "ui-icon-heart",
+            click: function () {
+              $(".ui-dialog-content").dialog("close");
+            },
+          },
+        ]);
+
+        // Getter
+        var Title_Background = $(".ui-dialog-content").dialog(
+          "option",
+          "classes.ui-dialog-titlebar"
+        );
+
+        // Setter
+        $(".ui-dialog-content").dialog(
+          "option",
+          "classes.ui-dialog-titlebar",
+          "Title_Background"
+        );
+      });
+    </script>
+  </body>
+</html>
