@@ -1,0 +1,129 @@
+﻿@{
+    ViewData["Title"] = "Supplier";
+    ViewData["Nombre_Apellido_Usuario_String"] =
+    this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
+    ViewData["E_Mail_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("E_Mail_Usuario_String");
+    ViewData["Imagen_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("Imagen_Usuario_String");
+}
+
+<div class="card">
+    <div class="card-header">
+        <i class="fa-solid fa-b fa-2xl"></i>&nbsp;&nbsp;Proveedores de Insumos Registrados
+    </div>
+    <div class="card-body">
+        <div class="row align-items-end">
+            <div class="col-sm-2">
+                <div class="d-grid mb-2">
+                    <button type="button" class="btn btn-success" onclick="Open_Form_Modal(@null)">
+                        <i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Insertar Proveedor de Insumo
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="d-grid mb-2">
+                    <button type="button" class="btn btn-danger" onclick="Open_Form_Modal_Alternative()">
+                        <i class="fa-regular fa-circle"></i>&nbsp;&nbsp;Proveedores Eliminados
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <table id="Table_Proveedor_Insumo" class="display cell-border" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>ID:</th>
+                    <th>Estado:</th>
+                    <th>Nombre:</th>
+                    <th>Insumos:</th>
+                    <th>Fecha Registro:</th>
+                    <th>Operaciones:</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Vertically Centered Modal -->
+<div class="modal fade" id="Form_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Proveedor del Insumo</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <form id="Form_Supplier" class="needs-validation" novalidate>
+                <div class="modal-body">
+                    <!----><input id="ID_Proveedor_Insumo" type="hidden" value="0" /><!---->
+                    <div class="row g-2">
+                        <div class="col-sm-6">
+                            <label for="Nombre_Proveedor_Insumo" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="Nombre_Proveedor_Insumo"
+                                name="Nombre_Proveedor_Insumo" placeholder="Nombre" autocomplete="off">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="Telefono_Proveedor_Insumo" class="form-label">Teléfono:</label>
+                            <input type="number" class="form-control" id="Telefono_Proveedor_Insumo"
+                                name="Telefono_Proveedor_Insumo" placeholder="Teléfono" autocomplete="off">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="E_Mail_Proveedor_Insumo" class="form-label">E-Mail:</label>
+                            <input type="text" class="form-control" id="E_Mail_Proveedor_Insumo"
+                                name="E_Mail_Proveedor_Insumo" placeholder="name@gmail.com" autocomplete="off">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="Direccion_Proveedor_Insumo" class="form-label">Dirección:</label>
+                            <textarea class="form-control" id="Direccion_Proveedor_Insumo"
+                                name="Direccion_Proveedor_Insumo" placeholder="Dirección" autocomplete="off"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" onclick="Procesar()">Procesar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Vertically Centered Modal -->
+<!-- Modal -->
+<div class="modal fade" id="Static_Backdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Proveedores Eliminados</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table id="Table_Proveedor_Insumo_Alternative" class="display cell-border" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>ID:</th>
+                            <th>Estado:</th>
+                            <th>Nombre:</th>
+                            <th>Insumos:</th>
+                            <th>Fecha Registro:</th>
+                            <th>Operaciones:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Java_Script {
+    <script src="~/js/Supplier.js" asp-append-version="true"></script>
+}

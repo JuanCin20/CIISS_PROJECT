@@ -9,5 +9,6 @@
         public string Direccion_Proveedor_Insumo { get; set; }
         public bool Estado_Proveedor_Insumo { get; set; }
         public string Fecha_Registro_Proveedor_Insumo { get; set; }
+        public int Supply_Number { get; set; } // ?
     }
 }

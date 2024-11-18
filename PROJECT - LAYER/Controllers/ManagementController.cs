@@ -19,7 +19,7 @@ namespace PROJECT___LAYER.Controllers
         }
 
         [Authorize(Roles = "Administrador, Empleado")]
-        public IActionResult Brand()
+        public IActionResult Supplier()
         {
             return View();
         }
@@ -31,7 +31,7 @@ namespace PROJECT___LAYER.Controllers
         }
 
         [Authorize(Roles = "Administrador, Empleado")]
-        public IActionResult Product()
+        public IActionResult Supply()
         {
             return View();
         }
@@ -39,11 +39,11 @@ namespace PROJECT___LAYER.Controllers
         //+++++++++++++++++++++++Http_Request_Methods_Proveedor_Insumo+++++++++++++++++++++++//
         #region Http_Request_Methods_Proveedor_Insumo
         [HttpGet]
-        public JsonResult Management_Controller_Proveedor_Insumo_Listar()
+        public JsonResult Management_Controller_Proveedor_Insumo_Listar(bool Estado_Proveedor_Insumo)
         {
-            List<Class_Entity_Proveedor_Insumo> Obj_List_Class_Entity_Proveedor_Insumo = new Class_Business_Proveedor_Insumo().Class_Business_Proveedor_Insumo_Listar();
+            List<Class_Entity_Proveedor_Insumo> Obj_List_Class_Entity_Proveedor_Insumo = new Class_Business_Proveedor_Insumo().Class_Business_Proveedor_Insumo_Listar(Estado_Proveedor_Insumo);
 
-            return Json(new { obj_List_Class_Entity_Proveedor_Insumo = Obj_List_Class_Entity_Proveedor_Insumo });
+            return Json(new { data = Obj_List_Class_Entity_Proveedor_Insumo });
         }
 
         [HttpPost]
@@ -64,17 +64,6 @@ namespace PROJECT___LAYER.Controllers
             string Message = string.Empty;
 
             Result = new Class_Business_Proveedor_Insumo().Class_Business_Proveedor_Insumo_Editar(Obj_Class_Entity_Proveedor_Insumo, out Message);
-
-            return Json(new { result = Result, message = Message });
-        }
-
-        [HttpPost]
-        public JsonResult Management_Controller_Proveedor_Insumo_Eliminar(int ID_Proveedor_Insumo)
-        {
-            bool Result = false;
-            string Message = string.Empty;
-
-            Result = new Class_Business_Proveedor_Insumo().Class_Business_Proveedor_Insumo_Eliminar(ID_Proveedor_Insumo, out Message);
 
             return Json(new { result = Result, message = Message });
         }
@@ -111,38 +100,32 @@ namespace PROJECT___LAYER.Controllers
 
             return Json(new { result = Result, message = Message });
         }
-
-        [HttpPost]
-        public JsonResult Management_Controller_Categoria_Insumo_Reset(int ID_Categoria_Insumo)
-        {
-            bool Result = false;
-            string Message = string.Empty;
-
-            Result = new Class_Business_Categoria_Insumo().Class_Business_Categoria_Insumo_Reset(ID_Categoria_Insumo, out Message);
-
-            return Json(new { result = Result, message = Message });
-        }
-
-        [HttpPost]
-        public JsonResult Management_Controller_Categoria_Insumo_Eliminar(int ID_Categoria_Insumo)
-        {
-            bool Result = false;
-            string Message = string.Empty;
-
-            Result = new Class_Business_Categoria_Insumo().Class_Business_Categoria_Insumo_Eliminar(ID_Categoria_Insumo, out Message);
-
-            return Json(new { result = Result, message = Message });
-        }
         #endregion
 
         //+++++++++++++++++++++++Http_Request_Methods_Insumo+++++++++++++++++++++++//
         #region Http_Request_Methods_Insumo
         [HttpGet]
-        public JsonResult Management_Controller_Insumo_Listar()
+        public JsonResult Management_Controller_Insumo_Listar(bool Estado_Insumo)
         {
-            List<Class_Entity_Insumo> Obj_List_Class_Entity_Insumo = new Class_Business_Insumo().Class_Business_Insumo_Listar();
+            List<Class_Entity_Insumo> Obj_List_Class_Entity_Insumo = new Class_Business_Insumo().Class_Business_Insumo_Listar(Estado_Insumo);
 
-            return Json(new { obj_List_Class_Entity_Insumo = Obj_List_Class_Entity_Insumo });
+            return Json(new { data = Obj_List_Class_Entity_Insumo });
+        }
+
+        [HttpGet]
+        public JsonResult Management_Controller_Insumo_Categoria_Insumo_Listar()
+        {
+            List<Class_Entity_Categoria_Insumo> Obj_List_Class_Entity_Categoria_Insumo = new Class_Business_Insumo().Class_Business_Insumo_Categoria_Insumo_Listar();
+
+            return Json(new { data = Obj_List_Class_Entity_Categoria_Insumo });
+        }
+
+        [HttpGet]
+        public JsonResult Management_Controller_Insumo_Proveedor_Insumo_Listar()
+        {
+            List<Class_Entity_Proveedor_Insumo> Obj_List_Class_Entity_Proveedor_Insumo = new Class_Business_Insumo().Class_Business_Insumo_Proveedor_Insumo_Listar();
+
+            return Json(new { data = Obj_List_Class_Entity_Proveedor_Insumo });
         }
 
         [HttpPost]
@@ -291,7 +274,7 @@ namespace PROJECT___LAYER.Controllers
         public JsonResult Management_Controller_Insumo_Imagen(int ID_Insumo)
         {
             bool Conversion = false;
-            Class_Entity_Insumo Obj_Class_Entity_Insumo = new Class_Business_Insumo().Class_Business_Insumo_Listar().Where(Obj_Class_Entity_Insumo_Alter => Obj_Class_Entity_Insumo_Alter.ID_Insumo == ID_Insumo).FirstOrDefault();
+            Class_Entity_Insumo Obj_Class_Entity_Insumo = new Class_Business_Insumo().Class_Business_Insumo_Listar(true).Where(Obj_Class_Entity_Insumo_Alter => Obj_Class_Entity_Insumo_Alter.ID_Insumo == ID_Insumo).FirstOrDefault();
             string Base_64_Imagen_Insumo = Class_Business_Recurso.Convert_Base_64(Path.Combine(Obj_Class_Entity_Insumo.Ruta_Imagen_Insumo, Obj_Class_Entity_Insumo.Nombre_Imagen_Insumo), out Conversion);
             return Json(new { conversion = Conversion, base_64_Imagen_Insumo = Base_64_Imagen_Insumo, extension_Imagen_Insumo = Path.GetExtension(Obj_Class_Entity_Insumo.Nombre_Imagen_Insumo) });
         }

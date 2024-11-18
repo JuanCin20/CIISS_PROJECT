@@ -1,0 +1,163 @@
+﻿@{
+    ViewData["Title"] = "Supply";
+    ViewData["Nombre_Apellido_Usuario_String"] =
+    this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
+    ViewData["E_Mail_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("E_Mail_Usuario_String");
+    ViewData["Imagen_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("Imagen_Usuario_String");
+}
+
+<div class="card">
+    <div class="card-header">
+        <i class="fa-solid fa-a fa-2xl"></i>&nbsp;&nbsp;Insumos Registrados
+    </div>
+    <div class="card-body">
+        <div class="row align-items-end">
+            <div class="col-sm-2">
+                <div class="d-grid mb-2">
+                    <button type="button" class="btn btn-success" onclick="Open_Form_Modal(@null)">
+                        <i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Insertar Insumo
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="d-grid mb-2">
+                    <button type="button" class="btn btn-danger" onclick="Open_Form_Modal_Alternative()">
+                        <i class="fa-regular fa-circle"></i>&nbsp;&nbsp;Insumos Eliminados
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <table id="Table_Insumo" class="display cell-border" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>ID:</th>
+                    <th>Nombre:</th>
+                    <th>Unidad Medida:</th>
+                    <th>Precio:</th>
+                    <th>Stock:</th>
+                    <th>Fecha Vencimiento:</th>
+                    <th>Estado:</th>
+                    <th>Imagen:</th>
+                    <th>Operaciones:</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Vertically Centered Modal -->
+<div class="modal fade" id="Form_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Insumo</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <form id="Form_Supply" class="needs-validation" novalidate>
+                <div class="modal-body">
+                    <!----><input id="ID_Insumo" type="hidden" value="0" /><!---->
+                    <div class="row g-2">
+                        <div class="col-sm-12">
+                            <label for="Nombre_Insumo" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="Nombre_Insumo" name="Nombre_Insumo"
+                                placeholder="Nombre" autocomplete="off">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="Categoria_Insumo" class="form-label">Categoría:</label>
+                            <select class="form-select" id="Categoria_Insumo" name="Categoria_Insumo"
+                                aria-label="Default select example">
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="Proveedor_Insumo" class="form-label">Proveedor:</label>
+                            <select class="form-select" id="Proveedor_Insumo" name="Proveedor_Insumo"
+                                aria-label="Default select example">
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="Unidad_Medida_Insumo" class="form-label">Unidad de Medida:</label>
+                            <input type="text" class="form-control" id="Unidad_Medida_Insumo"
+                                name="Unidad_Medida_Insumo" placeholder="Unidad de Medida" autocomplete="off">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="Precio_Insumo" class="form-label">Precio:</label>
+                            <input type="number" class="form-control" id="Precio_Insumo" name="Precio_Insumo"
+                                placeholder="Precio" autocomplete="off">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="Stock_Insumo" class="form-label">Stock:</label>
+                            <input type="number" class="form-control" id="Stock_Insumo" name="Stock_Insumo"
+                                placeholder="Stock" autocomplete="off">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="Fecha_Vencimiento_Insumo" class="form-label">Fecha de Vencimiento:</label>
+                            <input type="text" class="form-control" id="Fecha_Vencimiento_Insumo"
+                                name="Fecha_Vencimiento_Insumo" autocomplete="off">
+                        </div>
+                        <div class="col-sm-12 d-flex flex-column align-items-center gap-2">
+                            <img id="Imagen_Insumo" style="width: 200px; height: 200px;"
+                                class="border rounded mx-auto d-block img-fluid">
+                            <input type="file" class="form-control" id="Imagen_Insumo_Input" name="Imagen_Insumo_Input"
+                                accept="image/png, image/jpg, image/jpeg" onchange="Show_Supply_Image(this)">
+                        </div>
+                        <div class="col-sm-12">
+                            <label for="Descripcion_Insumo" class="form-label">Descripción:</label>
+                            <textarea class="form-control" id="Descripcion_Insumo" name="Descripcion_Insumo"
+                                placeholder="Descripción" autocomplete="off"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" onclick="Procesar()">Procesar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Vertically Centered Modal -->
+<!-- Modal -->
+<div class="modal fade" id="Static_Backdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Insumos Eliminados</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table id="Table_Insumo_Alternative" class="display cell-border" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>ID:</th>
+                            <th>Nombre:</th>
+                            <th>Unidad Medida:</th>
+                            <th>Precio:</th>
+                            <th>Stock:</th>
+                            <th>Fecha Vencimiento:</th>
+                            <th>Estado:</th>
+                            <th>Imagen:</th>
+                            <th>Operaciones:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Java_Script {
+    <script src="~/js/Supply.js" asp-append-version="true"></script>
+}

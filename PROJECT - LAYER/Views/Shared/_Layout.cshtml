@@ -88,17 +88,17 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#/" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fa-solid fa-boxes-stacked"></i>&nbsp;&nbsp;<span>Mantenimiento</span>
+                    <i class="fa-solid fa-list-check"></i>&nbsp;&nbsp;<span>Mantenimiento</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Administrar Recursos:</h6>
                         <a class="collapse-item" asp-area="" asp-controller="Management"
-                            asp-action="Category">Categorías de Productos</a>
-                        <a class="collapse-item" asp-area="" asp-controller="Management" asp-action="Brand">Marcas de
-                            Productos</a>
+                            asp-action="Category">Categorías de Insumos</a>
                         <a class="collapse-item" asp-area="" asp-controller="Management"
-                            asp-action="Product">Productos</a>
+                            asp-action="Supplier">Proveedores de
+                            Insumos</a>
+                        <a class="collapse-item" asp-area="" asp-controller="Management" asp-action="Supply">Insumos</a>
                     </div>
                 </div>
             </li>
@@ -147,14 +147,14 @@
                         <label class="mb-0">Categorías</label>
                     }
 
-                    @if (ViewData["Title"] == "Brand")
+                    @if (ViewData["Title"] == "Supplier")
                     {
-                        <label class="mb-0">Marcas</label>
+                        <label class="mb-0">Proveedores</label>
                     }
 
-                    @if (ViewData["Title"] == "Product")
+                    @if (ViewData["Title"] == "Supply")
                     {
-                        <label class="mb-0">Productos</label>
+                        <label class="mb-0">Insumos</label>
                     }
 
                     <!-- Topbar Navbar -->

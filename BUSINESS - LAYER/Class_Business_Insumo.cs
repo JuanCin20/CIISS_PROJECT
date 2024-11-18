@@ -8,9 +8,19 @@ namespace BUSINESS___LAYER
     {
         private Class_Data_Insumo Obj_Class_Data_Insumo = new Class_Data_Insumo();
 
-        public List<Class_Entity_Insumo> Class_Business_Insumo_Listar()
+        public List<Class_Entity_Insumo> Class_Business_Insumo_Listar(bool Estado_Insumo)
         {
-            return Obj_Class_Data_Insumo.Class_Data_Insumo_Listar();
+            return Obj_Class_Data_Insumo.Class_Data_Insumo_Listar(Estado_Insumo);
+        }
+
+        public List<Class_Entity_Categoria_Insumo> Class_Business_Insumo_Categoria_Insumo_Listar()
+        {
+            return Obj_Class_Data_Insumo.Class_Data_Insumo_Categoria_Insumo_Listar();
+        }
+
+        public List<Class_Entity_Proveedor_Insumo> Class_Business_Insumo_Proveedor_Insumo_Listar()
+        {
+            return Obj_Class_Data_Insumo.Class_Data_Insumo_Proveedor_Insumo_Listar();
         }
 
         public int Class_Business_Insumo_Registrar(Class_Entity_Insumo Obj_Class_Entity_Insumo, out string Message)

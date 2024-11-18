@@ -8,9 +8,9 @@ namespace BUSINESS___LAYER
     {
         private Class_Data_Proveedor_Insumo Obj_Class_Data_Proveedor_Insumo = new Class_Data_Proveedor_Insumo();
 
-        public List<Class_Entity_Proveedor_Insumo> Class_Business_Proveedor_Insumo_Listar()
+        public List<Class_Entity_Proveedor_Insumo> Class_Business_Proveedor_Insumo_Listar(bool Estado_ProveedorInsumo)
         {
-            return Obj_Class_Data_Proveedor_Insumo.Class_Data_Proveedor_Insumo_Listar();
+            return Obj_Class_Data_Proveedor_Insumo.Class_Data_Proveedor_Insumo_Listar(Estado_ProveedorInsumo);
         }
 
         public int Class_Business_Proveedor_Insumo_Registrar(Class_Entity_Proveedor_Insumo Obj_Class_Entity_Proveedor_Insumo, out string Message)
@@ -62,11 +62,6 @@ namespace BUSINESS___LAYER
             {
                 return false;
             }
-        }
-
-        public bool Class_Business_Proveedor_Insumo_Eliminar(int ID_Proveedor_Insumo, out string Message)
-        {
-            return Obj_Class_Data_Proveedor_Insumo.Class_Data_Proveedor_Insumo_Eliminar(ID_Proveedor_Insumo, out Message);
         }
     }
 }

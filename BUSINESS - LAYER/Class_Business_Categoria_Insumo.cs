@@ -55,15 +55,5 @@ namespace BUSINESS___LAYER
                 return false;
             }
         }
-
-        public bool Class_Business_Categoria_Insumo_Reset(int ID_Categoria_Insumo, out string Message)
-        {
-            return Obj_Class_Data_Categoria_Insumo.Class_Categoria_Insumo_Reset(ID_Categoria_Insumo, out Message);
-        }
-
-        public bool Class_Business_Categoria_Insumo_Eliminar(int ID_Categoria_Insumo, out string Message)
-        {
-            return Obj_Class_Data_Categoria_Insumo.Class_Data_Categoria_Insumo_Eliminar(ID_Categoria_Insumo, out Message);
-        }
     }
 }

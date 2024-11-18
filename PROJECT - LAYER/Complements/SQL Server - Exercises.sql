@@ -21,35 +21,6 @@
  Tabla_Usuario TU
  INNER JOIN Tabla_Tipo_Usuario TTU ON TU.ID_Tipo_Usuario = TTU.ID_Tipo_Usuario
  WHERE TU.Estado_Usuario = 1;
- 
- SELECT
- TI.ID_Insumo,
- TCI.ID_Categoria_Insumo,
- TCI.Nombre_Categoria_Insumo,
- TPI.ID_Proveedor_Insumo,
- TPI.Nombre_Proveedor_Insumo,
- TI.Nombre_Insumo,
- TI.Descripcion_Insumo,
- TI.Unidad_Medida_Insumo,
- TI.Precio_Insumo,
- TI.Stock_Insumo,
- TI.Estado_Insumo,
- CONVERT(
- VARCHAR(10),
- TI.Fecha_Registro_Insumo,
- 103
- ) AS [Fecha_Registro_Insumo],
- CONVERT(
- VARCHAR(10),
- TI.Fecha_Vencimiento_Insumo,
- 103
- ) AS [Fecha_Vencimiento_Insumo],
- TI.Ruta_Imagen_Insumo,
- TI.Nombre_Imagen_Insumo
- FROM
- Tabla_Insumo TI
- INNER JOIN Tabla_Categoria_Insumo TCI ON TI.ID_Categoria_Insumo = TCI.ID_Categoria_Insumo
- INNER JOIN Tabla_Proveedor_Insumo TPI ON TI.ID_Proveedor_Insumo = TPI.ID_Proveedor_Insumo;
  */
 USE DataBase_Inventory_Management;
 
@@ -316,37 +287,60 @@ END;
 
 GO
 	CREATE
-	OR ALTER PROCEDURE SP_CATEGORY_DELETE (
-		@ID_Categoria_Insumo INT,
-		@Message VARCHAR (500) OUTPUT,
-		@Result INT OUTPUT
-	) AS BEGIN
-SET
-	@Result = 0 IF NOT EXISTS (
-		SELECT
-			*
-		FROM
-			Tabla_Insumo TI
-			INNER JOIN Tabla_Categoria_Insumo TCI ON TI.ID_Categoria_Insumo = TCI.ID_Categoria_Insumo
-		WHERE
-			TI.Estado_Insumo = 1
-			AND TCI.ID_Categoria_Insumo = @ID_Categoria_Insumo
-	) BEGIN
-UPDATE
-	TOP (1) Tabla_Categoria_Insumo
-SET
-	Estado_Categoria_Insumo = 0
+	OR ALTER PROCEDURE SP_SUPPLIER_LIST (@Estado_Proveedor_Insumo BIT) AS BEGIN IF(@Estado_Proveedor_Insumo = 1) BEGIN
+SELECT
+	TPI.ID_Proveedor_Insumo,
+	TPI.Nombre_Proveedor_Insumo,
+	TPI.Telefono_Proveedor_Insumo,
+	TPI.E_Mail_Proveedor_Insumo,
+	TPI.Direccion_Proveedor_Insumo,
+	TPI.Estado_Proveedor_Insumo,
+	CONVERT(
+		VARCHAR(10),
+		TPI.Fecha_Registro_Proveedor_Insumo,
+		103
+	) AS [Fecha_Registro_Proveedor_Insumo],
+	COUNT(TI.ID_Proveedor_Insumo) AS [Supply_Number]
+FROM
+	Tabla_Proveedor_Insumo TPI
+	INNER JOIN Tabla_Insumo TI ON TPI.ID_Proveedor_Insumo = TI.ID_Proveedor_Insumo
 WHERE
-	ID_Categoria_Insumo = @ID_Categoria_Insumo
-SET
-	@Result = 1
+	TPI.Estado_Proveedor_Insumo = 1
+GROUP BY
+	TPI.ID_Proveedor_Insumo,
+	TPI.Nombre_Proveedor_Insumo,
+	TPI.Telefono_Proveedor_Insumo,
+	TPI.E_Mail_Proveedor_Insumo,
+	TPI.Direccion_Proveedor_Insumo,
+	TPI.Estado_Proveedor_Insumo,
+	TPI.Fecha_Registro_Proveedor_Insumo,
+	TI.ID_Proveedor_Insumo
 END;
 
-ELSE
-SET
-	@Message = 'El Nombre de la Categoría del Insumo se Encuentra Relacionado a un Insumo'
+ELSE BEGIN
+SELECT
+	ID_Proveedor_Insumo,
+	Nombre_Proveedor_Insumo,
+	Telefono_Proveedor_Insumo,
+	E_Mail_Proveedor_Insumo,
+	Direccion_Proveedor_Insumo,
+	Estado_Proveedor_Insumo,
+	CONVERT(
+		VARCHAR(10),
+		Fecha_Registro_Proveedor_Insumo,
+		103
+	) AS [Fecha_Registro_Proveedor_Insumo],
+	'0' AS [Supply_Number]
+FROM
+	Tabla_Proveedor_Insumo
+WHERE
+	Estado_Proveedor_Insumo = 0
 END;
 
+END;
+
+----DECLARE @Estado_Proveedor_Insumo BIT = 1;
+----EXECUTE SP_SUPPLIER_LIST @Estado_Proveedor_Insumo;
 GO
 	CREATE
 	OR ALTER PROCEDURE SP_SUPPLIER_CREATE (
@@ -354,7 +348,6 @@ GO
 		@Telefono_Proveedor_Insumo INT,
 		@E_Mail_Proveedor_Insumo VARCHAR (30),
 		@Direccion_Proveedor_Insumo VARCHAR (50),
-		@Estado_Proveedor_Insumo BIT,
 		@Message VARCHAR (500) OUTPUT,
 		@Result INT OUTPUT
 	) AS BEGIN
@@ -372,16 +365,14 @@ INSERT INTO
 		Nombre_Proveedor_Insumo,
 		Telefono_Proveedor_Insumo,
 		E_Mail_Proveedor_Insumo,
-		Direccion_Proveedor_Insumo,
-		Estado_Proveedor_Insumo
+		Direccion_Proveedor_Insumo
 	)
 VALUES
 	(
 		@Nombre_Proveedor_Insumo,
 		@Telefono_Proveedor_Insumo,
 		@E_Mail_Proveedor_Insumo,
-		@Direccion_Proveedor_Insumo,
-		@Estado_Proveedor_Insumo
+		@Direccion_Proveedor_Insumo
 	)
 SET
 	@Result = SCOPE_IDENTITY()
@@ -428,36 +419,42 @@ END;
 
 GO
 	CREATE
-	OR ALTER PROCEDURE SP_SUPPLIER_DELETE (
-		@ID_Proveedor_Insumo INT,
-		@Message VARCHAR (500) OUTPUT,
-		@Result INT OUTPUT
-	) AS BEGIN
-SET
-	@Result = 0 IF NOT EXISTS (
-		SELECT
-			*
-		FROM
-			Tabla_Insumo TI
-			INNER JOIN Tabla_Proveedor_Insumo TPI ON TI.ID_Proveedor_Insumo = TPI.ID_Proveedor_Insumo
-		WHERE
-			TI.ID_Proveedor_Insumo = @ID_Proveedor_Insumo
-	) BEGIN
-UPDATE
-	TOP (1) Tabla_Proveedor_Insumo
-SET
-	Estado_Proveedor_Insumo = 0
+	OR ALTER PROCEDURE SP_SUPPLY_LIST (@Estado_Insumo BIT) AS BEGIN
+SELECT
+	TI.ID_Insumo,
+	TCI.ID_Categoria_Insumo,
+	TCI.Nombre_Categoria_Insumo,
+	TPI.ID_Proveedor_Insumo,
+	TPI.Nombre_Proveedor_Insumo,
+	TI.Nombre_Insumo,
+	TI.Descripcion_Insumo,
+	TI.Unidad_Medida_Insumo,
+	TI.Precio_Insumo,
+	TI.Stock_Insumo,
+	TI.Estado_Insumo,
+	CONVERT(
+		VARCHAR(10),
+		TI.Fecha_Registro_Insumo,
+		103
+	) AS [Fecha_Registro_Insumo],
+	CONVERT(
+		VARCHAR(10),
+		TI.Fecha_Vencimiento_Insumo,
+		103
+	) AS [Fecha_Vencimiento_Insumo],
+	TI.Ruta_Imagen_Insumo,
+	TI.Nombre_Imagen_Insumo
+FROM
+	Tabla_Insumo TI
+	INNER JOIN Tabla_Categoria_Insumo TCI ON TI.ID_Categoria_Insumo = TCI.ID_Categoria_Insumo
+	INNER JOIN Tabla_Proveedor_Insumo TPI ON TI.ID_Proveedor_Insumo = TPI.ID_Proveedor_Insumo
 WHERE
-	ID_Proveedor_Insumo = @ID_Proveedor_Insumo
-SET
-	@Result = 1
+	TI.Estado_Insumo = @Estado_Insumo;
+
 END;
 
-ELSE
-SET
-	@Message = 'El Nombre del Proveedor del Insumo se Encuentra Relacionado a un Insumo'
-END;
-
+----DECLARE @Estado_Insumo BIT = 1;
+----EXECUTE SP_SUPPLY_LIST @Estado_Insumo;
 GO
 	CREATE
 	OR ALTER PROCEDURE SP_SUPPLY_CREATE (
@@ -468,7 +465,6 @@ GO
 		@Unidad_Medida_Insumo VARCHAR (20),
 		@Precio_Insumo DECIMAL (10, 2),
 		@Stock_Insumo INT,
-		@Estado_Insumo BIT,
 		@Fecha_Vencimiento_Insumo DATE,
 		@Message VARCHAR (500) OUTPUT,
 		@Result INT OUTPUT
@@ -491,7 +487,6 @@ INSERT INTO
 		Unidad_Medida_Insumo,
 		Precio_Insumo,
 		Stock_Insumo,
-		Estado_Insumo,
 		Fecha_Vencimiento_Insumo
 	)
 VALUES
@@ -503,7 +498,6 @@ VALUES
 		@Unidad_Medida_Insumo,
 		@Precio_Insumo,
 		@Stock_Insumo,
-		@Estado_Insumo,
 		@Fecha_Vencimiento_Insumo
 	)
 SET
@@ -522,7 +516,6 @@ GO
 		@Descripcion_Insumo TEXT,
 		@Precio_Insumo DECIMAL (10, 2),
 		@Stock_Insumo INT,
-		@Estado_Insumo BIT,
 		@Message VARCHAR (500) OUTPUT,
 		@Result INT OUTPUT
 	) AS BEGIN
@@ -540,8 +533,7 @@ UPDATE
 SET
 	Descripcion_Insumo = @Descripcion_Insumo,
 	Precio_Insumo = @Precio_Insumo,
-	Stock_Insumo = @Stock_Insumo,
-	Estado_Insumo = @Estado_Insumo
+	Stock_Insumo = @Stock_Insumo
 WHERE
 	ID_Insumo = @ID_Insumo
 SET

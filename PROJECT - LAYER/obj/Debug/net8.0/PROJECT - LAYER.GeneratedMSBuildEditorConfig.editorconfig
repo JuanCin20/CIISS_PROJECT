@@ -50,16 +50,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Management/Brand.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlbWVudFxCcmFuZC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Management/Category.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlbWVudFxDYXRlZ29yeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Management/Product.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlbWVudFxQcm9kdWN0LmNzaHRtbA==
+[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Management/Supplier.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlbWVudFxTdXBwbGllci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Management/Supply.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlbWVudFxTdXBwbHkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Shared/Error.cshtml]
@@ -70,8 +70,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Shared/_Layout_Alter.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRfQWx0ZXIuY3NodG1s
+[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Shared/_Layout_Alternative.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRfQWx0ZXJuYXRpdmUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Staff/User.cshtml]

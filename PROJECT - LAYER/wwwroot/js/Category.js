@@ -296,13 +296,13 @@ function Procesar() {
         type: "POST",
         data: { Obj_Class_Entity_Categoria_Insumo: Categoria },
         success: function (data) {
-          debugger; // TODO: Punto de Depuración
+          // debugger; // TODO: Punto de Depuración
 
           $(".modal-body").LoadingOverlay("hide");
 
           if (data.iD_Auto_Generated != 0) {
             Categoria.iD_Categoria_Insumo = data.iD_Auto_Generated;
-            Table_Categoria_Insumo.row.add(Categoria).draw(false);
+            Table_Categoria_Insumo_Alternative.ajax.reload();
             $("#Form_Modal").modal("hide");
             toastr.options = {
               closeButton: true,
@@ -373,9 +373,7 @@ function Procesar() {
             $(".modal-body").LoadingOverlay("hide");
 
             if (data.result) {
-              Table_Categoria_Insumo.row(Selected_Row)
-                .data(Categoria)
-                .draw(false);
+              Table_Categoria_Insumo.ajax.reload();
               Selected_Row = null;
               $("#Form_Modal").modal("hide");
               toastr.options = {

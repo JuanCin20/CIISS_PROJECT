@@ -77,6 +77,7 @@ function Open_Form_Modal(data) {
     $("#E_Mail_Usuario").removeClass("is-valid");
     $("#E_Mail_Usuario").removeClass("is-invalid");
     $("#Imagen_Usuario_Input").removeClass("is-valid");
+    $("#Imagen_Usuario_Input").removeClass("is-invalid");
     $("#ID_Usuario").val(0);
     $("#Nombre_Usuario").val("");
     $("#Apellido_Usuario").val("");
@@ -94,6 +95,7 @@ function Open_Form_Modal(data) {
       $("#E_Mail_Usuario").removeClass("is-valid");
       $("#E_Mail_Usuario").removeClass("is-invalid");
       $("#Imagen_Usuario_Input").removeClass("is-valid");
+      $("#Imagen_Usuario_Input").removeClass("is-invalid");
       $("#ID_Usuario").val(data.iD_Usuario);
       $("#Nombre_Usuario").val(data.nombre_Usuario);
       $("#Apellido_Usuario").val(data.apellido_Usuario);
@@ -437,7 +439,6 @@ function Procesar() {
 
           if (data.iD_Auto_Generated != 0) {
             Usuario.iD_Usuario = data.iD_Auto_Generated;
-            Table_Usuario.row.add(Usuario).draw(false);
             $("#Form_Modal").modal("hide");
             Table_Usuario.ajax.reload();
             toastr.options = {
@@ -512,7 +513,6 @@ function Procesar() {
             $(".modal-body").LoadingOverlay("hide");
 
             if (data.successful_Operation) {
-              Table_Usuario.row(Selected_Row).data(Usuario).draw(false);
               Selected_Row = null;
               $("#Form_Modal").modal("hide");
               Table_Usuario.ajax.reload();

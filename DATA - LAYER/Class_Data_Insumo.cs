@@ -10,27 +10,16 @@ namespace DATA___LAYER
 {
     public class Class_Data_Insumo
     {
-        public List<Class_Entity_Insumo> Class_Data_Insumo_Listar()
+        public List<Class_Entity_Insumo> Class_Data_Insumo_Listar(bool Estado_Insumo)
         {
             List<Class_Entity_Insumo> Obj_List_Class_Entity_Insumo = new List<Class_Entity_Insumo>();
             try
             {
                 using (SqlConnection Obj_SqlConnection = new SqlConnection(Class_Data_Connection.Connection_String))
                 {
-                    //string SQL_Server_Query_String = "SELECT TI.ID_Insumo, TCI.ID_Categoria_Insumo, TCI.Nombre_Categoria_Insumo, TPI.ID_Proveedor_Insumo, TPI.Nombre_Proveedor_Insumo, TI.Nombre_Insumo, TI.Descripcion_Insumo, TI.Unidad_Medida_Insumo, TI.Precio_Insumo, TI.Stock_Insumo, TI.Estado_Insumo, CONVERT(VARCHAR(10), TI.Fecha_Registro_Insumo, 103) AS [Fecha_Registro_Insumo], CONVERT(VARCHAR(10), TI.Fecha_Vencimiento_Insumo, 103) AS [Fecha_Vencimiento_Insumo], TI.Ruta_Imagen_Insumo, TI.Nombre_Imagen_Insumo FROM Tabla_Insumo TI INNER JOIN Tabla_Categoria_Insumo TCI ON TI.ID_Categoria_Insumo = TCI.ID_Categoria_Insumo INNER JOIN Tabla_Proveedor_Insumo TPI ON TI.ID_Proveedor_Insumo = TPI.ID_Proveedor_Insumo;";
-
-                    StringBuilder Obj_StringBuilder = new StringBuilder();
-
-                    Obj_StringBuilder.AppendLine("SELECT TI.ID_Insumo, TCI.ID_Categoria_Insumo, TCI.Nombre_Categoria_Insumo, TPI.ID_Proveedor_Insumo, ");
-                    Obj_StringBuilder.AppendLine("TPI.Nombre_Proveedor_Insumo, TI.Nombre_Insumo, TI.Descripcion_Insumo, TI.Unidad_Medida_Insumo, ");
-                    Obj_StringBuilder.AppendLine("TI.Precio_Insumo, TI.Stock_Insumo, TI.Estado_Insumo, CONVERT(VARCHAR(10), TI.Fecha_Registro_Insumo, ");
-                    Obj_StringBuilder.AppendLine("103) AS [Fecha_Registro_Insumo], CONVERT(VARCHAR(10), TI.Fecha_Vencimiento_Insumo, 103) AS ");
-                    Obj_StringBuilder.AppendLine("[Fecha_Vencimiento_Insumo], TI.Ruta_Imagen_Insumo, TI.Nombre_Imagen_Insumo FROM Tabla_Insumo TI INNER ");
-                    Obj_StringBuilder.AppendLine("JOIN Tabla_Categoria_Insumo TCI ON TI.ID_Categoria_Insumo = TCI.ID_Categoria_Insumo INNER JOIN ");
-                    Obj_StringBuilder.AppendLine("Tabla_Proveedor_Insumo TPI ON TI.ID_Proveedor_Insumo = TPI.ID_Proveedor_Insumo;");
-
-                    SqlCommand Obj_SqlCommand = new SqlCommand(Obj_StringBuilder.ToString(), Obj_SqlConnection);
-                    Obj_SqlCommand.CommandType = CommandType.Text;
+                    SqlCommand Obj_SqlCommand = new SqlCommand("SP_SUPPLY_LIST", Obj_SqlConnection);
+                    Obj_SqlCommand.Parameters.AddWithValue("Estado_Insumo", Estado_Insumo);
+                    Obj_SqlCommand.CommandType = CommandType.StoredProcedure;
 
                     Obj_SqlConnection.Open();
 
@@ -76,6 +65,84 @@ namespace DATA___LAYER
             return Obj_List_Class_Entity_Insumo;
         }
 
+        public List<Class_Entity_Categoria_Insumo> Class_Data_Insumo_Categoria_Insumo_Listar()
+        {
+            List<Class_Entity_Categoria_Insumo> Obj_List_Class_Entity_Categoria_Insumo = new List<Class_Entity_Categoria_Insumo>();
+            try
+            {
+                using (SqlConnection Obj_SqlConnection = new SqlConnection(Class_Data_Connection.Connection_String))
+                {
+                    string SQL_Server_Query_String = "SELECT * FROM Tabla_Categoria_Insumo;";
+
+                    SqlCommand Obj_SqlCommand = new SqlCommand(SQL_Server_Query_String, Obj_SqlConnection);
+                    Obj_SqlCommand.CommandType = CommandType.Text;
+
+                    Obj_SqlConnection.Open();
+
+                    using (SqlDataReader Obj_SqlDataReader = Obj_SqlCommand.ExecuteReader())
+                    {
+                        while (Obj_SqlDataReader.Read())
+                        {
+                            Obj_List_Class_Entity_Categoria_Insumo.Add(new Class_Entity_Categoria_Insumo()
+                            {
+                                ID_Categoria_Insumo = Convert.ToInt32(Obj_SqlDataReader["ID_Categoria_Insumo"]),
+                                Nombre_Categoria_Insumo = Obj_SqlDataReader["Nombre_Categoria_Insumo"].ToString(),
+                                Descripcion_Categoria_Insumo = Obj_SqlDataReader["Descripcion_Categoria_Insumo"].ToString(),
+                                Estado_Categoria_Insumo = Convert.ToBoolean(Obj_SqlDataReader["Estado_Categoria_Insumo"]),
+                                Fecha_Registro_Categoria_Insumo = Obj_SqlDataReader["Fecha_Registro_Categoria_Insumo"].ToString(),
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception Error)
+            {
+                Console.WriteLine(Error.Message);
+                Obj_List_Class_Entity_Categoria_Insumo = new List<Class_Entity_Categoria_Insumo>();
+            }
+            return Obj_List_Class_Entity_Categoria_Insumo;
+        }
+
+        public List<Class_Entity_Proveedor_Insumo> Class_Data_Insumo_Proveedor_Insumo_Listar()
+        {
+            List<Class_Entity_Proveedor_Insumo> Obj_List_Class_Entity_Proveedor_Insumo = new List<Class_Entity_Proveedor_Insumo>();
+            try
+            {
+                using (SqlConnection Obj_SqlConnection = new SqlConnection(Class_Data_Connection.Connection_String))
+                {
+                    string SQL_Server_Query_String = "SELECT * FROM Tabla_Proveedor_Insumo;";
+
+                    SqlCommand Obj_SqlCommand = new SqlCommand(SQL_Server_Query_String, Obj_SqlConnection);
+                    Obj_SqlCommand.CommandType = CommandType.Text;
+
+                    Obj_SqlConnection.Open();
+
+                    using (SqlDataReader Obj_SqlDataReader = Obj_SqlCommand.ExecuteReader())
+                    {
+                        while (Obj_SqlDataReader.Read())
+                        {
+                            Obj_List_Class_Entity_Proveedor_Insumo.Add(new Class_Entity_Proveedor_Insumo()
+                            {
+                                ID_Proveedor_Insumo = Convert.ToInt32(Obj_SqlDataReader["ID_Proveedor_Insumo"]),
+                                Nombre_Proveedor_Insumo = Obj_SqlDataReader["Nombre_Proveedor_Insumo"].ToString(),
+                                Telefono_Proveedor_Insumo = Convert.ToInt32(Obj_SqlDataReader["Telefono_Proveedor_Insumo"]),
+                                E_Mail_Proveedor_Insumo = Obj_SqlDataReader["E_Mail_Proveedor_Insumo"].ToString(),
+                                Direccion_Proveedor_Insumo = Obj_SqlDataReader["Direccion_Proveedor_Insumo"].ToString(),
+                                Estado_Proveedor_Insumo = Convert.ToBoolean(Obj_SqlDataReader["Estado_Proveedor_Insumo"]),
+                                Fecha_Registro_Proveedor_Insumo = Obj_SqlDataReader["Fecha_Registro_Proveedor_Insumo"].ToString(),
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception Error)
+            {
+                Console.WriteLine(Error.Message);
+                Obj_List_Class_Entity_Proveedor_Insumo = new List<Class_Entity_Proveedor_Insumo>();
+            }
+            return Obj_List_Class_Entity_Proveedor_Insumo;
+        }
+
         public int Class_Data_Insumo_Registrar(Class_Entity_Insumo Obj_Class_Entity_Insumo, out string Message)
         {
             int ID_Auto_Generated = 0;
@@ -92,7 +159,6 @@ namespace DATA___LAYER
                     Obj_SqlCommand.Parameters.AddWithValue("Unidad_Medida_Insumo", Obj_Class_Entity_Insumo.Unidad_Medida_Insumo);
                     Obj_SqlCommand.Parameters.AddWithValue("Precio_Insumo", Obj_Class_Entity_Insumo.Precio_Insumo);
                     Obj_SqlCommand.Parameters.AddWithValue("Stock_Insumo", Obj_Class_Entity_Insumo.Stock_Insumo);
-                    Obj_SqlCommand.Parameters.AddWithValue("Estado_Insumo", Obj_Class_Entity_Insumo.Estado_Insumo);
                     Obj_SqlCommand.Parameters.AddWithValue("Fecha_Vencimiento_Insumo", Obj_Class_Entity_Insumo.Fecha_Vencimiento_Insumo);
                     Obj_SqlCommand.Parameters.Add("Message", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
                     Obj_SqlCommand.Parameters.Add("Result", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -128,7 +194,6 @@ namespace DATA___LAYER
                     Obj_SqlCommand.Parameters.AddWithValue("Descripcion_Insumo", Obj_Class_Entity_Insumo.Descripcion_Insumo);
                     Obj_SqlCommand.Parameters.AddWithValue("Precio_Insumo", Obj_Class_Entity_Insumo.Precio_Insumo);
                     Obj_SqlCommand.Parameters.AddWithValue("Stock_Insumo", Obj_Class_Entity_Insumo.Stock_Insumo);
-                    Obj_SqlCommand.Parameters.AddWithValue("Estado_Insumo", Obj_Class_Entity_Insumo.Estado_Insumo);
                     Obj_SqlCommand.Parameters.Add("Message", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
                     Obj_SqlCommand.Parameters.Add("Result", SqlDbType.Int).Direction = ParameterDirection.Output;
                     Obj_SqlCommand.CommandType = CommandType.StoredProcedure;
