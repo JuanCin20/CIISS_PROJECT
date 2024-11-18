@@ -2,6 +2,18 @@ var Table_Usuario;
 var Table_Usuario_Alternative;
 var Selected_Row;
 
+// ? var Url_01 = "@Url.Action("Staff_Controller_Usuario_Listar_Alternative", "Staff")",
+var Url_01 =
+  "https://localhost:44381/Staff/Staff_Controller_Usuario_Listar_Alternative" +
+  "?Estado_Usuario=" +
+  true;
+
+// ? var Url_02 = "@Url.Action("Staff_Controller_Usuario_Listar_Alternative", "Staff")",
+var Url_02 =
+  "https://localhost:44381/Staff/Staff_Controller_Usuario_Listar_Alternative" +
+  "?Estado_Usuario=" +
+  false;
+
 function Show_User_Image(input) {
   if (input.files) {
     var Reader = new FileReader();
@@ -11,12 +23,6 @@ function Show_User_Image(input) {
     Reader.readAsDataURL(input.files[0]);
   }
 }
-
-// ? var Url_01 = "@Url.Action("Staff_Controller_Usuario_Listar_Alternative", "Staff")",
-var Url_01 =
-  "https://localhost:44381/Staff/Staff_Controller_Usuario_Listar_Alternative" +
-  "?Estado_Usuario=" +
-  true;
 
 Table_Usuario = $("#Table_Usuario").DataTable({
   responsive: true,
@@ -186,7 +192,7 @@ $("#Table_Usuario").on("click", ".Delete_Button", function () {
               icon: "success",
             });
             Table_Usuario.row(Selected_Row).remove().draw();
-            Table_Usuario_Alternative.ajax.reload();
+            Table_Usuario_Alternative.ajax.url(Url_02).load();
           } else {
             Swal.fire({
               title: "Error",
@@ -205,12 +211,6 @@ $("#Table_Usuario").on("click", ".Delete_Button", function () {
 });
 
 function Open_Form_Modal_Alternative() {
-  // ? var Url_02 = "@Url.Action("Staff_Controller_Usuario_Listar_Alternative", "Staff")",
-  var Url_02 =
-    "https://localhost:44381/Staff/Staff_Controller_Usuario_Listar_Alternative" +
-    "?Estado_Usuario=" +
-    false;
-
   Table_Usuario_Alternative = $("#Table_Usuario_Alternative").DataTable({
     retrieve: true,
     responsive: true,
@@ -290,7 +290,7 @@ $("#Table_Usuario_Alternative").on("click", ".Reset_Button", function () {
               icon: "success",
             });
             Table_Usuario_Alternative.row(Selected_Row).remove().draw();
-            Table_Usuario.ajax.reload();
+            Table_Usuario.ajax.url(Url_01).load();
           } else {
             Swal.fire({
               title: "Error",
@@ -438,9 +438,8 @@ function Procesar() {
           $(".modal-body").LoadingOverlay("hide");
 
           if (data.iD_Auto_Generated != 0) {
-            Usuario.iD_Usuario = data.iD_Auto_Generated;
             $("#Form_Modal").modal("hide");
-            Table_Usuario.ajax.reload();
+            Table_Usuario.ajax.url(Url_01).load();
             toastr.options = {
               closeButton: true,
               debug: false,
@@ -515,7 +514,7 @@ function Procesar() {
             if (data.successful_Operation) {
               Selected_Row = null;
               $("#Form_Modal").modal("hide");
-              Table_Usuario.ajax.reload();
+              Table_Usuario.ajax.url(Url_01).load();
               toastr.options = {
                 closeButton: true,
                 debug: false,

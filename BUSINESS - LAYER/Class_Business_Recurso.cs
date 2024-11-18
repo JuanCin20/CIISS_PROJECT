@@ -12,7 +12,7 @@ namespace BUSINESS___LAYER
         public static string Generate_Password()
         {
             string Password_Usuario = Guid.NewGuid().ToString("N").Substring(0, 6);
-            string Password_Usuario_Alternative = "@" + Password_Usuario + "A";
+            string Password_Usuario_Alternative = "@Aa" + Password_Usuario;
             return Password_Usuario_Alternative;
         }
 
