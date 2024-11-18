@@ -1,3 +1,8 @@
+$(document).ready(function () {
+  Function_Table_Categoria_Insumo();
+  Function_Table_Categoria_Insumo_Alternative();
+});
+
 var Table_Categoria_Insumo;
 var Table_Categoria_Insumo_Alternative;
 var Selected_Row;
@@ -8,7 +13,24 @@ var Url_01 =
   "?Estado_Categoria_Insumo=" +
   true;
 
-$(document).ready(function () {
+// ? var Url_02 = "@Url.Action("Management_Controller_Categoria_Insumo_Listar", "Management")",
+var Url_02 =
+  "https://localhost:44381/Management/Management_Controller_Categoria_Insumo_Listar" +
+  "?Estado_Categoria_Insumo=" +
+  false;
+
+function Selected_Row_Function(data) {
+  // ? Obtener la Fila Actual
+  var Selected_Row = $(data).parents("tr");
+  // ? Compruebe si la Fila Actual es una Fila Secundaria
+  if (Selected_Row.hasClass("child")) {
+    // ? Si es así, Señale la Fila Anterior (It's "parent")
+    Selected_Row = Selected_Row.prev();
+  }
+  return Selected_Row;
+}
+
+function Function_Table_Categoria_Insumo() {
   Table_Categoria_Insumo = $("#Table_Categoria_Insumo").DataTable({
     fnDrawCallback: function () {
       // !
@@ -76,58 +98,9 @@ $(document).ready(function () {
       },
     ],
   });
-});
-
-function Open_Form_Modal(data) {
-  if (data == null) {
-    $("#Nombre_Categoria_Insumo").removeClass("is-valid");
-    $("#Nombre_Categoria_Insumo").removeClass("is-invalid");
-    $("#Nombre_Categoria_Insumo").prop("disabled", false);
-    $("#Descripcion_Categoria_Insumo").removeClass("is-valid");
-    $("#Descripcion_Categoria_Insumo").removeClass("is-invalid");
-    $("#ID_Categoria_Insumo").val(0);
-    $("#Nombre_Categoria_Insumo").val("");
-    $("#Descripcion_Categoria_Insumo").val("");
-  } else {
-    if (data != null) {
-      $("#Nombre_Categoria_Insumo").removeClass("is-valid");
-      $("#Nombre_Categoria_Insumo").removeClass("is-invalid");
-      $("#Nombre_Categoria_Insumo").prop("disabled", true);
-      $("#Descripcion_Categoria_Insumo").removeClass("is-valid");
-      $("#Descripcion_Categoria_Insumo").removeClass("is-invalid");
-      $("#ID_Categoria_Insumo").val(data.iD_Categoria_Insumo);
-      $("#Nombre_Categoria_Insumo").val(data.nombre_Categoria_Insumo);
-      $("#Descripcion_Categoria_Insumo").val(data.descripcion_Categoria_Insumo);
-    }
-  }
-  $("#Form_Modal").modal("show");
 }
 
-function Selected_Row_Function(data) {
-  // ? Obtener la Fila Actual
-  var Selected_Row = $(data).parents("tr");
-  // ? Compruebe si la Fila Actual es una Fila Secundaria
-  if (Selected_Row.hasClass("child")) {
-    // ? Si es así, Señale la Fila Anterior (It's "parent")
-    Selected_Row = Selected_Row.prev();
-  }
-  return Selected_Row;
-}
-
-$("#Table_Categoria_Insumo").on("click", ".Edit_Button", function () {
-  Selected_Row = Selected_Row_Function(this);
-  var data = Table_Categoria_Insumo.row(Selected_Row).data();
-  // console.log(data); // ? Good 'console.log'
-  Open_Form_Modal(data);
-});
-
-function Open_Form_Modal_Alternative() {
-  // ? var Url_02 = "@Url.Action("Management_Controller_Categoria_Insumo_Listar", "Management")",
-  var Url_02 =
-    "https://localhost:44381/Management/Management_Controller_Categoria_Insumo_Listar" +
-    "?Estado_Categoria_Insumo=" +
-    false;
-
+function Function_Table_Categoria_Insumo_Alternative() {
   Table_Categoria_Insumo_Alternative = $(
     "#Table_Categoria_Insumo_Alternative"
   ).DataTable({
@@ -197,8 +170,39 @@ function Open_Form_Modal_Alternative() {
       },
     ],
   });
-  $("#Static_Backdrop").modal("show");
 }
+
+function Open_Form_Modal(data) {
+  if (data == null) {
+    $("#Nombre_Categoria_Insumo").removeClass("is-valid");
+    $("#Nombre_Categoria_Insumo").removeClass("is-invalid");
+    $("#Nombre_Categoria_Insumo").prop("disabled", false);
+    $("#Descripcion_Categoria_Insumo").removeClass("is-valid");
+    $("#Descripcion_Categoria_Insumo").removeClass("is-invalid");
+    $("#ID_Categoria_Insumo").val(0);
+    $("#Nombre_Categoria_Insumo").val("");
+    $("#Descripcion_Categoria_Insumo").val("");
+  } else {
+    if (data != null) {
+      $("#Nombre_Categoria_Insumo").removeClass("is-valid");
+      $("#Nombre_Categoria_Insumo").removeClass("is-invalid");
+      $("#Nombre_Categoria_Insumo").prop("disabled", true);
+      $("#Descripcion_Categoria_Insumo").removeClass("is-valid");
+      $("#Descripcion_Categoria_Insumo").removeClass("is-invalid");
+      $("#ID_Categoria_Insumo").val(data.iD_Categoria_Insumo);
+      $("#Nombre_Categoria_Insumo").val(data.nombre_Categoria_Insumo);
+      $("#Descripcion_Categoria_Insumo").val(data.descripcion_Categoria_Insumo);
+    }
+  }
+  $("#Form_Modal").modal("show");
+}
+
+$("#Table_Categoria_Insumo").on("click", ".Edit_Button", function () {
+  Selected_Row = Selected_Row_Function(this);
+  var data = Table_Categoria_Insumo.row(Selected_Row).data();
+  // console.log(data); // ? Good 'console.log'
+  Open_Form_Modal(data);
+});
 
 jQuery.validator.addMethod(
   "Valid_Nombre_Categoria_Insumo",
@@ -301,9 +305,8 @@ function Procesar() {
           $(".modal-body").LoadingOverlay("hide");
 
           if (data.iD_Auto_Generated != 0) {
-            Categoria.iD_Categoria_Insumo = data.iD_Auto_Generated;
-            Table_Categoria_Insumo_Alternative.ajax.reload();
             $("#Form_Modal").modal("hide");
+            Table_Categoria_Insumo_Alternative.ajax.url(Url_02).load();
             toastr.options = {
               closeButton: true,
               debug: false,
@@ -373,9 +376,9 @@ function Procesar() {
             $(".modal-body").LoadingOverlay("hide");
 
             if (data.result) {
-              Table_Categoria_Insumo.ajax.reload();
               Selected_Row = null;
               $("#Form_Modal").modal("hide");
+              Table_Categoria_Insumo.ajax.url(Url_01).load();
               toastr.options = {
                 closeButton: true,
                 debug: false,

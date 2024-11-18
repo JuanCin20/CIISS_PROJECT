@@ -1,3 +1,8 @@
+$(document).ready(function () {
+  Function_Table_Proveedor_Insumo();
+  Function_Table_Proveedor_Insumo_Alternative();
+});
+
 var Table_Proveedor_Insumo;
 var Table_Proveedor_Insumo_Alternative;
 var Selected_Row;
@@ -8,7 +13,24 @@ var Url_01 =
   "?Estado_Proveedor_Insumo=" +
   true;
 
-$(document).ready(function () {
+// ? var Url_02 = "@Url.Action("Management_Controller_Proveedor_Insumo_Listar", "Management")",
+var Url_02 =
+  "https://localhost:44381/Management/Management_Controller_Proveedor_Insumo_Listar" +
+  "?Estado_Proveedor_Insumo=" +
+  false;
+
+function Selected_Row_Function(data) {
+  // ? Obtener la Fila Actual
+  var Selected_Row = $(data).parents("tr");
+  // ? Compruebe si la Fila Actual es una Fila Secundaria
+  if (Selected_Row.hasClass("child")) {
+    // ? Si es así, Señale la Fila Anterior (It's "parent")
+    Selected_Row = Selected_Row.prev();
+  }
+  return Selected_Row;
+}
+
+function Function_Table_Proveedor_Insumo() {
   Table_Proveedor_Insumo = $("#Table_Proveedor_Insumo").DataTable({
     fnDrawCallback: function () {
       // !
@@ -80,72 +102,9 @@ $(document).ready(function () {
       },
     ],
   });
-});
-
-function Open_Form_Modal(data) {
-  if (data == null) {
-    $("#Nombre_Proveedor_Insumo").removeClass("is-valid");
-    $("#Nombre_Proveedor_Insumo").removeClass("is-invalid");
-    $("#Nombre_Proveedor_Insumo").prop("disabled", false);
-    $("#Telefono_Proveedor_Insumo").removeClass("is-valid");
-    $("#Telefono_Proveedor_Insumo").removeClass("is-invalid");
-    $("#E_Mail_Proveedor_Insumo").removeClass("is-valid");
-    $("#E_Mail_Proveedor_Insumo").removeClass("is-invalid");
-    $("#Direccion_Proveedor_Insumo").removeClass("is-valid");
-    $("#Direccion_Proveedor_Insumo").removeClass("is-invalid");
-    $("#Direccion_Proveedor_Insumo").prop("disabled", false);
-    $("#ID_Proveedor_Insumo").val(0);
-    $("#Nombre_Proveedor_Insumo").val("");
-    $("#Telefono_Proveedor_Insumo").val("");
-    $("#E_Mail_Proveedor_Insumo").val("");
-    $("#Direccion_Proveedor_Insumo").val("");
-  } else {
-    if (data != null) {
-      $("#Nombre_Proveedor_Insumo").removeClass("is-valid");
-      $("#Nombre_Proveedor_Insumo").removeClass("is-invalid");
-      $("#Nombre_Proveedor_Insumo").prop("disabled", true);
-      $("#Telefono_Proveedor_Insumo").removeClass("is-valid");
-      $("#Telefono_Proveedor_Insumo").removeClass("is-invalid");
-      $("#E_Mail_Proveedor_Insumo").removeClass("is-valid");
-      $("#E_Mail_Proveedor_Insumo").removeClass("is-invalid");
-      $("#Direccion_Proveedor_Insumo").removeClass("is-valid");
-      $("#Direccion_Proveedor_Insumo").removeClass("is-invalid");
-      $("#Direccion_Proveedor_Insumo").prop("disabled", true);
-      $("#ID_Proveedor_Insumo").val(data.iD_Proveedor_Insumo);
-      $("#Nombre_Proveedor_Insumo").val(data.nombre_Proveedor_Insumo);
-      $("#Telefono_Proveedor_Insumo").val(data.telefono_Proveedor_Insumo);
-      $("#E_Mail_Proveedor_Insumo").val(data.e_Mail_Proveedor_Insumo);
-      $("#Direccion_Proveedor_Insumo").val(data.direccion_Proveedor_Insumo);
-    }
-  }
-  $("#Form_Modal").modal("show");
 }
 
-function Selected_Row_Function(data) {
-  // ? Obtener la Fila Actual
-  var Selected_Row = $(data).parents("tr");
-  // ? Compruebe si la Fila Actual es una Fila Secundaria
-  if (Selected_Row.hasClass("child")) {
-    // ? Si es así, Señale la Fila Anterior (It's "parent")
-    Selected_Row = Selected_Row.prev();
-  }
-  return Selected_Row;
-}
-
-$("#Table_Proveedor_Insumo").on("click", ".Edit_Button", function () {
-  Selected_Row = Selected_Row_Function(this);
-  var data = Table_Proveedor_Insumo.row(Selected_Row).data();
-  // console.log(data); // ? Good 'console.log'
-  Open_Form_Modal(data);
-});
-
-function Open_Form_Modal_Alternative() {
-  // ? var Url_02 = "@Url.Action("Management_Controller_Proveedor_Insumo_Listar", "Management")",
-  var Url_02 =
-    "https://localhost:44381/Management/Management_Controller_Proveedor_Insumo_Listar" +
-    "?Estado_Proveedor_Insumo=" +
-    false;
-
+function Function_Table_Proveedor_Insumo_Alternative() {
   Table_Proveedor_Insumo_Alternative = $(
     "#Table_Proveedor_Insumo_Alternative"
   ).DataTable({
@@ -219,8 +178,53 @@ function Open_Form_Modal_Alternative() {
       },
     ],
   });
-  $("#Static_Backdrop").modal("show");
 }
+
+function Open_Form_Modal(data) {
+  if (data == null) {
+    $("#Nombre_Proveedor_Insumo").removeClass("is-valid");
+    $("#Nombre_Proveedor_Insumo").removeClass("is-invalid");
+    $("#Nombre_Proveedor_Insumo").prop("disabled", false);
+    $("#Telefono_Proveedor_Insumo").removeClass("is-valid");
+    $("#Telefono_Proveedor_Insumo").removeClass("is-invalid");
+    $("#E_Mail_Proveedor_Insumo").removeClass("is-valid");
+    $("#E_Mail_Proveedor_Insumo").removeClass("is-invalid");
+    $("#Direccion_Proveedor_Insumo").removeClass("is-valid");
+    $("#Direccion_Proveedor_Insumo").removeClass("is-invalid");
+    $("#Direccion_Proveedor_Insumo").prop("disabled", false);
+    $("#ID_Proveedor_Insumo").val(0);
+    $("#Nombre_Proveedor_Insumo").val("");
+    $("#Telefono_Proveedor_Insumo").val("");
+    $("#E_Mail_Proveedor_Insumo").val("");
+    $("#Direccion_Proveedor_Insumo").val("");
+  } else {
+    if (data != null) {
+      $("#Nombre_Proveedor_Insumo").removeClass("is-valid");
+      $("#Nombre_Proveedor_Insumo").removeClass("is-invalid");
+      $("#Nombre_Proveedor_Insumo").prop("disabled", true);
+      $("#Telefono_Proveedor_Insumo").removeClass("is-valid");
+      $("#Telefono_Proveedor_Insumo").removeClass("is-invalid");
+      $("#E_Mail_Proveedor_Insumo").removeClass("is-valid");
+      $("#E_Mail_Proveedor_Insumo").removeClass("is-invalid");
+      $("#Direccion_Proveedor_Insumo").removeClass("is-valid");
+      $("#Direccion_Proveedor_Insumo").removeClass("is-invalid");
+      $("#Direccion_Proveedor_Insumo").prop("disabled", true);
+      $("#ID_Proveedor_Insumo").val(data.iD_Proveedor_Insumo);
+      $("#Nombre_Proveedor_Insumo").val(data.nombre_Proveedor_Insumo);
+      $("#Telefono_Proveedor_Insumo").val(data.telefono_Proveedor_Insumo);
+      $("#E_Mail_Proveedor_Insumo").val(data.e_Mail_Proveedor_Insumo);
+      $("#Direccion_Proveedor_Insumo").val(data.direccion_Proveedor_Insumo);
+    }
+  }
+  $("#Form_Modal").modal("show");
+}
+
+$("#Table_Proveedor_Insumo").on("click", ".Edit_Button", function () {
+  Selected_Row = Selected_Row_Function(this);
+  var data = Table_Proveedor_Insumo.row(Selected_Row).data();
+  // console.log(data); // ? Good 'console.log'
+  Open_Form_Modal(data);
+});
 
 jQuery.validator.addMethod(
   "Valid_Nombre_Proveedor_Insumo",
@@ -370,9 +374,8 @@ function Procesar() {
           $(".modal-body").LoadingOverlay("hide");
 
           if (data.iD_Auto_Generated != 0) {
-            Proveedor.iD_Proveedor_Insumo = data.iD_Auto_Generated;
-            Table_Proveedor_Insumo_Alternative.ajax.reload();
             $("#Form_Modal").modal("hide");
+            Table_Proveedor_Insumo_Alternative.ajax.url(Url_02).load();
             toastr.options = {
               closeButton: true,
               debug: false,
@@ -439,9 +442,9 @@ function Procesar() {
             $(".modal-body").LoadingOverlay("hide");
 
             if (data.result) {
-              Table_Proveedor_Insumo.ajax.reload();
               Selected_Row = null;
               $("#Form_Modal").modal("hide");
+              Table_Proveedor_Insumo.ajax.url(Url_01).load();
               toastr.options = {
                 closeButton: true,
                 debug: false,

@@ -85,11 +85,11 @@ function Procesar() {
       beforeSend: function () {
         $("body").LoadingOverlay("show", {
           background: "rgba(0, 0, 0, 0.5)",
-          image: "../../img/clock-regular.svg",
+          image: "../img/clock-regular.svg",
           imageAnimation: "1.5s fadein",
           imageAutoResize: true,
           imageResizeFactor: 1,
-          imageColor: "#FFD43B",
+          // imageColor: "#FFD43B",
         });
       },
     });
