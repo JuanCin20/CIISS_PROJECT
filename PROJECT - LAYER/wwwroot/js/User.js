@@ -44,6 +44,7 @@ Table_Usuario = $("#Table_Usuario").DataTable({
     { data: "nombre_Usuario" },
     { data: "apellido_Usuario" },
     { data: "e_Mail_Usuario" },
+    { data: "fecha_Registro_Usuario" },
     {
       data: null,
       render: function (data, type, row) {
@@ -141,7 +142,7 @@ function Selected_Row_Function(data) {
   var Selected_Row = $(data).parents("tr");
   // ? Compruebe si la Fila Actual es una Fila Secundaria
   if (Selected_Row.hasClass("child")) {
-    // ? Si es as�, Se�ale la Fila Anterior (It's "parent")
+    // ? Si es así, Señale la Fila Anterior (It's "parent")
     Selected_Row = Selected_Row.prev();
   }
   return Selected_Row;
@@ -174,7 +175,7 @@ $("#Table_Usuario").on("click", ".Delete_Button", function () {
         type: "POST",
         data: { ID_Usuario: data.iD_Usuario },
         success: function (data) {
-          // debugger; // TODO: Punto de Depuraci�n
+          // debugger; // TODO: Punto de Depuración
 
           if (data.result) {
             Swal.fire({
@@ -183,6 +184,7 @@ $("#Table_Usuario").on("click", ".Delete_Button", function () {
               icon: "success",
             });
             Table_Usuario.row(Selected_Row).remove().draw();
+            Table_Usuario_Alternative.ajax.reload();
           } else {
             Swal.fire({
               title: "Error",
@@ -215,7 +217,6 @@ function Open_Form_Modal_Alternative() {
       url: "//cdn.datatables.net/plug-ins/2.1.8/i18n/es-MX.json",
     },
     ajax: {
-      // ? url: "@Url.Action("Staff_Controller_Usuario_Listar_Alternative", "Staff")",
       url: Url_02,
       type: "GET",
       dataType: "json",
@@ -235,6 +236,7 @@ function Open_Form_Modal_Alternative() {
       { data: "nombre_Usuario" },
       { data: "apellido_Usuario" },
       { data: "e_Mail_Usuario" },
+      { data: "fecha_Registro_Usuario" },
       {
         data: null,
         render: function (data, type, row) {
@@ -247,7 +249,7 @@ function Open_Form_Modal_Alternative() {
       },
       {
         defaultContent:
-          '<button type="button" class="btn btn-success btn-sm Reset_Button"><i class="fa-solid fa-feather-pointed"></i></button>',
+          '<button type="button" class="btn btn-warning btn-sm Reset_Button"><i class="fa-solid fa-trash-arrow-up"></i></button>',
         orderable: false,
         searchable: false,
         width: "90px",
@@ -277,7 +279,7 @@ $("#Table_Usuario_Alternative").on("click", ".Reset_Button", function () {
         type: "POST",
         data: { ID_Usuario: data.iD_Usuario },
         success: function (data) {
-          // debugger; // TODO: Punto de Depuraci�n
+          // debugger; // TODO: Punto de Depuración
 
           if (data.result) {
             Swal.fire({
@@ -307,7 +309,7 @@ $("#Table_Usuario_Alternative").on("click", ".Reset_Button", function () {
 jQuery.validator.addMethod("Valid_Nombre_Usuario", function (value, element) {
   return (
     this.optional(element) ||
-    /^[a-zA-Z�-�\u00f1\u00d1\u00E0-\u00FC]+(\s*[a-zA-Z�-�\u00f1\u00d1\u00E0-\u00FC]*)*[a-zA-Z�-�\u00f1\u00d1\u00E0-\u00FC]+$/.test(
+    /^[a-zA-ZÀ-ÿ\u00f1\u00d1\u00E0-\u00FC]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1\u00E0-\u00FC]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1\u00E0-\u00FC]+$/.test(
       value
     )
   );
@@ -316,7 +318,7 @@ jQuery.validator.addMethod("Valid_Nombre_Usuario", function (value, element) {
 jQuery.validator.addMethod("Valid_Apellido_Usuario", function (value, element) {
   return (
     this.optional(element) ||
-    /^[a-zA-Z�-�\u00f1\u00d1\u00E0-\u00FC]+(\s*[a-zA-Z�-�\u00f1\u00d1\u00E0-\u00FC]*)*[a-zA-Z�-�\u00f1\u00d1\u00E0-\u00FC]+$/.test(
+    /^[a-zA-ZÀ-ÿ\u00f1\u00d1\u00E0-\u00FC]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1\u00E0-\u00FC]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1\u00E0-\u00FC]+$/.test(
       value
     )
   );
@@ -429,7 +431,7 @@ function Procesar() {
         processData: false,
         contentType: false,
         success: function (data) {
-          // debugger; // TODO: Punto de Depuraci�n
+          // debugger; // TODO: Punto de Depuración
 
           $(".modal-body").LoadingOverlay("hide");
 
@@ -505,7 +507,7 @@ function Procesar() {
           processData: false,
           contentType: false,
           success: function (data) {
-            // debugger; // TODO: Punto de Depuraci�n
+            // debugger; // TODO: Punto de Depuración
 
             $(".modal-body").LoadingOverlay("hide");
 

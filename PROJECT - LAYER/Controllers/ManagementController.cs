@@ -83,11 +83,11 @@ namespace PROJECT___LAYER.Controllers
         //+++++++++++++++++++++++Http_Request_Methods_Categoria_Insumo+++++++++++++++++++++++//
         #region Http_Request_Methods_Categoria_Insumo
         [HttpGet]
-        public JsonResult Management_Controller_Categoria_Insumo_Listar()
+        public JsonResult Management_Controller_Categoria_Insumo_Listar(bool Estado_Categoria_Insumo)
         {
-            List<Class_Entity_Categoria_Insumo> Obj_List_Class_Entity_Categoria_Insumo = new Class_Business_Categoria_Insumo().Class_Business_Categoria_Insumo_Listar();
+            List<Class_Entity_Categoria_Insumo> Obj_List_Class_Entity_Categoria_Insumo = new Class_Business_Categoria_Insumo().Class_Business_Categoria_Insumo_Listar(Estado_Categoria_Insumo);
 
-            return Json(new { obj_List_Class_Entity_Categoria_Insumo = Obj_List_Class_Entity_Categoria_Insumo });
+            return Json(new { data = Obj_List_Class_Entity_Categoria_Insumo });
         }
 
         [HttpPost]
@@ -108,6 +108,17 @@ namespace PROJECT___LAYER.Controllers
             string Message = string.Empty;
 
             Result = new Class_Business_Categoria_Insumo().Class_Business_Categoria_Insumo_Editar(Obj_Class_Entity_Categoria_Insumo, out Message);
+
+            return Json(new { result = Result, message = Message });
+        }
+
+        [HttpPost]
+        public JsonResult Management_Controller_Categoria_Insumo_Reset(int ID_Categoria_Insumo)
+        {
+            bool Result = false;
+            string Message = string.Empty;
+
+            Result = new Class_Business_Categoria_Insumo().Class_Business_Categoria_Insumo_Reset(ID_Categoria_Insumo, out Message);
 
             return Json(new { result = Result, message = Message });
         }

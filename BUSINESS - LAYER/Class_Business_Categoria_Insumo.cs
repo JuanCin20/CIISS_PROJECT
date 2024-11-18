@@ -8,9 +8,9 @@ namespace BUSINESS___LAYER
     {
         private Class_Data_Categoria_Insumo Obj_Class_Data_Categoria_Insumo = new Class_Data_Categoria_Insumo();
 
-        public List<Class_Entity_Categoria_Insumo> Class_Business_Categoria_Insumo_Listar()
+        public List<Class_Entity_Categoria_Insumo> Class_Business_Categoria_Insumo_Listar(bool Estado_Categoria_Insumo)
         {
-            return Obj_Class_Data_Categoria_Insumo.Class_Data_Categoria_Insumo_Listar();
+            return Obj_Class_Data_Categoria_Insumo.Class_Data_Categoria_Insumo_Listar(Estado_Categoria_Insumo);
         }
 
         public int Class_Business_Categoria_Insumo_Registrar(Class_Entity_Categoria_Insumo Obj_Class_Entity_Categoria_Insumo, out string Message)
@@ -54,6 +54,11 @@ namespace BUSINESS___LAYER
             {
                 return false;
             }
+        }
+
+        public bool Class_Business_Categoria_Insumo_Reset(int ID_Categoria_Insumo, out string Message)
+        {
+            return Obj_Class_Data_Categoria_Insumo.Class_Categoria_Insumo_Reset(ID_Categoria_Insumo, out Message);
         }
 
         public bool Class_Business_Categoria_Insumo_Eliminar(int ID_Categoria_Insumo, out string Message)

@@ -56,9 +56,7 @@ USE DataBase_Inventory_Management;
 ----PROCEDIMIENTOS ALMACENADOS
 GO
 	CREATE
-	OR ALTER PROCEDURE SP_USER_LIST (
-		@Estado_Usuario BIT
-	)AS BEGIN
+	OR ALTER PROCEDURE SP_USER_LIST (@Estado_Usuario BIT) AS BEGIN
 SELECT
 	TU.ID_Usuario,
 	TTU.ID_Tipo_Usuario,
@@ -199,10 +197,60 @@ END;
 ----UPDATE Tabla_Usuario SET Ruta_Imagen_Usuario = @Ruta_Imagen_Usuario, Nombre_Imagen_Usuario = @Nombre_Imagen_Usuario WHERE ID_Usuario = @ID_Usuario;
 GO
 	CREATE
+	OR ALTER PROCEDURE SP_CATEGORY_LIST (@Estado_Categoria_Insumo BIT) AS BEGIN IF(@Estado_Categoria_Insumo = 1) BEGIN
+SELECT
+	TCI.ID_Categoria_Insumo,
+	TCI.Nombre_Categoria_Insumo,
+	CAST(TCI.Descripcion_Categoria_Insumo AS VARCHAR(255)) AS [Descripcion_Categoria_Insumo],
+	TCI.Estado_Categoria_Insumo,
+	CONVERT(
+		VARCHAR(10),
+		TCI.Fecha_Registro_Categoria_Insumo,
+		103
+	) AS [Fecha_Registro_Categoria_Insumo],
+	COUNT(TI.ID_Categoria_Insumo) AS [Supply_Number]
+FROM
+	Tabla_Categoria_Insumo TCI
+	INNER JOIN Tabla_Insumo TI ON TCI.ID_Categoria_Insumo = TI.ID_Categoria_Insumo
+WHERE
+	TCI.Estado_Categoria_Insumo = 1
+GROUP BY
+	TCI.ID_Categoria_Insumo,
+	TCI.Nombre_Categoria_Insumo,
+	CAST(TCI.Descripcion_Categoria_Insumo AS VARCHAR(255)),
+	TCI.Estado_Categoria_Insumo,
+	TCI.Fecha_Registro_Categoria_Insumo,
+	TI.ID_Categoria_Insumo;
+
+END;
+
+ELSE BEGIN
+SELECT
+	ID_Categoria_Insumo,
+	Nombre_Categoria_Insumo,
+	CAST(Descripcion_Categoria_Insumo AS VARCHAR(255)) AS [Descripcion_Categoria_Insumo],
+	Estado_Categoria_Insumo,
+	CONVERT(
+		VARCHAR(10),
+		Fecha_Registro_Categoria_Insumo,
+		103
+	) AS [Fecha_Registro_Categoria_Insumo],
+	'0' AS [Supply_Number]
+FROM
+	Tabla_Categoria_Insumo
+WHERE
+	Estado_Categoria_Insumo = 0
+END;
+
+END;
+
+----DECLARE @Estado_Categoria_Insumo BIT = 1;
+----EXECUTE SP_CATEGORY_LIST @Estado_Categoria_Insumo;
+GO
+	CREATE
 	OR ALTER PROCEDURE SP_CATEGORY_CREATE (
 		@Nombre_Categoria_Insumo VARCHAR (50),
 		@Descripcion_Categoria_Insumo TEXT,
-		@Estado_Categoria_Insumo BIT,
 		@Message VARCHAR (500) OUTPUT,
 		@Result INT OUTPUT
 	) AS BEGIN
@@ -218,14 +266,12 @@ SET
 INSERT INTO
 	Tabla_Categoria_Insumo (
 		Nombre_Categoria_Insumo,
-		Descripcion_Categoria_Insumo,
-		Estado_Categoria_Insumo
+		Descripcion_Categoria_Insumo
 	)
 VALUES
 	(
 		@Nombre_Categoria_Insumo,
-		@Descripcion_Categoria_Insumo,
-		@Estado_Categoria_Insumo
+		@Descripcion_Categoria_Insumo
 	)
 SET
 	@Result = SCOPE_IDENTITY()
@@ -283,7 +329,8 @@ SET
 			Tabla_Insumo TI
 			INNER JOIN Tabla_Categoria_Insumo TCI ON TI.ID_Categoria_Insumo = TCI.ID_Categoria_Insumo
 		WHERE
-			TI.ID_Categoria_Insumo = @ID_Categoria_Insumo
+			TI.Estado_Insumo = 1
+			AND TCI.ID_Categoria_Insumo = @ID_Categoria_Insumo
 	) BEGIN
 UPDATE
 	TOP (1) Tabla_Categoria_Insumo

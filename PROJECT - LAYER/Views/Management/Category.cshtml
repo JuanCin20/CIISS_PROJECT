@@ -8,14 +8,23 @@
 
 <div class="card">
     <div class="card-header">
-        <i class="fa-solid fa-table"></i> Categorías de Insumos Registradas
+        <i class="fa-solid fa-table"></i>&nbsp;&nbsp;Categorías de Insumos Registradas
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-12">
-                <button type="button" class="btn btn-success" onclick="Open_Form_Modal(@null)">
-                    <i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Insertar Categoría de
-                </button>
+        <div class="row align-items-end">
+            <div class="col-sm-2">
+                <div class="d-grid mb-2">
+                    <button type="button" class="btn btn-success" onclick="Open_Form_Modal(@null)">
+                        <i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Insertar Categoría de Insumo
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="d-grid mb-2">
+                    <button type="button" class="btn btn-danger" onclick="Open_Form_Modal_Alternative()">
+                        <i class="fa-regular fa-circle"></i>&nbsp;&nbsp;Categorías Eliminadas
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -25,8 +34,10 @@
             <thead>
                 <tr>
                     <th>ID:</th>
-                    <th>Nombre:</th>
                     <th>Estado:</th>
+                    <th>Nombre:</th>
+                    <th>Insumos:</th>
+                    <th>Fecha Registro:</th>
                     <th>Operaciones:</th>
                 </tr>
             </thead>
@@ -36,7 +47,7 @@
     </div>
 </div>
 
-<!--Vertically Centered Modal-->
+<!-- Vertically Centered Modal -->
 <div class="modal fade" id="Form_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
     data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
@@ -50,16 +61,7 @@
                 <div class="modal-body">
                     <!----><input id="ID_Categoria_Insumo" type="hidden" value="0" /><!---->
                     <div class="row g-2">
-                        <div class="col-sm-6">
-                            <label for="Estado_Categoria_Insumo" class="form-label">Estado:</label>
-                            <select class="form-select" id="Estado_Categoria_Insumo" name="Estado_Categoria_Insumo"
-                                aria-label="Default select example">
-                                <option value="0" selected disabled>Seleccionar</option>
-                                <option value="Available">Disponible</option>
-                                <option value="Not_Available">No Disponible</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <label for="Nombre_Categoria_Insumo" class="form-label">Nombre:</label>
                             <input type="text" class="form-control" id="Nombre_Categoria_Insumo"
                                 name="Nombre_Categoria_Insumo" placeholder="Nombre" autocomplete="off">
@@ -80,7 +82,39 @@
         </div>
     </div>
 </div>
-<!--Vertically Centered Modal-->
+<!-- Vertically Centered Modal -->
+<!-- Modal -->
+<div class="modal fade" id="Static_Backdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Categorías Eliminadas</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table id="Table_Categoria_Insumo_Alternative" class="display cell-border" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>ID:</th>
+                            <th>Estado:</th>
+                            <th>Nombre:</th>
+                            <th>Insumos:</th>
+                            <th>Fecha Registro:</th>
+                            <th>Operaciones:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 @section Java_Script {
     <script src="~/js/Category.js" asp-append-version="true"></script>
 }

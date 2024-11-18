@@ -1,5 +1,6 @@
 var Table_Deadline_Report;
 var Table_Transaction_Report;
+
 $(document).ready(function () {
   var Close_Bootstrap_Button = $.fn.button.noConflict(); // Return "$.fn.button" to Previously Assigned Value
   $.fn.bootstrapBtn = Close_Bootstrap_Button; // Give "$().bootstrapBtn" the Bootstrap Functionality

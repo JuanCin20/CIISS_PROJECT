@@ -16,7 +16,7 @@ namespace DATA___LAYER
             {
                 using (SqlConnection Obj_SqlConnection = new SqlConnection(Class_Data_Connection.Connection_String))
                 {
-                    //string SQL_Server_Query_String = "SELECT TU.ID_Usuario, TTU.ID_Tipo_Usuario, TTU.Nombre_Tipo_Usuario, TU.Nombre_Usuario, TU.Apellido_Usuario, TU.E_Mail_Usuario, TU.Password_Usuario, TU.Reestablecer_Password_Usuario, TU.Estado_Usuario, CONVERT(VARCHAR(10), TU.Fecha_Registro_Usuario, 103) AS [Fecha_Registro_Usuario], TU.Ruta_Imagen_Usuario, TU.Nombre_Imagen_Usuario FROM Tabla_Usuario TU INNER JOIN Tabla_Tipo_Usuario TTU ON TU.ID_Tipo_Usuario = TTU.ID_Tipo_Usuario;";
+                    //string SQL_Server_Query_String = "SELECT TU.ID_Usuario, TTU.ID_Tipo_Usuario, TTU.Nombre_Tipo_Usuario, TU.Nombre_Usuario, TU.Apellido_Usuario, TU.E_Mail_Usuario, TU.Password_Usuario, TU.Reestablecer_Password_Usuario, TU.Estado_Usuario, CONVERT(VARCHAR(10), TU.Fecha_Registro_Usuario, 103) AS [Fecha_Registro_Usuario], TU.Ruta_Imagen_Usuario, TU.Nombre_Imagen_Usuario FROM Tabla_Usuario TU INNER JOIN Tabla_Tipo_Usuario TTU ON TU.ID_Tipo_Usuario = TTU.ID_Tipo_Usuario WHERE TU.Estado_Usuario = 1;";
 
                     StringBuilder Obj_StringBuilder = new StringBuilder();
 

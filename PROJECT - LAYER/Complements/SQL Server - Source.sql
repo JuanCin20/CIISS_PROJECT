@@ -57,7 +57,7 @@ GO
 		ID_Categoria_Insumo INT IDENTITY (1, 1) PRIMARY KEY,
 		Nombre_Categoria_Insumo VARCHAR (50) NOT NULL,
 		Descripcion_Categoria_Insumo TEXT NOT NULL,
-		Estado_Categoria_Insumo BIT NOT NULL,
+		Estado_Categoria_Insumo BIT DEFAULT 0 NOT NULL,
 		Fecha_Registro_Categoria_Insumo DATETIME DEFAULT GETDATE() NOT NULL
 	);
 

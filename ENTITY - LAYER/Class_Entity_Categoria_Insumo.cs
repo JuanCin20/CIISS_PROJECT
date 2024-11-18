@@ -7,5 +7,6 @@
         public string Descripcion_Categoria_Insumo { get; set; }
         public bool Estado_Categoria_Insumo { get; set; }
         public string Fecha_Registro_Categoria_Insumo { get; set; }
+        public int Supply_Number { get; set; } // ?
     }
 }
