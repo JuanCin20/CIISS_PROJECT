@@ -1,3 +1,8 @@
+$(document).ready(function () {
+  Function_Table_Usuario();
+  Function_Table_Usuario_Alternative();
+});
+
 var Table_Usuario;
 var Table_Usuario_Alternative;
 var Selected_Row;
@@ -24,53 +29,116 @@ function Show_User_Image(input) {
   }
 }
 
-Table_Usuario = $("#Table_Usuario").DataTable({
-  responsive: true,
-  ordering: false,
-  language: {
-    url: "//cdn.datatables.net/plug-ins/2.1.8/i18n/es-MX.json",
-  },
-  ajax: {
-    url: Url_01,
-    type: "GET",
-    dataType: "json",
-  },
-  columns: [
-    { data: "iD_Usuario" },
-    {
-      data: "estado_Usuario",
-      render: function (estado_Usuario) {
-        if (estado_Usuario) {
-          return '<span class="badge text-bg-success">Disponible</span>';
-        } else {
-          return '<span class="badge text-bg-danger">No Disponible</span>';
-        }
+function Selected_Row_Function(data) {
+  // ? Obtener la Fila Actual
+  var Selected_Row = $(data).parents("tr");
+  // ? Compruebe si la Fila Actual es una Fila Secundaria
+  if (Selected_Row.hasClass("child")) {
+    // ? Si es así, Señale la Fila Anterior (It's "parent")
+    Selected_Row = Selected_Row.prev();
+  }
+  return Selected_Row;
+}
+
+function Function_Table_Usuario() {
+  Table_Usuario = $("#Table_Usuario").DataTable({
+    responsive: true,
+    ordering: false,
+    language: {
+      url: "//cdn.datatables.net/plug-ins/2.1.8/i18n/es-MX.json",
+    },
+    ajax: {
+      url: Url_01,
+      type: "GET",
+      dataType: "json",
+    },
+    columns: [
+      { data: "iD_Usuario" },
+      {
+        data: "estado_Usuario",
+        render: function (estado_Usuario) {
+          if (estado_Usuario) {
+            return '<span class="badge text-bg-success">Disponible</span>';
+          } else {
+            return '<span class="badge text-bg-danger">No Disponible</span>';
+          }
+        },
       },
-    },
-    { data: "nombre_Usuario" },
-    { data: "apellido_Usuario" },
-    { data: "e_Mail_Usuario" },
-    { data: "fecha_Registro_Usuario" },
-    {
-      data: null,
-      render: function (data, type, row) {
-        return (
-          '<img style="width: 60px; height: 60px;" src="../User_Images/' +
-          row.nombre_Imagen_Usuario +
-          '" alt="Image_Error" class="border rounded img-fluid">'
-        );
+      { data: "nombre_Usuario" },
+      { data: "apellido_Usuario" },
+      { data: "e_Mail_Usuario" },
+      { data: "fecha_Registro_Usuario" },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return (
+            '<img style="width: 60px; height: 60px;" src="../User_Images/' +
+            row.nombre_Imagen_Usuario +
+            '" alt="Image_Error" class="border rounded img-fluid">'
+          );
+        },
       },
+      {
+        defaultContent:
+          '<button type="button" class="btn btn-primary btn-sm Edit_Button"><i class="fa-solid fa-pencil"></i></button>' +
+          '<button type="button" class="btn btn-danger btn-sm ms-2 Delete_Button"><i class="fa-solid fa-trash"></i></i></button>',
+        orderable: false,
+        searchable: false,
+        width: "90px",
+      },
+    ],
+  });
+}
+
+function Function_Table_Usuario_Alternative() {
+  Table_Usuario_Alternative = $("#Table_Usuario_Alternative").DataTable({
+    retrieve: true,
+    responsive: true,
+    ordering: false,
+    language: {
+      url: "//cdn.datatables.net/plug-ins/2.1.8/i18n/es-MX.json",
     },
-    {
-      defaultContent:
-        '<button type="button" class="btn btn-primary btn-sm Edit_Button"><i class="fa-solid fa-pencil"></i></button>' +
-        '<button type="button" class="btn btn-danger btn-sm ms-2 Delete_Button"><i class="fa-solid fa-trash"></i></i></button>',
-      orderable: false,
-      searchable: false,
-      width: "90px",
+    ajax: {
+      url: Url_02,
+      type: "GET",
+      dataType: "json",
     },
-  ],
-});
+    columns: [
+      { data: "iD_Usuario" },
+      {
+        data: "estado_Usuario",
+        render: function (estado_Usuario) {
+          if (estado_Usuario) {
+            return '<span class="badge text-bg-success">Disponible</span>';
+          } else {
+            return '<span class="badge text-bg-danger">No Disponible</span>';
+          }
+        },
+      },
+      { data: "nombre_Usuario" },
+      { data: "apellido_Usuario" },
+      { data: "e_Mail_Usuario" },
+      { data: "fecha_Registro_Usuario" },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return (
+            '<img style="width: 60px; height: 60px;" src="../User_Images/' +
+            row.nombre_Imagen_Usuario +
+            '" alt="Image_Error" class="border rounded img-fluid">'
+          );
+        },
+      },
+      {
+        defaultContent:
+          '<button type="button" class="btn btn-warning btn-sm Reset_Button"><i class="fa-solid fa-trash-arrow-up"></i></button>',
+        orderable: false,
+        searchable: false,
+        width: "90px",
+      },
+    ],
+  });
+}
 
 function Open_Form_Modal(data) {
   if (data == null) {
@@ -114,7 +182,6 @@ function Open_Form_Modal(data) {
         type: "POST",
         data: { ID_Usuario: data.iD_Usuario },
         success: function (data) {
-          $("#Imagen_Usuario").LoadingOverlay("hide");
           if (data.conversion) {
             $("#Imagen_Usuario").attr({
               src:
@@ -126,34 +193,12 @@ function Open_Form_Modal(data) {
           }
         },
         error: function (xhr, status, error) {
-          $("#Imagen_Usuario").LoadingOverlay("hide");
           alert(xhr.responseText);
-        },
-        beforeSend: function () {
-          $("#Imagen_Usuario").LoadingOverlay("show", {
-            background: "rgba(0, 0, 0, 0.5)",
-            image: "../img/clock-regular.svg",
-            imageAnimation: "1.5s fadein",
-            imageAutoResize: true,
-            imageResizeFactor: 1,
-            imageColor: "#FFD43B",
-          });
         },
       });
     }
   }
   $("#Form_Modal").modal("show");
-}
-
-function Selected_Row_Function(data) {
-  // ? Obtener la Fila Actual
-  var Selected_Row = $(data).parents("tr");
-  // ? Compruebe si la Fila Actual es una Fila Secundaria
-  if (Selected_Row.hasClass("child")) {
-    // ? Si es así, Señale la Fila Anterior (It's "parent")
-    Selected_Row = Selected_Row.prev();
-  }
-  return Selected_Row;
 }
 
 $("#Table_Usuario").on("click", ".Edit_Button", function () {
@@ -209,57 +254,6 @@ $("#Table_Usuario").on("click", ".Delete_Button", function () {
   });
   // console.log(data); // ? Good 'console.log'
 });
-
-function Open_Form_Modal_Alternative() {
-  Table_Usuario_Alternative = $("#Table_Usuario_Alternative").DataTable({
-    retrieve: true,
-    responsive: true,
-    ordering: false,
-    language: {
-      url: "//cdn.datatables.net/plug-ins/2.1.8/i18n/es-MX.json",
-    },
-    ajax: {
-      url: Url_02,
-      type: "GET",
-      dataType: "json",
-    },
-    columns: [
-      { data: "iD_Usuario" },
-      {
-        data: "estado_Usuario",
-        render: function (estado_Usuario) {
-          if (estado_Usuario) {
-            return '<span class="badge text-bg-success">Disponible</span>';
-          } else {
-            return '<span class="badge text-bg-danger">No Disponible</span>';
-          }
-        },
-      },
-      { data: "nombre_Usuario" },
-      { data: "apellido_Usuario" },
-      { data: "e_Mail_Usuario" },
-      { data: "fecha_Registro_Usuario" },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return (
-            '<img style="width: 60px; height: 60px;" src="../User_Images/' +
-            row.nombre_Imagen_Usuario +
-            '" alt="Image_Error" class="border rounded img-fluid">'
-          );
-        },
-      },
-      {
-        defaultContent:
-          '<button type="button" class="btn btn-warning btn-sm Reset_Button"><i class="fa-solid fa-trash-arrow-up"></i></button>',
-        orderable: false,
-        searchable: false,
-        width: "90px",
-      },
-    ],
-  });
-  $("#Static_Backdrop").modal("show");
-}
 
 $("#Table_Usuario_Alternative").on("click", ".Reset_Button", function () {
   Selected_Row = Selected_Row_Function(this);
