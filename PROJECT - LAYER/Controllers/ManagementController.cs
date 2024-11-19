@@ -164,7 +164,7 @@ namespace PROJECT___LAYER.Controllers
             {
                 if (Obj_IFormFile != null)
                 {
-                    string Ruta_Imagen_Insumo = "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\Product_Images";
+                    string Ruta_Imagen_Insumo = "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\Supply_Images";
                     string Extension_Imagen_Insumo = Path.GetExtension(Obj_IFormFile.FileName);
                     string Nombre_Imagen_Insumo = string.Concat(Obj_Class_Entity_Insumo_Alternative.ID_Insumo.ToString(), Extension_Imagen_Insumo);
 
@@ -198,7 +198,7 @@ namespace PROJECT___LAYER.Controllers
                 {
                     if (Obj_IFormFile == null)
                     {
-                        string Ruta_Imagen_Insumo = "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\Product_Images";
+                        string Ruta_Imagen_Insumo = "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\Supply_Images";
                         string Nombre_Imagen_Insumo = "Image_Error.jpg";
                         Obj_Class_Entity_Insumo_Alternative.Ruta_Imagen_Insumo = Ruta_Imagen_Insumo;
                         Obj_Class_Entity_Insumo_Alternative.Nombre_Imagen_Insumo = Nombre_Imagen_Insumo;
@@ -236,7 +236,7 @@ namespace PROJECT___LAYER.Controllers
             {
                 if (Obj_IFormFile != null)
                 {
-                    string Ruta_Imagen_Insumo = "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\Product_Images";
+                    string Ruta_Imagen_Insumo = "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\Supply_Images";
                     string Extension_Imagen_Insumo = Path.GetExtension(Obj_IFormFile.FileName);
                     string Nombre_Imagen_Insumo = string.Concat(Obj_Class_Entity_Insumo_Alternative.ID_Insumo.ToString(), Extension_Imagen_Insumo);
 

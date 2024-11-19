@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PROJECT - LAYER")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b4306b5b6dcd37626c5ca4a49be3750869d30e8a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+51f6f2865c2e4bf13284f9f8d610bd28c8341094")]
 [assembly: System.Reflection.AssemblyProductAttribute("PROJECT - LAYER")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PROJECT - LAYER")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

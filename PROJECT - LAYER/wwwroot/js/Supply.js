@@ -123,7 +123,20 @@ function Function_Table_Insumo() {
       { data: "unidad_Medida_Insumo" },
       { data: "precio_Insumo" },
       { data: "stock_Insumo" },
-      { data: "fecha_Vencimiento_Insumo" },
+      {
+        data: "fecha_Vencimiento_Insumo",
+        render: function (fecha_Vencimiento_Insumo) {
+          if (fecha_Vencimiento_Insumo == null) {
+            return '<label class="text-danger">NULL</label>';
+          } else {
+            return (
+              '<label class="text-dark">' +
+              fecha_Vencimiento_Insumo +
+              "</label>"
+            );
+          }
+        },
+      },
       {
         data: "estado_Insumo",
         render: function (estado_Insumo) {
@@ -156,7 +169,7 @@ function Function_Table_Insumo() {
   });
 }
 
-function Open_Form_Modal_Alternative() {
+function Function_Table_Insumo_Alternative() {
   Table_Insumo_Alternative = $("#Table_Insumo_Alternative").DataTable({
     retrieve: true,
     responsive: true,
@@ -192,7 +205,20 @@ function Open_Form_Modal_Alternative() {
       { data: "unidad_Medida_Insumo" },
       { data: "precio_Insumo" },
       { data: "stock_Insumo" },
-      { data: "fecha_Vencimiento_Insumo" },
+      {
+        data: "fecha_Vencimiento_Insumo",
+        render: function (fecha_Vencimiento_Insumo) {
+          if (fecha_Vencimiento_Insumo == null) {
+            return '<label class="text-danger">NULL</label>';
+          } else {
+            return (
+              '<label class="text-dark">' +
+              fecha_Vencimiento_Insumo +
+              "</label>"
+            );
+          }
+        },
+      },
       {
         data: "estado_Insumo",
         render: function (estado_Insumo) {
@@ -550,7 +576,7 @@ $(document).ready(function () {
         required: "Campo Requerido: Descripci\xf3n del Insumo",
         Valid_Descripcion_Insumo: "Campo Requerido: Descripci\xf3n del Insumo",
         maxlength:
-          "La Descripci\xf3n del Insumo debe Contener un M\xe1ximo de 120 Caracteres",
+          "La Descripci\xf3n del Insumo debe Contener un M\xe1ximo de 255 Caracteres",
       },
       Imagen_Insumo_Input: {
         required: "Campo Requerido: Im\xe1gen del Insumo",
