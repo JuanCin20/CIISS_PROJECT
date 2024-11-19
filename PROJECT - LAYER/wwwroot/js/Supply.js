@@ -1,6 +1,61 @@
+$(document).ready(function () {
+  Function_Table_Insumo();
+  Function_Table_Insumo_Alternative();
+});
+
 var Table_Insumo;
 var Table_Insumo_Alternative;
 var Selected_Row;
+
+// ? var Url_01 = "@Url.Action("Management_Controller_Insumo_Listar", "Management")",
+var Url_01 =
+  "https://localhost:44381/Management/Management_Controller_Insumo_Listar" +
+  "?Estado_Insumo=" +
+  true;
+
+// ? var Url_02 = "@Url.Action("Management_Controller_Insumo_Listar", "Management")",
+var Url_02 =
+  "https://localhost:44381/Management/Management_Controller_Insumo_Listar" +
+  "?Estado_Insumo=" +
+  false;
+
+jQuery.ajax({
+  url: "https://localhost:44381/Management/Management_Controller_Insumo_Categoria_Insumo_Listar",
+  type: "GET",
+  dataType: "json",
+  contentType: "application/json; charset=UTF-8",
+  success: function (data) {
+    $("<option>")
+      .attr({ value: "0", disabled: "true", selected: "true" })
+      .text("Seleccionar")
+      .appendTo("#Categoria_Insumo");
+    $.each(data.data, function (index, item) {
+      $("<option>")
+        .attr({ value: item.iD_Categoria_Insumo })
+        .text(item.nombre_Categoria_Insumo)
+        .appendTo("#Categoria_Insumo");
+    });
+  },
+});
+
+jQuery.ajax({
+  url: "https://localhost:44381/Management/Management_Controller_Insumo_Proveedor_Insumo_Listar",
+  type: "GET",
+  dataType: "json",
+  contentType: "application/json; charset=UTF-8",
+  success: function (data) {
+    $("<option>")
+      .attr({ value: "0", disabled: "true", selected: "true" })
+      .text("Seleccionar")
+      .appendTo("#Proveedor_Insumo");
+    $.each(data.data, function (index, item) {
+      $("<option>")
+        .attr({ value: item.iD_Proveedor_Insumo })
+        .text(item.nombre_Proveedor_Insumo)
+        .appendTo("#Proveedor_Insumo");
+    });
+  },
+});
 
 function Show_Supply_Image(input) {
   if (input.files) {
@@ -12,13 +67,18 @@ function Show_Supply_Image(input) {
   }
 }
 
-// ? var Url_01 = "@Url.Action("Management_Controller_Insumo_Listar", "Management")",
-var Url_01 =
-  "https://localhost:44381/Management/Management_Controller_Insumo_Listar" +
-  "?Estado_Insumo=" +
-  true;
+function Selected_Row_Function(data) {
+  // ? Obtener la Fila Actual
+  var Selected_Row = $(data).parents("tr");
+  // ? Compruebe si la Fila Actual es una Fila Secundaria
+  if (Selected_Row.hasClass("child")) {
+    // ? Si es así, Señale la Fila Anterior (It's "parent")
+    Selected_Row = Selected_Row.prev();
+  }
+  return Selected_Row;
+}
 
-$(document).ready(function () {
+function Function_Table_Insumo() {
   Table_Insumo = $("#Table_Insumo").DataTable({
     fnDrawCallback: function () {
       // !
@@ -94,45 +154,75 @@ $(document).ready(function () {
       },
     ],
   });
-});
+}
 
-jQuery.ajax({
-  url: "https://localhost:44381/Management/Management_Controller_Insumo_Categoria_Insumo_Listar",
-  type: "GET",
-  dataType: "json",
-  contentType: "application/json; charset=UTF-8",
-  success: function (data) {
-    $("<option>")
-      .attr({ value: "0", disabled: "true", selected: "true" })
-      .text("Seleccionar")
-      .appendTo("#Categoria_Insumo");
-    $.each(data.data, function (index, item) {
-      $("<option>")
-        .attr({ value: item.iD_Categoria_Insumo })
-        .text(item.nombre_Categoria_Insumo)
-        .appendTo("#Categoria_Insumo");
-    });
-  },
-});
-
-jQuery.ajax({
-  url: "https://localhost:44381/Management/Management_Controller_Insumo_Proveedor_Insumo_Listar",
-  type: "GET",
-  dataType: "json",
-  contentType: "application/json; charset=UTF-8",
-  success: function (data) {
-    $("<option>")
-      .attr({ value: "0", disabled: "true", selected: "true" })
-      .text("Seleccionar")
-      .appendTo("#Proveedor_Insumo");
-    $.each(data.data, function (index, item) {
-      $("<option>")
-        .attr({ value: item.iD_Proveedor_Insumo })
-        .text(item.nombre_Proveedor_Insumo)
-        .appendTo("#Proveedor_Insumo");
-    });
-  },
-});
+function Open_Form_Modal_Alternative() {
+  Table_Insumo_Alternative = $("#Table_Insumo_Alternative").DataTable({
+    retrieve: true,
+    responsive: true,
+    ordering: false,
+    language: {
+      url: "//cdn.datatables.net/plug-ins/2.1.8/i18n/es-MX.json",
+    },
+    ajax: {
+      url: Url_02,
+      type: "GET",
+      dataType: "json",
+    },
+    columns: [
+      { data: "iD_Insumo" },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return (
+            '<a tabindex="' +
+            row.iD_Insumo +
+            '" href="#/" class="Pop_Trigger" data-bs-html="true" data-bs-custom-class="custom-popover" data-bs-container="body" data-bs-toggle="popover" data-bs-title="Informaci\xf3n" data-bs-content="<p><b>Categor\xeda:</b> ' +
+            row.obj_Class_Entity_Categoria_Insumo.nombre_Categoria_Insumo +
+            "</p><p><b>Proveedor:</b> " +
+            row.obj_Class_Entity_Proveedor_Insumo.nombre_Proveedor_Insumo +
+            "</p><p><b>Descripci\xf3n:</b> " +
+            row.descripcion_Insumo +
+            '</p>">' +
+            row.nombre_Insumo +
+            "</a>"
+          );
+        },
+      },
+      { data: "unidad_Medida_Insumo" },
+      { data: "precio_Insumo" },
+      { data: "stock_Insumo" },
+      { data: "fecha_Vencimiento_Insumo" },
+      {
+        data: "estado_Insumo",
+        render: function (estado_Insumo) {
+          if (estado_Insumo) {
+            return '<span class="badge text-bg-success">Disponible</span>';
+          } else {
+            return '<span class="badge text-bg-danger">No Disponible</span>';
+          }
+        },
+      },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return (
+            '<img style="width: 60px; height: 60px;" src="../Supply_Images/' +
+            row.nombre_Imagen_Insumo +
+            '" alt="Image_Error" class="border rounded img-fluid">'
+          );
+        },
+      },
+      {
+        defaultContent:
+          '<button type="button" class="btn btn-warning btn-sm Reset_Button"><i class="fa-solid fa-trash-arrow-up"></i></button>',
+        orderable: false,
+        searchable: false,
+        width: "90px",
+      },
+    ],
+  });
+}
 
 function Open_Form_Modal(data) {
   if (data == null) {
@@ -220,7 +310,6 @@ function Open_Form_Modal(data) {
         type: "POST",
         data: { ID_Insumo: data.iD_Insumo },
         success: function (data) {
-          $("#Imagen_Insumo").LoadingOverlay("hide");
           if (data.conversion) {
             $("#Imagen_Insumo").attr({
               src:
@@ -232,34 +321,12 @@ function Open_Form_Modal(data) {
           }
         },
         error: function (xhr, status, error) {
-          $("#Imagen_Insumo").LoadingOverlay("hide");
           alert(xhr.responseText);
-        },
-        beforeSend: function () {
-          $("#Imagen_Insumo").LoadingOverlay("show", {
-            background: "rgba(0, 0, 0, 0.5)",
-            image: "../img/clock-regular.svg",
-            imageAnimation: "1.5s fadein",
-            imageAutoResize: true,
-            imageResizeFactor: 1,
-            imageColor: "#FFD43B",
-          });
         },
       });
     }
   }
   $("#Form_Modal").modal("show");
-}
-
-function Selected_Row_Function(data) {
-  // ? Obtener la Fila Actual
-  var Selected_Row = $(data).parents("tr");
-  // ? Compruebe si la Fila Actual es una Fila Secundaria
-  if (Selected_Row.hasClass("child")) {
-    // ? Si es as , Se ale la Fila Anterior (It's "parent")
-    Selected_Row = Selected_Row.prev();
-  }
-  return Selected_Row;
 }
 
 $("#Table_Insumo").on("click", ".Edit_Button", function () {
@@ -298,7 +365,7 @@ $("#Table_Insumo").on("click", ".Delete_Button", function () {
               icon: "success",
             });
             Table_Insumo.row(Selected_Row).remove().draw();
-            Table_Insumo_Alternative.ajax.reload();
+            Table_Insumo_Alternative.ajax.url(Url_02).load();
           } else {
             Swal.fire({
               title: "Error",
@@ -315,81 +382,6 @@ $("#Table_Insumo").on("click", ".Delete_Button", function () {
   });
   // console.log(data); // ? Good 'console.log'
 });
-
-function Open_Form_Modal_Alternative() {
-  // ? var Url_02 = "@Url.Action("Management_Controller_Insumo_Listar", "Management")",
-  var Url_02 =
-    "https://localhost:44381/Management/Management_Controller_Insumo_Listar" +
-    "?Estado_Insumo=" +
-    false;
-
-  Table_Insumo_Alternative = $("#Table_Insumo_Alternative").DataTable({
-    retrieve: true,
-    responsive: true,
-    ordering: false,
-    language: {
-      url: "//cdn.datatables.net/plug-ins/2.1.8/i18n/es-MX.json",
-    },
-    ajax: {
-      url: Url_02,
-      type: "GET",
-      dataType: "json",
-    },
-    columns: [
-      { data: "iD_Insumo" },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return (
-            '<a tabindex="' +
-            row.iD_Insumo +
-            '" href="#/" class="Pop_Trigger" data-bs-html="true" data-bs-custom-class="custom-popover" data-bs-container="body" data-bs-toggle="popover" data-bs-title="Informaci\xf3n" data-bs-content="<p><b>Categor\xeda:</b> ' +
-            row.obj_Class_Entity_Categoria_Insumo.nombre_Categoria_Insumo +
-            "</p><p><b>Proveedor:</b> " +
-            row.obj_Class_Entity_Proveedor_Insumo.nombre_Proveedor_Insumo +
-            "</p><p><b>Descripci\xf3n:</b> " +
-            row.descripcion_Insumo +
-            '</p>">' +
-            row.nombre_Insumo +
-            "</a>"
-          );
-        },
-      },
-      { data: "unidad_Medida_Insumo" },
-      { data: "precio_Insumo" },
-      { data: "stock_Insumo" },
-      { data: "fecha_Vencimiento_Insumo" },
-      {
-        data: "estado_Insumo",
-        render: function (estado_Insumo) {
-          if (estado_Insumo) {
-            return '<span class="badge text-bg-success">Disponible</span>';
-          } else {
-            return '<span class="badge text-bg-danger">No Disponible</span>';
-          }
-        },
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return (
-            '<img style="width: 60px; height: 60px;" src="../Supply_Images/' +
-            row.nombre_Imagen_Insumo +
-            '" alt="Image_Error" class="border rounded img-fluid">'
-          );
-        },
-      },
-      {
-        defaultContent:
-          '<button type="button" class="btn btn-warning btn-sm Reset_Button"><i class="fa-solid fa-trash-arrow-up"></i></button>',
-        orderable: false,
-        searchable: false,
-        width: "90px",
-      },
-    ],
-  });
-  $("#Static_Backdrop").modal("show");
-}
 
 $("#Table_Insumo_Alternative").on("click", ".Reset_Button", function () {
   Selected_Row = Selected_Row_Function(this);
@@ -420,7 +412,7 @@ $("#Table_Insumo_Alternative").on("click", ".Reset_Button", function () {
               icon: "success",
             });
             Table_Insumo_Alternative.row(Selected_Row).remove().draw();
-            Table_Insumo.ajax.reload();
+            Table_Insumo.ajax.url(Url_01).load();
           } else {
             Swal.fire({
               title: "Error",
@@ -636,10 +628,8 @@ function Procesar() {
           $(".modal-body").LoadingOverlay("hide");
 
           if (data.iD_Auto_Generated != 0) {
-            Insumo.iD_Insumo = data.iD_Auto_Generated;
-            Table_Insumo.row.add(Insumo).draw(false);
             $("#Form_Modal").modal("hide");
-            Table_Insumo.ajax.reload();
+            Table_Insumo.ajax.url(Url_01).load();
             toastr.options = {
               closeButton: true,
               debug: false,
@@ -712,10 +702,9 @@ function Procesar() {
             $(".modal-body").LoadingOverlay("hide");
 
             if (data.successful_Operation) {
-              Table_Insumo.row(Selected_Row).data(Insumo).draw(false);
               Selected_Row = null;
               $("#Form_Modal").modal("hide");
-              Table_Insumo.ajax.reload();
+              Table_Insumo.ajax.url(Url_01).load();
               toastr.options = {
                 closeButton: true,
                 debug: false,

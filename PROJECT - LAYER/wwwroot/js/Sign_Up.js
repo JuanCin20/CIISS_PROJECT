@@ -159,7 +159,7 @@ function Procesar() {
           imageAnimation: "1.5s fadein",
           imageAutoResize: true,
           imageResizeFactor: 1,
-          // imageColor: "#FFD43B",
+          imageColor: "#FFD43B",
         });
       },
     });
