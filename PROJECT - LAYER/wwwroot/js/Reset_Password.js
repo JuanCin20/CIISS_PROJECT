@@ -5,8 +5,6 @@ jQuery.validator.addMethod("Valid_E_Mail_Usuario", function (value, element) {
 });
 
 $(document).ready(function () {
-  $("#Alert_Div").hide();
-
   $("#Form_Reset_Password").validate({
     rules: {
       E_Mail_Usuario: {
@@ -69,12 +67,15 @@ function Procesar() {
           window.location.replace("https://localhost:44381/Access/Log_In");
         } else {
           if (data.message != "Success!") {
-            $("#Alert_Div").show();
-            $("#Alert_Div").html(
-              "<i class='fa-solid fa-triangle-exclamation'></i>&nbsp;" +
-                data.message +
-                ""
-            );
+            $("#Alert_Container").html("");
+            $("<div>")
+              .addClass("alert alert-danger")
+              .attr({ role: "alert" })
+              .append(
+                $("<i>").addClass("fa-solid fa-triangle-exclamation"),
+                $("<label>").html("&nbsp;&nbsp;" + data.message)
+              )
+              .appendTo("#Alert_Container");
           }
         }
       },

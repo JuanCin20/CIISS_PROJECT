@@ -1,30 +1,36 @@
 --EJERCICIOS
-----CONSULTA EMPLEANDO MÁS DE UNA TABLA
-/*SELECT
- TU.ID_Usuario,
- TTU.ID_Tipo_Usuario,
- TTU.Nombre_Tipo_Usuario,
- TU.Nombre_Usuario,
- TU.Apellido_Usuario,
- TU.E_Mail_Usuario,
- TU.Password_Usuario,
- TU.Reestablecer_Password_Usuario,
- TU.Estado_Usuario,
- CONVERT(
- VARCHAR(10),
- TU.Fecha_Registro_Usuario,
- 103
- ) AS [Fecha_Registro_Usuario],
- TU.Ruta_Imagen_Usuario,
- TU.Nombre_Imagen_Usuario
- FROM
- Tabla_Usuario TU
- INNER JOIN Tabla_Tipo_Usuario TTU ON TU.ID_Tipo_Usuario = TTU.ID_Tipo_Usuario
- WHERE TU.Estado_Usuario = 1;
- */
 USE DataBase_Inventory_Management;
 
 ----PROCEDIMIENTOS ALMACENADOS
+GO
+	CREATE
+	OR ALTER PROCEDURE SP_USER AS BEGIN
+SELECT
+	TU.ID_Usuario,
+	TTU.ID_Tipo_Usuario,
+	TTU.Nombre_Tipo_Usuario,
+	TU.Nombre_Usuario,
+	TU.Apellido_Usuario,
+	TU.E_Mail_Usuario,
+	TU.Password_Usuario,
+	TU.Reestablecer_Password_Usuario,
+	TU.Estado_Usuario,
+	CONVERT(
+		VARCHAR(10),
+		TU.Fecha_Registro_Usuario,
+		103
+	) AS [Fecha_Registro_Usuario],
+	TU.Ruta_Imagen_Usuario,
+	TU.Nombre_Imagen_Usuario
+FROM
+	Tabla_Usuario TU
+	INNER JOIN Tabla_Tipo_Usuario TTU ON TU.ID_Tipo_Usuario = TTU.ID_Tipo_Usuario
+WHERE
+	TU.Estado_Usuario = 1;
+
+END;
+
+----EXECUTE SP_USER;
 GO
 	CREATE
 	OR ALTER PROCEDURE SP_USER_LIST (@Estado_Usuario BIT) AS BEGIN
@@ -185,6 +191,7 @@ FROM
 	INNER JOIN Tabla_Insumo TI ON TCI.ID_Categoria_Insumo = TI.ID_Categoria_Insumo
 WHERE
 	TCI.Estado_Categoria_Insumo = 1
+	AND TI.Estado_Insumo = 1
 GROUP BY
 	TCI.ID_Categoria_Insumo,
 	TCI.Nombre_Categoria_Insumo,
@@ -306,6 +313,7 @@ FROM
 	INNER JOIN Tabla_Insumo TI ON TPI.ID_Proveedor_Insumo = TI.ID_Proveedor_Insumo
 WHERE
 	TPI.Estado_Proveedor_Insumo = 1
+	AND TI.Estado_Insumo = 1
 GROUP BY
 	TPI.ID_Proveedor_Insumo,
 	TPI.Nombre_Proveedor_Insumo,
@@ -559,11 +567,11 @@ SET
 		FROM
 			Tabla_Insumo
 		WHERE
-			Stock_Insumo < 10
+			Stock_Insumo <= 10
 			AND ID_Insumo = @ID_Insumo
 	) BEGIN
 UPDATE
-	TOP (1) Tabla_Insumo
+	Tabla_Insumo
 SET
 	Estado_Insumo = 0
 WHERE
@@ -579,7 +587,7 @@ ELSE BEGIN IF EXISTS (
 		Tabla_Insumo
 	WHERE
 		DATEDIFF(DAY, GETDATE(), Fecha_Vencimiento_Insumo) <= 7
-		AND ID_Insumo = 1
+		AND ID_Insumo = @ID_Insumo
 ) BEGIN
 UPDATE
 	TOP (1) Tabla_Insumo
@@ -928,3 +936,135 @@ END;
 
 ----DECLARE @ID_Categoria_Insumo INT = 1;
 ----EXECUTE SP_QUERY @ID_Categoria_Insumo;
+GO
+	CREATE
+	OR ALTER TRIGGER TRI_01 ON Tabla_Insumo FOR
+INSERT
+	AS BEGIN DECLARE @ID_Insumo INT DECLARE @ID_Categoria_Insumo INT DECLARE @ID_Proveedor_Insumo INT DECLARE @Stock_Insumo INT
+SELECT
+	@ID_Insumo = ID_Insumo,
+	@ID_Categoria_Insumo = ID_Categoria_Insumo,
+	@ID_Proveedor_Insumo = ID_Proveedor_Insumo
+FROM
+	INSERTED
+SELECT
+	@Stock_Insumo = Stock_Insumo
+FROM
+	Tabla_Insumo
+WHERE
+	ID_Insumo = @ID_Insumo IF (@Stock_Insumo > 10) BEGIN
+UPDATE
+	Tabla_Categoria_Insumo
+SET
+	Estado_Categoria_Insumo = 1
+WHERE
+	ID_Categoria_Insumo = @ID_Categoria_Insumo
+UPDATE
+	Tabla_Proveedor_Insumo
+SET
+	Estado_Proveedor_Insumo = 1
+WHERE
+	ID_Proveedor_Insumo = @ID_Proveedor_Insumo
+END
+ELSE BEGIN
+UPDATE
+	Tabla_Categoria_Insumo
+SET
+	Estado_Categoria_Insumo = 0
+WHERE
+	ID_Categoria_Insumo = @ID_Categoria_Insumo
+UPDATE
+	Tabla_Proveedor_Insumo
+SET
+	Estado_Proveedor_Insumo = 0
+WHERE
+	ID_Proveedor_Insumo = @ID_Proveedor_Insumo
+END
+END;
+
+GO
+	CREATE
+	OR ALTER TRIGGER TRI_02 ON Tabla_Insumo FOR
+UPDATE
+	AS BEGIN DECLARE @ID_Insumo INT DECLARE @ID_Categoria_Insumo INT
+SELECT
+	@ID_Insumo = ID_Insumo
+FROM
+	INSERTED
+SELECT
+	@ID_Categoria_Insumo = ID_Categoria_Insumo
+FROM
+	Tabla_Insumo
+WHERE
+	ID_Insumo = @ID_Insumo IF EXISTS (
+		SELECT
+			*
+		FROM
+			Tabla_Insumo
+		WHERE
+			ID_Categoria_Insumo = @ID_Categoria_Insumo
+			AND Estado_Insumo = 1
+	) BEGIN
+UPDATE
+	Tabla_Categoria_Insumo
+SET
+	Estado_Categoria_Insumo = 1
+WHERE
+	ID_Categoria_Insumo = @ID_Categoria_Insumo
+END
+ELSE BEGIN
+UPDATE
+	Tabla_Categoria_Insumo
+SET
+	Estado_Categoria_Insumo = 0
+WHERE
+	ID_Categoria_Insumo = @ID_Categoria_Insumo
+END
+END;
+
+GO
+	CREATE
+	OR ALTER TRIGGER TRI_03 ON Tabla_Insumo FOR
+UPDATE
+	AS BEGIN DECLARE @ID_Insumo INT DECLARE @ID_Proveedor_Insumo INT
+SELECT
+	@ID_Insumo = ID_Insumo
+FROM
+	INSERTED
+SELECT
+	@ID_Proveedor_Insumo = ID_Proveedor_Insumo
+FROM
+	Tabla_Insumo
+WHERE
+	ID_Insumo = @ID_Insumo IF EXISTS (
+		SELECT
+			*
+		FROM
+			Tabla_Insumo
+		WHERE
+			ID_Proveedor_Insumo = @ID_Proveedor_Insumo
+			AND Estado_Insumo = 1
+	) BEGIN
+UPDATE
+	Tabla_Proveedor_Insumo
+SET
+	Estado_Proveedor_Insumo = 1
+WHERE
+	ID_Proveedor_Insumo = @ID_Proveedor_Insumo
+END
+ELSE BEGIN
+UPDATE
+	Tabla_Proveedor_Insumo
+SET
+	Estado_Proveedor_Insumo = 0
+WHERE
+	ID_Proveedor_Insumo = @ID_Proveedor_Insumo
+END
+END;
+
+/*INSERT INTO Tabla_Categoria_Insumo (Nombre_Categoria_Insumo, Descripcion_Categoria_Insumo) VALUES ('Juan Carlos Aronés Peña', 'Juan Carlos Aronés Peña.')*/
+/*INSERT INTO Tabla_Proveedor_Insumo (Nombre_Proveedor_Insumo, Telefono_Proveedor_Insumo, E_Mail_Proveedor_Insumo, Direccion_Proveedor_Insumo)
+ VALUES ('Juan Carlos Aronés Peña', '959748008', 'rasterfrack@gmail.com', 'Juan Carlos Aronés Peña.')*/
+/*INSERT INTO Tabla_Insumo (ID_Categoria_Insumo, ID_Proveedor_Insumo, Nombre_Insumo, Descripcion_Insumo, Unidad_Medida_Insumo, Precio_Insumo, Stock_Insumo, Fecha_Vencimiento_Insumo, Ruta_Imagen_Insumo, Nombre_Imagen_Insumo)
+ VALUES (13, 26, 'Juan Carlos Aronés Peña', 'Juan Carlos Aronés Peña', 'Un.', 500, 5, '2024-11-20', 'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images', 'Image_Error.jpg')*/
+/*UPDATE Tabla_Insumo SET Estado_Insumo = 1 WHERE ID_Insumo = 213*/

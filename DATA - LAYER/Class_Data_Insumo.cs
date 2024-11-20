@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
-using System.Text;
 using System;
 using ENTITY___LAYER;
 using System.Globalization;
@@ -229,6 +228,35 @@ namespace DATA___LAYER
                     Obj_SqlCommand.Parameters.AddWithValue("@Ruta_Imagen_Insumo", Obj_Class_Entity_Insumo.Ruta_Imagen_Insumo);
                     Obj_SqlCommand.Parameters.AddWithValue("@Nombre_Imagen_Insumo", Obj_Class_Entity_Insumo.Nombre_Imagen_Insumo);
                     Obj_SqlCommand.Parameters.AddWithValue("@ID_Insumo", Obj_Class_Entity_Insumo.ID_Insumo);
+                    Obj_SqlCommand.CommandType = CommandType.Text;
+
+                    Obj_SqlConnection.Open();
+
+                    Result = Obj_SqlCommand.ExecuteNonQuery() > 0 ? true : false;
+                }
+            }
+            catch (Exception Error)
+            {
+                Console.WriteLine(Error.Message);
+                Message = Error.Message;
+                Result = false;
+            }
+            return Result;
+        }
+
+        public bool Class_Data_Insumo_Reset(int ID_Insumo, string Fecha_Vencimiento_Insumo, out string Message)
+        {
+            bool Result = false;
+            Message = string.Empty;
+            try
+            {
+                using (SqlConnection Obj_SqlConnection = new SqlConnection(Class_Data_Connection.Connection_String))
+                {
+                    string SQL_Server_Query_String = "UPDATE Tabla_Insumo SET Estado_Insumo = 1 WHERE ID_Insumo = @ID_Insumo AND Fecha_Vencimiento_Insumo = @Fecha_Vencimiento_Insumo;";
+
+                    SqlCommand Obj_SqlCommand = new SqlCommand(SQL_Server_Query_String, Obj_SqlConnection);
+                    Obj_SqlCommand.Parameters.AddWithValue("@ID_Insumo", ID_Insumo);
+                    Obj_SqlCommand.Parameters.AddWithValue("@Fecha_Vencimiento_Insumo", Fecha_Vencimiento_Insumo);
                     Obj_SqlCommand.CommandType = CommandType.Text;
 
                     Obj_SqlConnection.Open();

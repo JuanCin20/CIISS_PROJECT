@@ -17,71 +17,71 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = PROJECT___LAYER
 build_property.RootNamespace = PROJECT___LAYER
-build_property.ProjectDir = e:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\
+build_property.ProjectDir = E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = e:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER
+build_property.MSBuildProjectDirectory = E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER
 build_property._RazorSourceGeneratorDebug = 
 
-[e:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Access/Change_Password.cshtml]
+[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Access/Change_Password.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNzXENoYW5nZV9QYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Access/Log_In.cshtml]
+[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Access/Log_In.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNzXExvZ19Jbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Access/Reset_Password.cshtml]
+[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Access/Reset_Password.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNzXFJlc2V0X1Bhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Access/Sign_Up.cshtml]
+[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Access/Sign_Up.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNzXFNpZ25fVXAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Home/Index.cshtml]
+[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Home/Privacy.cshtml]
+[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Management/Category.cshtml]
+[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Management/Category.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlbWVudFxDYXRlZ29yeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Management/Supplier.cshtml]
+[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Management/Supplier.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlbWVudFxTdXBwbGllci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Management/Supply.cshtml]
+[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Management/Supply.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlbWVudFxTdXBwbHkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Shared/Error.cshtml]
+[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Shared/_Layout.cshtml]
+[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Shared/_Layout_Alternative.cshtml]
+[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Shared/_Layout_Alternative.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRfQWx0ZXJuYXRpdmUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Staff/User.cshtml]
+[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/Staff/User.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcVXNlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/_ViewImports.cshtml]
+[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[e:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/_ViewStart.cshtml]
+[E:/JuanCin20/DATA/CIISS - INVENTORY MANAGEMENT/CIISS - INVENTORY MANAGEMENT/PROJECT - LAYER/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

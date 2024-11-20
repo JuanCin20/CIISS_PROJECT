@@ -42,8 +42,9 @@ namespace PROJECT___LAYER.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Access_Controller_Change_Password(int ID_Usuario, string Password_Usuario, string Password_Usuario_01, string Password_Usuario_02)
+        public async Task<IActionResult> Access_Controller_Change_Password(string Password_Usuario, string Password_Usuario_01, string Password_Usuario_02)
         {
+            int ID_Usuario = Convert.ToInt32(HttpContext.Session.GetString("ID_Usuario_String"));
             Class_Entity_Usuario Obj_Class_Entity_Usuario = new Class_Entity_Usuario();
 
             Obj_Class_Entity_Usuario = new Class_Business_Usuario().Class_Business_Usuario_Listar().Where(Obj_Class_Entity_Usuario_Alter => Obj_Class_Entity_Usuario_Alter.ID_Usuario == ID_Usuario).FirstOrDefault();

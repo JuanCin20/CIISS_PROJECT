@@ -116,8 +116,7 @@ function Procesar() {
       apellido_Usuario: $("#Apellido_Usuario").val(),
       e_Mail_Usuario: $.trim($("#E_Mail_Usuario").val()),
       obj_Class_Entity_Tipo_Usuario: {
-        iD_Tipo_Usuario: $("#ID_Tipo_Usuario").val(),
-        nombre_Tipo_Usuario: $("#Nombre_Tipo_Usuario").val(),
+        iD_Tipo_Usuario: 1,
       },
     };
 
@@ -140,12 +139,15 @@ function Procesar() {
         if (data.iD_Auto_Generated != 0) {
           window.location.replace("https://localhost:44381/Access/Log_In");
         } else {
-          $("#Alert_Div").show();
-          $("#Alert_Div").html(
-            "<i class='fa-solid fa-triangle-exclamation'></i>&nbsp;" +
-              data.message +
-              ""
-          );
+          $("#Alert_Container").html("");
+          $("<div>")
+            .addClass("alert alert-danger")
+            .attr({ role: "alert" })
+            .append(
+              $("<i>").addClass("fa-solid fa-triangle-exclamation"),
+              $("<label>").html("&nbsp;&nbsp;" + data.message)
+            )
+            .appendTo("#Alert_Container");
         }
       },
       error: function (xhr, status, error) {

@@ -6,6 +6,7 @@ $(document).ready(function () {
 var Table_Categoria_Insumo;
 var Table_Categoria_Insumo_Alternative;
 var Selected_Row;
+var ID_Categoria_Insumo;
 
 // ? var Url_01 = "@Url.Action("Management_Controller_Categoria_Insumo_Listar", "Management")",
 var Url_01 =
@@ -179,7 +180,7 @@ function Open_Form_Modal(data) {
     $("#Nombre_Categoria_Insumo").prop("disabled", false);
     $("#Descripcion_Categoria_Insumo").removeClass("is-valid");
     $("#Descripcion_Categoria_Insumo").removeClass("is-invalid");
-    $("#ID_Categoria_Insumo").val(0);
+    ID_Categoria_Insumo = 0;
     $("#Nombre_Categoria_Insumo").val("");
     $("#Descripcion_Categoria_Insumo").val("");
   } else {
@@ -189,7 +190,7 @@ function Open_Form_Modal(data) {
       $("#Nombre_Categoria_Insumo").prop("disabled", true);
       $("#Descripcion_Categoria_Insumo").removeClass("is-valid");
       $("#Descripcion_Categoria_Insumo").removeClass("is-invalid");
-      $("#ID_Categoria_Insumo").val(data.iD_Categoria_Insumo);
+      ID_Categoria_Insumo = data.iD_Categoria_Insumo;
       $("#Nombre_Categoria_Insumo").val(data.nombre_Categoria_Insumo);
       $("#Descripcion_Categoria_Insumo").val(data.descripcion_Categoria_Insumo);
     }
@@ -286,14 +287,14 @@ function Procesar() {
     return;
   } else {
     var Categoria = {
-      iD_Categoria_Insumo: $("#ID_Categoria_Insumo").val(),
+      iD_Categoria_Insumo: ID_Categoria_Insumo,
       nombre_Categoria_Insumo: $.trim($("#Nombre_Categoria_Insumo").val()),
       descripcion_Categoria_Insumo: $.trim(
         $("#Descripcion_Categoria_Insumo").val()
       ),
     };
 
-    if ($("#ID_Categoria_Insumo").val() == 0) {
+      if (ID_Categoria_Insumo == 0) {
       jQuery.ajax({
         // ? url: "@Url.Action("Management_Controller_Categoria_Insumo_Registrar", "Management")",
         url: "https://localhost:44381/Management/Management_Controller_Categoria_Insumo_Registrar",
@@ -364,7 +365,7 @@ function Procesar() {
         },
       });
     } else {
-      if ($("#ID_Categoria_Insumo").val() != 0) {
+        if (ID_Categoria_Insumo != 0) {
         jQuery.ajax({
           // ? url: "@Url.Action("Management_Controller_Categoria_Insumo_Editar", "Management")",
           url: "https://localhost:44381/Management/Management_Controller_Categoria_Insumo_Editar",

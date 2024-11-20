@@ -100,6 +100,11 @@ namespace BUSINESS___LAYER
             return Obj_Class_Data_Insumo.Class_Data_Insumo_Save_Image(Obj_Class_Entity_Insumo, out Message);
         }
 
+        public bool Class_Business_Insumo_Reset(int ID_Insumo, string Fecha_Vencimiento_Insumo, out string Message)
+        {
+            return Obj_Class_Data_Insumo.Class_Data_Insumo_Reset(ID_Insumo, Fecha_Vencimiento_Insumo, out Message);
+        }
+
         public bool Class_Business_Insumo_Eliminar(int ID_Insumo, out string Message)
         {
             return Obj_Class_Data_Insumo.Class_Data_Insumo_Eliminar(ID_Insumo, out Message);

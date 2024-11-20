@@ -28,9 +28,6 @@
                                     <div class="small mb-3 text-muted">Le Enviaremos una Contraseña de Acceso Inicial al
                                         Correo Brindado en el Registro.</div>
                                     <form id="Form_User" class="needs-validation" novalidate>
-                                        <!----><input id="ID_Tipo_Usuario" type="hidden" value="1" /><!---->
-                                        <!----><input id="Nombre_Tipo_Usuario" type="hidden"
-                                            value="Administrador" /><!---->
                                         <div class="row g-2">
                                             <div class="col-sm-6">
                                                 <div class="form-floating mb-3">
@@ -67,10 +64,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!---->
-                                        <div class="alert alert-danger align-items-center" id="Alert_Div" role="alert">
+                                        <div id="Alert_Container">
                                         </div>
-                                        <!---->
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                             <a asp-area="" asp-controller="Access" asp-action="Log_In"
                                                 class="small">Volver a Iniciar Sesión</a>

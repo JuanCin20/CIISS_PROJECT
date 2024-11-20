@@ -165,8 +165,8 @@ namespace PROJECT___LAYER.Controllers
                 if (Obj_IFormFile != null)
                 {
                     string Ruta_Imagen_Insumo = "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\Supply_Images";
-                    string Extension_Imagen_Insumo = Path.GetExtension(Obj_IFormFile.FileName);
-                    string Nombre_Imagen_Insumo = string.Concat(Obj_Class_Entity_Insumo_Alternative.ID_Insumo.ToString(), Extension_Imagen_Insumo);
+                    string Image_Extension = Path.GetExtension(Obj_IFormFile.FileName);
+                    string Nombre_Imagen_Insumo = string.Concat(Obj_Class_Entity_Insumo_Alternative.ID_Insumo.ToString(), Image_Extension);
 
                     try
                     {
@@ -237,8 +237,8 @@ namespace PROJECT___LAYER.Controllers
                 if (Obj_IFormFile != null)
                 {
                     string Ruta_Imagen_Insumo = "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\Supply_Images";
-                    string Extension_Imagen_Insumo = Path.GetExtension(Obj_IFormFile.FileName);
-                    string Nombre_Imagen_Insumo = string.Concat(Obj_Class_Entity_Insumo_Alternative.ID_Insumo.ToString(), Extension_Imagen_Insumo);
+                    string Image_Extension = Path.GetExtension(Obj_IFormFile.FileName);
+                    string Nombre_Imagen_Insumo = string.Concat(Obj_Class_Entity_Insumo_Alternative.ID_Insumo.ToString(), Image_Extension);
 
                     try
                     {
@@ -277,6 +277,17 @@ namespace PROJECT___LAYER.Controllers
             Class_Entity_Insumo Obj_Class_Entity_Insumo = new Class_Business_Insumo().Class_Business_Insumo_Listar(true).Where(Obj_Class_Entity_Insumo_Alter => Obj_Class_Entity_Insumo_Alter.ID_Insumo == ID_Insumo).FirstOrDefault();
             string Base_64_Imagen_Insumo = Class_Business_Recurso.Convert_Base_64(Path.Combine(Obj_Class_Entity_Insumo.Ruta_Imagen_Insumo, Obj_Class_Entity_Insumo.Nombre_Imagen_Insumo), out Conversion);
             return Json(new { conversion = Conversion, base_64_Imagen_Insumo = Base_64_Imagen_Insumo, extension_Imagen_Insumo = Path.GetExtension(Obj_Class_Entity_Insumo.Nombre_Imagen_Insumo) });
+        }
+
+        [HttpPost]
+        public JsonResult Management_Controller_Insumo_Reset(int ID_Insumo, string Fecha_Vencimiento_Insumo)
+        {
+            bool Result = false;
+            string Message = string.Empty;
+
+            Result = new Class_Business_Insumo().Class_Business_Insumo_Reset(ID_Insumo, Fecha_Vencimiento_Insumo, out Message);
+
+            return Json(new { result = Result, message = Message });
         }
 
         [HttpPost]

@@ -1,11 +1,17 @@
 $(document).ready(function () {
   Function_Table_Insumo();
   Function_Table_Insumo_Alternative();
+    $("#swal2-input")
+    .datepicker({ dateFormat: "dd/mm/yy", minDate: '+8D' })
+        .datepicker("setDate", "");
+    var Date_Object = $("#swal2-input").datepicker("getDate");
+    var Date_String = $.datepicker.formatDate("yy-mm-dd", Date_Object);
 });
 
 var Table_Insumo;
 var Table_Insumo_Alternative;
 var Selected_Row;
+var ID_Insumo;
 
 // ? var Url_01 = "@Url.Action("Management_Controller_Insumo_Listar", "Management")",
 var Url_01 =
@@ -126,8 +132,8 @@ function Function_Table_Insumo() {
       {
         data: "fecha_Vencimiento_Insumo",
         render: function (fecha_Vencimiento_Insumo) {
-          if (fecha_Vencimiento_Insumo == null) {
-            return '<label class="text-danger">NULL</label>';
+          if (fecha_Vencimiento_Insumo == "") {
+            return '<label class="text-danger">--/--/----</label>';
           } else {
             return (
               '<label class="text-dark">' +
@@ -208,8 +214,8 @@ function Function_Table_Insumo_Alternative() {
       {
         data: "fecha_Vencimiento_Insumo",
         render: function (fecha_Vencimiento_Insumo) {
-          if (fecha_Vencimiento_Insumo == null) {
-            return '<label class="text-danger">NULL</label>';
+          if (fecha_Vencimiento_Insumo == "") {
+            return '<label class="text-danger">--/--/----</label>';
           } else {
             return (
               '<label class="text-dark">' +
@@ -275,7 +281,7 @@ function Open_Form_Modal(data) {
     $("#Fecha_Vencimiento_Insumo").prop("disabled", false);
     $("#Imagen_Insumo_Input").removeClass("is-valid");
     $("#Imagen_Insumo_Input").removeClass("is-invalid");
-    $("#ID_Insumo").val(0);
+    ID_Insumo = 0;
     $("#Categoria_Insumo").val(0);
     $("#Proveedor_Insumo").val(0);
     $("#Nombre_Insumo").val("");
@@ -284,7 +290,7 @@ function Open_Form_Modal(data) {
     $("#Precio_Insumo").val("");
     $("#Stock_Insumo").val("");
     $("#Fecha_Vencimiento_Insumo")
-      .datepicker({ dateFormat: "dd/mm/yy" })
+      .datepicker({ dateFormat: "dd/mm/yy", minDate: '+8D' })
       .datepicker("setDate", "");
     $("#Imagen_Insumo_Input").val("");
     $("#Imagen_Insumo").removeAttr("src");
@@ -313,7 +319,7 @@ function Open_Form_Modal(data) {
       $("#Fecha_Vencimiento_Insumo").prop("disabled", true);
       $("#Imagen_Insumo_Input").removeClass("is-valid");
       $("#Imagen_Insumo_Input").removeClass("is-invalid");
-      $("#ID_Insumo").val(data.iD_Insumo);
+      ID_Insumo = data.iD_Insumo;
       $("#Categoria_Insumo").val(
         data.obj_Class_Entity_Categoria_Insumo.iD_Categoria_Insumo
       );
@@ -326,7 +332,7 @@ function Open_Form_Modal(data) {
       $("#Precio_Insumo").val(data.precio_Insumo);
       $("#Stock_Insumo").val(data.stock_Insumo);
       $("#Fecha_Vencimiento_Insumo")
-        .datepicker({ dateFormat: "dd/mm/yy" })
+        .datepicker({ dateFormat: "dd/mm/yy", minDate: '+8D' })
         .datepicker("setDate", data.fecha_Vencimiento_Insumo);
       $("#Imagen_Insumo_Input").val("");
       $("#Imagen_Insumo").removeAttr("src");
@@ -412,48 +418,36 @@ $("#Table_Insumo").on("click", ".Delete_Button", function () {
 $("#Table_Insumo_Alternative").on("click", ".Reset_Button", function () {
   Selected_Row = Selected_Row_Function(this);
   var data = Table_Insumo_Alternative.row(Selected_Row).data();
-  Swal.fire({
-    title: "Confirmaci\xf3n",
-    text: "\xbfDesea Restaurar el Insumo Seleccionado?",
-    icon: "info",
-    showCancelButton: true,
-    cancelButtonText: "Cancelar",
-    cancelButtonColor: "#FF0000",
-    confirmButtonText: "Aceptar",
-    confirmButtonColor: "#3085D6",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      jQuery.ajax({
-        // ? url: "@Url.Action("Management_Controller_Insumo_Reset", "Management")",
-        url: "https://localhost:44381/Management/Management_Controller_Insumo_Reset",
-        type: "POST",
-        data: { ID_Insumo: data.iD_Insumo },
-        success: function (data) {
-          // debugger; // TODO: Punto de Depuración
-
-          if (data.result) {
-            Swal.fire({
-              title: "Correcto",
-              text: "El Insumo ha sido Restaurado",
-              icon: "success",
-            });
-            Table_Insumo_Alternative.row(Selected_Row).remove().draw();
-            Table_Insumo.ajax.url(Url_01).load();
-          } else {
-            Swal.fire({
-              title: "Error",
-              text: data.message,
-              icon: "error",
-            });
-          }
+    Swal.fire({
+        title: "Submit your Github username",
+        input: "text",
+        inputAttributes: {
+            autocapitalize: "off"
         },
-        error: function (xhr, status, error) {
-          alert(xhr.responseText);
+        showCancelButton: true,
+        confirmButtonText: "Look up",
+        showLoaderOnConfirm: true,
+        preConfirm: async (Date_String) => {
+            try {
+                const githubUrl = `https://localhost:44381/Management/Management_Controller_Insumo_Reset/${Date_String}`;
+                const response = await fetch(githubUrl);
+                if (!response.ok) {
+                    return Swal.showValidationMessage(`${JSON.stringify(await response.json())}`);
+                }
+                return response.json();
+            } catch (error) {
+                Swal.showValidationMessage(`Request failed: ${error}`);
+            }
         },
-      });
-    }
-  });
-  // console.log(data); // ? Good 'console.log'
+        allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: `${result.value.login}'s avatar`,
+                imageUrl: result.value.avatar_url
+            });
+        }
+    });
 });
 
 jQuery.validator.addMethod("Valid_Nombre_Insumo", function (value, element) {
@@ -471,6 +465,16 @@ jQuery.validator.addMethod(
       /([a-zA-Z',.-]+( [a-zA-Z',.-]+)*){2,30}/.test(value)
     );
   }
+);
+
+jQuery.validator.addMethod(
+    "Valid_Precio_Insumo",
+    function (value, element) {
+        return (
+            this.optional(element) ||
+            /^[1-9]\d*(\.\d+)?$/.test(value)
+        );
+    }
 );
 
 jQuery.validator.addMethod(
@@ -516,6 +520,7 @@ $(document).ready(function () {
       },
       Precio_Insumo: {
         required: true,
+        Valid_Precio_Insumo: true,
         number: true,
       },
       Stock_Insumo: {
@@ -559,6 +564,7 @@ $(document).ready(function () {
       },
       Precio_Insumo: {
         required: "Campo Requerido: Precio del Insumo",
+        Valid_Precio_Insumo: "Ingrese un Precio V\xe1lido",
         number: "Ingrese un Precio V\xe1lido",
       },
       Stock_Insumo: {
@@ -618,7 +624,7 @@ function Procesar() {
     var Imagen_Insumo_Input = $("#Imagen_Insumo_Input")[0].files[0];
 
     var Insumo = {
-      iD_Insumo: $("#ID_Insumo").val(),
+      iD_Insumo: ID_Insumo,
       obj_Class_Entity_Categoria_Insumo: {
         iD_Categoria_Insumo: $("#Categoria_Insumo option:selected").val(),
         nombre_Categoria_Insumo: $("#Categoria_Insumo option:selected").text(),
@@ -636,7 +642,7 @@ function Procesar() {
       fecha_Vencimiento_Insumo: Date_String,
     };
 
-    if ($("#ID_Insumo").val() == 0) {
+    if (ID_Insumo == 0) {
       var Request = new FormData();
       Request.append("Obj_Class_Entity_Insumo", JSON.stringify(Insumo));
       Request.append("Obj_IFormFile", Imagen_Insumo_Input);
@@ -710,7 +716,7 @@ function Procesar() {
         },
       });
     } else {
-      if ($("#ID_Insumo").val() != 0) {
+      if (ID_Insumo != 0) {
         var Request = new FormData();
         Request.append("Obj_Class_Entity_Insumo", JSON.stringify(Insumo));
         Request.append("Obj_IFormFile", Imagen_Insumo_Input);

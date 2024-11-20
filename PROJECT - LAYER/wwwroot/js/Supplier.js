@@ -6,6 +6,7 @@ $(document).ready(function () {
 var Table_Proveedor_Insumo;
 var Table_Proveedor_Insumo_Alternative;
 var Selected_Row;
+var ID_Proveedor_Insumo;
 
 // ? var Url_01 = "@Url.Action("Management_Controller_Proveedor_Insumo_Listar", "Management")",
 var Url_01 =
@@ -192,7 +193,7 @@ function Open_Form_Modal(data) {
     $("#Direccion_Proveedor_Insumo").removeClass("is-valid");
     $("#Direccion_Proveedor_Insumo").removeClass("is-invalid");
     $("#Direccion_Proveedor_Insumo").prop("disabled", false);
-    $("#ID_Proveedor_Insumo").val(0);
+    ID_Proveedor_Insumo = 0;
     $("#Nombre_Proveedor_Insumo").val("");
     $("#Telefono_Proveedor_Insumo").val("");
     $("#E_Mail_Proveedor_Insumo").val("");
@@ -209,7 +210,7 @@ function Open_Form_Modal(data) {
       $("#Direccion_Proveedor_Insumo").removeClass("is-valid");
       $("#Direccion_Proveedor_Insumo").removeClass("is-invalid");
       $("#Direccion_Proveedor_Insumo").prop("disabled", true);
-      $("#ID_Proveedor_Insumo").val(data.iD_Proveedor_Insumo);
+      ID_Proveedor_Insumo = data.iD_Proveedor_Insumo;
       $("#Nombre_Proveedor_Insumo").val(data.nombre_Proveedor_Insumo);
       $("#Telefono_Proveedor_Insumo").val(data.telefono_Proveedor_Insumo);
       $("#E_Mail_Proveedor_Insumo").val(data.e_Mail_Proveedor_Insumo);
@@ -353,7 +354,7 @@ function Procesar() {
     return;
   } else {
     var Proveedor = {
-      iD_Proveedor_Insumo: $("#ID_Proveedor_Insumo").val(),
+      iD_Proveedor_Insumo: ID_Proveedor_Insumo,
       nombre_Proveedor_Insumo: $.trim($("#Nombre_Proveedor_Insumo").val()),
       telefono_Proveedor_Insumo: $("#Telefono_Proveedor_Insumo").val(),
       e_Mail_Proveedor_Insumo: $.trim($("#E_Mail_Proveedor_Insumo").val()),
@@ -362,7 +363,7 @@ function Procesar() {
       ),
     };
 
-    if ($("#ID_Proveedor_Insumo").val() == 0) {
+    if (ID_Proveedor_Insumo == 0) {
       jQuery.ajax({
         // ? url: "@Url.Action("Management_Controller_Proveedor_Insumo_Registrar", "Management")",
         url: "https://localhost:44381/Management/Management_Controller_Proveedor_Insumo_Registrar",
@@ -430,7 +431,7 @@ function Procesar() {
         },
       });
     } else {
-      if ($("#ID_Proveedor_Insumo").val() != 0) {
+      if (ID_Proveedor_Insumo != 0) {
         jQuery.ajax({
           // ? url: "@Url.Action("Management_Controller_Proveedor_Insumo_Editar", "Management")",
           url: "https://localhost:44381/Management/Management_Controller_Proveedor_Insumo_Editar",

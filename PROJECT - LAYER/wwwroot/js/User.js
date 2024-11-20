@@ -6,6 +6,7 @@ $(document).ready(function () {
 var Table_Usuario;
 var Table_Usuario_Alternative;
 var Selected_Row;
+var ID_Usuario;
 
 // ? var Url_01 = "@Url.Action("Staff_Controller_Usuario_Listar_Alternative", "Staff")",
 var Url_01 =
@@ -152,7 +153,7 @@ function Open_Form_Modal(data) {
     $("#E_Mail_Usuario").removeClass("is-invalid");
     $("#Imagen_Usuario_Input").removeClass("is-valid");
     $("#Imagen_Usuario_Input").removeClass("is-invalid");
-    $("#ID_Usuario").val(0);
+    ID_Usuario = 0;
     $("#Nombre_Usuario").val("");
     $("#Apellido_Usuario").val("");
     $("#E_Mail_Usuario").val("");
@@ -170,7 +171,7 @@ function Open_Form_Modal(data) {
       $("#E_Mail_Usuario").removeClass("is-invalid");
       $("#Imagen_Usuario_Input").removeClass("is-valid");
       $("#Imagen_Usuario_Input").removeClass("is-invalid");
-      $("#ID_Usuario").val(data.iD_Usuario);
+      ID_Usuario = data.iD_Usuario;
       $("#Nombre_Usuario").val(data.nombre_Usuario);
       $("#Apellido_Usuario").val(data.apellido_Usuario);
       $("#E_Mail_Usuario").val(data.e_Mail_Usuario);
@@ -404,17 +405,16 @@ function Procesar() {
     var Imagen_Usuario_Input = $("#Imagen_Usuario_Input")[0].files[0];
 
     var Usuario = {
-      iD_Usuario: $("#ID_Usuario").val(),
+      iD_Usuario: ID_Usuario,
       nombre_Usuario: $("#Nombre_Usuario").val(),
       apellido_Usuario: $("#Apellido_Usuario").val(),
       e_Mail_Usuario: $.trim($("#E_Mail_Usuario").val()),
       obj_Class_Entity_Tipo_Usuario: {
-        iD_Tipo_Usuario: $("#ID_Tipo_Usuario").val(),
-        nombre_Tipo_Usuario: $("#Nombre_Tipo_Usuario").val(),
+        iD_Tipo_Usuario: 2,
       },
     };
 
-    if ($("#ID_Usuario").val() == 0) {
+    if (ID_Usuario == 0) {
       var Request = new FormData();
       Request.append("Obj_Class_Entity_Usuario", JSON.stringify(Usuario));
       Request.append("Obj_IFormFile", Imagen_Usuario_Input);
@@ -488,7 +488,7 @@ function Procesar() {
         },
       });
     } else {
-      if ($("#ID_Usuario").val() != 0) {
+      if (ID_Usuario != 0) {
         var Request = new FormData();
         Request.append("Obj_Class_Entity_Usuario", JSON.stringify(Usuario));
         Request.append("Obj_IFormFile", Imagen_Usuario_Input);
