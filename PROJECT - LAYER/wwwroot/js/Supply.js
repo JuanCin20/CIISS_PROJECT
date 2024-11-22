@@ -1,11 +1,6 @@
 $(document).ready(function () {
   Function_Table_Insumo();
   Function_Table_Insumo_Alternative();
-    $("#swal2-input")
-    .datepicker({ dateFormat: "dd/mm/yy", minDate: '+8D' })
-        .datepicker("setDate", "");
-    var Date_Object = $("#swal2-input").datepicker("getDate");
-    var Date_String = $.datepicker.formatDate("yy-mm-dd", Date_Object);
 });
 
 var Table_Insumo;
@@ -290,7 +285,7 @@ function Open_Form_Modal(data) {
     $("#Precio_Insumo").val("");
     $("#Stock_Insumo").val("");
     $("#Fecha_Vencimiento_Insumo")
-      .datepicker({ dateFormat: "dd/mm/yy", minDate: '+8D' })
+      .datepicker({ dateFormat: "dd/mm/yy", minDate: "+8D" })
       .datepicker("setDate", "");
     $("#Imagen_Insumo_Input").val("");
     $("#Imagen_Insumo").removeAttr("src");
@@ -332,7 +327,7 @@ function Open_Form_Modal(data) {
       $("#Precio_Insumo").val(data.precio_Insumo);
       $("#Stock_Insumo").val(data.stock_Insumo);
       $("#Fecha_Vencimiento_Insumo")
-        .datepicker({ dateFormat: "dd/mm/yy", minDate: '+8D' })
+        .datepicker({ dateFormat: "dd/mm/yy", minDate: "+8D" })
         .datepicker("setDate", data.fecha_Vencimiento_Insumo);
       $("#Imagen_Insumo_Input").val("");
       $("#Imagen_Insumo").removeAttr("src");
@@ -397,7 +392,9 @@ $("#Table_Insumo").on("click", ".Delete_Button", function () {
               icon: "success",
             });
             Table_Insumo.row(Selected_Row).remove().draw();
-            Table_Insumo_Alternative.ajax.url(Url_02).load();
+            $("#Table_Insumo_Alternative").DataTable().ajax.reload();
+            // Table_Insumo_Alternative.ajax.reload(null, false);
+            // Table_Insumo_Alternative.ajax.url(Url_02).load();
           } else {
             Swal.fire({
               title: "Error",
@@ -418,36 +415,6 @@ $("#Table_Insumo").on("click", ".Delete_Button", function () {
 $("#Table_Insumo_Alternative").on("click", ".Reset_Button", function () {
   Selected_Row = Selected_Row_Function(this);
   var data = Table_Insumo_Alternative.row(Selected_Row).data();
-    Swal.fire({
-        title: "Submit your Github username",
-        input: "text",
-        inputAttributes: {
-            autocapitalize: "off"
-        },
-        showCancelButton: true,
-        confirmButtonText: "Look up",
-        showLoaderOnConfirm: true,
-        preConfirm: async (Date_String) => {
-            try {
-                const githubUrl = `https://localhost:44381/Management/Management_Controller_Insumo_Reset/${Date_String}`;
-                const response = await fetch(githubUrl);
-                if (!response.ok) {
-                    return Swal.showValidationMessage(`${JSON.stringify(await response.json())}`);
-                }
-                return response.json();
-            } catch (error) {
-                Swal.showValidationMessage(`Request failed: ${error}`);
-            }
-        },
-        allowOutsideClick: () => !Swal.isLoading()
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire({
-                title: `${result.value.login}'s avatar`,
-                imageUrl: result.value.avatar_url
-            });
-        }
-    });
 });
 
 jQuery.validator.addMethod("Valid_Nombre_Insumo", function (value, element) {
@@ -467,15 +434,9 @@ jQuery.validator.addMethod(
   }
 );
 
-jQuery.validator.addMethod(
-    "Valid_Precio_Insumo",
-    function (value, element) {
-        return (
-            this.optional(element) ||
-            /^[1-9]\d*(\.\d+)?$/.test(value)
-        );
-    }
-);
+jQuery.validator.addMethod("Valid_Precio_Insumo", function (value, element) {
+  return this.optional(element) || /^[1-9]\d*(\.\d+)?$/.test(value);
+});
 
 jQuery.validator.addMethod(
   "Valid_Fecha_Vencimiento_Insumo",
@@ -661,7 +622,9 @@ function Procesar() {
 
           if (data.iD_Auto_Generated != 0) {
             $("#Form_Modal").modal("hide");
-            Table_Insumo.ajax.url(Url_01).load();
+            $("#Table_Insumo").DataTable().ajax.reload();
+            // Table_Insumo.ajax.reload(null, false);
+            // Table_Insumo.ajax.url(Url_01).load();
             toastr.options = {
               closeButton: true,
               debug: false,
@@ -729,14 +692,16 @@ function Procesar() {
           processData: false,
           contentType: false,
           success: function (data) {
-            // debugger; // TODO: Punto de Depuración
+            debugger; // TODO: Punto de Depuración
 
             $(".modal-body").LoadingOverlay("hide");
 
             if (data.successful_Operation) {
               Selected_Row = null;
               $("#Form_Modal").modal("hide");
-              Table_Insumo.ajax.url(Url_01).load();
+              $("#Table_Insumo").DataTable().ajax.reload();
+              // Table_Insumo.ajax.reload(null, false);
+              // Table_Insumo.ajax.url(Url_01).load();
               toastr.options = {
                 closeButton: true,
                 debug: false,
