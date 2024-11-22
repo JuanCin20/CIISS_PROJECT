@@ -68,17 +68,6 @@ function Function_Table_Usuario() {
       { data: "nombre_Usuario" },
       { data: "apellido_Usuario" },
       { data: "e_Mail_Usuario" },
-      { data: "fecha_Registro_Usuario" },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return (
-            '<img style="width: 60px; height: 60px;" src="../User_Images/' +
-            row.nombre_Imagen_Usuario +
-            '" alt="Image_Error" class="border rounded img-fluid">'
-          );
-        },
-      },
       {
         defaultContent:
           '<button type="button" class="btn btn-primary btn-sm Edit_Button"><i class="fa-solid fa-pencil"></i></button>' +
@@ -119,17 +108,6 @@ function Function_Table_Usuario_Alternative() {
       { data: "nombre_Usuario" },
       { data: "apellido_Usuario" },
       { data: "e_Mail_Usuario" },
-      { data: "fecha_Registro_Usuario" },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return (
-            '<img style="width: 60px; height: 60px;" src="../User_Images/' +
-            row.nombre_Imagen_Usuario +
-            '" alt="Image_Error" class="border rounded img-fluid">'
-          );
-        },
-      },
       {
         defaultContent:
           '<button type="button" class="btn btn-warning btn-sm Reset_Button"><i class="fa-solid fa-trash-arrow-up"></i></button>',
@@ -345,9 +323,6 @@ $(document).ready(function () {
         Valid_E_Mail_Usuario: true,
         maxlength: 30,
       },
-      Imagen_Usuario_Input: {
-        required: true,
-      },
     },
     messages: {
       Nombre_Usuario: {
@@ -367,9 +342,6 @@ $(document).ready(function () {
         Valid_E_Mail_Usuario: "Ingrese un Correo Electr\xf3nico V\xe1lido",
         maxlength:
           "El Correo Electr\xf3nico del Usuario debe Contener un M\xe1ximo de 30 Caracteres",
-      },
-      Imagen_Usuario_Input: {
-        required: "Campo Requerido: Im\xe1gen del Usuario",
       },
     },
     errorElement: "em",

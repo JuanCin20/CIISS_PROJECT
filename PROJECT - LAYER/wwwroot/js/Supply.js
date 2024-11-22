@@ -104,6 +104,16 @@ function Function_Table_Insumo() {
     columns: [
       { data: "iD_Insumo" },
       {
+        data: "estado_Insumo",
+        render: function (estado_Insumo) {
+          if (estado_Insumo) {
+            return '<span class="badge text-bg-success">Disponible</span>';
+          } else {
+            return '<span class="badge text-bg-danger">No Disponible</span>';
+          }
+        },
+      },
+      {
         data: null,
         render: function (data, type, row) {
           return (
@@ -136,26 +146,6 @@ function Function_Table_Insumo() {
               "</label>"
             );
           }
-        },
-      },
-      {
-        data: "estado_Insumo",
-        render: function (estado_Insumo) {
-          if (estado_Insumo) {
-            return '<span class="badge text-bg-success">Disponible</span>';
-          } else {
-            return '<span class="badge text-bg-danger">No Disponible</span>';
-          }
-        },
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return (
-            '<img style="width: 60px; height: 60px;" src="../Supply_Images/' +
-            row.nombre_Imagen_Insumo +
-            '" alt="Image_Error" class="border rounded img-fluid">'
-          );
         },
       },
       {
@@ -186,6 +176,16 @@ function Function_Table_Insumo_Alternative() {
     columns: [
       { data: "iD_Insumo" },
       {
+        data: "estado_Insumo",
+        render: function (estado_Insumo) {
+          if (estado_Insumo) {
+            return '<span class="badge text-bg-success">Disponible</span>';
+          } else {
+            return '<span class="badge text-bg-danger">No Disponible</span>';
+          }
+        },
+      },
+      {
         data: null,
         render: function (data, type, row) {
           return (
@@ -218,26 +218,6 @@ function Function_Table_Insumo_Alternative() {
               "</label>"
             );
           }
-        },
-      },
-      {
-        data: "estado_Insumo",
-        render: function (estado_Insumo) {
-          if (estado_Insumo) {
-            return '<span class="badge text-bg-success">Disponible</span>';
-          } else {
-            return '<span class="badge text-bg-danger">No Disponible</span>';
-          }
-        },
-      },
-      {
-        data: null,
-        render: function (data, type, row) {
-          return (
-            '<img style="width: 60px; height: 60px;" src="../Supply_Images/' +
-            row.nombre_Imagen_Insumo +
-            '" alt="Image_Error" class="border rounded img-fluid">'
-          );
         },
       },
       {
@@ -497,9 +477,6 @@ $(document).ready(function () {
         Valid_Descripcion_Insumo: true,
         maxlength: 255,
       },
-      Imagen_Insumo_Input: {
-        required: true,
-      },
     },
     messages: {
       Nombre_Insumo: {
@@ -542,9 +519,6 @@ $(document).ready(function () {
         Valid_Descripcion_Insumo: "Campo Requerido: Descripci\xf3n del Insumo",
         maxlength:
           "La Descripci\xf3n del Insumo debe Contener un M\xe1ximo de 255 Caracteres",
-      },
-      Imagen_Insumo_Input: {
-        required: "Campo Requerido: Im\xe1gen del Insumo",
       },
     },
     errorElement: "em",
