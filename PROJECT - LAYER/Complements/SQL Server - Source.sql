@@ -49,7 +49,7 @@ GO
 		Estado_Usuario BIT DEFAULT 1 NOT NULL,
 		Fecha_Registro_Usuario DATETIME DEFAULT GETDATE() NOT NULL,
 		Ruta_Imagen_Usuario VARCHAR (255) NULL,
-		Nombre_Imagen_Usuario VARCHAR (255) DEFAULT 'Image_Error.jpg' NULL
+		Nombre_Imagen_Usuario VARCHAR (255) DEFAULT 'Image_Error.png' NULL
 	);
 
 GO
@@ -88,7 +88,7 @@ GO
 		Fecha_Registro_Insumo DATETIME DEFAULT GETDATE() NOT NULL,
 		Fecha_Vencimiento_Insumo DATE NULL,
 		Ruta_Imagen_Insumo VARCHAR (255) NULL,
-		Nombre_Imagen_Insumo VARCHAR (255) DEFAULT 'Image_Error.jpg' NULL
+		Nombre_Imagen_Insumo VARCHAR (255) DEFAULT 'Image_Error.png' NULL
 	);
 
 GO
@@ -170,7 +170,7 @@ VALUES
 	 '4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 	 '2022-08-06 10:00:00.000',
 	 'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-	 '1.jpeg'
+	 '1.png'
 	 ),*/
 	(
 		'2',
@@ -180,7 +180,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'2.jpeg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -190,7 +190,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'3.jpeg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -200,7 +200,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'4.jpeg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -210,7 +210,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -220,7 +220,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -230,7 +230,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -240,7 +240,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -250,7 +250,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -260,7 +260,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -270,7 +270,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -280,7 +280,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -290,7 +290,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -300,7 +300,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -310,7 +310,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -320,7 +320,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -330,7 +330,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -340,7 +340,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -350,7 +350,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -360,7 +360,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -370,7 +370,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -380,7 +380,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -390,7 +390,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -400,7 +400,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -410,7 +410,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -420,7 +420,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -430,7 +430,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -440,7 +440,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -450,7 +450,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -460,7 +460,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -470,7 +470,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -480,7 +480,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -490,7 +490,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -500,7 +500,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -510,7 +510,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -520,7 +520,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -530,7 +530,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -540,7 +540,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -550,7 +550,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -560,7 +560,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -570,7 +570,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -580,7 +580,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -590,7 +590,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -600,7 +600,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -610,7 +610,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -620,7 +620,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -630,7 +630,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -640,7 +640,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -650,7 +650,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -660,7 +660,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -670,7 +670,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -680,7 +680,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		'2',
@@ -690,7 +690,7 @@ VALUES
 		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	);
 
 GO
@@ -3380,7 +3380,7 @@ VALUES
 		'2022-14-06 13:00:00.00',
 		NULL,
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		10,
@@ -3393,7 +3393,7 @@ VALUES
 		'2022-14-06 13:00:00.00',
 		NULL,
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		10,
@@ -3406,7 +3406,7 @@ VALUES
 		'2022-14-06 13:00:00.00',
 		NULL,
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		10,
@@ -3419,7 +3419,7 @@ VALUES
 		'2022-14-06 13:00:00.00',
 		NULL,
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		10,
@@ -3432,7 +3432,7 @@ VALUES
 		'2022-14-06 13:00:00.00',
 		NULL,
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images',
-		'Image_Error.jpg'
+		'Image_Error.png'
 	),
 	(
 		11,

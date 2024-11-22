@@ -392,9 +392,7 @@ $("#Table_Insumo").on("click", ".Delete_Button", function () {
               icon: "success",
             });
             Table_Insumo.row(Selected_Row).remove().draw();
-            $("#Table_Insumo_Alternative").DataTable().ajax.reload();
-            // Table_Insumo_Alternative.ajax.reload(null, false);
-            // Table_Insumo_Alternative.ajax.url(Url_02).load();
+            Table_Insumo_Alternative.ajax.url(Url_02).load();
           } else {
             Swal.fire({
               title: "Error",
@@ -622,9 +620,7 @@ function Procesar() {
 
           if (data.iD_Auto_Generated != 0) {
             $("#Form_Modal").modal("hide");
-            $("#Table_Insumo").DataTable().ajax.reload();
-            // Table_Insumo.ajax.reload(null, false);
-            // Table_Insumo.ajax.url(Url_01).load();
+            Table_Insumo.ajax.url(Url_01).load();
             toastr.options = {
               closeButton: true,
               debug: false,
@@ -692,16 +688,14 @@ function Procesar() {
           processData: false,
           contentType: false,
           success: function (data) {
-            debugger; // TODO: Punto de Depuración
+            // debugger; // TODO: Punto de Depuración
 
             $(".modal-body").LoadingOverlay("hide");
 
             if (data.successful_Operation) {
               Selected_Row = null;
               $("#Form_Modal").modal("hide");
-              $("#Table_Insumo").DataTable().ajax.reload();
-              // Table_Insumo.ajax.reload(null, false);
-              // Table_Insumo.ajax.url(Url_01).load();
+              Table_Insumo.ajax.url(Url_01).load();
               toastr.options = {
                 closeButton: true,
                 debug: false,
