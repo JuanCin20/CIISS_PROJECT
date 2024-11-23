@@ -1,6 +1,5 @@
 ﻿@{
     ViewData["Title"] = "Index";
-    Layout = "../Shared/_Layout_Alternative.cshtml";
     ViewData["Nombre_Apellido_Usuario_String"] =
     this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
     ViewData["E_Mail_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("E_Mail_Usuario_String");
@@ -9,11 +8,6 @@
 
 <main>
     <div class="container-fluid px-4">
-        @if (User.IsInRole("Empleado"))
-        {
-            <h1>Hola, Empleado/a!</h1>
-        }
-
         @if (User.IsInRole("Administrador"))
         {
             <h1 class="m-4">Bienvenido/a Administror/a!</h1>

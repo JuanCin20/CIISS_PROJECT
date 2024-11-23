@@ -10,18 +10,36 @@
     <link rel="stylesheet" href="~/lib/Real_Use/Fontawesome_v6.6.0/css/all.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/Real_Use/Bootstrap_v5.3.3/Content/bootstrap.min.css" asp-append-version="true" />
-    <link rel="stylesheet"
-        href="~/lib/Real_Use/JQuery_Datatables_v1.10.15/Content/DataTables/css/jquery.dataTables.min.css"
-        asp-append-version="true" />
-    <link rel="stylesheet"
-        href="~/lib/Real_Use/JQuery_Datatables_v1.10.15/Content/DataTables/css/responsive.dataTables.min.css"
-        asp-append-version="true" />
+    @if (ViewData["Title"] == "Index")
+    {
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.jqueryui.css"
+            asp-append-version="true">
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.jqueryui.css"
+            asp-append-version="true">
+    }
+    @if (ViewData["Title"] != "Index")
+    {
+        <link rel="stylesheet"
+            href="~/lib/Real_Use/JQuery_Datatables_v1.10.15/Content/DataTables/css/jquery.dataTables.min.css"
+            asp-append-version="true" />
+        <link rel="stylesheet"
+            href="~/lib/Real_Use/JQuery_Datatables_v1.10.15/Content/DataTables/css/responsive.dataTables.min.css"
+            asp-append-version="true" />
+    }
     <link rel="stylesheet" href="~/lib/Real_Use/Sweet_Alert_2_v1.0.1/staticwebassets/bootstrap4Theme.min.css"
         asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/Real_Use/Toastr_v2.1.1/content/toastr.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Extra.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/Real_Use/JQuery_UI_Combined_v1.13.3/Content/themes/base/jquery-ui.min.css"
-        asp-append-version="true" />
+    @if (ViewData["Title"] == "Index")
+    {
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" asp-append-version="true">
+    }
+    @if (ViewData["Title"] != "Index")
+    {
+        <link rel="stylesheet" href="~/lib/Real_Use/JQuery_UI_Combined_v1.13.3/Content/themes/base/jquery-ui.min.css"
+            asp-append-version="true" />
+    }
 </head>
 
 <body id="page-top">
@@ -41,18 +59,30 @@
                 <div class="sidebar-brand-text mx-3">Sistema de Inventario<sup>2.0</sup></div>
             </a>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+            @if (User.IsInRole("Administrador"))
+            {
+                <!-- Divider -->
+                <hr class="sidebar-divider my-0">
+            }
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
-                    <i class="fa-solid fa-gauge"></i>&nbsp;&nbsp;<span>Dashboard</span>
-                </a>
-            </li>
+            @if (User.IsInRole("Empleado"))
+            {
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+            }
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+            @if (User.IsInRole("Administrador"))
+            {
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item active">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                        <i class="fa-solid fa-gauge"></i>&nbsp;&nbsp;<span>Dashboard</span>
+                    </a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+            }
 
             @if (User.IsInRole("Administrador"))
             {
@@ -63,11 +93,11 @@
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#/" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
+                    <a class="nav-link collapsed" href="#/" data-toggle="collapse" data-target="#Collapse_01"
+                        aria-expanded="true" aria-controls="Collapse_01">
                         <i class="fa-solid fa-users"></i>&nbsp;&nbsp;<span>Personal</span>
                     </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div id="Collapse_01" class="collapse" aria-labelledby="Collapse_01" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Administrar Usuarios:</h6>
                             <a class="collapse-item" asp-area="" asp-controller="Staff" asp-action="User">Usuarios</a>
@@ -86,19 +116,18 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#/" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
+                <a class="nav-link collapsed" href="#/" data-toggle="collapse" data-target="#Collapse_02"
+                    aria-expanded="true" aria-controls="Collapse_02">
                     <i class="fa-solid fa-list-check"></i>&nbsp;&nbsp;<span>Mantenimiento</span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div id="Collapse_02" class="collapse" aria-labelledby="Collapse_02" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Administrar Recursos:</h6>
                         @if (User.IsInRole("Administrador"))
                         {
                             <a class="collapse-item" asp-area="" asp-controller="Management"
-                               asp-action="Category">Categorías de Insumos</a>
-                            <a class="collapse-item" asp-area="" asp-controller="Management"
-                               asp-action="Supplier">
+                                asp-action="Category">Categorías de Insumos</a>
+                            <a class="collapse-item" asp-area="" asp-controller="Management" asp-action="Supplier">
                                 Proveedores de
                                 Insumos
                             </a>
@@ -109,7 +138,34 @@
             </li>
 
             <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+            <hr class="sidebar-divider">
+
+            @if (User.IsInRole("Administrador") || User.IsInRole("Empleado"))
+            {
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Sección 03
+                </div>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#/" data-toggle="collapse" data-target="#Collapse_03"
+                        aria-expanded="true" aria-controls="Collapse_03">
+                        <i class="fa-solid fa-users"></i>&nbsp;&nbsp;<span>Transacción</span>
+                    </a>
+                    <div id="Collapse_03" class="collapse" aria-labelledby="Collapse_03" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Administrar Entradas:</h6>
+                            <a class="collapse-item" asp-area="" asp-controller="Transaction"
+                                asp-action="Supply">Insumos</a>
+                            <a class="collapse-item" asp-area="" asp-controller="Transaction" asp-action="Middle">Middle</a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+            }
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -244,14 +300,33 @@
     </div>
     <script src="~/lib/Real_Use/JQuery_v3.7.1/Scripts/jquery-3.7.1.min.js" asp-append-version="true"></script>
     <script src="~/js/Extra.js" asp-append-version="true"></script>
-    <script src="~/lib/Real_Use/JQuery_UI_Combined_v1.13.3/Scripts/jquery-ui-1.13.3.min.js"
-        asp-append-version="true"></script>
+    @if (ViewData["Title"] == "Index")
+    {
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" asp-append-version="true"></script>
+    }
+    @if (ViewData["Title"] != "Index")
+    {
+        <script src="~/lib/Real_Use/JQuery_UI_Combined_v1.13.3/Scripts/jquery-ui-1.13.3.min.js"
+            asp-append-version="true"></script>
+    }
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/Real_Use/Bootstrap_v5.3.3/Scripts/bootstrap.bundle.min.js" asp-append-version="true"></script>
-    <script src="~/lib/Real_Use/JQuery_Datatables_v1.10.15/Scripts/DataTables/jquery.dataTables.min.js"
-        asp-append-version="true"></script>
-    <script src="~/lib/Real_Use/JQuery_Datatables_v1.10.15/Scripts/DataTables/dataTables.responsive.min.js"
-        asp-append-version="true"></script>
+    @if (ViewData["Title"] == "Index")
+    {
+        <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js" asp-append-version="true"></script>
+        <script src="https://cdn.datatables.net/2.1.8/js/dataTables.jqueryui.js" asp-append-version="true"></script>
+        <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"
+            asp-append-version="true"></script>
+        <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.jqueryui.js"
+            asp-append-version="true"></script>
+    }
+    @if (ViewData["Title"] != "Index")
+    {
+        <script src="~/lib/Real_Use/JQuery_Datatables_v1.10.15/Scripts/DataTables/jquery.dataTables.min.js"
+            asp-append-version="true"></script>
+        <script src="~/lib/Real_Use/JQuery_Datatables_v1.10.15/Scripts/DataTables/dataTables.responsive.min.js"
+            asp-append-version="true"></script>
+    }
     <script src="~/lib/Real_Use/JQuery_Loading_Overlay_v2.1.5/Scripts/loadingoverlay.min.js"
         asp-append-version="true"></script>
     <script src="~/lib/Real_Use/Sweet_Alert_2_v1.0.1/staticwebassets/sweetAlert2.min.js"

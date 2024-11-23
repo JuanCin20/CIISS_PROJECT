@@ -85,25 +85,11 @@
                             <input type="text" class="form-control" id="Unidad_Medida_Insumo"
                                 name="Unidad_Medida_Insumo" placeholder="Unidad de Medida" autocomplete="off">
                         </div>
-
-                        @if (User.IsInRole("Administrador"))
-                        {
-                            <div class="col-sm-6">
-                                <label for="Precio_Insumo" class="form-label">Precio:</label>
-                                <input type="number" class="form-control" id="Precio_Insumo" name="Precio_Insumo"
-                                    placeholder="Precio" autocomplete="off">
-                            </div>
-                        }
-
-                        @if (User.IsInRole("Empleado"))
-                        {
-                            <div class="col-sm-6">
-                                <label for="Precio_Insumo" class="form-label">Precio:</label>
-                                <input type="number" class="form-control" id="Precio_Insumo" name="Precio_Insumo"
-                                    placeholder="Precio" autocomplete="off" disabled>
-                            </div>
-                        }
-
+                        <div class="col-sm-6">
+                            <label for="Precio_Insumo" class="form-label">Precio:</label>
+                            <input type="number" class="form-control" id="Precio_Insumo" name="Precio_Insumo"
+                                placeholder="Precio" autocomplete="off">
+                        </div>
                         <div class="col-sm-6">
                             <label for="Stock_Insumo" class="form-label">Stock:</label>
                             <input type="number" class="form-control" id="Stock_Insumo" name="Stock_Insumo"

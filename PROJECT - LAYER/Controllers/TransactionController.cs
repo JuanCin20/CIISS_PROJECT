@@ -23,7 +23,8 @@ namespace PROJECT___LAYER.Controllers
             return View();
         }
 
-        public IActionResult Index()
+        [Authorize(Roles = "Administrador, Empleado")]
+        public IActionResult Supply()
         {
             return View();
         }
@@ -152,8 +153,6 @@ namespace PROJECT___LAYER.Controllers
         [HttpPost]
         public async Task<JsonResult> Transaction_Controller_Venta_Registrar(Class_Entity_Movimiento_Inventario Obj_Class_Entity_Movimiento_Inventario, List<Class_Entity_Middle> Obj_List_Class_Entity_Middle, int ID_Usuario)
         {
-            bool Result = false;
-            string Message = string.Empty;
             decimal Monto_Total_Movimiento_Inventario = 0;
 
             DataTable Obj_DataTable = new DataTable();
