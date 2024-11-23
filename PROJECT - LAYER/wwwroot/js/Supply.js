@@ -796,28 +796,40 @@ function Reset() {
   if (!$("#Form_Reset").valid()) {
     return;
   } else {
-    var Date_Object = $(
-      "#Valid_Fecha_Vencimiento_Insumo_Form_Reset"
-    ).datepicker("getDate");
+    var Date_Object = $("#Fecha_Vencimiento_Insumo_Form_Reset").datepicker(
+      "getDate"
+    );
     var Date_String = $.datepicker.formatDate("yy-mm-dd", Date_Object);
 
-    var Insumo = {
-      iD_Insumo: ID_Insumo,
-      fecha_Vencimiento_Insumo: Date_String,
-    };
+    var Fecha_Vencimiento_Insumo = Date_String;
 
     if (ID_Insumo != 0) {
       jQuery.ajax({
         // ? url: "@Url.Action("Management_Controller_Insumo_Reset", "Management")",
         url: "https://localhost:44381/Management/Management_Controller_Insumo_Reset",
         type: "POST",
-        data: { ID_Insumo: ID_Insumo, Obj_Class_Entity_Insumo: Insumo },
+        data: {
+          ID_Insumo: ID_Insumo,
+          Fecha_Vencimiento_Insumo: Fecha_Vencimiento_Insumo,
+        },
         success: function (data) {
           // debugger; // TODO: Punto de Depuración
+
           if (data.result == true) {
             $("#Static_Backdrop_02").modal("hide");
+            Swal.fire({
+              title: "Correcto",
+              text: "El Insumo ha sido Restaurado",
+              icon: "success",
+            });
             Table_Insumo.ajax.url(Url_01).load();
             Table_Insumo_Alternative.ajax.url(Url_02).load();
+          } else {
+            Swal.fire({
+              title: "Error",
+              text: data.message,
+              icon: "error",
+            });
           }
         },
       });
