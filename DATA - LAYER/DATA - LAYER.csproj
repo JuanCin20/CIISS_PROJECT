@@ -45,7 +45,10 @@
     <Compile Include="Class_Data_Connection.cs" />
     <Compile Include="Class_Data_Dashboard.cs" />
     <Compile Include="Class_Data_Insumo.cs" />
+    <Compile Include="Class_Data_Middle.cs" />
+    <Compile Include="Class_Data_Movimiento_Inventario.cs" />
     <Compile Include="Class_Data_Proveedor_Insumo.cs" />
+    <Compile Include="Class_Data_Ubication.cs" />
     <Compile Include="Class_Data_Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

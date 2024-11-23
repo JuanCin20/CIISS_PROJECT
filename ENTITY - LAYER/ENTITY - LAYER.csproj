@@ -43,9 +43,14 @@
   <ItemGroup>
     <Compile Include="Class_Entity_Categoria_Insumo.cs" />
     <Compile Include="Class_Entity_Dashboard.cs" />
+    <Compile Include="Class_Entity_Departamento.cs" />
+    <Compile Include="Class_Entity_Detalle_Movimiento_Inventario.cs" />
+    <Compile Include="Class_Entity_Distrito.cs" />
     <Compile Include="Class_Entity_Insumo.cs" />
+    <Compile Include="Class_Entity_Middle.cs" />
     <Compile Include="Class_Entity_Movimiento_Inventario.cs" />
     <Compile Include="Class_Entity_Proveedor_Insumo.cs" />
+    <Compile Include="Class_Entity_Provincia.cs" />
     <Compile Include="Class_Entity_Tipo_Usuario.cs" />
     <Compile Include="Class_Entity_Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

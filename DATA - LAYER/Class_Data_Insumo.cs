@@ -192,7 +192,6 @@ namespace DATA___LAYER
                     Obj_SqlCommand.Parameters.AddWithValue("ID_Insumo", Obj_Class_Entity_Insumo.ID_Insumo);
                     Obj_SqlCommand.Parameters.AddWithValue("Descripcion_Insumo", Obj_Class_Entity_Insumo.Descripcion_Insumo);
                     Obj_SqlCommand.Parameters.AddWithValue("Precio_Insumo", Obj_Class_Entity_Insumo.Precio_Insumo);
-                    Obj_SqlCommand.Parameters.AddWithValue("Stock_Insumo", Obj_Class_Entity_Insumo.Stock_Insumo);
                     Obj_SqlCommand.Parameters.Add("Message", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
                     Obj_SqlCommand.Parameters.Add("Result", SqlDbType.Int).Direction = ParameterDirection.Output;
                     Obj_SqlCommand.CommandType = CommandType.StoredProcedure;
@@ -252,11 +251,11 @@ namespace DATA___LAYER
             {
                 using (SqlConnection Obj_SqlConnection = new SqlConnection(Class_Data_Connection.Connection_String))
                 {
-                    string SQL_Server_Query_String = "UPDATE Tabla_Insumo SET Estado_Insumo = 1 WHERE ID_Insumo = @ID_Insumo AND Fecha_Vencimiento_Insumo = @Fecha_Vencimiento_Insumo;";
+                    string SQL_Server_Query_String = "UPDATE Tabla_Insumo SET Estado_Insumo = 1, Fecha_Vencimiento_Insumo = @Fecha_Vencimiento_Insumo WHERE ID_Insumo = @ID_Insumo;";
 
                     SqlCommand Obj_SqlCommand = new SqlCommand(SQL_Server_Query_String, Obj_SqlConnection);
-                    Obj_SqlCommand.Parameters.AddWithValue("@ID_Insumo", ID_Insumo);
                     Obj_SqlCommand.Parameters.AddWithValue("@Fecha_Vencimiento_Insumo", Fecha_Vencimiento_Insumo);
+                    Obj_SqlCommand.Parameters.AddWithValue("@ID_Insumo", ID_Insumo);
                     Obj_SqlCommand.CommandType = CommandType.Text;
 
                     Obj_SqlConnection.Open();

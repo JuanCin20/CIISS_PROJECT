@@ -114,5 +114,39 @@ namespace DATA___LAYER
             }
             return Result;
         }
+
+        public List<Class_Entity_Proveedor_Insumo> Class_Data_Proveedor_Insumo_Listar_Alternative(int ID_Categoria_Insumo)
+        {
+            List<Class_Entity_Proveedor_Insumo> Obj_List_Class_Entity_Proveedor_Insumo = new List<Class_Entity_Proveedor_Insumo>();
+            try
+            {
+                using (SqlConnection Obj_SqlConnection = new SqlConnection(Class_Data_Connection.Connection_String))
+                {
+                    SqlCommand Obj_SqlCommand = new SqlCommand("SP_SUPPLIER_LIST_ALTERNATIVE", Obj_SqlConnection);
+                    Obj_SqlCommand.Parameters.AddWithValue("ID_Categoria_Insumo", ID_Categoria_Insumo);
+                    Obj_SqlCommand.CommandType = CommandType.StoredProcedure;
+
+                    Obj_SqlConnection.Open();
+
+                    using (SqlDataReader Obj_SqlDataReader = Obj_SqlCommand.ExecuteReader())
+                    {
+                        while (Obj_SqlDataReader.Read())
+                        {
+                            Obj_List_Class_Entity_Proveedor_Insumo.Add(new Class_Entity_Proveedor_Insumo()
+                            {
+                                ID_Proveedor_Insumo = Convert.ToInt32(Obj_SqlDataReader["ID_Proveedor_Insumo"]),
+                                Nombre_Proveedor_Insumo = Obj_SqlDataReader["Nombre_Proveedor_Insumo"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception Error)
+            {
+                Console.WriteLine(Error.Message);
+                Obj_List_Class_Entity_Proveedor_Insumo = new List<Class_Entity_Proveedor_Insumo>();
+            }
+            return Obj_List_Class_Entity_Proveedor_Insumo;
+        }
     }
 }

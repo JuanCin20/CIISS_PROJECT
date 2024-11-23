@@ -251,6 +251,7 @@ function Open_Form_Modal(data) {
     $("#Precio_Insumo").removeClass("is-invalid");
     $("#Stock_Insumo").removeClass("is-valid");
     $("#Stock_Insumo").removeClass("is-invalid");
+    $("#Stock_Insumo").prop("disabled", false);
     $("#Fecha_Vencimiento_Insumo").removeClass("is-valid");
     $("#Fecha_Vencimiento_Insumo").removeClass("is-invalid");
     $("#Fecha_Vencimiento_Insumo").prop("disabled", false);
@@ -289,6 +290,7 @@ function Open_Form_Modal(data) {
       $("#Precio_Insumo").removeClass("is-invalid");
       $("#Stock_Insumo").removeClass("is-valid");
       $("#Stock_Insumo").removeClass("is-invalid");
+      $("#Stock_Insumo").prop("disabled", true);
       $("#Fecha_Vencimiento_Insumo").removeClass("is-valid");
       $("#Fecha_Vencimiento_Insumo").removeClass("is-invalid");
       $("#Fecha_Vencimiento_Insumo").prop("disabled", true);
@@ -334,6 +336,16 @@ function Open_Form_Modal(data) {
     }
   }
   $("#Form_Modal").modal("show");
+}
+
+function Open_Form_Reset_Modal(data) {
+  ID_Insumo = data.iD_Insumo;
+  $("#Fecha_Vencimiento_Insumo_Form_Reset").removeClass("is-valid");
+  $("#Fecha_Vencimiento_Insumo_Form_Reset").removeClass("is-invalid");
+  $("#Fecha_Vencimiento_Insumo_Form_Reset")
+    .datepicker({ dateFormat: "dd/mm/yy", minDate: "+8D" })
+    .datepicker("setDate", "");
+  $("#Static_Backdrop_02").modal("show");
 }
 
 $("#Table_Insumo").on("click", ".Edit_Button", function () {
@@ -393,6 +405,8 @@ $("#Table_Insumo").on("click", ".Delete_Button", function () {
 $("#Table_Insumo_Alternative").on("click", ".Reset_Button", function () {
   Selected_Row = Selected_Row_Function(this);
   var data = Table_Insumo_Alternative.row(Selected_Row).data();
+  $("#Static_Backdrop_01").modal("hide");
+  Open_Form_Reset_Modal(data);
 });
 
 jQuery.validator.addMethod("Valid_Nombre_Insumo", function (value, element) {
@@ -724,6 +738,89 @@ function Procesar() {
           },
         });
       }
+    }
+  }
+}
+
+jQuery.validator.addMethod(
+  "Valid_Fecha_Vencimiento_Insumo_Form_Reset",
+  function (value, element) {
+    return (
+      this.optional(element) ||
+      /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/.test(
+        value
+      )
+    );
+  }
+);
+
+$(document).ready(function () {
+  $("#Form_Reset").validate({
+    rules: {
+      Fecha_Vencimiento_Insumo_Form_Reset: {
+        required: true,
+        Valid_Fecha_Vencimiento_Insumo_Form_Reset: true,
+        maxlength: 10,
+      },
+    },
+    messages: {
+      Fecha_Vencimiento_Insumo_Form_Reset: {
+        required: "Campo Requerido: Fecha de Vencimiento del Insumo",
+        Valid_Fecha_Vencimiento_Insumo_Form_Reset:
+          "Ingrese una Fecha V\xe1lida",
+        maxlength:
+          "La Fecha de Vencimiento del Insumo debe Contener un M\xe1ximo de 10 Caracteres",
+      },
+    },
+    errorElement: "em",
+    errorPlacement: function (error, element) {
+      // Add the "invalid-feedback" class to the error element
+      error.addClass("invalid-feedback");
+
+      if (element.prop("type") === "checkbox") {
+        error.insertAfter(element.next("label"));
+      } else {
+        error.insertAfter(element);
+      }
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element).addClass("is-invalid").removeClass("is-valid");
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element).addClass("is-valid").removeClass("is-invalid");
+    },
+  });
+});
+
+function Reset() {
+  if (!$("#Form_Reset").valid()) {
+    return;
+  } else {
+    var Date_Object = $(
+      "#Valid_Fecha_Vencimiento_Insumo_Form_Reset"
+    ).datepicker("getDate");
+    var Date_String = $.datepicker.formatDate("yy-mm-dd", Date_Object);
+
+    var Insumo = {
+      iD_Insumo: ID_Insumo,
+      fecha_Vencimiento_Insumo: Date_String,
+    };
+
+    if (ID_Insumo != 0) {
+      jQuery.ajax({
+        // ? url: "@Url.Action("Management_Controller_Insumo_Reset", "Management")",
+        url: "https://localhost:44381/Management/Management_Controller_Insumo_Reset",
+        type: "POST",
+        data: { ID_Insumo: ID_Insumo, Obj_Class_Entity_Insumo: Insumo },
+        success: function (data) {
+          // debugger; // TODO: Punto de Depuración
+          if (data.result == true) {
+            $("#Static_Backdrop_02").modal("hide");
+            Table_Insumo.ajax.url(Url_01).load();
+            Table_Insumo_Alternative.ajax.url(Url_02).load();
+          }
+        },
+      });
     }
   }
 }

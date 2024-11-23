@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    ViewData["ID_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("ID_Usuario_String");
+    ViewData["Nombre_Apellido_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
+    ViewData["E_Mail_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("E_Mail_Usuario_String");
+    ViewData["Imagen_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("Imagen_Usuario_String");
+}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+
+                        <!-- Cart List -->
+                        <div class="col-sm-9">
+                            <div class="me-2">
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="ms-2 mt-2">Productos Agregados al Carrito</h5>
+                                    <a class="btn btn-primary" asp-area="" asp-controller="Store" asp-action="Index"><i class="fa-solid fa-cart-plus"></i>&nbsp;&nbsp;Seguir Comprando</a>
+                                </div>
+                                <hr class="mt-2 mb-2" />
+                                <div id="Cart_Product">
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <label class="align-self-center">
+                                        <b>Total: S/. <span id="Total"></span></b>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delivery Detail -->
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body bg-light">
+                                    <h5 class="card-title">Detalles del Envío</h5>
+                                    <form id="Form_Delivery" class="needs-validation" novalidate>
+                                        <div class="mb-2">
+                                            <label for="ID_Departamento" class="form-label">Departamento:</label>
+                                            <select class="form-select form-select-sm" id="ID_Departamento" name="ID_Departamento"></select>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="ID_Provincia" class="form-label">Provincia:</label>
+                                            <select class="form-select form-select-sm" id="ID_Provincia" name="ID_Provincia"></select>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="ID_Distrito" class="form-label">Distrito:</label>
+                                            <select class="form-select form-select-sm" id="ID_Distrito" name="ID_Distrito"></select>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="Nombre_Apellido_Usuario" class="form-label">Nombre Completo:</label>
+                                            <input type="text" class="form-control form-control-sm" id="Nombre_Apellido_Usuario" name="Nombre_Apellido_Usuario" placeholder="Nombre Completo" autocomplete="off" />
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="Direccion_Usuario" class="form-label">Dirección:</label>
+                                            <input type="text" class="form-control form-control-sm" id="Direccion_Usuario" name="Direccion_Usuario" placeholder="Dirección" autocomplete="off" />
+                                        </div>
+                                        <div class="mb-2">
+                                            <label for="Telefono_Usuario" class="form-label">Teléfono:</label>
+                                            <input type="number" class="form-control form-control-sm" id="Telefono_Usuario" name="Telefono_Usuario" placeholder="Teléfono" autocomplete="off" />
+                                        </div>
+                                        <div class="d-grid">
+                                            <button class="btn btn-success" type="submit" onclick="Pay()">
+                                                <i class="fa-brands fa-paypal"></i>&nbsp;&nbsp;Continuar y Procesar el Pago
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Java_Script {
+    <script src="~/js/Store.js" asp-append-version="true"></script>
+}

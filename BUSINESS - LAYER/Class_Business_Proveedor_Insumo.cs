@@ -63,5 +63,10 @@ namespace BUSINESS___LAYER
                 return false;
             }
         }
+
+        public List<Class_Entity_Proveedor_Insumo> Class_Business_Proveedor_Insumo_Listar_Alternative(int ID_Categoria_Producto)
+        {
+            return Obj_Class_Data_Proveedor_Insumo.Class_Data_Proveedor_Insumo_Listar_Alternative(ID_Categoria_Producto);
+        }
     }
 }

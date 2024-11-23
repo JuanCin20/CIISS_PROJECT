@@ -44,8 +44,11 @@
     <Compile Include="Class_Business_Categoria_Insumo.cs" />
     <Compile Include="Class_Business_Dashboard.cs" />
     <Compile Include="Class_Business_Insumo.cs" />
+    <Compile Include="Class_Business_Middle.cs" />
+    <Compile Include="Class_Business_Movimiento_Inventario.cs" />
     <Compile Include="Class_Business_Proveedor_Insumo.cs" />
     <Compile Include="Class_Business_Recurso.cs" />
+    <Compile Include="Class_Business_Ubication.cs" />
     <Compile Include="Class_Business_Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

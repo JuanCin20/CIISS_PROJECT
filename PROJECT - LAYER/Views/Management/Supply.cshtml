@@ -22,7 +22,7 @@
             <div class="col-sm-2">
                 <div class="d-grid mb-2">
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                        data-bs-target="#Static_Backdrop">
+                        data-bs-target="#Static_Backdrop_01">
                         <i class="fa-regular fa-circle"></i>&nbsp;&nbsp;Insumos Eliminados
                     </button>
                 </div>
@@ -85,11 +85,25 @@
                             <input type="text" class="form-control" id="Unidad_Medida_Insumo"
                                 name="Unidad_Medida_Insumo" placeholder="Unidad de Medida" autocomplete="off">
                         </div>
-                        <div class="col-sm-6">
-                            <label for="Precio_Insumo" class="form-label">Precio:</label>
-                            <input type="number" class="form-control" id="Precio_Insumo" name="Precio_Insumo"
-                                placeholder="Precio" autocomplete="off">
-                        </div>
+
+                        @if (User.IsInRole("Administrador"))
+                        {
+                            <div class="col-sm-6">
+                                <label for="Precio_Insumo" class="form-label">Precio:</label>
+                                <input type="number" class="form-control" id="Precio_Insumo" name="Precio_Insumo"
+                                    placeholder="Precio" autocomplete="off">
+                            </div>
+                        }
+
+                        @if (User.IsInRole("Empleado"))
+                        {
+                            <div class="col-sm-6">
+                                <label for="Precio_Insumo" class="form-label">Precio:</label>
+                                <input type="number" class="form-control" id="Precio_Insumo" name="Precio_Insumo"
+                                    placeholder="Precio" autocomplete="off" disabled>
+                            </div>
+                        }
+
                         <div class="col-sm-6">
                             <label for="Stock_Insumo" class="form-label">Stock:</label>
                             <input type="number" class="form-control" id="Stock_Insumo" name="Stock_Insumo"
@@ -123,7 +137,7 @@
 </div>
 <!-- Vertically Centered Modal -->
 <!-- Modal -->
-<div class="modal fade" id="Static_Backdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="Static_Backdrop_01" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -153,6 +167,36 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="Static_Backdrop_02" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Nueva Fecha de Vencimiento</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <form id="Form_Reset" class="needs-validation" novalidate>
+                <div class="modal-body">
+                    <div class="row g-2">
+                        <div class="col-sm-12">
+                            <label for="Fecha_Vencimiento_Insumo_Form_Reset" class="form-label">Fecha de
+                                Vencimiento:</label>
+                            <input type="text" class="form-control" id="Fecha_Vencimiento_Insumo_Form_Reset"
+                                name="Fecha_Vencimiento_Insumo_Form_Reset" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" onclick="Reset()">Procesar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

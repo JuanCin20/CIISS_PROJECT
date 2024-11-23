@@ -523,7 +523,6 @@ GO
 		@ID_Insumo INT,
 		@Descripcion_Insumo TEXT,
 		@Precio_Insumo DECIMAL (10, 2),
-		@Stock_Insumo INT,
 		@Message VARCHAR (500) OUTPUT,
 		@Result INT OUTPUT
 	) AS BEGIN
@@ -540,8 +539,7 @@ UPDATE
 	TOP (1) Tabla_Insumo
 SET
 	Descripcion_Insumo = @Descripcion_Insumo,
-	Precio_Insumo = @Precio_Insumo,
-	Stock_Insumo = @Stock_Insumo
+	Precio_Insumo = @Precio_Insumo
 WHERE
 	ID_Insumo = @ID_Insumo
 SET
@@ -879,26 +877,25 @@ SET
 SELECT
 	TMI.ID_Movimiento_Inventario,
 	TMI.Tipo_Movimiento_Inventario,
+	CONCAT (TU.Nombre_Usuario, ' ', TU.Apellido_Usuario) AS [Usuario_Transaction],
 	TCI.Nombre_Categoria_Insumo AS [Nombre_Categoria_Insumo_02],
 	TPI.Nombre_Proveedor_Insumo AS [Nombre_Proveedor_Insumo_02],
 	TI.Nombre_Insumo AS [Nombre_Insumo_02],
 	TI.Descripcion_Insumo AS [Descripcion_Insumo_02],
 	TI.Precio_Insumo AS [Precio_Insumo_02],
-	TMI.Cantidad_Movimiento_Inventario,
-	(
-		TI.Precio_Insumo * TMI.Cantidad_Movimiento_Inventario
-	) AS [Total_Transaction],
+	TDMI.Cantidad_Insumo_Detalle_Movimiento_Inventario,
+	TDMI.Monto_Total_Detalle_Movimiento_Inventario AS [Total_Transaction],
 	CONVERT(
 		VARCHAR(10),
 		TMI.Fecha_Movimiento_Inventario,
 		103
-	) AS [Fecha_Movimiento_Inventario],
-	CONCAT (TU.Nombre_Usuario, ' ', TU.Apellido_Usuario) [Usuario_Transaction]
+	) AS [Fecha_Movimiento_Inventario]
 FROM
-	Tabla_Movimiento_Inventario TMI
-	INNER JOIN Tabla_Insumo TI ON TMI.ID_Insumo = TI.ID_Insumo
-	INNER JOIN Tabla_Categoria_Insumo TCI ON TCI.ID_Categoria_Insumo = TI.ID_Categoria_Insumo
-	INNER JOIN Tabla_Proveedor_Insumo TPI ON TPI.ID_Proveedor_Insumo = TI.ID_Proveedor_Insumo
+	Tabla_Detalle_Movimiento_Inventario TDMI
+	INNER JOIN Tabla_Insumo TI ON TDMI.ID_Insumo = TI.ID_Insumo
+	INNER JOIN Tabla_Categoria_Insumo TCI ON TI.ID_Categoria_Insumo = TCI.ID_Categoria_Insumo
+	INNER JOIN Tabla_Proveedor_Insumo TPI ON TI.ID_Proveedor_Insumo = TPI.ID_Proveedor_Insumo
+	INNER JOIN Tabla_Movimiento_Inventario TMI ON TDMI.ID_Movimiento_Inventario = TMI.ID_Movimiento_Inventario
 	INNER JOIN Tabla_Usuario TU ON TMI.ID_Usuario = TU.ID_Usuario
 WHERE
 	CONVERT(DATE, TMI.Fecha_Movimiento_Inventario) BETWEEN @Initial_Fecha_Movimiento_Inventario
@@ -914,28 +911,6 @@ END;
 ----DECLARE @Final_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-11-15';
 ----DECLARE @ID_Movimiento_Inventario INT = 0;
 ----EXECUTE SP_TRANSACTION_REPORT @Initial_Fecha_Movimiento_Inventario, @Final_Fecha_Movimiento_Inventario, @ID_Movimiento_Inventario;
-GO
-	CREATE
-	OR ALTER PROCEDURE SP_QUERY (@ID_Categoria_Insumo INT) AS BEGIN
-SELECT
-	DISTINCT TPI.ID_Proveedor_Insumo,
-	TPI.Nombre_Proveedor_Insumo
-FROM
-	Tabla_Insumo TI
-	INNER JOIN Tabla_Categoria_Insumo TCI ON TI.ID_Categoria_Insumo = TCI.ID_Categoria_Insumo
-	INNER JOIN Tabla_Proveedor_Insumo TPI ON TI.ID_Proveedor_Insumo = TPI.ID_Proveedor_Insumo
-	AND TPI.Estado_Proveedor_Insumo = 1
-WHERE
-	TCI.ID_Categoria_Insumo = IIF(
-		@ID_Categoria_Insumo = 0,
-		TCI.ID_Categoria_Insumo,
-		@ID_Categoria_Insumo
-	);
-
-END;
-
-----DECLARE @ID_Categoria_Insumo INT = 1;
-----EXECUTE SP_QUERY @ID_Categoria_Insumo;
 GO
 	CREATE
 	OR ALTER TRIGGER TRI_01 ON Tabla_Insumo FOR
@@ -1068,3 +1043,255 @@ END;
 /*INSERT INTO Tabla_Insumo (ID_Categoria_Insumo, ID_Proveedor_Insumo, Nombre_Insumo, Descripcion_Insumo, Unidad_Medida_Insumo, Precio_Insumo, Stock_Insumo, Fecha_Vencimiento_Insumo, Ruta_Imagen_Insumo, Nombre_Imagen_Insumo)
  VALUES (13, 26, 'Juan Carlos Aronés Peña', 'Juan Carlos Aronés Peña', 'Un.', 500, 5, '2024-11-20', 'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images', 'Image_Error.jpg')*/
 /*UPDATE Tabla_Insumo SET Estado_Insumo = 1 WHERE ID_Insumo = 213*/
+GO
+	CREATE
+	OR ALTER PROCEDURE SP_SUPPLIER_LIST_ALTERNATIVE (@ID_Categoria_Insumo INT) AS BEGIN
+SELECT
+	DISTINCT TPI.ID_Proveedor_Insumo,
+	TPI.Nombre_Proveedor_Insumo
+FROM
+	Tabla_Insumo TI
+	INNER JOIN Tabla_Categoria_Insumo TCI ON TI.ID_Categoria_Insumo = TCI.ID_Categoria_Insumo
+	INNER JOIN Tabla_Proveedor_Insumo TPI ON TI.ID_Proveedor_Insumo = TPI.ID_Proveedor_Insumo
+	AND TPI.Estado_Proveedor_Insumo = 1
+WHERE
+	TCI.ID_Categoria_Insumo = IIF(
+		@ID_Categoria_Insumo = 0,
+		TCI.ID_Categoria_Insumo,
+		@ID_Categoria_Insumo
+	);
+
+END;
+
+----DECLARE @ID_Categoria_Insumo INT = 1;
+----EXECUTE SP_SUPPLIER_LIST_ALTERNATIVE @ID_Categoria_Insumo;
+GO
+	CREATE
+	OR ALTER PROCEDURE SP_MIDDLE_LIST(
+		@ID_Usuario INT,
+		@ID_Insumo INT,
+		@Result BIT OUTPUT
+	) AS BEGIN IF EXISTS (
+		SELECT
+			*
+		FROM
+			Tabla_Middle
+		WHERE
+			ID_Usuario = @ID_Usuario
+			AND ID_Insumo = @ID_Insumo
+	)
+SET
+	@Result = 1
+	ELSE
+SET
+	@Result = 0
+END;
+
+GO
+	CREATE
+	OR ALTER PROCEDURE SP_MIDDLE_CREATE_UPDATE(
+		@ID_Usuario INT,
+		@ID_Insumo INT,
+		@Boolean_Operation BIT,
+		@Message VARCHAR (500) OUTPUT,
+		@Result BIT OUTPUT
+	) AS BEGIN
+SET
+	@Result = 1
+SET
+	@Message = '' DECLARE @Exists_Middle BIT = IIF(
+		EXISTS(
+			SELECT
+				*
+			FROM
+				Tabla_Middle
+			WHERE
+				ID_Usuario = @ID_Usuario
+				AND ID_Insumo = @ID_Insumo
+		),
+		1,
+		0
+	) DECLARE @Stock_Insumo INT = (
+		SELECT
+			Stock_Insumo
+		FROM
+			Tabla_Insumo
+		WHERE
+			ID_Insumo = @ID_Insumo
+	) BEGIN TRY BEGIN TRANSACTION OPERATION IF(@Boolean_Operation = 1) BEGIN IF(@Stock_Insumo > 0) BEGIN IF(@Exists_Middle = 1)
+UPDATE
+	Tabla_Middle
+SET
+	Cantidad_Insumo_Middle = Cantidad_Insumo_Middle + 1
+WHERE
+	ID_Usuario = @ID_Usuario
+	AND ID_Insumo = @ID_Insumo
+	ELSE
+INSERT INTO
+	Tabla_Middle(ID_Usuario, ID_Insumo, Cantidad_Insumo_Middle)
+VALUES
+	(@ID_Usuario, @ID_Insumo, 1)
+UPDATE
+	Tabla_Insumo
+SET
+	Stock_Insumo = Stock_Insumo - 1
+WHERE
+	ID_Insumo = @ID_Insumo
+END
+ELSE BEGIN
+SET
+	@Result = 0
+SET
+	@Message = 'Stock Insuficiente para Satisfacer la Demanda'
+END
+END
+ELSE BEGIN
+UPDATE
+	Tabla_Middle
+SET
+	Cantidad_Insumo_Middle = Cantidad_Insumo_Middle - 1
+WHERE
+	ID_Usuario = @ID_Usuario
+	AND ID_Insumo = @ID_Insumo
+UPDATE
+	Tabla_Insumo
+SET
+	Stock_Insumo = Stock_Insumo + 1
+WHERE
+	ID_Insumo = @ID_Insumo
+END COMMIT TRANSACTION OPERATION
+END TRY BEGIN CATCH
+SET
+	@Result = 0
+SET
+	@Message = ERROR_MESSAGE() ROLLBACK TRANSACTION OPERATION
+END CATCH
+END;
+
+GO
+	CREATE
+	OR ALTER FUNCTION FN_MIDDLE_LIST(@ID_Usuario INT) RETURNS TABLE AS RETURN (
+		SELECT
+			TI.ID_Insumo,
+			TPI.Nombre_Proveedor_Insumo,
+			TI.Nombre_Insumo,
+			TI.Precio_Insumo,
+			TM.Cantidad_Insumo_Middle,
+			TI.Ruta_Imagen_Insumo,
+			TI.Nombre_Imagen_Insumo
+		FROM
+			Tabla_Middle TM
+			INNER JOIN Tabla_Insumo TI ON TM.ID_Insumo = TI.ID_Insumo
+			INNER JOIN Tabla_Proveedor_Insumo TPI ON TPI.ID_Proveedor_Insumo = TI.ID_Proveedor_Insumo
+		WHERE
+			TM.ID_Usuario = @ID_Usuario
+	) ----SELECT * FROM FN_MIDDLE_LIST(1)
+GO
+	CREATE
+	OR ALTER PROCEDURE SP_MIDDLE_DELETE(
+		@ID_Usuario INT,
+		@ID_Insumo INT,
+		@Result BIT OUTPUT
+	) AS BEGIN
+SET
+	@Result = 1 DECLARE @Cantidad_Insumo_Middle INT = (
+		SELECT
+			Cantidad_Insumo_Middle
+		FROM
+			Tabla_Middle
+		WHERE
+			ID_Usuario = @ID_Usuario
+			AND ID_Insumo = @ID_Insumo
+	) BEGIN TRY BEGIN TRANSACTION OPERATION
+UPDATE
+	Tabla_Insumo
+SET
+	Stock_Insumo = Stock_Insumo + @Cantidad_Insumo_Middle
+WHERE
+	ID_Insumo = @ID_Insumo DELETE TOP (1)
+FROM
+	Tabla_Middle
+WHERE
+	ID_Usuario = @ID_Usuario
+	AND ID_Insumo = @ID_Insumo COMMIT TRANSACTION OPERATION
+END TRY BEGIN CATCH
+SET
+	@Result = 0 ROLLBACK TRANSACTION OPERATION
+END CATCH
+END;
+
+----
+CREATE TYPE Tabla_Detalle_Movimiento_Inventario AS TABLE (
+	ID_Insumo INT NULL,
+	Cantidad_Insumo_Detalle_Movimiento_Inventario INT NULL,
+	Monto_Total_Detalle_Movimiento_Inventario DECIMAL (10, 2) NULL
+);
+
+GO
+	CREATE
+	OR ALTER PROCEDURE SP_TRANSACTION_CREATE(
+		@ID_Usuario INT,
+		@Tipo_Movimiento_Inventario VARCHAR (10),
+		@Cantidad_Insumo_Movimiento_Inventario INT,
+		@Monto_Total_Movimiento_Inventario DECIMAL (10, 2),
+		@Restaurante_Movimiento_Inventario VARCHAR (50),
+		@Telefono_Movimiento_Inventario INT,
+		@Direccion_Movimiento_Inventario VARCHAR (150),
+		@ID_Distrito INT,
+		@Tabla_Detalle_Movimiento_Inventario Tabla_Detalle_Movimiento_Inventario READONLY,
+		@Message VARCHAR (500) OUTPUT,
+		@Result BIT OUTPUT
+	) AS BEGIN BEGIN TRY DECLARE @ID_Movimiento_Inventario INT = 0
+SET
+	@Message = ''
+SET
+	@Result = 1 BEGIN TRANSACTION REGISTER
+INSERT INTO
+	Tabla_Venta (
+		ID_Usuario,
+		Tipo_Movimiento_Inventario,
+		Cantidad_Insumo_Movimiento_Inventario,
+		Monto_Total_Movimiento_Inventario,
+		Restaurante_Movimiento_Inventario,
+		Telefono_Movimiento_Inventario,
+		Direccion_Movimiento_Inventario,
+		ID_Distrito
+	)
+VALUES
+	(
+		@ID_Usuario,
+		@Tipo_Movimiento_Inventario,
+		@Cantidad_Insumo_Movimiento_Inventario,
+		@Monto_Total_Movimiento_Inventario,
+		@Restaurante_Movimiento_Inventario,
+		@Telefono_Movimiento_Inventario,
+		@Direccion_Movimiento_Inventario,
+		@ID_Distrito
+	)
+SET
+	@ID_Movimiento_Inventario = SCOPE_IDENTITY()
+INSERT INTO
+	Tabla_Detalle_Movimiento_Inventario(
+		ID_Movimiento_Inventario,
+		ID_Insumo,
+		Cantidad_Insumo_Detalle_Movimiento_Inventario,
+		Monto_Total_Detalle_Movimiento_Inventario
+	)
+SELECT
+	@ID_Movimiento_Inventario,
+	ID_Insumo,
+	Cantidad_Insumo_Detalle_Movimiento_Inventario,
+	Monto_Total_Detalle_Movimiento_Inventario
+FROM
+	@Tabla_Detalle_Movimiento_Inventario
+DELETE FROM
+	Tabla_Middle
+WHERE
+	ID_Usuario = @ID_Usuario COMMIT TRANSACTION REGISTER
+END TRY BEGIN CATCH
+SET
+	@Message = ERROR_MESSAGE()
+SET
+	@Result = 0 ROLLBACK TRANSACTION REGISTER
+END CATCH
+END;

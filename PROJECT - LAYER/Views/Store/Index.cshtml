@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    ViewData["ID_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("ID_Usuario_String");
+    ViewData["Nombre_Apellido_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
+    ViewData["E_Mail_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("E_Mail_Usuario_String");
+    ViewData["Imagen_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("Imagen_Usuario_String");
+}
+
+<!-- Header-->
+<div id="carouselExampleInterval" class="carousel slide mt-3" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="5000">
+            <img src="https://audiomusica.vtexassets.com/assets/vtex.file-manager-graphql/images/bfd177ee-6082-4da5-bf90-fed67e638e58___8c0e7e711f60015376580e9bed767d28.png" class="d-block w-100" alt="Image_Error">
+        </div>
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="https://audiomusica.vtexassets.com/assets/vtex.file-manager-graphql/images/7ac40360-2d74-4632-ad68-4dc90bc50bb9___fed227bd3e251bd8a3baeecb8cf19877.png" class="d-block w-100" alt="Image_Error">
+        </div>
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="https://audiomusica.vtexassets.com/assets/vtex.file-manager-graphql/images/e3b67110-a94e-473f-87e7-bcbb97b5c0ab___23825600baeb32fc9860f2a3c748a5fe.png" class="d-block w-100" alt="Image_Error">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<!-- Section-->
+<section class="container-fluid">
+    <div class="p-3 m-3">
+        <div class="col-lg-12 row">
+            <div class="col-lg-3 col-md-12">
+                <div class="w-100 m-2">
+                    <div class="card">
+                        <h5 class="card-header bg-dark text-light">Categorías</h5>
+                        <div class="card-body">
+                            <ul id="Category_Container" class="list-group">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-100 m-2">
+                    <div class="card">
+                        <h5 class="card-header bg-dark text-light">Marcas</h5>
+                        <div class="card-body">
+                            <ul id="Brand_Container" class="list-group">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-100 m-2">
+                    <button id="Filter_Button" class="btn btn-outline-dark col-12"><i class="fa-solid fa-filter"></i>&nbsp;&nbsp;Aplicar Filtros</button>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-12">
+                <div class="w-100 m-2">
+                    <div id="Product_Container" class="row row-cols-1 row-cols-md-3 g-4">
+                        <div class="card" style="width: 18rem;">
+                            <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" class="card-img-top" alt="Image_Error">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 18rem;">
+                            <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" class="card-img-top" alt="Image_Error">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 18rem;">
+                            <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" class="card-img-top" alt="Image_Error">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Java_Script {
+    <script src="~/js/Store.js" asp-append-version="true"></script>
+}
