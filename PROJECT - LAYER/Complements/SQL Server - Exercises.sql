@@ -883,7 +883,7 @@ SELECT
 	TI.Nombre_Insumo AS [Nombre_Insumo_02],
 	TI.Descripcion_Insumo AS [Descripcion_Insumo_02],
 	TI.Precio_Insumo AS [Precio_Insumo_02],
-	TDMI.Cantidad_Insumo_Detalle_Movimiento_Inventario,
+	TDMI.Cantidad_Insumo_Detalle_Movimiento_Inventario AS [Cantidad_Movimiento_Inventario],
 	TDMI.Monto_Total_Detalle_Movimiento_Inventario AS [Total_Transaction],
 	CONVERT(
 		VARCHAR(10),
@@ -907,8 +907,8 @@ WHERE
 	)
 END;
 
-----DECLARE @Initial_Fecha_Movimiento_Inventario VARCHAR(10) = '2023-01-01';
-----DECLARE @Final_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-11-15';
+----DECLARE @Initial_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-11-23';
+----DECLARE @Final_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-11-23';
 ----DECLARE @ID_Movimiento_Inventario INT = 0;
 ----EXECUTE SP_TRANSACTION_REPORT @Initial_Fecha_Movimiento_Inventario, @Final_Fecha_Movimiento_Inventario, @ID_Movimiento_Inventario;
 GO
@@ -1220,7 +1220,11 @@ SET
 END CATCH
 END;
 
-----
+/**/
+/**/
+/**/
+/**/
+/**/
 CREATE TYPE Tabla_Detalle_Movimiento_Inventario AS TABLE (
 	ID_Insumo INT NULL,
 	Cantidad_Insumo_Detalle_Movimiento_Inventario INT NULL,
@@ -1247,7 +1251,7 @@ SET
 SET
 	@Result = 1 BEGIN TRANSACTION REGISTER
 INSERT INTO
-	Tabla_Venta (
+	Tabla_Movimiento_Inventario (
 		ID_Usuario,
 		Tipo_Movimiento_Inventario,
 		Cantidad_Insumo_Movimiento_Inventario,

@@ -196,7 +196,7 @@ function Show_Supply(ID_Categoria_Insumo, ID_Proveedor_Insumo) {
                         $("<p>")
                           .addClass("card-text")
                           .text(
-                            "S/. " + element.precio_Insumo.toFixed(2) + " PEN"
+                            "S/. " + element.precio_Insumo.toFixed(2)
                           )
                       )
                   ),
@@ -756,15 +756,13 @@ function Confirm() {
           Obj_List_Class_Entity_Middle: Obj_List_Class_Entity_Middle,
         },
         success: function (data) {
-          if (data.result) {
+          $("body").LoadingOverlay("hide");
+          if (data.result) { 
             Swal.fire({
               allowOutsideClick: false,
               title: "Confirmaci\xf3n",
               text: "Transacci\xf3n Realizada",
               icon: "success",
-              showCancelButton: true,
-              cancelButtonText: "Cancelar",
-              cancelButtonColor: "#FF0000",
               confirmButtonText: "Aceptar",
               confirmButtonColor: "#3085D6",
             }).then((result) => {
