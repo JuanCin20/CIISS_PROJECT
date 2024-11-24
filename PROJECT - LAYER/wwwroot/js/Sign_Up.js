@@ -137,7 +137,7 @@ function Procesar() {
         $("body").LoadingOverlay("hide");
 
         if (data.iD_Auto_Generated != 0) {
-          window.location.replace("https://localhost:44381/Access/Log_In");
+          window.location.replace("/Access/Log_In");
         } else {
           $("#Alert_Container").html("");
           $("<div>")

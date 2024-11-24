@@ -731,7 +731,7 @@ function Confirm() {
         ).val(),
         obj_Class_Entity_Distrito: {
           iD_Distrito: $("#ID_Distrito").val(),
-        }
+        },
       };
 
       var Obj_List_Class_Entity_Middle = [];
@@ -756,13 +756,26 @@ function Confirm() {
           Obj_List_Class_Entity_Middle: Obj_List_Class_Entity_Middle,
         },
         success: function (data) {
-          if (data.status) {
-            debugger;
-            window.location.replace(data.link);
+          if (data.result) {
+            Swal.fire({
+              allowOutsideClick: false,
+              title: "Confirmaci\xf3n",
+              text: "Transacci\xf3n Realizada",
+              icon: "success",
+              showCancelButton: true,
+              cancelButtonText: "Cancelar",
+              cancelButtonColor: "#FF0000",
+              confirmButtonText: "Aceptar",
+              confirmButtonColor: "#3085D6",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.replace("/Management/Supply");
+              }
+            });
           } else {
             Swal.fire({
               title: "Error",
-              text: "Error",
+              text: data.message,
               icon: "error",
             });
           }
@@ -773,12 +786,12 @@ function Confirm() {
         },
         beforeSend: function () {
           $("body").LoadingOverlay("show", {
-          background: "rgba(0, 0, 0, 0.5)",
-          image: "../img/clock-regular.svg",
-          imageAnimation: "1.5s fadein",
-          imageAutoResize: true,
-          imageResizeFactor: 1,
-          imageColor: "#FFD43B",
+            background: "rgba(0, 0, 0, 0.5)",
+            image: "../img/clock-regular.svg",
+            imageAnimation: "1.5s fadein",
+            imageAutoResize: true,
+            imageResizeFactor: 1,
+            imageColor: "#FFD43B",
           });
         },
       });

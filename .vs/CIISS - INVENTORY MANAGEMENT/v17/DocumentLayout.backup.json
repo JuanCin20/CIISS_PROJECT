@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FA3D52A5-9BBC-4D3C-861A-213421AF8210}|PROJECT - LAYER\\PROJECT - LAYER.csproj|e:\\juancin20\\data\\ciiss - inventory management\\ciiss - inventory management\\project - layer\\wwwroot\\js\\transaction.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{FA3D52A5-9BBC-4D3C-861A-213421AF8210}|PROJECT - LAYER\\PROJECT - LAYER.csproj|solutionrelative:project - layer\\wwwroot\\js\\transaction.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA3D52A5-9BBC-4D3C-861A-213421AF8210}|PROJECT - LAYER\\PROJECT - LAYER.csproj|e:\\juancin20\\data\\ciiss - inventory management\\ciiss - inventory management\\project - layer\\wwwroot\\js\\category.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{FA3D52A5-9BBC-4D3C-861A-213421AF8210}|PROJECT - LAYER\\PROJECT - LAYER.csproj|solutionrelative:project - layer\\wwwroot\\js\\category.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FA3D52A5-9BBC-4D3C-861A-213421AF8210}|PROJECT - LAYER\\PROJECT - LAYER.csproj|e:\\juancin20\\data\\ciiss - inventory management\\ciiss - inventory management\\project - layer\\controllers\\transactioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FA3D52A5-9BBC-4D3C-861A-213421AF8210}|PROJECT - LAYER\\PROJECT - LAYER.csproj|solutionrelative:project - layer\\controllers\\transactioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA3D52A5-9BBC-4D3C-861A-213421AF8210}|PROJECT - LAYER\\PROJECT - LAYER.csproj|e:\\juancin20\\data\\ciiss - inventory management\\ciiss - inventory management\\project - layer\\wwwroot\\js\\transaction.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{FA3D52A5-9BBC-4D3C-861A-213421AF8210}|PROJECT - LAYER\\PROJECT - LAYER.csproj|solutionrelative:project - layer\\wwwroot\\js\\transaction.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,40 +23,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Category.js",
-              "DocumentMoniker": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\Category.js",
-              "RelativeDocumentMoniker": "PROJECT - LAYER\\wwwroot\\js\\Category.js",
-              "ToolTip": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\Category.js",
-              "RelativeToolTip": "PROJECT - LAYER\\wwwroot\\js\\Category.js",
-              "ViewState": "AgIAAEwBAAAAAAAAAAAmwGABAAAIAAAAAAAAAA==",
+              "Title": "Transaction.js",
+              "DocumentMoniker": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\Transaction.js",
+              "RelativeDocumentMoniker": "PROJECT - LAYER\\wwwroot\\js\\Transaction.js",
+              "ToolTip": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\Transaction.js",
+              "RelativeToolTip": "PROJECT - LAYER\\wwwroot\\js\\Transaction.js",
+              "ViewState": "AgIAAO0CAAAAAAAAAAAUwPUCAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-24T00:01:32.578Z",
+              "WhenOpened": "2024-11-24T02:20:49.613Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Transaction.js",
-              "DocumentMoniker": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\Transaction.js",
-              "RelativeDocumentMoniker": "PROJECT - LAYER\\wwwroot\\js\\Transaction.js",
-              "ToolTip": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\Transaction.js*",
-              "RelativeToolTip": "PROJECT - LAYER\\wwwroot\\js\\Transaction.js*",
-              "ViewState": "AgIAAPMCAAAAAAAAAAAUwBADAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-11-23T23:53:16.552Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "TransactionController.cs",
               "DocumentMoniker": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\Controllers\\TransactionController.cs",
               "RelativeDocumentMoniker": "PROJECT - LAYER\\Controllers\\TransactionController.cs",
               "ToolTip": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\Controllers\\TransactionController.cs",
               "RelativeToolTip": "PROJECT - LAYER\\Controllers\\TransactionController.cs",
-              "ViewState": "AgIAALIAAAAAAAAAAAAswMEAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAJMAAAAAAAAAAAAkwNYAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-23T23:51:45.349Z",
+              "WhenOpened": "2024-11-24T02:14:55.825Z",
               "EditorCaption": ""
             }
           ]

@@ -161,15 +161,18 @@ namespace PROJECT___LAYER.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Transaction_Controller_Venta_Registrar(Class_Entity_Movimiento_Inventario Obj_Class_Entity_Movimiento_Inventario, List<Class_Entity_Middle> Obj_List_Class_Entity_Middle)
+        public JsonResult Transaction_Controller_Venta_Registrar(Class_Entity_Movimiento_Inventario Obj_Class_Entity_Movimiento_Inventario, List<Class_Entity_Middle> Obj_List_Class_Entity_Middle)
         {
+            bool Result = false;
+            string Message = string.Empty;
+
             Class_Entity_Movimiento_Inventario Obj_Class_Entity_Movimiento_Inventario_Alternative = new Class_Entity_Movimiento_Inventario();
 
             Obj_Class_Entity_Movimiento_Inventario_Alternative = new Class_Entity_Movimiento_Inventario()
             {
                 Obj_Class_Entity_Usuario = new Class_Entity_Usuario()
                 {
-                    ID_Usuario = Obj_Class_Entity_Movimiento_Inventario.Obj_Class_Entity_Usuario.ID_Usuario
+                    ID_Usuario = Convert.ToInt32(HttpContext.Session.GetString("ID_Usuario_String"))
                 },
                 Tipo_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Tipo_Movimiento_Inventario,
                 Cantidad_Insumo_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Cantidad_Insumo_Movimiento_Inventario,
@@ -206,26 +209,9 @@ namespace PROJECT___LAYER.Controllers
 
             Obj_Class_Entity_Movimiento_Inventario_Alternative.Monto_Total_Movimiento_Inventario = Monto_Total_Movimiento_Inventario;
 
-            TempData["Obj_Class_Entity_Movimiento_Inventario_Alternative"] = Obj_Class_Entity_Movimiento_Inventario_Alternative;
-            TempData["Obj_DataTable"] = Obj_DataTable;
+            Result = new Class_Business_Movimiento_Inventario().Class_Business_Venta_Registrar(Obj_Class_Entity_Movimiento_Inventario_Alternative, Obj_DataTable, out Message);
 
-            return Json(new { status = true, link = "/Transaction/Confirmation?Status=true" });
-        }
-
-        public async Task<IActionResult> Confirmation()
-        {
-            bool Status = Convert.ToBoolean(HttpContext.Request.Query["Status"]);
-
-            ViewData["Status"] = Status;
-
-            if (Status)
-            {
-                Class_Entity_Movimiento_Inventario Obj_Class_Entity_Movimiento_Inventario = (Class_Entity_Movimiento_Inventario)TempData["Obj_Class_Entity_Movimiento_Inventario"];
-                DataTable Obj_DataTable = (DataTable)TempData["Obj_DataTable"];
-                string Message = string.Empty;
-                bool Result = new Class_Business_Movimiento_Inventario().Class_Business_Venta_Registrar(Obj_Class_Entity_Movimiento_Inventario, Obj_DataTable, out Message);
-            }
-            return View();
+            return Json(new { result = Result, message = Message });
         }
 
         [HttpGet]
