@@ -1,7 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Index";
     ViewData["ID_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("ID_Usuario_String");
-    ViewData["Nombre_Apellido_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
+    ViewData["Nombre_Apellido_Usuario_String"] =
+    this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
     ViewData["E_Mail_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("E_Mail_Usuario_String");
     ViewData["Imagen_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("Imagen_Usuario_String");
 }
@@ -13,19 +14,18 @@
                 <div class="card-body">
                     <div class="row">
 
-                        <!-- Cart List -->
+                        <!-- Middle List -->
                         <div class="col-sm-9">
                             <div class="me-2">
                                 <div class="d-flex justify-content-between">
-                                    <h5 class="ms-2 mt-2">Productos Agregados al Carrito</h5>
-                                    <a class="btn btn-primary" asp-area="" asp-controller="Store" asp-action="Index"><i class="fa-solid fa-cart-plus"></i>&nbsp;&nbsp;Seguir Comprando</a>
+                                    <h5 class="ms-2 mt-2">Insumos Agregados a Middle</h5>
                                 </div>
                                 <hr class="mt-2 mb-2" />
-                                <div id="Cart_Product">
+                                <div id="Middle_List">
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <label class="align-self-center">
-                                        <b>Total: S/. <span id="Total"></span></b>
+                                        <b>Total: S/. <span id="Monto_Total_Movimiento_Inventario"></span></b>
                                     </label>
                                 </div>
                             </div>
@@ -39,31 +39,46 @@
                                     <form id="Form_Delivery" class="needs-validation" novalidate>
                                         <div class="mb-2">
                                             <label for="ID_Departamento" class="form-label">Departamento:</label>
-                                            <select class="form-select form-select-sm" id="ID_Departamento" name="ID_Departamento"></select>
+                                            <select class="form-select form-select-sm" id="ID_Departamento"
+                                                name="ID_Departamento"></select>
                                         </div>
                                         <div class="mb-2">
                                             <label for="ID_Provincia" class="form-label">Provincia:</label>
-                                            <select class="form-select form-select-sm" id="ID_Provincia" name="ID_Provincia"></select>
+                                            <select class="form-select form-select-sm" id="ID_Provincia"
+                                                name="ID_Provincia"></select>
                                         </div>
                                         <div class="mb-2">
                                             <label for="ID_Distrito" class="form-label">Distrito:</label>
-                                            <select class="form-select form-select-sm" id="ID_Distrito" name="ID_Distrito"></select>
+                                            <select class="form-select form-select-sm" id="ID_Distrito"
+                                                name="ID_Distrito"></select>
                                         </div>
                                         <div class="mb-2">
-                                            <label for="Nombre_Apellido_Usuario" class="form-label">Nombre Completo:</label>
-                                            <input type="text" class="form-control form-control-sm" id="Nombre_Apellido_Usuario" name="Nombre_Apellido_Usuario" placeholder="Nombre Completo" autocomplete="off" />
+                                            <label for="Restaurante_Movimiento_Inventario"
+                                                class="form-label">Restaurante:</label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                id="Restaurante_Movimiento_Inventario"
+                                                name="Restaurante_Movimiento_Inventario" placeholder="Nombre Completo"
+                                                autocomplete="off" />
                                         </div>
                                         <div class="mb-2">
-                                            <label for="Direccion_Usuario" class="form-label">Dirección:</label>
-                                            <input type="text" class="form-control form-control-sm" id="Direccion_Usuario" name="Direccion_Usuario" placeholder="Dirección" autocomplete="off" />
+                                            <label for="Direccion_Movimiento_Inventario"
+                                                class="form-label">Dirección:</label>
+                                            <input type="text" class="form-control form-control-sm"
+                                                id="Direccion_Movimiento_Inventario"
+                                                name="Direccion_Movimiento_Inventario" placeholder="Dirección"
+                                                autocomplete="off" />
                                         </div>
                                         <div class="mb-2">
-                                            <label for="Telefono_Usuario" class="form-label">Teléfono:</label>
-                                            <input type="number" class="form-control form-control-sm" id="Telefono_Usuario" name="Telefono_Usuario" placeholder="Teléfono" autocomplete="off" />
+                                            <label for="Telefono_Movimiento_Inventario"
+                                                class="form-label">Teléfono:</label>
+                                            <input type="number" class="form-control form-control-sm"
+                                                id="Telefono_Movimiento_Inventario"
+                                                name="Telefono_Movimiento_Inventario" placeholder="Teléfono"
+                                                autocomplete="off" />
                                         </div>
                                         <div class="d-grid">
-                                            <button class="btn btn-success" type="submit" onclick="Pay()">
-                                                <i class="fa-brands fa-paypal"></i>&nbsp;&nbsp;Continuar y Procesar el Pago
+                                            <button class="btn btn-success" type="submit" onclick="Confirm()">
+                                                <i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;Confirmar
                                             </button>
                                         </div>
                                     </form>
@@ -78,5 +93,5 @@
 </div>
 
 @section Java_Script {
-    <script src="~/js/Store.js" asp-append-version="true"></script>
+    <script src="~/js/Transaction.js" asp-append-version="true"></script>
 }

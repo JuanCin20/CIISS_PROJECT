@@ -111,32 +111,64 @@ namespace PROJECT___LAYER.Controllers
                 }
                 else
                 {
-                    var Claims = new List<Claim> {
+                    if (Obj_Class_Entity_Usuario.Obj_Class_Entity_Tipo_Usuario.ID_Tipo_Usuario == 1)
+                    {
+                        var Claims = new List<Claim> {
                         new Claim(ClaimTypes.Name, Obj_Class_Entity_Usuario.Nombre_Usuario),
                         new Claim("E_Mail_Usuario", Obj_Class_Entity_Usuario.E_Mail_Usuario)
                     };
 
-                    foreach (string Obj_Class_Entity_Tipo_Usuario in Obj_Class_Entity_Usuario.Obj_Class_Entity_Tipo_Usuario.Nombre_Tipo_Usuario.Split(","))
-                    {
-                        Claims.Add(new Claim(ClaimTypes.Role, Obj_Class_Entity_Tipo_Usuario));
+                        foreach (string Obj_Class_Entity_Tipo_Usuario in Obj_Class_Entity_Usuario.Obj_Class_Entity_Tipo_Usuario.Nombre_Tipo_Usuario.Split(","))
+                        {
+                            Claims.Add(new Claim(ClaimTypes.Role, Obj_Class_Entity_Tipo_Usuario));
+                        }
+
+                        var Claims_Identity = new ClaimsIdentity(Claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(Claims_Identity));
+
+                        string ID_Usuario_String = "ID_Usuario_String";
+                        string Nombre_Apellido_Usuario_String = "Nombre_Apellido_Usuario_String";
+                        string E_Mail_Usuario_String = "E_Mail_Usuario_String";
+                        string Imagen_Usuario_String = "Imagen_Usuario_String";
+
+                        HttpContext.Session.SetString(ID_Usuario_String, Obj_Class_Entity_Usuario.ID_Usuario.ToString());
+                        HttpContext.Session.SetString(Nombre_Apellido_Usuario_String, Obj_Class_Entity_Usuario.Nombre_Usuario + " " + Obj_Class_Entity_Usuario.Apellido_Usuario);
+                        HttpContext.Session.SetString(E_Mail_Usuario_String, Obj_Class_Entity_Usuario.E_Mail_Usuario);
+                        HttpContext.Session.SetString(Imagen_Usuario_String, Obj_Class_Entity_Usuario.Nombre_Imagen_Usuario);
+
+                        ViewBag.Error = null;
+                        return RedirectToAction("Index", "Home");
                     }
+                    else
+                    {
+                        var Claims = new List<Claim> {
+                        new Claim(ClaimTypes.Name, Obj_Class_Entity_Usuario.Nombre_Usuario),
+                        new Claim("E_Mail_Usuario", Obj_Class_Entity_Usuario.E_Mail_Usuario)
+                    };
 
-                    var Claims_Identity = new ClaimsIdentity(Claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        foreach (string Obj_Class_Entity_Tipo_Usuario in Obj_Class_Entity_Usuario.Obj_Class_Entity_Tipo_Usuario.Nombre_Tipo_Usuario.Split(","))
+                        {
+                            Claims.Add(new Claim(ClaimTypes.Role, Obj_Class_Entity_Tipo_Usuario));
+                        }
 
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(Claims_Identity));
+                        var Claims_Identity = new ClaimsIdentity(Claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                    string ID_Usuario_String = "ID_Usuario_String";
-                    string Nombre_Apellido_Usuario_String = "Nombre_Apellido_Usuario_String";
-                    string E_Mail_Usuario_String = "E_Mail_Usuario_String";
-                    string Imagen_Usuario_String = "Imagen_Usuario_String";
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(Claims_Identity));
 
-                    HttpContext.Session.SetString(ID_Usuario_String, Obj_Class_Entity_Usuario.ID_Usuario.ToString());
-                    HttpContext.Session.SetString(Nombre_Apellido_Usuario_String, Obj_Class_Entity_Usuario.Nombre_Usuario + " " + Obj_Class_Entity_Usuario.Apellido_Usuario);
-                    HttpContext.Session.SetString(E_Mail_Usuario_String, Obj_Class_Entity_Usuario.E_Mail_Usuario);
-                    HttpContext.Session.SetString(Imagen_Usuario_String, Obj_Class_Entity_Usuario.Nombre_Imagen_Usuario);
+                        string ID_Usuario_String = "ID_Usuario_String";
+                        string Nombre_Apellido_Usuario_String = "Nombre_Apellido_Usuario_String";
+                        string E_Mail_Usuario_String = "E_Mail_Usuario_String";
+                        string Imagen_Usuario_String = "Imagen_Usuario_String";
 
-                    ViewBag.Error = null;
-                    return RedirectToAction("Index", "Home");
+                        HttpContext.Session.SetString(ID_Usuario_String, Obj_Class_Entity_Usuario.ID_Usuario.ToString());
+                        HttpContext.Session.SetString(Nombre_Apellido_Usuario_String, Obj_Class_Entity_Usuario.Nombre_Usuario + " " + Obj_Class_Entity_Usuario.Apellido_Usuario);
+                        HttpContext.Session.SetString(E_Mail_Usuario_String, Obj_Class_Entity_Usuario.E_Mail_Usuario);
+                        HttpContext.Session.SetString(Imagen_Usuario_String, Obj_Class_Entity_Usuario.Nombre_Imagen_Usuario);
+
+                        ViewBag.Error = null;
+                        return RedirectToAction("Supply", "Management");
+                    }
                 }
             }
         }

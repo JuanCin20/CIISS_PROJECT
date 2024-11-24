@@ -73,8 +73,10 @@ namespace PROJECT___LAYER.Controllers
         }
 
         [HttpPost]
-        public JsonResult Transaction_Controller_Middle_Listar(int ID_Usuario, int ID_Insumo)
+        public JsonResult Transaction_Controller_Middle_Listar(int ID_Insumo)
         {
+            int ID_Usuario = Convert.ToInt32(HttpContext.Session.GetString("ID_Usuario_String"));
+
             bool Result_01 = new Class_Business_Middle().Class_Business_Middle_Listar(ID_Usuario, ID_Insumo);
 
             bool Result_02 = false;
@@ -83,7 +85,7 @@ namespace PROJECT___LAYER.Controllers
 
             if (Result_01)
             {
-                Message = "El Insumo ya se Ecuentra Agregado al Middle";
+                Message = "El Insumo ya se Ecuentra Agregado a Middle";
             }
             else
             {
@@ -94,8 +96,10 @@ namespace PROJECT___LAYER.Controllers
         }
 
         [HttpPost]
-        public JsonResult Transaction_Controller_Middle_Listar_Alternative(int ID_Usuario)
+        public JsonResult Transaction_Controller_Middle_Listar_Alternative()
         {
+            int ID_Usuario = Convert.ToInt32(HttpContext.Session.GetString("ID_Usuario_String"));
+
             List<Class_Entity_Middle> Obj_List_Class_Entity_Middle = new List<Class_Entity_Middle>();
 
             bool Conversion;
@@ -119,8 +123,10 @@ namespace PROJECT___LAYER.Controllers
         }
 
         [HttpPost]
-        public JsonResult Transaction_Controller_Middle_Create_Update(int ID_Usuario, int ID_Insumo, bool Boolean_Operation)
+        public JsonResult Transaction_Controller_Middle_Create_Update(int ID_Insumo, bool Boolean_Operation)
         {
+            int ID_Usuario = Convert.ToInt32(HttpContext.Session.GetString("ID_Usuario_String"));
+
             bool Result = false;
 
             string Message = string.Empty;
@@ -131,8 +137,10 @@ namespace PROJECT___LAYER.Controllers
         }
 
         [HttpPost]
-        public JsonResult Transaction_Controller_Middle_Delete(int ID_Usuario, int ID_Insumo)
+        public JsonResult Transaction_Controller_Middle_Delete(int ID_Insumo)
         {
+            int ID_Usuario = Convert.ToInt32(HttpContext.Session.GetString("ID_Usuario_String"));
+
             bool Result = false;
 
             string Message = string.Empty;
@@ -143,16 +151,37 @@ namespace PROJECT___LAYER.Controllers
         }
 
         [HttpPost]
-        public JsonResult Store_Controller_Middle_Count(int ID_Usuario)
+        public JsonResult Transaction_Controller_Middle_Count()
         {
+            int ID_Usuario = Convert.ToInt32(HttpContext.Session.GetString("ID_Usuario_String"));
+
             int Result = new Class_Business_Middle().Class_Business_Middle_Count(ID_Usuario);
 
             return Json(new { result = Result });
         }
 
         [HttpPost]
-        public async Task<JsonResult> Transaction_Controller_Venta_Registrar(Class_Entity_Movimiento_Inventario Obj_Class_Entity_Movimiento_Inventario, List<Class_Entity_Middle> Obj_List_Class_Entity_Middle, int ID_Usuario)
+        public async Task<JsonResult> Transaction_Controller_Venta_Registrar(Class_Entity_Movimiento_Inventario Obj_Class_Entity_Movimiento_Inventario, List<Class_Entity_Middle> Obj_List_Class_Entity_Middle)
         {
+            Class_Entity_Movimiento_Inventario Obj_Class_Entity_Movimiento_Inventario_Alternative = new Class_Entity_Movimiento_Inventario();
+
+            Obj_Class_Entity_Movimiento_Inventario_Alternative = new Class_Entity_Movimiento_Inventario()
+            {
+                Obj_Class_Entity_Usuario = new Class_Entity_Usuario()
+                {
+                    ID_Usuario = Obj_Class_Entity_Movimiento_Inventario.Obj_Class_Entity_Usuario.ID_Usuario
+                },
+                Tipo_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Tipo_Movimiento_Inventario,
+                Cantidad_Insumo_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Cantidad_Insumo_Movimiento_Inventario,
+                Restaurante_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Restaurante_Movimiento_Inventario,
+                Telefono_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Telefono_Movimiento_Inventario,
+                Direccion_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Direccion_Movimiento_Inventario,
+                Obj_Class_Entity_Distrito = new Class_Entity_Distrito()
+                {
+                    ID_Distrito = Obj_Class_Entity_Movimiento_Inventario.Obj_Class_Entity_Distrito.ID_Distrito
+                },
+            };
+
             decimal Monto_Total_Movimiento_Inventario = 0;
 
             DataTable Obj_DataTable = new DataTable();
@@ -163,22 +192,21 @@ namespace PROJECT___LAYER.Controllers
 
             foreach (Class_Entity_Middle Obj_Class_Entity_Middle in Obj_List_Class_Entity_Middle)
             {
-                decimal Sub_Total = Convert.ToDecimal(Obj_Class_Entity_Middle.Cantidad_Insumo_Middle.ToString()) * Obj_Class_Entity_Middle.Obj_Class_Entity_Insumo.Precio_Insumo;
+                decimal Monto_Total_Detalle_Movimiento_Inventario = Convert.ToDecimal(Obj_Class_Entity_Middle.Cantidad_Insumo_Middle.ToString()) * Obj_Class_Entity_Middle.Obj_Class_Entity_Insumo.Precio_Insumo;
 
-                Monto_Total_Movimiento_Inventario += Sub_Total;
+                Monto_Total_Movimiento_Inventario += Monto_Total_Detalle_Movimiento_Inventario;
 
                 Obj_DataTable.Rows.Add(new object[]
                 {
                     Obj_Class_Entity_Middle.Obj_Class_Entity_Insumo.ID_Insumo,
                     Obj_Class_Entity_Middle.Cantidad_Insumo_Middle,
-                    Sub_Total,
+                    Monto_Total_Detalle_Movimiento_Inventario,
                 });
             }
 
-            Obj_Class_Entity_Movimiento_Inventario.Monto_Total_Movimiento_Inventario = Monto_Total_Movimiento_Inventario;
-            Obj_Class_Entity_Movimiento_Inventario.Obj_Class_Entity_Usuario.ID_Usuario = ID_Usuario;
+            Obj_Class_Entity_Movimiento_Inventario_Alternative.Monto_Total_Movimiento_Inventario = Monto_Total_Movimiento_Inventario;
 
-            TempData["Obj_Class_Entity_Movimiento_Inventario"] = Obj_Class_Entity_Movimiento_Inventario;
+            TempData["Obj_Class_Entity_Movimiento_Inventario_Alternative"] = Obj_Class_Entity_Movimiento_Inventario_Alternative;
             TempData["Obj_DataTable"] = Obj_DataTable;
 
             return Json(new { status = true, link = "/Transaction/Confirmation?Status=true" });

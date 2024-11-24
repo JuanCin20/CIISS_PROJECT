@@ -897,16 +897,16 @@
       "PackagePath": "staticwebassets\\js\\Sign_Up.js"
     },
     {
-      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\Store.js",
-      "PackagePath": "staticwebassets\\js\\Store.js"
-    },
-    {
       "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\Supplier.js",
       "PackagePath": "staticwebassets\\js\\Supplier.js"
     },
     {
       "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\Supply.js",
       "PackagePath": "staticwebassets\\js\\Supply.js"
+    },
+    {
+      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\Transaction.js",
+      "PackagePath": "staticwebassets\\js\\Transaction.js"
     },
     {
       "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\User.js",

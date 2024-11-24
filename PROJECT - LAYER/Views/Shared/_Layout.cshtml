@@ -50,14 +50,29 @@
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-area="" asp-controller="Home"
-                asp-action="Index">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fa-brands fa-wolf-pack-battalion fa-2xl"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">Sistema de Inventario<sup>2.0</sup></div>
-            </a>
+            @if (User.IsInRole("Administrador"))
+            {
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-area="" asp-controller="Home"
+                    asp-action="Index">
+                    <div class="sidebar-brand-icon rotate-n-15">
+                        <i class="fa-brands fa-wolf-pack-battalion fa-2xl"></i>
+                    </div>
+                    <div class="sidebar-brand-text mx-3">Sistema de Inventario<sup>2.0</sup></div>
+                </a>
+            }
+
+            @if (User.IsInRole("Empleado"))
+            {
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-area=""
+                    asp-controller="Management" asp-action="Supply">
+                    <div class="sidebar-brand-icon rotate-n-15">
+                        <i class="fa-brands fa-wolf-pack-battalion fa-2xl"></i>
+                    </div>
+                    <div class="sidebar-brand-text mx-3">Sistema de Inventario<sup>2.0</sup></div>
+                </a>
+            }
 
             @if (User.IsInRole("Administrador"))
             {
@@ -151,14 +166,26 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#/" data-toggle="collapse" data-target="#Collapse_03"
                         aria-expanded="true" aria-controls="Collapse_03">
-                        <i class="fa-solid fa-users"></i>&nbsp;&nbsp;<span>Transacción</span>
+                        @if (User.IsInRole("Administrador"))
+                        {
+                            <i class="fa-solid fa-folder-plus"></i>
+                        }
+
+                        @if (User.IsInRole("Empleado"))
+                        {
+                            <i class="fa-solid fa-folder-minus"></i>
+                        }
+                        &nbsp;&nbsp;<span>Transacción</span>
                     </a>
                     <div id="Collapse_03" class="collapse" aria-labelledby="Collapse_03" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Administrar Entradas:</h6>
                             <a class="collapse-item" asp-area="" asp-controller="Transaction"
                                 asp-action="Supply">Insumos</a>
-                            <a class="collapse-item" asp-area="" asp-controller="Transaction" asp-action="Middle">Middle</a>
+                            <a class="collapse-item d-flex flex-row align-items-center" asp-area=""
+                                asp-controller="Transaction" asp-action="Middle">Middle&nbsp;&nbsp;<span class=""
+                                    id="Count_Middle"></span>
+                            </a>
                         </div>
                     </div>
                 </li>

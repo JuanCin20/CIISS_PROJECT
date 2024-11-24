@@ -18,7 +18,7 @@ namespace PROJECT___LAYER.Controllers
             _logger = logger;
         }
 
-        [Authorize(Roles = "Administrador, Empleado")]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Index()
         {
             return View();

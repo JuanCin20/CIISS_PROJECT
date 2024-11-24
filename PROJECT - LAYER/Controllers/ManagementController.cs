@@ -18,13 +18,13 @@ namespace PROJECT___LAYER.Controllers
             _logger = logger;
         }
 
-        [Authorize(Roles = "Administrador, Empleado")]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Supplier()
         {
             return View();
         }
 
-        [Authorize(Roles = "Administrador, Empleado")]
+        [Authorize(Roles = "Administrador")]
         public IActionResult Category()
         {
             return View();
