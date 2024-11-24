@@ -137,6 +137,20 @@ namespace PROJECT___LAYER.Controllers
         }
 
         [HttpPost]
+        public JsonResult Transaction_Controller_Middle_Create_Update_Alternative(int ID_Insumo, bool Boolean_Operation)
+        {
+            int ID_Usuario = Convert.ToInt32(HttpContext.Session.GetString("ID_Usuario_String"));
+
+            bool Result = false;
+
+            string Message = string.Empty;
+
+            Result = new Class_Business_Middle().Class_Business_Middle_Create_Update_Alternative(ID_Usuario, ID_Insumo, Boolean_Operation, out Message);
+
+            return Json(new { result = Result, message = Message });
+        }
+
+        [HttpPost]
         public JsonResult Transaction_Controller_Middle_Delete(int ID_Insumo)
         {
             int ID_Usuario = Convert.ToInt32(HttpContext.Session.GetString("ID_Usuario_String"));
@@ -146,6 +160,20 @@ namespace PROJECT___LAYER.Controllers
             string Message = string.Empty;
 
             Result = new Class_Business_Middle().Class_Business_Middle_Delete(ID_Usuario, ID_Insumo);
+
+            return Json(new { result = Result, message = Message });
+        }
+
+        [HttpPost]
+        public JsonResult Transaction_Controller_Middle_Delete_Alternative(int ID_Insumo)
+        {
+            int ID_Usuario = Convert.ToInt32(HttpContext.Session.GetString("ID_Usuario_String"));
+
+            bool Result = false;
+
+            string Message = string.Empty;
+
+            Result = new Class_Business_Middle().Class_Business_Middle_Delete_Alternative(ID_Usuario, ID_Insumo);
 
             return Json(new { result = Result, message = Message });
         }

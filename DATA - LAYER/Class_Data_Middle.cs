@@ -71,6 +71,39 @@ namespace DATA___LAYER
             return Result;
         }
 
+        public bool Class_Data_Middle_Create_Update_Alternative(int ID_Usuario, int ID_Insumo, bool Boolean_Operation, out string Message)
+        {
+            bool Result = true;
+            Message = string.Empty;
+            try
+            {
+                using (SqlConnection Obj_SqlConnection = new SqlConnection(Class_Data_Connection.Connection_String))
+                {
+                    SqlCommand Obj_SqlCommand = new SqlCommand("SP_MIDDLE_CREATE_UPDATE_ALTERNATIVE", Obj_SqlConnection);
+                    Obj_SqlCommand.Parameters.AddWithValue("ID_Usuario", ID_Usuario);
+                    Obj_SqlCommand.Parameters.AddWithValue("ID_Insumo", ID_Insumo);
+                    Obj_SqlCommand.Parameters.AddWithValue("Boolean_Operation", Boolean_Operation);
+                    Obj_SqlCommand.Parameters.Add("Message", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+                    Obj_SqlCommand.Parameters.Add("Result", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    Obj_SqlCommand.CommandType = CommandType.StoredProcedure;
+
+                    Obj_SqlConnection.Open();
+
+                    Obj_SqlCommand.ExecuteNonQuery();
+
+                    Message = Obj_SqlCommand.Parameters["Message"].Value.ToString();
+                    Result = Convert.ToBoolean(Obj_SqlCommand.Parameters["Result"].Value);
+                }
+            }
+            catch (Exception Error)
+            {
+                Console.WriteLine(Error.Message);
+                Message = Error.Message;
+                Result = false;
+            }
+            return Result;
+        }
+
         public List<Class_Entity_Middle> Class_Data_Middle_Listar_Alternative(int ID_Usuario)
         {
             List<Class_Entity_Middle> Obj_List_Class_Entity_Middle = new List<Class_Entity_Middle>();
@@ -126,6 +159,34 @@ namespace DATA___LAYER
                 using (SqlConnection Obj_SqlConnection = new SqlConnection(Class_Data_Connection.Connection_String))
                 {
                     SqlCommand Obj_SqlCommand = new SqlCommand("SP_MIDDLE_DELETE", Obj_SqlConnection);
+                    Obj_SqlCommand.Parameters.AddWithValue("ID_Usuario", ID_Usuario);
+                    Obj_SqlCommand.Parameters.AddWithValue("ID_Insumo", ID_Insumo);
+                    Obj_SqlCommand.Parameters.Add("Result", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    Obj_SqlCommand.CommandType = CommandType.StoredProcedure;
+
+                    Obj_SqlConnection.Open();
+
+                    Obj_SqlCommand.ExecuteNonQuery();
+
+                    Result = Convert.ToBoolean(Obj_SqlCommand.Parameters["Result"].Value);
+                }
+            }
+            catch (Exception Error)
+            {
+                Console.WriteLine(Error.Message);
+                Result = false;
+            }
+            return Result;
+        }
+
+        public bool Class_Data_Middle_Delete_Alternative(int ID_Usuario, int ID_Insumo)
+        {
+            bool Result = true;
+            try
+            {
+                using (SqlConnection Obj_SqlConnection = new SqlConnection(Class_Data_Connection.Connection_String))
+                {
+                    SqlCommand Obj_SqlCommand = new SqlCommand("SP_MIDDLE_DELETE_ALTERNATIVE", Obj_SqlConnection);
                     Obj_SqlCommand.Parameters.AddWithValue("ID_Usuario", ID_Usuario);
                     Obj_SqlCommand.Parameters.AddWithValue("ID_Insumo", ID_Insumo);
                     Obj_SqlCommand.Parameters.Add("Result", SqlDbType.Bit).Direction = ParameterDirection.Output;

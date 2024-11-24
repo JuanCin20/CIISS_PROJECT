@@ -1,5 +1,7 @@
 ﻿@{
     ViewData["Title"] = "User";
+    ViewData["ID_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("ID_Usuario_String");
+    ViewData["ID_Tipo_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("ID_Tipo_Usuario_String");
     ViewData["Nombre_Apellido_Usuario_String"] =
     this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
     ViewData["E_Mail_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("E_Mail_Usuario_String");

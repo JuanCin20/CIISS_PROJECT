@@ -1,5 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Category";
+    ViewData["ID_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("ID_Usuario_String");
+    ViewData["ID_Tipo_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("ID_Tipo_Usuario_String");
     ViewData["Nombre_Apellido_Usuario_String"] =
     this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
     ViewData["E_Mail_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("E_Mail_Usuario_String");
@@ -21,7 +23,8 @@
             </div>
             <div class="col-sm-2">
                 <div class="d-grid mb-2">
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Static_Backdrop">
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#Static_Backdrop">
                         <i class="fa-regular fa-circle"></i>&nbsp;&nbsp;Categorías Eliminadas
                     </button>
                 </div>
