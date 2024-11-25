@@ -127,10 +127,10 @@ GO
 		) NOT NULL,
 		Cantidad_Insumo_Movimiento_Inventario INT NOT NULL,
 		Monto_Total_Movimiento_Inventario DECIMAL (10, 2) NOT NULL,
-		Restaurante_Movimiento_Inventario VARCHAR (50) NOT NULL,
-		Telefono_Movimiento_Inventario INT NOT NULL,
-		Direccion_Movimiento_Inventario VARCHAR (150) NOT NULL,
-		ID_Distrito INT FOREIGN KEY REFERENCES Tabla_Distrito (ID_Distrito) NOT NULL,
+		Restaurante_Movimiento_Inventario VARCHAR (50) NULL,
+		Telefono_Movimiento_Inventario INT NULL,
+		Direccion_Movimiento_Inventario VARCHAR (150) NULL,
+		ID_Distrito INT FOREIGN KEY REFERENCES Tabla_Distrito (ID_Distrito) NULL,
 		Fecha_Movimiento_Inventario DATETIME DEFAULT GETDATE() NOT NULL
 	);
 

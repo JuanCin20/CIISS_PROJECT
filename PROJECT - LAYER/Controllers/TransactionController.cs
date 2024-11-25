@@ -89,9 +89,15 @@ namespace PROJECT___LAYER.Controllers
             }
             else
             {
-                Result_02 = new Class_Business_Middle().Class_Business_Middle_Create_Update(ID_Usuario, ID_Insumo, true, out Message);
+                if (Convert.ToInt32(HttpContext.Session.GetString("ID_Tipo_Usuario_String")) == 2)
+                {
+                    Result_02 = new Class_Business_Middle().Class_Business_Middle_Create_Update(ID_Usuario, ID_Insumo, true, out Message);
+                }
+                else
+                {
+                    Result_02 = new Class_Business_Middle().Class_Business_Middle_Create_Update_Alternative(ID_Usuario, ID_Insumo, true, out Message);
+                }
             }
-
             return Json(new { result_02 = Result_02, message = Message });
         }
 
@@ -196,22 +202,44 @@ namespace PROJECT___LAYER.Controllers
 
             Class_Entity_Movimiento_Inventario Obj_Class_Entity_Movimiento_Inventario_Alternative = new Class_Entity_Movimiento_Inventario();
 
-            Obj_Class_Entity_Movimiento_Inventario_Alternative = new Class_Entity_Movimiento_Inventario()
+            if (Convert.ToInt32(HttpContext.Session.GetString("ID_Tipo_Usuario_String")) == 2)
             {
-                Obj_Class_Entity_Usuario = new Class_Entity_Usuario()
+                Obj_Class_Entity_Movimiento_Inventario_Alternative = new Class_Entity_Movimiento_Inventario()
                 {
-                    ID_Usuario = Convert.ToInt32(HttpContext.Session.GetString("ID_Usuario_String"))
-                },
-                Tipo_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Tipo_Movimiento_Inventario,
-                Cantidad_Insumo_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Cantidad_Insumo_Movimiento_Inventario,
-                Restaurante_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Restaurante_Movimiento_Inventario,
-                Telefono_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Telefono_Movimiento_Inventario,
-                Direccion_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Direccion_Movimiento_Inventario,
-                Obj_Class_Entity_Distrito = new Class_Entity_Distrito()
+                    Obj_Class_Entity_Usuario = new Class_Entity_Usuario()
+                    {
+                        ID_Usuario = Convert.ToInt32(HttpContext.Session.GetString("ID_Usuario_String"))
+                    },
+                    Tipo_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Tipo_Movimiento_Inventario,
+                    Cantidad_Insumo_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Cantidad_Insumo_Movimiento_Inventario,
+                    Restaurante_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Restaurante_Movimiento_Inventario,
+                    Telefono_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Telefono_Movimiento_Inventario,
+                    Direccion_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Direccion_Movimiento_Inventario,
+                    Obj_Class_Entity_Distrito = new Class_Entity_Distrito()
+                    {
+                        ID_Distrito = Obj_Class_Entity_Movimiento_Inventario.Obj_Class_Entity_Distrito.ID_Distrito
+                    },
+                };
+            }
+            else
+            {
+                Obj_Class_Entity_Movimiento_Inventario_Alternative = new Class_Entity_Movimiento_Inventario()
                 {
-                    ID_Distrito = Obj_Class_Entity_Movimiento_Inventario.Obj_Class_Entity_Distrito.ID_Distrito
-                },
-            };
+                    Obj_Class_Entity_Usuario = new Class_Entity_Usuario()
+                    {
+                        ID_Usuario = Convert.ToInt32(HttpContext.Session.GetString("ID_Usuario_String"))
+                    },
+                    Tipo_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Tipo_Movimiento_Inventario,
+                    Cantidad_Insumo_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Cantidad_Insumo_Movimiento_Inventario,
+                    Restaurante_Movimiento_Inventario = null,
+                    Telefono_Movimiento_Inventario = 0,
+                    Direccion_Movimiento_Inventario = null,
+                    Obj_Class_Entity_Distrito = new Class_Entity_Distrito()
+                    {
+                        ID_Distrito = 0
+                    },
+                };
+            }
 
             decimal Monto_Total_Movimiento_Inventario = 0;
 

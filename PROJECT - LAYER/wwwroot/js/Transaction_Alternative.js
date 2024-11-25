@@ -2,7 +2,6 @@
   Count_Middle();
   Show_Category();
   Show_Supply(0, 0);
-  Listar_Departamento();
   List_Middle();
 });
 
@@ -195,9 +194,7 @@ function Show_Supply(ID_Categoria_Insumo, ID_Proveedor_Insumo) {
                           .text(element.nombre_Insumo),
                         $("<p>")
                           .addClass("card-text")
-                          .text(
-                            "S/. " + element.precio_Insumo.toFixed(2)
-                          )
+                          .text("S/. " + element.precio_Insumo.toFixed(2))
                       )
                   ),
                 $("<div>")
@@ -272,90 +269,6 @@ $(document).on("click", "button.Add_Middle", function () {
     }
   });
 });
-
-function Listar_Departamento() {
-  $("<option>")
-    .attr({ value: "0", disabled: "disabled", selected: "true" })
-    .text("Seleccionar")
-    .appendTo("#ID_Departamento");
-  jQuery.ajax({
-    // ? url: "@Url.Action("Transaction_Controller_Ubication_Departamento_Listar", "Transaction")",
-    url: "https://localhost:44381/Transaction/Transaction_Controller_Ubication_Departamento_Listar",
-    type: "GET",
-    dataType: "json",
-    success: function (data) {
-      if (data.obj_List_Class_Entity_Departamento != null) {
-        $.each(data.obj_List_Class_Entity_Departamento, function (i, element) {
-          $("<option>")
-            .attr({ value: element.iD_Departamento })
-            .text(element.nombre_Departamento)
-            .appendTo("#ID_Departamento");
-        });
-        Listar_Provincia();
-      }
-    },
-  });
-}
-
-$("#ID_Departamento").on("change", function () {
-  Listar_Provincia();
-});
-
-function Listar_Provincia() {
-  var ID_Departamento = $("#ID_Departamento option:selected").val();
-  $("#ID_Provincia").html("");
-  $("<option>")
-    .attr({ value: "0", disabled: "disabled", selected: "true" })
-    .text("Seleccionar")
-    .appendTo("#ID_Provincia");
-  jQuery.ajax({
-    // ? url: "@Url.Action("Transaction_Controller_Ubication_Provincia_Listar", "Transaction")",
-    url: "https://localhost:44381/Transaction/Transaction_Controller_Ubication_Provincia_Listar",
-    type: "POST",
-    data: { ID_Departamento: ID_Departamento },
-    success: function (data) {
-      if (data.obj_List_Class_Entity_Provincia != null) {
-        $.each(data.obj_List_Class_Entity_Provincia, function (i, element) {
-          $("<option>")
-            .attr({ value: element.iD_Provincia })
-            .text(element.nombre_Provincia)
-            .appendTo("#ID_Provincia");
-        });
-        Listar_Distrito();
-      }
-    },
-  });
-}
-
-$("#ID_Provincia").on("change", function () {
-  Listar_Distrito();
-});
-
-function Listar_Distrito() {
-  var ID_Provincia = $("#ID_Provincia option:selected").val();
-  var ID_Departamento = $("#ID_Departamento option:selected").val();
-  $("#ID_Distrito").html("");
-  $("<option>")
-    .attr({ value: "0", disabled: "disabled", selected: "true" })
-    .text("Seleccionar")
-    .appendTo("#ID_Distrito");
-  jQuery.ajax({
-    // ? url: "@Url.Action("Transaction_Controller_Ubication_Distrito_Listar", "Transaction")",
-    url: "https://localhost:44381/Transaction/Transaction_Controller_Ubication_Distrito_Listar",
-    type: "POST",
-    data: { ID_Provincia: ID_Provincia, ID_Departamento: ID_Departamento },
-    success: function (data) {
-      if (data.obj_List_Class_Entity_Distrito != null) {
-        $.each(data.obj_List_Class_Entity_Distrito, function (i, element) {
-          $("<option>")
-            .attr({ value: element.iD_Distrito })
-            .text(element.nombre_Distrito)
-            .appendTo("#ID_Distrito");
-        });
-      }
-    },
-  });
-}
 
 function List_Middle() {
   jQuery.ajax({
@@ -505,7 +418,8 @@ $(document).on("click", ".Button_Plus", function () {
       $(Button_Plus).LoadingOverlay("hide");
 
       if (data.result) {
-        var Input_Quantity_Alternative = parseInt($(Input_Quantity).val()) + 100;
+        var Input_Quantity_Alternative =
+          parseInt($(Input_Quantity).val()) + 100;
         $(Input_Quantity).val(Input_Quantity_Alternative);
         Monto_Total_Movimiento_Inventario();
       } else {
@@ -594,205 +508,79 @@ $(document).on("click", ".Button_Delete_Supply", function () {
   });
 });
 
-jQuery.validator.addMethod(
-  "Valid_Restaurante_Movimiento_Inventario",
-  function (value, element) {
-    return (
-      this.optional(element) ||
-      /^[a-zA-ZÀ-ÿ\u00f1\u00d1\u00E0-\u00FC]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1\u00E0-\u00FC]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1\u00E0-\u00FC]+$/.test(
-        value
-      )
-    );
-  }
-);
-
-jQuery.validator.addMethod(
-  "Valid_Direccion_Movimiento_Inventario",
-  function (value, element) {
-    return (
-      this.optional(element) ||
-      /([a-zA-Z',.-]+( [a-zA-Z',.-]+)*){2,30}/.test(value)
-    );
-  }
-);
-
-jQuery.validator.addMethod(
-  "Valid_Telefono_Movimiento_Inventario",
-  function (value, element) {
-    return (
-      this.optional(element) ||
-      /^(?:\+1)?\s?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{3}$/.test(value)
-    );
-  }
-);
-
-$(document).ready(function () {
-  $("#Form_Delivery").validate({
-    rules: {
-      ID_Departamento: {
-        required: true,
-      },
-      ID_Provincia: {
-        required: true,
-      },
-      ID_Distrito: {
-        required: true,
-      },
-      Restaurante_Movimiento_Inventario: {
-        required: true,
-        Valid_Restaurante_Movimiento_Inventario: true,
-      },
-      Direccion_Movimiento_Inventario: {
-        required: true,
-        Valid_Direccion_Movimiento_Inventario: true,
-      },
-      Telefono_Movimiento_Inventario: {
-        required: true,
-        number: true,
-        Valid_Telefono_Movimiento_Inventario: true,
-      },
-    },
-    messages: {
-      ID_Departamento: {
-        required: "Campo Requerido: Departamento",
-      },
-      ID_Provincia: {
-        required: "Campo Requerido: Provincia",
-      },
-      ID_Distrito: {
-        required: "Campo Requerido: Distrito",
-      },
-      Restaurante_Movimiento_Inventario: {
-        required: "Campo Requerido: Nombre Completo del Restaurante",
-        Valid_Restaurante_Movimiento_Inventario: "Ingrese Nombres V\xe1lidos",
-      },
-      Direccion_Movimiento_Inventario: {
-        required: "Campo Requerido: Direcci\xf3n del Restaurante",
-        Valid_Direccion_Movimiento_Inventario:
-          "Campo Requerido: Direcci\xf3n del Restaurante",
-      },
-      Telefono_Movimiento_Inventario: {
-        required: "Campo Requerido: Tel\xe9fono del Restaurante",
-        number: "Ingrese un N\xfamero Tel\xe9fonico V\xe1lido",
-        Valid_Telefono_Movimiento_Inventario:
-          "Ingrese un N\xfamero Tel\xe9fonico V\xe1lido",
-      },
-    },
-    errorElement: "em",
-    errorPlacement: function (error, element) {
-      // Add the "invalid-feedback" class to the error element
-      error.addClass("invalid-feedback");
-
-      if (element.prop("type") === "checkbox") {
-        error.insertAfter(element.next("label"));
-      } else {
-        error.insertAfter(element);
-      }
-    },
-    highlight: function (element, errorClass, validClass) {
-      $(element).addClass("is-invalid").removeClass("is-valid");
-    },
-    unhighlight: function (element, errorClass, validClass) {
-      $(element).addClass("is-valid").removeClass("is-invalid");
-    },
-  });
-});
-
-$.validator.setDefaults({
-  submitHandler: function () {
-    console.log("Success!");
-  },
-});
-
 function Confirm() {
-  if (!$("#Form_Delivery").valid()) {
+  if (parseInt($("#Count_Middle").text()) == 0) {
+    Swal.fire({
+      title: "Advertencia",
+      text: "El Middle se Encuentra Vacío",
+      icon: "warning",
+    });
     return;
   } else {
-    if (parseInt($("#Count_Middle").text()) == 0) {
-      Swal.fire({
-        title: "Advertencia",
-        text: "El Middle se Encuentra Vacío",
-        icon: "warning",
+    var Obj_Class_Entity_Movimiento_Inventario = {
+      tipo_Movimiento_Inventario: "Entrada",
+      cantidad_Insumo_Movimiento_Inventario: $("input.Input_Quantity").length,
+      monto_Total_Movimiento_Inventario: 0.0,
+    };
+
+    var Obj_List_Class_Entity_Middle = [];
+
+    $("input.Input_Quantity").each(function (i) {
+      var Obj_Class_Entity_Insumo = $(this).data("Obj_Class_Entity_Insumo");
+      var Cantidad_Insumo_Middle = parseFloat($(this).val());
+
+      Obj_List_Class_Entity_Middle.push({
+        Obj_Class_Entity_Insumo: Obj_Class_Entity_Insumo,
+        Cantidad_Insumo_Middle: Cantidad_Insumo_Middle,
       });
-      return;
-    } else {
-      var Obj_Class_Entity_Movimiento_Inventario = {
-        tipo_Movimiento_Inventario: "Salida",
-        cantidad_Insumo_Movimiento_Inventario: $("input.Input_Quantity").length,
-        monto_Total_Movimiento_Inventario: 0.0,
-        restaurante_Movimiento_Inventario: $(
-          "#Restaurante_Movimiento_Inventario"
-        ).val(),
-        telefono_Movimiento_Inventario: $(
-          "#Telefono_Movimiento_Inventario"
-        ).val(),
-        direccion_Movimiento_Inventario: $(
-          "#Direccion_Movimiento_Inventario"
-        ).val(),
-        obj_Class_Entity_Distrito: {
-          iD_Distrito: $("#ID_Distrito").val(),
-        },
-      };
+    });
 
-      var Obj_List_Class_Entity_Middle = [];
-
-      $("input.Input_Quantity").each(function (i) {
-        var Obj_Class_Entity_Insumo = $(this).data("Obj_Class_Entity_Insumo");
-        var Cantidad_Insumo_Middle = parseFloat($(this).val());
-
-        Obj_List_Class_Entity_Middle.push({
-          Obj_Class_Entity_Insumo: Obj_Class_Entity_Insumo,
-          Cantidad_Insumo_Middle: Cantidad_Insumo_Middle,
-        });
-      });
-
-      jQuery.ajax({
-        // ? url: "@Url.Action("Transaction_Controller_Venta_Registrar", "Transaction")",
-        url: "https://localhost:44381/Transaction/Transaction_Controller_Venta_Registrar",
-        type: "POST",
-        data: {
-          Obj_Class_Entity_Movimiento_Inventario:
-            Obj_Class_Entity_Movimiento_Inventario,
-          Obj_List_Class_Entity_Middle: Obj_List_Class_Entity_Middle,
-        },
-        success: function (data) {
-          $("body").LoadingOverlay("hide");
-          if (data.result) { 
-            Swal.fire({
-              allowOutsideClick: false,
-              title: "Confirmaci\xf3n",
-              text: "Transacci\xf3n Realizada",
-              icon: "success",
-              confirmButtonText: "Aceptar",
-              confirmButtonColor: "#3085D6",
-            }).then((result) => {
-              if (result.isConfirmed) {
-                window.location.replace("/Management/Supply");
-              }
-            });
-          } else {
-            Swal.fire({
-              title: "Error",
-              text: data.message,
-              icon: "error",
-            });
-          }
-        },
-        error: function (xhr, status, error) {
-          $("body").LoadingOverlay("hide");
-          alert(xhr.responseText);
-        },
-        beforeSend: function () {
-          $("body").LoadingOverlay("show", {
-            background: "rgba(0, 0, 0, 0.5)",
-            image: "../img/clock-regular.svg",
-            imageAnimation: "1.5s fadein",
-            imageAutoResize: true,
-            imageResizeFactor: 1,
-            imageColor: "#FFD43B",
+    jQuery.ajax({
+      // ? url: "@Url.Action("Transaction_Controller_Venta_Registrar", "Transaction")",
+      url: "https://localhost:44381/Transaction/Transaction_Controller_Venta_Registrar",
+      type: "POST",
+      data: {
+        Obj_Class_Entity_Movimiento_Inventario:
+          Obj_Class_Entity_Movimiento_Inventario,
+        Obj_List_Class_Entity_Middle: Obj_List_Class_Entity_Middle,
+      },
+      success: function (data) {
+        $("body").LoadingOverlay("hide");
+        if (data.result) {
+          Swal.fire({
+            allowOutsideClick: false,
+            title: "Confirmaci\xf3n",
+            text: "Transacci\xf3n Realizada",
+            icon: "success",
+            confirmButtonText: "Aceptar",
+            confirmButtonColor: "#3085D6",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.replace("/Home/Index");
+            }
           });
-        },
-      });
-    }
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: data.message,
+            icon: "error",
+          });
+        }
+      },
+      error: function (xhr, status, error) {
+        $("body").LoadingOverlay("hide");
+        alert(xhr.responseText);
+      },
+      beforeSend: function () {
+        $("body").LoadingOverlay("show", {
+          background: "rgba(0, 0, 0, 0.5)",
+          image: "../img/clock-regular.svg",
+          imageAnimation: "1.5s fadein",
+          imageAutoResize: true,
+          imageResizeFactor: 1,
+          imageColor: "#FFD43B",
+        });
+      },
+    });
   }
 }
