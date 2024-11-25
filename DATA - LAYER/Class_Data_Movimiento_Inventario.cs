@@ -23,7 +23,7 @@ namespace DATA___LAYER
                     Obj_SqlCommand.Parameters.AddWithValue("Restaurante_Movimiento_Inventario", Obj_Class_Entity_Movimiento_Inventario.Restaurante_Movimiento_Inventario);
                     Obj_SqlCommand.Parameters.AddWithValue("Telefono_Movimiento_Inventario", Obj_Class_Entity_Movimiento_Inventario.Telefono_Movimiento_Inventario);
                     Obj_SqlCommand.Parameters.AddWithValue("Direccion_Movimiento_Inventario", Obj_Class_Entity_Movimiento_Inventario.Direccion_Movimiento_Inventario);
-                    Obj_SqlCommand.Parameters.AddWithValue("ID_Distrito", Obj_Class_Entity_Movimiento_Inventario.Obj_Class_Entity_Distrito.ID_Distrito);
+                    Obj_SqlCommand.Parameters.AddWithValue("ID_Distrito", Obj_Class_Entity_Movimiento_Inventario.ID_Distrito);
                     Obj_SqlCommand.Parameters.AddWithValue("Tabla_Detalle_Movimiento_Inventario", Obj_DataTable);
                     Obj_SqlCommand.Parameters.Add("Message", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
                     Obj_SqlCommand.Parameters.Add("Result", SqlDbType.Bit).Direction = ParameterDirection.Output;

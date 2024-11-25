@@ -665,28 +665,18 @@ SET
 	);
 
 SELECT
-	*
+	DATENAME(MONTH, Fecha_Movimiento_Inventario) AS [Income_Month_Name],
+	COUNT(*) AS [Income_Number]
 FROM
-	(
-		SELECT
-			TOP 6 Fecha_Movimiento_Inventario AS [Fecha_Movimiento_Inventario],
-			YEAR(Fecha_Movimiento_Inventario) AS [Income_Year],
-			MONTH(Fecha_Movimiento_Inventario) AS [Income_Month],
-			DATENAME(MONTH, Fecha_Movimiento_Inventario) AS [Income_Month_Name],
-			COUNT(*) AS [Income_Number]
-		FROM
-			Tabla_Movimiento_Inventario
-		WHERE
-			Tipo_Movimiento_Inventario = 'Entrada'
-			AND Fecha_Movimiento_Inventario BETWEEN @Min_Date
-			AND @Max_Date
-		GROUP BY
-			Fecha_Movimiento_Inventario
-		ORDER BY
-			Fecha_Movimiento_Inventario DESC
-	) TMI
+	Tabla_Movimiento_Inventario
+WHERE
+	Tipo_Movimiento_Inventario = 'Entrada'
+	AND Fecha_Movimiento_Inventario BETWEEN @Min_Date
+	AND @Max_Date
+GROUP BY
+	DATENAME(MONTH, Fecha_Movimiento_Inventario)
 ORDER BY
-	[Fecha_Movimiento_Inventario] ASC
+	DATENAME(MONTH, Fecha_Movimiento_Inventario) DESC
 END;
 
 ----EXECUTE SP_CHART_01;
@@ -717,28 +707,18 @@ SET
 	);
 
 SELECT
-	*
+	DATENAME(MONTH, Fecha_Movimiento_Inventario) AS [Income_Month_Name],
+	COUNT(*) AS [Income_Number]
 FROM
-	(
-		SELECT
-			TOP 6 Fecha_Movimiento_Inventario AS [Fecha_Movimiento_Inventario],
-			YEAR(Fecha_Movimiento_Inventario) AS [Exit_Year],
-			MONTH(Fecha_Movimiento_Inventario) AS [Exit_Month],
-			DATENAME(MONTH, Fecha_Movimiento_Inventario) AS [Exit_Month_Name],
-			COUNT(*) AS [Exit_Number]
-		FROM
-			Tabla_Movimiento_Inventario
-		WHERE
-			Tipo_Movimiento_Inventario = 'Salida'
-			AND Fecha_Movimiento_Inventario BETWEEN @Min_Date
-			AND @Max_Date
-		GROUP BY
-			Fecha_Movimiento_Inventario
-		ORDER BY
-			Fecha_Movimiento_Inventario DESC
-	) TMI
+	Tabla_Movimiento_Inventario
+WHERE
+	Tipo_Movimiento_Inventario = 'Salida'
+	AND Fecha_Movimiento_Inventario BETWEEN @Min_Date
+	AND @Max_Date
+GROUP BY
+	DATENAME(MONTH, Fecha_Movimiento_Inventario)
 ORDER BY
-	[Fecha_Movimiento_Inventario] ASC
+	DATENAME(MONTH, Fecha_Movimiento_Inventario) DESC
 END;
 
 ----EXECUTE SP_CHART_02;
@@ -907,8 +887,8 @@ WHERE
 	)
 END;
 
-----DECLARE @Initial_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-11-23';
-----DECLARE @Final_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-11-23';
+----DECLARE @Initial_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-11-25';
+----DECLARE @Final_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-11-25';
 ----DECLARE @ID_Movimiento_Inventario INT = 0;
 ----EXECUTE SP_TRANSACTION_REPORT @Initial_Fecha_Movimiento_Inventario, @Final_Fecha_Movimiento_Inventario, @ID_Movimiento_Inventario;
 GO
@@ -1205,6 +1185,12 @@ INSERT INTO
 	Tabla_Middle(ID_Usuario, ID_Insumo, Cantidad_Insumo_Middle)
 VALUES
 	(@ID_Usuario, @ID_Insumo, 100)
+UPDATE
+	Tabla_Insumo
+SET
+	Stock_Insumo = Stock_Insumo + 100
+WHERE
+	ID_Insumo = @ID_Insumo
 END
 ELSE BEGIN
 UPDATE
@@ -1214,6 +1200,12 @@ SET
 WHERE
 	ID_Usuario = @ID_Usuario
 	AND ID_Insumo = @ID_Insumo
+UPDATE
+	Tabla_Insumo
+SET
+	Stock_Insumo = Stock_Insumo - 100
+WHERE
+	ID_Insumo = @ID_Insumo
 END COMMIT TRANSACTION OPERATION_02
 END TRY BEGIN CATCH
 SET
@@ -1362,7 +1354,19 @@ SELECT
 	Cantidad_Insumo_Detalle_Movimiento_Inventario,
 	Monto_Total_Detalle_Movimiento_Inventario
 FROM
-	@Tabla_Detalle_Movimiento_Inventario
+	@Tabla_Detalle_Movimiento_Inventario --DECLARE @VALUE_01 INT = (
+	--		SELECT
+	--			ID_Insumo
+	--		FROM
+	--			@Tabla_Detalle_Movimiento_Inventario)
+	--DECLARE @VALUE_02 INT = (
+	--		SELECT
+	--			Cantidad_Insumo_Detalle_Movimiento_Inventario
+	--		FROM
+	--			@Tabla_Detalle_Movimiento_Inventario)
+	--UPDATE Tabla_Insumo
+	--SET Stock_Insumo = Stock_Insumo + @VALUE_02
+	--WHERE ID_Insumo = @VALUE_01
 DELETE FROM
 	Tabla_Middle
 WHERE

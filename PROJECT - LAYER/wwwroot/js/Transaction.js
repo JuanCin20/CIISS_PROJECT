@@ -729,9 +729,7 @@ function Confirm() {
         direccion_Movimiento_Inventario: $(
           "#Direccion_Movimiento_Inventario"
         ).val(),
-        obj_Class_Entity_Distrito: {
-          iD_Distrito: $("#ID_Distrito").val(),
-        },
+        iD_Distrito: $("#ID_Distrito").val(),
       };
 
       var Obj_List_Class_Entity_Middle = [];

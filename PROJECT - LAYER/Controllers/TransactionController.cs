@@ -215,10 +215,7 @@ namespace PROJECT___LAYER.Controllers
                     Restaurante_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Restaurante_Movimiento_Inventario,
                     Telefono_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Telefono_Movimiento_Inventario,
                     Direccion_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Direccion_Movimiento_Inventario,
-                    Obj_Class_Entity_Distrito = new Class_Entity_Distrito()
-                    {
-                        ID_Distrito = Obj_Class_Entity_Movimiento_Inventario.Obj_Class_Entity_Distrito.ID_Distrito
-                    },
+                    ID_Distrito = Obj_Class_Entity_Movimiento_Inventario.ID_Distrito
                 };
             }
             else
@@ -231,13 +228,10 @@ namespace PROJECT___LAYER.Controllers
                     },
                     Tipo_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Tipo_Movimiento_Inventario,
                     Cantidad_Insumo_Movimiento_Inventario = Obj_Class_Entity_Movimiento_Inventario.Cantidad_Insumo_Movimiento_Inventario,
-                    Restaurante_Movimiento_Inventario = null,
+                    Restaurante_Movimiento_Inventario = "---",
                     Telefono_Movimiento_Inventario = 0,
-                    Direccion_Movimiento_Inventario = null,
-                    Obj_Class_Entity_Distrito = new Class_Entity_Distrito()
-                    {
-                        ID_Distrito = 0
-                    },
+                    Direccion_Movimiento_Inventario = "---",
+                    ID_Distrito = 0
                 };
             }
 

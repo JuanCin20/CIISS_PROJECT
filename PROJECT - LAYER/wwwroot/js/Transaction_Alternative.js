@@ -508,79 +508,127 @@ $(document).on("click", ".Button_Delete_Supply", function () {
   });
 });
 
-function Confirm() {
-  if (parseInt($("#Count_Middle").text()) == 0) {
-    Swal.fire({
-      title: "Advertencia",
-      text: "El Middle se Encuentra Vacío",
-      icon: "warning",
-    });
-    return;
-  } else {
-    var Obj_Class_Entity_Movimiento_Inventario = {
-      tipo_Movimiento_Inventario: "Entrada",
-      cantidad_Insumo_Movimiento_Inventario: $("input.Input_Quantity").length,
-      monto_Total_Movimiento_Inventario: 0.0,
-    };
+$(document).ready(function () {
+    $("#Form_Delivery").validate({
+        rules: {
+            Restaurante_Movimiento_Inventario: {
+            },
+            Direccion_Movimiento_Inventario: {
+            },
+            Telefono_Movimiento_Inventario: {
+            },
+        },
+        messages: {
+            Restaurante_Movimiento_Inventario: {
+            },
+            Direccion_Movimiento_Inventario: {
+            },
+            Telefono_Movimiento_Inventario: {
+            },
+        },
+        errorElement: "em",
+        errorPlacement: function (error, element) {
+            // Add the "invalid-feedback" class to the error element
+            error.addClass("invalid-feedback");
 
-    var Obj_List_Class_Entity_Middle = [];
-
-    $("input.Input_Quantity").each(function (i) {
-      var Obj_Class_Entity_Insumo = $(this).data("Obj_Class_Entity_Insumo");
-      var Cantidad_Insumo_Middle = parseFloat($(this).val());
-
-      Obj_List_Class_Entity_Middle.push({
-        Obj_Class_Entity_Insumo: Obj_Class_Entity_Insumo,
-        Cantidad_Insumo_Middle: Cantidad_Insumo_Middle,
-      });
-    });
-
-    jQuery.ajax({
-      // ? url: "@Url.Action("Transaction_Controller_Venta_Registrar", "Transaction")",
-      url: "https://localhost:44381/Transaction/Transaction_Controller_Venta_Registrar",
-      type: "POST",
-      data: {
-        Obj_Class_Entity_Movimiento_Inventario:
-          Obj_Class_Entity_Movimiento_Inventario,
-        Obj_List_Class_Entity_Middle: Obj_List_Class_Entity_Middle,
-      },
-      success: function (data) {
-        $("body").LoadingOverlay("hide");
-        if (data.result) {
-          Swal.fire({
-            allowOutsideClick: false,
-            title: "Confirmaci\xf3n",
-            text: "Transacci\xf3n Realizada",
-            icon: "success",
-            confirmButtonText: "Aceptar",
-            confirmButtonColor: "#3085D6",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              window.location.replace("/Home/Index");
+            if (element.prop("type") === "checkbox") {
+                error.insertAfter(element.next("label"));
+            } else {
+                error.insertAfter(element);
             }
-          });
-        } else {
-          Swal.fire({
-            title: "Error",
-            text: data.message,
-            icon: "error",
-          });
-        }
-      },
-      error: function (xhr, status, error) {
-        $("body").LoadingOverlay("hide");
-        alert(xhr.responseText);
-      },
-      beforeSend: function () {
-        $("body").LoadingOverlay("show", {
-          background: "rgba(0, 0, 0, 0.5)",
-          image: "../img/clock-regular.svg",
-          imageAnimation: "1.5s fadein",
-          imageAutoResize: true,
-          imageResizeFactor: 1,
-          imageColor: "#FFD43B",
-        });
-      },
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass("is-invalid").removeClass("is-valid");
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).addClass("is-valid").removeClass("is-invalid");
+        },
     });
-  }
+});
+
+$.validator.setDefaults({
+    submitHandler: function () {
+        console.log("Success!");
+    },
+});
+
+function Confirm() {
+    if (!$("#Form_Delivery").valid()) {
+        return;
+    } else {
+        if (parseInt($("#Count_Middle").text()) == 0) {
+            Swal.fire({
+                title: "Advertencia",
+                text: "El Middle se Encuentra Vacío",
+                icon: "warning",
+            });
+            return;
+        } else {
+            var Obj_Class_Entity_Movimiento_Inventario = {
+                tipo_Movimiento_Inventario: "Entrada",
+                cantidad_Insumo_Movimiento_Inventario: $("input.Input_Quantity").length,
+                monto_Total_Movimiento_Inventario: 0.0,
+            };
+
+            var Obj_List_Class_Entity_Middle = [];
+
+            $("input.Input_Quantity").each(function (i) {
+                var Obj_Class_Entity_Insumo = $(this).data("Obj_Class_Entity_Insumo");
+                var Cantidad_Insumo_Middle = parseFloat($(this).val());
+
+                Obj_List_Class_Entity_Middle.push({
+                    Obj_Class_Entity_Insumo: Obj_Class_Entity_Insumo,
+                    Cantidad_Insumo_Middle: Cantidad_Insumo_Middle,
+                });
+            });
+
+            jQuery.ajax({
+                // ? url: "@Url.Action("Transaction_Controller_Venta_Registrar", "Transaction")",
+                url: "https://localhost:44381/Transaction/Transaction_Controller_Venta_Registrar",
+                type: "POST",
+                data: {
+                    Obj_Class_Entity_Movimiento_Inventario:
+                        Obj_Class_Entity_Movimiento_Inventario,
+                    Obj_List_Class_Entity_Middle: Obj_List_Class_Entity_Middle,
+                },
+                success: function (data) {
+                    $("body").LoadingOverlay("hide");
+                    if (data.result) {
+                        Swal.fire({
+                            allowOutsideClick: false,
+                            title: "Confirmaci\xf3n",
+                            text: "Transacci\xf3n Realizada",
+                            icon: "success",
+                            confirmButtonText: "Aceptar",
+                            confirmButtonColor: "#3085D6",
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.replace("/Home/Index");
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Error",
+                            text: data.message,
+                            icon: "error",
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    $("body").LoadingOverlay("hide");
+                    alert(xhr.responseText);
+                },
+                beforeSend: function () {
+                    $("body").LoadingOverlay("show", {
+                        background: "rgba(0, 0, 0, 0.5)",
+                        image: "../img/clock-regular.svg",
+                        imageAnimation: "1.5s fadein",
+                        imageAutoResize: true,
+                        imageResizeFactor: 1,
+                        imageColor: "#FFD43B",
+                    });
+                },
+            });
+        }
+    }
 }
