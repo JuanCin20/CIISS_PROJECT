@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "G4Kau6t5X4hTqtl1QluGbZYDq0S4q+citJfMpzd1DqA=",
+  "Hash": "KER2L+O411lfLr3FMLKtHCV4gB24LgJg/VeicdKQql0=",
   "Source": "PROJECT - LAYER",
   "BasePath": "_content/PROJECT - LAYER",
   "Mode": "Default",
@@ -319,6 +319,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\Transaction.js"
+    },
+    {
+      "Identity": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\Transaction_Alternative.js",
+      "SourceId": "PROJECT - LAYER",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\",
+      "BasePath": "_content/PROJECT - LAYER",
+      "RelativePath": "js/Transaction_Alternative.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Transaction_Alternative.js"
     },
     {
       "Identity": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\User.js",

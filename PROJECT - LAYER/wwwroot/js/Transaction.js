@@ -505,7 +505,7 @@ $(document).on("click", ".Button_Plus", function () {
       $(Button_Plus).LoadingOverlay("hide");
 
       if (data.result) {
-        var Input_Quantity_Alternative = parseInt($(Input_Quantity).val()) + 1;
+        var Input_Quantity_Alternative = parseInt($(Input_Quantity).val()) + 100;
         $(Input_Quantity).val(Input_Quantity_Alternative);
         Monto_Total_Movimiento_Inventario();
       } else {
@@ -527,7 +527,7 @@ $(document).on("click", ".Button_Less", function () {
   var Input_Quantity = $(Display_Flex).find("input.Input_Quantity");
   var Button_Plus = $(this);
   var ID_Insumo = $(Input_Quantity).data("Obj_Class_Entity_Insumo").iD_Insumo;
-  var Input_Quantity_Alternative = parseInt($(Input_Quantity).val()) - 1;
+  var Input_Quantity_Alternative = parseInt($(Input_Quantity).val()) - 100;
 
   if (Input_Quantity_Alternative >= 1) {
     jQuery.ajax({

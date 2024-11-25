@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Index";
     ViewData["ID_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("ID_Usuario_String");
+    ViewData["ID_Tipo_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("ID_Tipo_Usuario_String");
     ViewData["Nombre_Apellido_Usuario_String"] =
     this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
     ViewData["E_Mail_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("E_Mail_Usuario_String");
@@ -91,7 +92,14 @@
         </div>
     </div>
 </div>
-
 @section Java_Script {
-    <script src="~/js/Transaction.js" asp-append-version="true"></script>
+    @if ((string)ViewData["ID_Tipo_Usuario_String"] == "2")
+    {
+        <script src="~/js/Transaction.js" asp-append-version="true"></script>
+    }
+
+    @if ((string)ViewData["ID_Tipo_Usuario_String"] == "1")
+    {
+        <script src="~/js/Transaction_Alternative.js" asp-append-version="true"></script>
+    }
 }

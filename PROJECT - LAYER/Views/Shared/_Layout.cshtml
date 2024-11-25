@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="~/lib/Real_Use/Fontawesome_v6.6.0/css/all.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/Real_Use/Bootstrap_v5.3.3/Content/bootstrap.min.css" asp-append-version="true" />
-    @if (ViewData["Title"] == "Index")
+    @if ((string)ViewData["Title"] == "Index")
     {
         <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.jqueryui.css"
             asp-append-version="true">
@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.jqueryui.css"
             asp-append-version="true">
     }
-    @if (ViewData["Title"] != "Index")
+    @if ((string)ViewData["Title"] != "Index")
     {
         <link rel="stylesheet"
             href="~/lib/Real_Use/JQuery_Datatables_v1.10.15/Content/DataTables/css/jquery.dataTables.min.css"
@@ -31,11 +31,11 @@
         asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/Real_Use/Toastr_v2.1.1/content/toastr.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Extra.css" asp-append-version="true" />
-    @if (ViewData["Title"] == "Index")
+    @if ((string)ViewData["Title"] == "Index")
     {
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" asp-append-version="true">
     }
-    @if (ViewData["Title"] != "Index")
+    @if ((string)ViewData["Title"] != "Index")
     {
         <link rel="stylesheet" href="~/lib/Real_Use/JQuery_UI_Combined_v1.13.3/Content/themes/base/jquery-ui.min.css"
             asp-append-version="true" />
@@ -215,32 +215,32 @@
                         <i class="fa-solid fa-bars"></i>
                     </button>
 
-                    @if (ViewData["Title"] == "Index")
+                    @if ((string)ViewData["Title"] == "Index")
                     {
                         <label class="mb-0">Dashboard</label>
                     }
 
-                    @if (ViewData["Title"] == "Privacy")
+                    @if ((string)ViewData["Title"] == "Privacy")
                     {
                         <label class="mb-0">Política de Privacidad</label>
                     }
 
-                    @if (ViewData["Title"] == "User")
+                    @if ((string)ViewData["Title"] == "User")
                     {
                         <label class="mb-0">Usuarios</label>
                     }
 
-                    @if (ViewData["Title"] == "Category")
+                    @if ((string)ViewData["Title"] == "Category")
                     {
                         <label class="mb-0">Categorías</label>
                     }
 
-                    @if (ViewData["Title"] == "Supplier")
+                    @if ((string)ViewData["Title"] == "Supplier")
                     {
                         <label class="mb-0">Proveedores</label>
                     }
 
-                    @if (ViewData["Title"] == "Supply")
+                    @if ((string)ViewData["Title"] == "Supply")
                     {
                         <label class="mb-0">Insumos</label>
                     }
@@ -327,18 +327,18 @@
     </div>
     <script src="~/lib/Real_Use/JQuery_v3.7.1/Scripts/jquery-3.7.1.min.js" asp-append-version="true"></script>
     <script src="~/js/Extra.js" asp-append-version="true"></script>
-    @if (ViewData["Title"] == "Index")
+    @if ((string)ViewData["Title"] == "Index")
     {
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" asp-append-version="true"></script>
     }
-    @if (ViewData["Title"] != "Index")
+    @if ((string)ViewData["Title"] != "Index")
     {
         <script src="~/lib/Real_Use/JQuery_UI_Combined_v1.13.3/Scripts/jquery-ui-1.13.3.min.js"
             asp-append-version="true"></script>
     }
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/Real_Use/Bootstrap_v5.3.3/Scripts/bootstrap.bundle.min.js" asp-append-version="true"></script>
-    @if (ViewData["Title"] == "Index")
+    @if ((string)ViewData["Title"] == "Index")
     {
         <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js" asp-append-version="true"></script>
         <script src="https://cdn.datatables.net/2.1.8/js/dataTables.jqueryui.js" asp-append-version="true"></script>
@@ -347,7 +347,7 @@
         <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.jqueryui.js"
             asp-append-version="true"></script>
     }
-    @if (ViewData["Title"] != "Index")
+    @if ((string)ViewData["Title"] != "Index")
     {
         <script src="~/lib/Real_Use/JQuery_Datatables_v1.10.15/Scripts/DataTables/jquery.dataTables.min.js"
             asp-append-version="true"></script>

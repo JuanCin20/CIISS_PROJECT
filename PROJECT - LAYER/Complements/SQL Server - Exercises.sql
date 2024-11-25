@@ -1122,7 +1122,7 @@ SET
 UPDATE
 	Tabla_Middle
 SET
-	Cantidad_Insumo_Middle = Cantidad_Insumo_Middle + 1
+	Cantidad_Insumo_Middle = Cantidad_Insumo_Middle + 100
 WHERE
 	ID_Usuario = @ID_Usuario
 	AND ID_Insumo = @ID_Insumo
@@ -1130,11 +1130,11 @@ WHERE
 INSERT INTO
 	Tabla_Middle(ID_Usuario, ID_Insumo, Cantidad_Insumo_Middle)
 VALUES
-	(@ID_Usuario, @ID_Insumo, 1)
+	(@ID_Usuario, @ID_Insumo, 100)
 UPDATE
 	Tabla_Insumo
 SET
-	Stock_Insumo = Stock_Insumo - 1
+	Stock_Insumo = Stock_Insumo - 100
 WHERE
 	ID_Insumo = @ID_Insumo
 END
@@ -1149,16 +1149,71 @@ ELSE BEGIN
 UPDATE
 	Tabla_Middle
 SET
-	Cantidad_Insumo_Middle = Cantidad_Insumo_Middle - 1
+	Cantidad_Insumo_Middle = Cantidad_Insumo_Middle - 100
 WHERE
 	ID_Usuario = @ID_Usuario
 	AND ID_Insumo = @ID_Insumo
 UPDATE
 	Tabla_Insumo
 SET
-	Stock_Insumo = Stock_Insumo + 1
+	Stock_Insumo = Stock_Insumo + 100
 WHERE
 	ID_Insumo = @ID_Insumo
+END COMMIT TRANSACTION OPERATION
+END TRY BEGIN CATCH
+SET
+	@Result = 0
+SET
+	@Message = ERROR_MESSAGE() ROLLBACK TRANSACTION OPERATION
+END CATCH
+END;
+
+GO
+	CREATE
+	OR ALTER PROCEDURE SP_MIDDLE_CREATE_UPDATE_ALTERNATIVE(
+		@ID_Usuario INT,
+		@ID_Insumo INT,
+		@Boolean_Operation BIT,
+		@Message VARCHAR (500) OUTPUT,
+		@Result BIT OUTPUT
+	) AS BEGIN
+SET
+	@Result = 1
+SET
+	@Message = '' DECLARE @Exists_Middle BIT = IIF(
+		EXISTS(
+			SELECT
+				*
+			FROM
+				Tabla_Middle
+			WHERE
+				ID_Usuario = @ID_Usuario
+				AND ID_Insumo = @ID_Insumo
+		),
+		1,
+		0
+	) BEGIN TRY BEGIN TRANSACTION OPERATION IF(@Boolean_Operation = 1) BEGIN IF(@Exists_Middle = 1)
+UPDATE
+	Tabla_Middle
+SET
+	Cantidad_Insumo_Middle = Cantidad_Insumo_Middle + 100
+WHERE
+	ID_Usuario = @ID_Usuario
+	AND ID_Insumo = @ID_Insumo
+	ELSE
+INSERT INTO
+	Tabla_Middle(ID_Usuario, ID_Insumo, Cantidad_Insumo_Middle)
+VALUES
+	(@ID_Usuario, @ID_Insumo, 100)
+END
+ELSE BEGIN
+UPDATE
+	Tabla_Middle
+SET
+	Cantidad_Insumo_Middle = Cantidad_Insumo_Middle - 100
+WHERE
+	ID_Usuario = @ID_Usuario
+	AND ID_Insumo = @ID_Insumo
 END COMMIT TRANSACTION OPERATION
 END TRY BEGIN CATCH
 SET
@@ -1185,7 +1240,7 @@ GO
 			INNER JOIN Tabla_Proveedor_Insumo TPI ON TPI.ID_Proveedor_Insumo = TI.ID_Proveedor_Insumo
 		WHERE
 			TM.ID_Usuario = @ID_Usuario
-	) ----SELECT * FROM FN_MIDDLE_LIST(1)
+	) ----SELECT * FROM FN_MIDDLE_LIST(53)
 GO
 	CREATE
 	OR ALTER PROCEDURE SP_MIDDLE_DELETE(
@@ -1220,6 +1275,26 @@ SET
 END CATCH
 END;
 
+GO
+	CREATE
+	OR ALTER PROCEDURE SP_MIDDLE_DELETE_ALTERNATIVE(
+		@ID_Usuario INT,
+		@ID_Insumo INT,
+		@Result BIT OUTPUT
+	) AS BEGIN
+SET
+	@Result = 1 BEGIN TRY BEGIN TRANSACTION OPERATION
+DELETE TOP (1)
+FROM
+	Tabla_Middle
+WHERE
+	ID_Usuario = @ID_Usuario
+	AND ID_Insumo = @ID_Insumo COMMIT TRANSACTION OPERATION
+END TRY BEGIN CATCH
+SET
+	@Result = 0 ROLLBACK TRANSACTION OPERATION
+END CATCH
+END;
 /**/
 /**/
 /**/
