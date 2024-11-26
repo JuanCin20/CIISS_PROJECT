@@ -62,8 +62,6 @@ namespace DATA___LAYER
                         {
                             Obj_List_Class_Entity_Chart.Add(new Class_Entity_Dashboard()
                             {
-                                Income_Year = Convert.ToInt32(Obj_SqlDataReader["Income_Year"]),
-                                Income_Month = Convert.ToInt32(Obj_SqlDataReader["Income_Month"]),
                                 Income_Month_Name = Obj_SqlDataReader["Income_Month_Name"].ToString(),
                                 Income_Number = Convert.ToInt32(Obj_SqlDataReader["Income_Number"])
                             });
@@ -97,8 +95,6 @@ namespace DATA___LAYER
                         {
                             Obj_List_Class_Entity_Chart.Add(new Class_Entity_Dashboard()
                             {
-                                Exit_Year = Convert.ToInt32(Obj_SqlDataReader["Exit_Year"]),
-                                Exit_Month = Convert.ToInt32(Obj_SqlDataReader["Exit_Month"]),
                                 Exit_Month_Name = Obj_SqlDataReader["Exit_Month_Name"].ToString(),
                                 Exit_Number = Convert.ToInt32(Obj_SqlDataReader["Exit_Number"])
                             });

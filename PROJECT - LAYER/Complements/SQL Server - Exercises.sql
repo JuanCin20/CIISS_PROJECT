@@ -707,8 +707,8 @@ SET
 	);
 
 SELECT
-	DATENAME(MONTH, Fecha_Movimiento_Inventario) AS [Income_Month_Name],
-	COUNT(*) AS [Income_Number]
+	DATENAME(MONTH, Fecha_Movimiento_Inventario) AS [Exit_Month_Name],
+	COUNT(*) AS [Exit_Number]
 FROM
 	Tabla_Movimiento_Inventario
 WHERE
@@ -1275,7 +1275,21 @@ GO
 		@Result BIT OUTPUT
 	) AS BEGIN
 SET
-	@Result = 1 BEGIN TRY BEGIN TRANSACTION OPERATION_02 DELETE TOP (1)
+	@Result = 1 DECLARE @Cantidad_Insumo_Middle INT = (
+		SELECT
+			Cantidad_Insumo_Middle
+		FROM
+			Tabla_Middle
+		WHERE
+			ID_Usuario = @ID_Usuario
+			AND ID_Insumo = @ID_Insumo
+	) BEGIN TRY BEGIN TRANSACTION OPERATION_02
+UPDATE
+	Tabla_Insumo
+SET
+	Stock_Insumo = Stock_Insumo - @Cantidad_Insumo_Middle
+WHERE
+	ID_Insumo = @ID_Insumo DELETE TOP (1)
 FROM
 	Tabla_Middle
 WHERE
@@ -1354,19 +1368,7 @@ SELECT
 	Cantidad_Insumo_Detalle_Movimiento_Inventario,
 	Monto_Total_Detalle_Movimiento_Inventario
 FROM
-	@Tabla_Detalle_Movimiento_Inventario --DECLARE @VALUE_01 INT = (
-	--		SELECT
-	--			ID_Insumo
-	--		FROM
-	--			@Tabla_Detalle_Movimiento_Inventario)
-	--DECLARE @VALUE_02 INT = (
-	--		SELECT
-	--			Cantidad_Insumo_Detalle_Movimiento_Inventario
-	--		FROM
-	--			@Tabla_Detalle_Movimiento_Inventario)
-	--UPDATE Tabla_Insumo
-	--SET Stock_Insumo = Stock_Insumo + @VALUE_02
-	--WHERE ID_Insumo = @VALUE_01
+	@Tabla_Detalle_Movimiento_Inventario
 DELETE FROM
 	Tabla_Middle
 WHERE
