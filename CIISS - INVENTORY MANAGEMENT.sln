@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DATA - LAYER", "DATA - LAYE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ENTITY - LAYER", "ENTITY - LAYER\ENTITY - LAYER.csproj", "{6C61E538-3CBE-42B6-9479-D86AEB25AF64}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CONSOLE - APP", "CONSOLE - APP\CONSOLE - APP.csproj", "{9C48F786-A39E-41CD-9116-CD03F388C2E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6C61E538-3CBE-42B6-9479-D86AEB25AF64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C61E538-3CBE-42B6-9479-D86AEB25AF64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C61E538-3CBE-42B6-9479-D86AEB25AF64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C48F786-A39E-41CD-9116-CD03F388C2E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C48F786-A39E-41CD-9116-CD03F388C2E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C48F786-A39E-41CD-9116-CD03F388C2E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C48F786-A39E-41CD-9116-CD03F388C2E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

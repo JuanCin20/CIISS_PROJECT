@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KER2L+O411lfLr3FMLKtHCV4gB24LgJg/VeicdKQql0=",
+  "Hash": "hr4l+GBDB1hkbKd4D2qpu79UwJFcUlcxJZ4PyhW1rt4=",
   "Source": "PROJECT - LAYER",
   "BasePath": "_content/PROJECT - LAYER",
   "Mode": "Default",
@@ -110,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\clock-regular.svg"
+    },
+    {
+      "Identity": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\img\\Report_Image.png",
+      "SourceId": "PROJECT - LAYER",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\",
+      "BasePath": "_content/PROJECT - LAYER",
+      "RelativePath": "img/Report_Image.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\Report_Image.png"
     },
     {
       "Identity": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\Category.js",

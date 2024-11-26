@@ -198,6 +198,9 @@
                     <i class="fa-solid fa-scroll"></i>&nbsp;&nbsp;Historial de Transacciones
                 </div>
                 <div class="card-body">
+                    <form asp-area="" asp-controller="Home" asp-action="Download_PDF">
+                        <button class="btn btn-danger" type="submit">Descargar PDF</button>
+                    </form>
                     <form asp-area="" asp-controller="Home" asp-action="Home_Controller_Dashboard_Transaction_Report_Export"
                         method="POST">
                         <div class="row align-items-end">

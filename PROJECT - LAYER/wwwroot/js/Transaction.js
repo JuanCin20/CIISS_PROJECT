@@ -510,7 +510,6 @@ $(document).on("click", ".Button_Plus", function () {
             icon: "warning",
           });
         }
-
         var Input_Quantity_Alternative =
           parseInt($(Input_Quantity).val()) + 100;
         $(Input_Quantity).val(Input_Quantity_Alternative);

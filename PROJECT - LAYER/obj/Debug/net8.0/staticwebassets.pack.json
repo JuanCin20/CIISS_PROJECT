@@ -865,6 +865,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\img\\Report_Image.png",
+      "PackagePath": "staticwebassets\\img\\Report_Image.png"
+    },
+    {
       "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\img\\clock-regular.svg",
       "PackagePath": "staticwebassets\\img\\clock-regular.svg"
     },
