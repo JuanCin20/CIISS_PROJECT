@@ -1116,7 +1116,9 @@ UPDATE
 SET
 	Stock_Insumo = Stock_Insumo - 100
 WHERE
-	ID_Insumo = @ID_Insumo
+	ID_Insumo = @ID_Insumo IF(@Stock_Insumo <= 2000)
+SET
+	@Message = 'Stock Restante: ' + CAST(@Stock_Insumo - 100 AS VARCHAR(20)) + ' Unidades'
 END
 ELSE BEGIN
 SET

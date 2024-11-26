@@ -195,9 +195,7 @@ function Show_Supply(ID_Categoria_Insumo, ID_Proveedor_Insumo) {
                           .text(element.nombre_Insumo),
                         $("<p>")
                           .addClass("card-text")
-                          .text(
-                            "S/. " + element.precio_Insumo.toFixed(2)
-                          )
+                          .text("S/. " + element.precio_Insumo.toFixed(2))
                       )
                   ),
                 $("<div>")
@@ -505,7 +503,16 @@ $(document).on("click", ".Button_Plus", function () {
       $(Button_Plus).LoadingOverlay("hide");
 
       if (data.result) {
-        var Input_Quantity_Alternative = parseInt($(Input_Quantity).val()) + 100;
+        if (data.message != "") {
+          Swal.fire({
+            title: "Advertencia",
+            text: data.message,
+            icon: "warning",
+          });
+        }
+
+        var Input_Quantity_Alternative =
+          parseInt($(Input_Quantity).val()) + 100;
         $(Input_Quantity).val(Input_Quantity_Alternative);
         Monto_Total_Movimiento_Inventario();
       } else {
@@ -755,7 +762,7 @@ function Confirm() {
         },
         success: function (data) {
           $("body").LoadingOverlay("hide");
-          if (data.result) { 
+          if (data.result) {
             Swal.fire({
               allowOutsideClick: false,
               title: "Confirmaci\xf3n",
