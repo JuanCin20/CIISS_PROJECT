@@ -9,10 +9,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{9C48F786-A39E-41CD-9116-CD03F388C2E9}|CONSOLE - APP\\CONSOLE - APP.csproj|e:\\juancin20\\data\\ciiss - inventory management\\ciiss - inventory management\\console - app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9C48F786-A39E-41CD-9116-CD03F388C2E9}|CONSOLE - APP\\CONSOLE - APP.csproj|solutionrelative:console - app\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA3D52A5-9BBC-4D3C-861A-213421AF8210}|PROJECT - LAYER\\PROJECT - LAYER.csproj|e:\\juancin20\\data\\ciiss - inventory management\\ciiss - inventory management\\project - layer\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA3D52A5-9BBC-4D3C-861A-213421AF8210}|PROJECT - LAYER\\PROJECT - LAYER.csproj|solutionrelative:project - layer\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,19 +18,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\Program.cs",
-              "RelativeDocumentMoniker": "PROJECT - LAYER\\Program.cs",
-              "ToolTip": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\Program.cs",
-              "RelativeToolTip": "PROJECT - LAYER\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAyAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "PROJECT - LAYER\\Controllers\\HomeController.cs",
+              "ToolTip": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "PROJECT - LAYER\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAM0BAAAAAAAAAAAAANUBAACEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T03:59:24.451Z",
+              "WhenOpened": "2024-11-27T22:34:45.911Z",
               "EditorCaption": ""
             },
             {
@@ -45,22 +41,9 @@
               "RelativeDocumentMoniker": "CONSOLE - APP\\Program.cs",
               "ToolTip": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\CONSOLE - APP\\Program.cs",
               "RelativeToolTip": "CONSOLE - APP\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAAAHsAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T03:58:46.027Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "PROJECT - LAYER\\Controllers\\HomeController.cs",
-              "ToolTip": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "PROJECT - LAYER\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAwwA4AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T03:45:03.654Z",
+              "WhenOpened": "2024-11-27T22:30:59.448Z",
               "EditorCaption": ""
             }
           ]

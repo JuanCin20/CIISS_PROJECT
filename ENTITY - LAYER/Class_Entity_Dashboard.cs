@@ -9,11 +9,17 @@
         public int Tabla_Insumo { get; set; }
 
         /*SP_CHART_01*/
+        public int Income_Year { get; set; }
+        public int Income_Month { get; set; }
         public string Income_Month_Name { get; set; }
+        public decimal Income_Sum { get; set; }
         public int Income_Number { get; set; }
 
         /*SP_CHART_02*/
+        public int Exit_Year { get; set; }
+        public int Exit_Month { get; set; }
         public string Exit_Month_Name { get; set; }
+        public decimal Exit_Sum { get; set; }
         public int Exit_Number { get; set; }
 
         /*SP_CHART_03*/

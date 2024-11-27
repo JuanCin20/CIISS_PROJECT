@@ -94,9 +94,25 @@
             <div class="row mb-1">
                 <div class="col-lg-6 mb-4">
                     <div class="card">
-                        <div class="card-header">
-                            <i class="fa-solid fa-chart-simple"></i>&nbsp;&nbsp;Reporte 01: Número de Transacciones de
-                            Salida
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0">
+                                <i class="fa-solid fa-chart-simple"></i>&nbsp;&nbsp;Reporte 01: Número de Transacciones de
+                                Salida
+                            </h6>
+                            <div class="dropdown no-arrow">
+                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-dark"></i>
+                                </a>
+                                <div style="padding: 8px;" class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                     aria-labelledby="dropdownMenuLink">
+                                    <form asp-area="" asp-controller="Home" asp-action="Report_02">
+                                        <button style="width: 200px;" class="btn btn-danger" type="submit">
+                                            <i class="fa-solid fa-file-pdf"></i>&nbsp;&nbsp;Generar Reporte
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <canvas id="Chart_01" witdh="100" height="200"></canvas>
@@ -105,9 +121,25 @@
                 </div>
                 <div class="col-lg-6 mb-4">
                     <div class="card">
-                        <div class="card-header">
-                            <i class="fa-solid fa-chart-simple"></i>&nbsp;&nbsp;Reporte 02: Número de Transacciones de
-                            Entrada
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0">
+                                <i class="fa-solid fa-chart-simple"></i>&nbsp;&nbsp;Reporte 02: Número de Transacciones de
+                                Entrada
+                            </h6>
+                            <div class="dropdown no-arrow">
+                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-dark"></i>
+                                </a>
+                                <div style="padding: 8px;" class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                     aria-labelledby="dropdownMenuLink">
+                                    <form asp-area="" asp-controller="Home" asp-action="Report_03">
+                                        <button style="width: 200px;" class="btn btn-danger" type="submit">
+                                            <i class="fa-solid fa-file-pdf"></i>&nbsp;&nbsp;Generar Reporte
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <canvas id="Chart_02" witdh="100" height="200"></canvas>
@@ -161,8 +193,21 @@
             </div>
 
             <div class="card border-danger mb-4">
-                <div class="card-header">
-                    <i class="fa-solid fa-stopwatch"></i>&nbsp;&nbsp;Insumos por Expirar
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0"><i class="fa-solid fa-stopwatch"></i>&nbsp;&nbsp;Insumos por Expirar</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-dark"></i>
+                        </a>
+                        <div style="padding: 8px;" class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                            aria-labelledby="dropdownMenuLink">
+                            <form asp-area="" asp-controller="Home" asp-action="Report_01">
+                                <button style="width: 200px;" class="btn btn-danger" type="submit"><i
+                                        class="fa-solid fa-file-pdf"></i>&nbsp;&nbsp;Generar Reporte</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -198,11 +243,7 @@
                     <i class="fa-solid fa-scroll"></i>&nbsp;&nbsp;Historial de Transacciones
                 </div>
                 <div class="card-body">
-                    <form asp-area="" asp-controller="Home" asp-action="Download_PDF">
-                        <button class="btn btn-danger" type="submit">Descargar PDF</button>
-                    </form>
-                    <form asp-area="" asp-controller="Home" asp-action="Home_Controller_Dashboard_Transaction_Report_Export"
-                        method="POST">
+                    <form asp-area="" asp-controller="Home" asp-action="Report_04" method="POST">
                         <div class="row align-items-end">
                             <div class="col-sm-2">
                                 <div class="mb-2">
@@ -234,9 +275,8 @@
                             </div>
                             <div class="col-sm-2">
                                 <div class="d-grid mb-2">
-                                    <button class="btn btn-success" type="submit">
-                                        <i class="fa-solid fa-file-excel"></i>&nbsp;&nbsp;Exportar
-                                    </button>
+                                    <button style="width: 200px;" class="btn btn-danger" type="submit"><i
+                                            class="fa-solid fa-file-pdf"></i>&nbsp;&nbsp;Generar Reporte</button>
                                 </div>
                             </div>
                         </div>

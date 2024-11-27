@@ -5,19 +5,26 @@ using PROJECT___LAYER.Models;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
-using ClosedXML.Excel;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
+using System.Globalization;
 
 namespace PROJECT___LAYER.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IWebHostEnvironment _host;
+        /* private readonly ILogger<HomeController> _logger;
 
-        public HomeController(IWebHostEnvironment host)
+        public HomeController(ILogger<HomeController> logger)
         {
-            _host = host;
+            _logger = logger;
+        } */
+
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+
+        public HomeController(IWebHostEnvironment WebHostEnvironment)
+        {
+            _WebHostEnvironment = WebHostEnvironment;
         }
 
         [Authorize(Roles = "Administrador")]
@@ -32,123 +39,138 @@ namespace PROJECT___LAYER.Controllers
             return View();
         }
 
-        public IActionResult Download_PDF()
+        public IActionResult Report_01()
         {
-            var data = Document.Create(document =>
+            List<Class_Entity_Dashboard> Obj_List_Class_Entity_Dashboard = new Class_Business_Dashboard().Class_Business_Dashboard_Deadline_Report();
+
+            decimal Total = Obj_List_Class_Entity_Dashboard.Sum(Value_01 => Convert.ToDecimal(Value_01.Precio_Insumo_01 * Value_01.Stock_Insumo, new CultureInfo("es-PE")));
+
+            string Current_Day = DateTime.Now.Day.ToString();
+            string Current_Month = DateTime.Now.Month.ToString();
+            string Current_Year = DateTime.Now.Year.ToString();
+
+            int Obj_List_Class_Entity_Dashboard_Size = Obj_List_Class_Entity_Dashboard.Count;
+
+            string ID_Usuario_String = HttpContext.Session.GetString("ID_Usuario_String");
+            string Nombre_Apellido_Usuario_String = HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
+            string E_Mail_Usuario_String = HttpContext.Session.GetString("E_Mail_Usuario_String");
+
+            var Document_Alternative = Document.Create(Document =>
             {
-                document.Page(page =>
+                Document.Page(Page =>
                 {
-                    page.Margin(30);
+                    Page.Margin(30);
 
-                    page.Header().ShowOnce().Row(row =>
+                    Page.Header().ShowOnce().Row(Row =>
                     {
-                        var rutaImagen = Path.Combine(_host.WebRootPath, "img/Report_Image.png");
+                        var Image_Ubication = Path.Combine(_WebHostEnvironment.WebRootPath, "img/Report_Image.png");
 
-                        byte[] imageData = System.IO.File.ReadAllBytes(rutaImagen);
+                        byte[] Image_Data = System.IO.File.ReadAllBytes(Image_Ubication);
 
-                        // ? row.ConstantItem(140).Height(60).Placeholder();
-                        row.ConstantItem(150).Image(imageData);
+                        Row.ConstantItem(100).Image(Image_Data);
 
-                        row.RelativeItem().Column(col =>
+                        Row.RelativeItem().Column(Column =>
                         {
-                            col.Item().AlignCenter().Text("Sistema de Inventario SAC").Bold().FontSize(14);
-                            col.Item().AlignCenter().Text("Av. Ruise�ores, Los Milanos 161 - Santa Anita").FontSize(9);
-                            col.Item().AlignCenter().Text("959 748 008 / 998 723 316").FontSize(9);
-                            col.Item().AlignCenter().Text("jucarpe0806@gmail.com").FontSize(9);
+                            Column.Item().AlignCenter().Text("Sistema de Inventario SAC").Bold().FontSize(14);
+                            Column.Item().AlignCenter().Text("Av. Ruiseñores, Los Milanos 161 - Santa Anita").FontSize(9);
+                            Column.Item().AlignCenter().Text("959 748 008 / 998 723 316").FontSize(9);
+                            Column.Item().AlignCenter().Text("JuanCin080604@gmail.com").FontSize(9);
                         });
 
-                        row.RelativeItem().Column(col =>
+                        Row.RelativeItem().Column(Column =>
                         {
-                            col.Item().Border(1).BorderColor("#257272").AlignCenter().Text("RUC - 21312312312");
-                            col.Item().Background("#257272").Border(1).BorderColor("#257272").AlignCenter().Text("QuestPDF Companion").FontColor("#FFFFFF");
-                            col.Item().Border(1).BorderColor("#257272").AlignCenter().Text("N� 00001");
+                            Column.Item().Border(1).BorderColor("#094293").AlignCenter().Text("R.U.C N° 20040608161");
+                            Column.Item().Background("#094293").Border(1).BorderColor("#094293").AlignCenter().Text("QuestPDF Companion").FontColor("#FFFFFF");
+                            Column.Item().Border(1).BorderColor("#094293").AlignCenter().Text(Current_Day + "/" + Current_Month + "/" + Current_Year);
                         });
                     });
 
-                    page.Content().PaddingVertical(10).Column(col_01 =>
+                    Page.Content().PaddingVertical(10).Column(Column_01 =>
                     {
-                        col_01.Item().Column(col_02 =>
+                        Column_01.Item().Column(Column_02 =>
                         {
-                            col_02.Item().Text("Datos del Usuario").Underline().Bold();
-                            col_02.Item().Text(txt =>
+                            Column_02.Item().Text("Datos del Usuario").Underline().Bold();
+                            Column_02.Item().Text(Text =>
                             {
-                                txt.Span("Identificador: ").SemiBold().FontSize(10);
-                                txt.Span("1").FontSize(10);
+                                Text.Span("Identificador: ").SemiBold().FontSize(10);
+                                Text.Span(ID_Usuario_String).FontSize(10);
                             });
 
-                            col_02.Item().Text(txt =>
+                            Column_02.Item().Text(Text =>
                             {
-                                txt.Span("Nombres y Apellidos: ").SemiBold().FontSize(10);
-                                txt.Span("Juan Carlos Aron�s Pe�a").FontSize(10);
+                                Text.Span("Nombres y Apellidos: ").SemiBold().FontSize(10);
+                                Text.Span(Nombre_Apellido_Usuario_String).FontSize(10);
                             });
 
-                            col_02.Item().Text(txt =>
+                            Column_02.Item().Text(Text =>
                             {
-                                txt.Span("Correo Electr�nico: ").SemiBold().FontSize(10);
-                                txt.Span("JuanCin080604@gmail.com").FontSize(10);
+                                Text.Span("Correo Electrónico: ").SemiBold().FontSize(10);
+                                Text.Span(E_Mail_Usuario_String).FontSize(10);
                             });
                         });
 
-                        col_01.Item().LineHorizontal(0.5f);
+                        Column_01.Item().LineHorizontal(0.5f);
 
-                        col_01.Item().Table(tabla =>
+                        Column_01.Item().Table(Table =>
                         {
-                            tabla.ColumnsDefinition(columns =>
+                            Table.ColumnsDefinition(Columns =>
                             {
-                                columns.RelativeColumn(3);
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
-                                columns.RelativeColumn();
+                                Columns.RelativeColumn();
+                                Columns.RelativeColumn();
+                                Columns.RelativeColumn();
+                                Columns.RelativeColumn();
+                                Columns.RelativeColumn();
+                                Columns.RelativeColumn();
                             });
 
-                            tabla.Header(header =>
+                            Table.Header(Header =>
                             {
-                                header.Cell().Background("#257272").Padding(2).Text("Producto").FontColor("#FFFFFF");
-                                header.Cell().Background("#257272").Padding(2).Text("Precio").FontColor("#FFFFFF");
-                                header.Cell().Background("#257272").Padding(2).Text("Cantidad").FontColor("#FFFFFF");
-                                header.Cell().Background("#257272").Padding(2).Text("Total").FontColor("#FFFFFF");
+                                Header.Cell().Background("#094293").Padding(2).Text("ID").FontColor("#FFFFFF");
+                                Header.Cell().Background("#094293").Padding(2).Text("Nombre").FontColor("#FFFFFF");
+                                Header.Cell().Background("#094293").Padding(2).Text("Precio").FontColor("#FFFFFF");
+                                Header.Cell().Background("#094293").Padding(2).Text("Stock").FontColor("#FFFFFF");
+                                Header.Cell().Background("#094293").Padding(2).Text("Fecha de Vencimiento").FontColor("#FFFFFF");
+                                Header.Cell().Background("#094293").Padding(2).Text("Días Restantes").FontColor("#FFFFFF");
                             });
 
-                            foreach (var item in Enumerable.Range(1, 45))
+                            foreach (var Value_02 in Obj_List_Class_Entity_Dashboard)
                             {
-                                var cantidad = Placeholders.Random.Next(1, 10);
-                                var precio = Placeholders.Random.Next(5, 15);
-                                var total = cantidad * precio;
-
-                                tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Placeholders.Label()).FontSize(10);
-                                tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(cantidad.ToString()).FontSize(10);
-                                tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text($"S/. {precio}").FontSize(10);
-                                tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).AlignRight().Text($"S/. {total}").FontSize(10);
+                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.ID_Insumo.ToString()).FontSize(10);
+                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Nombre_Insumo_01).FontSize(10);
+                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text($"S/. {Value_02.Precio_Insumo_01}").FontSize(10);
+                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Stock_Insumo.ToString()).FontSize(10);
+                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Fecha_Vencimiento_Insumo).FontSize(10);
+                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Deadline.ToString()).FontSize(10).FontColor("#094293");
                             }
                         });
-                        col_01.Item().AlignRight().Text("Total: S/. 1500").FontSize(12);
 
-                        if (1 == 1)
+                        Column_01.Item().Background(Colors.Grey.Lighten3).Padding(10).Column(Column =>
                         {
-                            col_01.Item().Background(Colors.Grey.Lighten3).Padding(10).Column(column =>
-                            {
-                                column.Item().Text("Comentarios: ").FontSize(14);
-                                column.Item().Text(Placeholders.LoremIpsum());
-                                column.Spacing(5);
-                            });
-                        }
+                            Column.Item().Text("Pérdidas Generadas: S/. " + Total).FontSize(15).FontColor("#FF0000");
+                            Column.Item().Text("Número de Insumos por Expirar: " + Obj_List_Class_Entity_Dashboard_Size).FontSize(15).FontColor("#FF0000");
+                            Column.Item().Text("Recomendaciones: ").FontSize(14);
+                            Column.Item().Text("- Realiza promociones como 'compra uno y lleva otro' para productos en riesgo.").FontSize(12);
+                            Column.Item().Text("- Donar productos a organizaciones benéficas o bancos de alimentos si aún están dentro de su vida útil.").FontSize(12);
+                            Column.Item().Text("- Busca asociaciones con grupos comunitarios que puedan beneficiarse.").FontSize(12);
+                            Column.Spacing(5);
+                        });
 
-                        col_01.Spacing(10);
+                        Column_01.Spacing(10);
                     });
 
-                    page.Footer().AlignRight().Text(txt =>
+                    Page.Footer().AlignRight().Text(Text =>
                     {
-                        txt.Span("Pagina ").FontSize(10);
-                        txt.CurrentPageNumber().FontSize(10);
-                        txt.Span(" de ").FontSize(10);
-                        txt.TotalPages().FontSize(10);
+                        Text.Span("Pagina ").FontSize(10);
+                        Text.CurrentPageNumber().FontSize(10);
+                        Text.Span(" de ").FontSize(10);
+                        Text.TotalPages().FontSize(10);
                     });
                 });
             }).GeneratePdf();
 
-            Stream Obj_Stream = new MemoryStream(data);
+            Stream Obj_Stream = new MemoryStream(Document_Alternative);
 
-            return File(Obj_Stream, "application/pdf", "Report_Test.pdf");
+            return File(Obj_Stream, "application/pdf", "Report_01.pdf");
         }
 
         [HttpGet]
@@ -233,55 +255,252 @@ namespace PROJECT___LAYER.Controllers
             return Json(new { data = Obj_List_Class_Entity_Dashboard });
         }
 
-        [HttpPost]
-        public FileResult Home_Controller_Dashboard_Transaction_Report_Export(string Initial_Fecha_Movimiento_Inventario, string Final_Fecha_Movimiento_Inventario, int ID_Movimiento_Inventario)
+        public IActionResult Report_02()
         {
-            List<Class_Entity_Dashboard> Obj_List_Class_Entity_Dashboard = new List<Class_Entity_Dashboard>();
-            Obj_List_Class_Entity_Dashboard = new Class_Business_Dashboard().Class_Business_Dashboard_Transaction_Report(Initial_Fecha_Movimiento_Inventario, Final_Fecha_Movimiento_Inventario, ID_Movimiento_Inventario);
-            DataTable Obj_DataTable = new DataTable();
+            List<Class_Entity_Dashboard> Obj_List_Class_Entity_Dashboard = new Class_Business_Dashboard().Class_Business_Dashboard_Chart_01();
 
-            Obj_DataTable.Locale = new System.Globalization.CultureInfo("es-PE");
-            Obj_DataTable.Columns.Add("ID_Movimiento_Inventario", typeof(int));
-            Obj_DataTable.Columns.Add("Tipo_Movimiento_Inventario", typeof(string));
-            Obj_DataTable.Columns.Add("Nombre_Categoria_Insumo", typeof(string));
-            Obj_DataTable.Columns.Add("Nombre_Proveedor_Insumo", typeof(string));
-            Obj_DataTable.Columns.Add("Nombre_Insumo", typeof(string));
-            Obj_DataTable.Columns.Add("Descripcion_Insumo", typeof(string));
-            Obj_DataTable.Columns.Add("Precio_Insumo", typeof(decimal));
-            Obj_DataTable.Columns.Add("Cantidad_Movimiento_Inventario", typeof(int));
-            Obj_DataTable.Columns.Add("Total_Transaction", typeof(decimal));
-            Obj_DataTable.Columns.Add("Fecha_Movimiento_Inventario", typeof(string));
-            Obj_DataTable.Columns.Add("Usuario_Transaction", typeof(string));
+            decimal Total = Obj_List_Class_Entity_Dashboard.Sum(Value_01 => Convert.ToDecimal(Value_01.Income_Sum, new CultureInfo("es-PE")));
 
-            foreach (Class_Entity_Dashboard Obj_Class_Entity_Dashboard in Obj_List_Class_Entity_Dashboard)
+            string Current_Day = DateTime.Now.Day.ToString();
+            string Current_Month = DateTime.Now.Month.ToString();
+            string Current_Year = DateTime.Now.Year.ToString();
+
+            string ID_Usuario_String = HttpContext.Session.GetString("ID_Usuario_String");
+            string Nombre_Apellido_Usuario_String = HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
+            string E_Mail_Usuario_String = HttpContext.Session.GetString("E_Mail_Usuario_String");
+
+            var Document_Alternative = Document.Create(Document =>
             {
-                Obj_DataTable.Rows.Add(new object[] {
-                Obj_Class_Entity_Dashboard.ID_Movimiento_Inventario,
-                Obj_Class_Entity_Dashboard.Tipo_Movimiento_Inventario,
-                Obj_Class_Entity_Dashboard.Nombre_Categoria_Insumo_02,
-                Obj_Class_Entity_Dashboard.Nombre_Proveedor_Insumo_02,
-                Obj_Class_Entity_Dashboard.Nombre_Insumo_02,
-                Obj_Class_Entity_Dashboard.Descripcion_Insumo_02,
-                Obj_Class_Entity_Dashboard.Precio_Insumo_02,
-                Obj_Class_Entity_Dashboard.Cantidad_Movimiento_Inventario,
-                Obj_Class_Entity_Dashboard.Total_Transaction,
-                Obj_Class_Entity_Dashboard.Fecha_Movimiento_Inventario,
-                Obj_Class_Entity_Dashboard.Usuario_Transaction
-            });
-            }
-
-            Obj_DataTable.TableName = "Dashboard_Transaction_Report";
-
-            using (XLWorkbook Obj_XLWorkbook = new XLWorkbook())
-            {
-                Obj_XLWorkbook.Worksheets.Add(Obj_DataTable);
-                using (MemoryStream Obj_MemoryStream = new MemoryStream())
+                Document.Page(Page =>
                 {
-                    Obj_XLWorkbook.SaveAs(Obj_MemoryStream);
-                    return File(Obj_MemoryStream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Dashboard_Transaction_Report - " + DateTime.Now.ToString() + ".xlsx");
-                }
-            }
+                    Page.Margin(30);
+
+                    Page.Header().ShowOnce().Row(Row =>
+                    {
+                        var Image_Ubication = Path.Combine(_WebHostEnvironment.WebRootPath, "img/Report_Image.png");
+
+                        byte[] Image_Data = System.IO.File.ReadAllBytes(Image_Ubication);
+
+                        Row.ConstantItem(100).Image(Image_Data);
+
+                        Row.RelativeItem().Column(Column =>
+                        {
+                            Column.Item().AlignCenter().Text("Sistema de Inventario SAC").Bold().FontSize(14);
+                            Column.Item().AlignCenter().Text("Av. Ruiseñores, Los Milanos 161 - Santa Anita").FontSize(9);
+                            Column.Item().AlignCenter().Text("959 748 008 / 998 723 316").FontSize(9);
+                            Column.Item().AlignCenter().Text("JuanCin080604@gmail.com").FontSize(9);
+                        });
+
+                        Row.RelativeItem().Column(Column =>
+                        {
+                            Column.Item().Border(1).BorderColor("#094293").AlignCenter().Text("R.U.C N° 20040608161");
+                            Column.Item().Background("#094293").Border(1).BorderColor("#094293").AlignCenter().Text("QuestPDF Companion").FontColor("#FFFFFF");
+                            Column.Item().Border(1).BorderColor("#094293").AlignCenter().Text(Current_Day + "/" + Current_Month + "/" + Current_Year);
+                        });
+                    });
+
+                    Page.Content().PaddingVertical(10).Column(Column_01 =>
+                    {
+                        Column_01.Item().Column(Column_02 =>
+                        {
+                            Column_02.Item().Text("Datos del Usuario").Underline().Bold();
+                            Column_02.Item().Text(Text =>
+                            {
+                                Text.Span("Identificador: ").SemiBold().FontSize(10);
+                                Text.Span(ID_Usuario_String).FontSize(10);
+                            });
+
+                            Column_02.Item().Text(Text =>
+                            {
+                                Text.Span("Nombres y Apellidos: ").SemiBold().FontSize(10);
+                                Text.Span(Nombre_Apellido_Usuario_String).FontSize(10);
+                            });
+
+                            Column_02.Item().Text(Text =>
+                            {
+                                Text.Span("Correo Electrónico: ").SemiBold().FontSize(10);
+                                Text.Span(E_Mail_Usuario_String).FontSize(10);
+                            });
+                        });
+
+                        Column_01.Item().LineHorizontal(0.5f);
+
+                        Column_01.Item().Table(Table =>
+                        {
+                            Table.ColumnsDefinition(Columns =>
+                            {
+                                Columns.RelativeColumn();
+                                Columns.RelativeColumn();
+                                Columns.RelativeColumn();
+                                Columns.RelativeColumn();
+                            });
+
+                            Table.Header(Header =>
+                            {
+                                Header.Cell().Background("#094293").Padding(2).Text("Año").FontColor("#FFFFFF");
+                                Header.Cell().Background("#094293").Padding(2).Text("Mes").FontColor("#FFFFFF");
+                                Header.Cell().Background("#094293").Padding(2).Text("Costo").FontColor("#FFFFFF");
+                                Header.Cell().Background("#094293").Padding(2).Text("Número de Transacciones").FontColor("#FFFFFF");
+                            });
+
+                            foreach (var Value_02 in Obj_List_Class_Entity_Dashboard)
+                            {
+                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Income_Year.ToString()).FontSize(10);
+                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Income_Month_Name.ToString()).FontSize(10);
+                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text($"S/. {Value_02.Income_Sum}").FontSize(10);
+                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Income_Number.ToString()).FontSize(10).FontColor("#094293");
+                            }
+                        });
+
+                        Column_01.Item().Background(Colors.Grey.Lighten3).Padding(10).Column(Column =>
+                        {
+                            Column.Item().Text("Costos Generados: S/. " + Total).FontSize(15).FontColor("#FF0000");
+                            Column.Spacing(5);
+                        });
+
+                        Column_01.Spacing(10);
+                    });
+
+                    Page.Footer().AlignRight().Text(Text =>
+                    {
+                        Text.Span("Pagina ").FontSize(10);
+                        Text.CurrentPageNumber().FontSize(10);
+                        Text.Span(" de ").FontSize(10);
+                        Text.TotalPages().FontSize(10);
+                    });
+                });
+            }).GeneratePdf();
+
+            Stream Obj_Stream = new MemoryStream(Document_Alternative);
+
+            return File(Obj_Stream, "application/pdf", "Report_02.pdf");
         }
+
+        public IActionResult Report_03()
+        {
+            List<Class_Entity_Dashboard> Obj_List_Class_Entity_Dashboard = new Class_Business_Dashboard().Class_Business_Dashboard_Chart_02();
+
+            decimal Total = Obj_List_Class_Entity_Dashboard.Sum(Value_01 => Convert.ToDecimal(Value_01.Exit_Sum, new CultureInfo("es-PE")));
+
+            string Current_Day = DateTime.Now.Day.ToString();
+            string Current_Month = DateTime.Now.Month.ToString();
+            string Current_Year = DateTime.Now.Year.ToString();
+
+            string ID_Usuario_String = HttpContext.Session.GetString("ID_Usuario_String");
+            string Nombre_Apellido_Usuario_String = HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
+            string E_Mail_Usuario_String = HttpContext.Session.GetString("E_Mail_Usuario_String");
+
+            var Document_Alternative = Document.Create(Document =>
+            {
+                Document.Page(Page =>
+                {
+                    Page.Margin(30);
+
+                    Page.Header().ShowOnce().Row(Row =>
+                    {
+                        var Image_Ubication = Path.Combine(_WebHostEnvironment.WebRootPath, "img/Report_Image.png");
+
+                        byte[] Image_Data = System.IO.File.ReadAllBytes(Image_Ubication);
+
+                        Row.ConstantItem(100).Image(Image_Data);
+
+                        Row.RelativeItem().Column(Column =>
+                        {
+                            Column.Item().AlignCenter().Text("Sistema de Inventario SAC").Bold().FontSize(14);
+                            Column.Item().AlignCenter().Text("Av. Ruiseñores, Los Milanos 161 - Santa Anita").FontSize(9);
+                            Column.Item().AlignCenter().Text("959 748 008 / 998 723 316").FontSize(9);
+                            Column.Item().AlignCenter().Text("JuanCin080604@gmail.com").FontSize(9);
+                        });
+
+                        Row.RelativeItem().Column(Column =>
+                        {
+                            Column.Item().Border(1).BorderColor("#094293").AlignCenter().Text("R.U.C N° 20040608161");
+                            Column.Item().Background("#094293").Border(1).BorderColor("#094293").AlignCenter().Text("QuestPDF Companion").FontColor("#FFFFFF");
+                            Column.Item().Border(1).BorderColor("#094293").AlignCenter().Text(Current_Day + "/" + Current_Month + "/" + Current_Year);
+                        });
+                    });
+
+                    Page.Content().PaddingVertical(10).Column(Column_01 =>
+                    {
+                        Column_01.Item().Column(Column_02 =>
+                        {
+                            Column_02.Item().Text("Datos del Usuario").Underline().Bold();
+                            Column_02.Item().Text(Text =>
+                            {
+                                Text.Span("Identificador: ").SemiBold().FontSize(10);
+                                Text.Span(ID_Usuario_String).FontSize(10);
+                            });
+
+                            Column_02.Item().Text(Text =>
+                            {
+                                Text.Span("Nombres y Apellidos: ").SemiBold().FontSize(10);
+                                Text.Span(Nombre_Apellido_Usuario_String).FontSize(10);
+                            });
+
+                            Column_02.Item().Text(Text =>
+                            {
+                                Text.Span("Correo Electrónico: ").SemiBold().FontSize(10);
+                                Text.Span(E_Mail_Usuario_String).FontSize(10);
+                            });
+                        });
+
+                        Column_01.Item().LineHorizontal(0.5f);
+
+                        Column_01.Item().Table(Table =>
+                        {
+                            Table.ColumnsDefinition(Columns =>
+                            {
+                                Columns.RelativeColumn();
+                                Columns.RelativeColumn();
+                                Columns.RelativeColumn();
+                                Columns.RelativeColumn();
+                            });
+
+                            Table.Header(Header =>
+                            {
+                                Header.Cell().Background("#094293").Padding(2).Text("Año").FontColor("#FFFFFF");
+                                Header.Cell().Background("#094293").Padding(2).Text("Mes").FontColor("#FFFFFF");
+                                Header.Cell().Background("#094293").Padding(2).Text("Costo").FontColor("#FFFFFF");
+                                Header.Cell().Background("#094293").Padding(2).Text("Número de Transacciones").FontColor("#FFFFFF");
+                            });
+
+                            foreach (var Value_02 in Obj_List_Class_Entity_Dashboard)
+                            {
+                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Exit_Year.ToString()).FontSize(10);
+                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Exit_Month_Name.ToString()).FontSize(10);
+                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text($"S/. {Value_02.Exit_Sum}").FontSize(10);
+                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Exit_Number.ToString()).FontSize(10).FontColor("#094293");
+                            }
+                        });
+
+                        Column_01.Item().Background(Colors.Grey.Lighten3).Padding(10).Column(Column =>
+                        {
+                            Column.Item().Text("Ganancias Generadas: S/. " + Total).FontSize(15).FontColor("#008000");
+                            Column.Spacing(5);
+                        });
+
+                        Column_01.Spacing(10);
+                    });
+
+                    Page.Footer().AlignRight().Text(Text =>
+                    {
+                        Text.Span("Pagina ").FontSize(10);
+                        Text.CurrentPageNumber().FontSize(10);
+                        Text.Span(" de ").FontSize(10);
+                        Text.TotalPages().FontSize(10);
+                    });
+                });
+            }).GeneratePdf();
+
+            Stream Obj_Stream = new MemoryStream(Document_Alternative);
+
+            return File(Obj_Stream, "application/pdf", "Report_03.pdf");
+        }
+
+        /* public IActionResult Report_04(string Initial_Fecha_Movimiento_Inventario, string Final_Fecha_Movimiento_Inventario, int ID_Movimiento_Inventario)
+        {
+
+        } */
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

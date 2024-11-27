@@ -665,7 +665,11 @@ SET
 	);
 
 SELECT
+	Fecha_Movimiento_Inventario,
+	YEAR(Fecha_Movimiento_Inventario) AS [Income_Year],
+	MONTH(Fecha_Movimiento_Inventario) AS [Income_Month],
 	DATENAME(MONTH, Fecha_Movimiento_Inventario) AS [Income_Month_Name],
+	SUM(Monto_Total_Movimiento_Inventario) AS [Income_Sum],
 	COUNT(*) AS [Income_Number]
 FROM
 	Tabla_Movimiento_Inventario
@@ -674,9 +678,12 @@ WHERE
 	AND Fecha_Movimiento_Inventario BETWEEN @Min_Date
 	AND @Max_Date
 GROUP BY
+	Fecha_Movimiento_Inventario,
+	YEAR(Fecha_Movimiento_Inventario),
+	MONTH(Fecha_Movimiento_Inventario),
 	DATENAME(MONTH, Fecha_Movimiento_Inventario)
 ORDER BY
-	DATENAME(MONTH, Fecha_Movimiento_Inventario) DESC
+	Fecha_Movimiento_Inventario ASC
 END;
 
 ----EXECUTE SP_CHART_01;
@@ -707,7 +714,11 @@ SET
 	);
 
 SELECT
+	Fecha_Movimiento_Inventario,
+	YEAR(Fecha_Movimiento_Inventario) AS [Exit_Year],
+	MONTH(Fecha_Movimiento_Inventario) AS [Exit_Month],
 	DATENAME(MONTH, Fecha_Movimiento_Inventario) AS [Exit_Month_Name],
+	SUM(Monto_Total_Movimiento_Inventario) AS [Exit_Sum],
 	COUNT(*) AS [Exit_Number]
 FROM
 	Tabla_Movimiento_Inventario
@@ -716,9 +727,12 @@ WHERE
 	AND Fecha_Movimiento_Inventario BETWEEN @Min_Date
 	AND @Max_Date
 GROUP BY
+	Fecha_Movimiento_Inventario,
+	YEAR(Fecha_Movimiento_Inventario),
+	MONTH(Fecha_Movimiento_Inventario),
 	DATENAME(MONTH, Fecha_Movimiento_Inventario)
 ORDER BY
-	DATENAME(MONTH, Fecha_Movimiento_Inventario) DESC
+	Fecha_Movimiento_Inventario ASC
 END;
 
 ----EXECUTE SP_CHART_02;
@@ -1308,7 +1322,7 @@ END;
 /**/
 /**/
 /**/
-CREATE TYPE Tabla_Detalle_Movimiento_Inventario AS TABLE (
+/*CREATE TYPE Tabla_Detalle_Movimiento_Inventario AS TABLE (
 	ID_Insumo INT NULL,
 	Cantidad_Insumo_Detalle_Movimiento_Inventario INT NULL,
 	Monto_Total_Detalle_Movimiento_Inventario DECIMAL (10, 2) NULL
@@ -1381,4 +1395,4 @@ SET
 SET
 	@Result = 0 ROLLBACK TRANSACTION REGISTER
 END CATCH
-END;
+END;*/
