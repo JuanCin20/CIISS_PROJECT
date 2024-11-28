@@ -294,7 +294,7 @@ function Procesar() {
       ),
     };
 
-      if (ID_Categoria_Insumo == 0) {
+    if (ID_Categoria_Insumo == 0) {
       jQuery.ajax({
         // ? url: "@Url.Action("Management_Controller_Categoria_Insumo_Registrar", "Management")",
         url: "https://localhost:44381/Management/Management_Controller_Categoria_Insumo_Registrar",
@@ -365,7 +365,7 @@ function Procesar() {
         },
       });
     } else {
-        if (ID_Categoria_Insumo != 0) {
+      if (ID_Categoria_Insumo != 0) {
         jQuery.ajax({
           // ? url: "@Url.Action("Management_Controller_Categoria_Insumo_Editar", "Management")",
           url: "https://localhost:44381/Management/Management_Controller_Categoria_Insumo_Editar",

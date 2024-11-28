@@ -1,19 +1,19 @@
 :root {
-    --bd-dark-blue-bg: rgb(5, 45, 100);
-    --bs-white: rgb(255, 255, 255);
+  --bd-dark-blue-bg: rgb(5, 45, 100);
+  --bs-white: rgb(255, 255, 255);
 }
 
 .custom-popover {
-    --bs-popover-max-width: 500px;
-    --bs-popover-border-color: var(--bd-dark-blue-bg);
-    --bs-popover-header-bg: var(--bd-dark-blue-bg);
-    --bs-popover-header-color: var(--bs-white);
-    --bs-popover-body-padding-x: 20px;
-    --bs-popover-body-padding-y: 20px;
+  --bs-popover-max-width: 500px;
+  --bs-popover-border-color: var(--bd-dark-blue-bg);
+  --bs-popover-header-bg: var(--bd-dark-blue-bg);
+  --bs-popover-header-color: var(--bs-white);
+  --bs-popover-body-padding-x: 20px;
+  --bs-popover-body-padding-y: 20px;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }

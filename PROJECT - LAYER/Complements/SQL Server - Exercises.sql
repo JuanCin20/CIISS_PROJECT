@@ -1325,76 +1325,76 @@ END;
 /**/
 /**/
 /*CREATE TYPE Tabla_Detalle_Movimiento_Inventario AS TABLE (
-	ID_Insumo INT NULL,
-	Cantidad_Insumo_Detalle_Movimiento_Inventario INT NULL,
-	Monto_Total_Detalle_Movimiento_Inventario DECIMAL (10, 2) NULL
-);
-
-GO
-	CREATE
-	OR ALTER PROCEDURE SP_TRANSACTION_CREATE(
-		@ID_Usuario INT,
-		@Tipo_Movimiento_Inventario VARCHAR (10),
-		@Cantidad_Insumo_Movimiento_Inventario INT,
-		@Monto_Total_Movimiento_Inventario DECIMAL (10, 2),
-		@Restaurante_Movimiento_Inventario VARCHAR (50),
-		@Telefono_Movimiento_Inventario INT,
-		@Direccion_Movimiento_Inventario VARCHAR (150),
-		@ID_Distrito INT,
-		@Tabla_Detalle_Movimiento_Inventario Tabla_Detalle_Movimiento_Inventario READONLY,
-		@Message VARCHAR (500) OUTPUT,
-		@Result BIT OUTPUT
-	) AS BEGIN BEGIN TRY DECLARE @ID_Movimiento_Inventario INT = 0
-SET
-	@Message = ''
-SET
-	@Result = 1 BEGIN TRANSACTION REGISTER
-INSERT INTO
-	Tabla_Movimiento_Inventario (
-		ID_Usuario,
-		Tipo_Movimiento_Inventario,
-		Cantidad_Insumo_Movimiento_Inventario,
-		Monto_Total_Movimiento_Inventario,
-		Restaurante_Movimiento_Inventario,
-		Telefono_Movimiento_Inventario,
-		Direccion_Movimiento_Inventario,
-		ID_Distrito
-	)
-VALUES
-	(
-		@ID_Usuario,
-		@Tipo_Movimiento_Inventario,
-		@Cantidad_Insumo_Movimiento_Inventario,
-		@Monto_Total_Movimiento_Inventario,
-		@Restaurante_Movimiento_Inventario,
-		@Telefono_Movimiento_Inventario,
-		@Direccion_Movimiento_Inventario,
-		@ID_Distrito
-	)
-SET
-	@ID_Movimiento_Inventario = SCOPE_IDENTITY()
-INSERT INTO
-	Tabla_Detalle_Movimiento_Inventario(
-		ID_Movimiento_Inventario,
-		ID_Insumo,
-		Cantidad_Insumo_Detalle_Movimiento_Inventario,
-		Monto_Total_Detalle_Movimiento_Inventario
-	)
-SELECT
-	@ID_Movimiento_Inventario,
-	ID_Insumo,
-	Cantidad_Insumo_Detalle_Movimiento_Inventario,
-	Monto_Total_Detalle_Movimiento_Inventario
-FROM
-	@Tabla_Detalle_Movimiento_Inventario
-DELETE FROM
-	Tabla_Middle
-WHERE
-	ID_Usuario = @ID_Usuario COMMIT TRANSACTION REGISTER
-END TRY BEGIN CATCH
-SET
-	@Message = ERROR_MESSAGE()
-SET
-	@Result = 0 ROLLBACK TRANSACTION REGISTER
-END CATCH
-END;*/
+ ID_Insumo INT NULL,
+ Cantidad_Insumo_Detalle_Movimiento_Inventario INT NULL,
+ Monto_Total_Detalle_Movimiento_Inventario DECIMAL (10, 2) NULL
+ );
+ 
+ GO
+ CREATE
+ OR ALTER PROCEDURE SP_TRANSACTION_CREATE(
+ @ID_Usuario INT,
+ @Tipo_Movimiento_Inventario VARCHAR (10),
+ @Cantidad_Insumo_Movimiento_Inventario INT,
+ @Monto_Total_Movimiento_Inventario DECIMAL (10, 2),
+ @Restaurante_Movimiento_Inventario VARCHAR (50),
+ @Telefono_Movimiento_Inventario INT,
+ @Direccion_Movimiento_Inventario VARCHAR (150),
+ @ID_Distrito INT,
+ @Tabla_Detalle_Movimiento_Inventario Tabla_Detalle_Movimiento_Inventario READONLY,
+ @Message VARCHAR (500) OUTPUT,
+ @Result BIT OUTPUT
+ ) AS BEGIN BEGIN TRY DECLARE @ID_Movimiento_Inventario INT = 0
+ SET
+ @Message = ''
+ SET
+ @Result = 1 BEGIN TRANSACTION REGISTER
+ INSERT INTO
+ Tabla_Movimiento_Inventario (
+ ID_Usuario,
+ Tipo_Movimiento_Inventario,
+ Cantidad_Insumo_Movimiento_Inventario,
+ Monto_Total_Movimiento_Inventario,
+ Restaurante_Movimiento_Inventario,
+ Telefono_Movimiento_Inventario,
+ Direccion_Movimiento_Inventario,
+ ID_Distrito
+ )
+ VALUES
+ (
+ @ID_Usuario,
+ @Tipo_Movimiento_Inventario,
+ @Cantidad_Insumo_Movimiento_Inventario,
+ @Monto_Total_Movimiento_Inventario,
+ @Restaurante_Movimiento_Inventario,
+ @Telefono_Movimiento_Inventario,
+ @Direccion_Movimiento_Inventario,
+ @ID_Distrito
+ )
+ SET
+ @ID_Movimiento_Inventario = SCOPE_IDENTITY()
+ INSERT INTO
+ Tabla_Detalle_Movimiento_Inventario(
+ ID_Movimiento_Inventario,
+ ID_Insumo,
+ Cantidad_Insumo_Detalle_Movimiento_Inventario,
+ Monto_Total_Detalle_Movimiento_Inventario
+ )
+ SELECT
+ @ID_Movimiento_Inventario,
+ ID_Insumo,
+ Cantidad_Insumo_Detalle_Movimiento_Inventario,
+ Monto_Total_Detalle_Movimiento_Inventario
+ FROM
+ @Tabla_Detalle_Movimiento_Inventario
+ DELETE FROM
+ Tabla_Middle
+ WHERE
+ ID_Usuario = @ID_Usuario COMMIT TRANSACTION REGISTER
+ END TRY BEGIN CATCH
+ SET
+ @Message = ERROR_MESSAGE()
+ SET
+ @Result = 0 ROLLBACK TRANSACTION REGISTER
+ END CATCH
+ END;*/
