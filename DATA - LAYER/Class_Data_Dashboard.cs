@@ -66,7 +66,8 @@ namespace DATA___LAYER
                                 Income_Month = Convert.ToInt32(Obj_SqlDataReader["Income_Month"]),
                                 Income_Month_Name = Obj_SqlDataReader["Income_Month_Name"].ToString(),
                                 Income_Sum = Convert.ToDecimal(Obj_SqlDataReader["Income_Sum"]),
-                                Income_Number = Convert.ToInt32(Obj_SqlDataReader["Income_Number"])
+                                Income_Number = Convert.ToInt32(Obj_SqlDataReader["Income_Number"]),
+                                Income_Datediff = Convert.ToInt32(Obj_SqlDataReader["Income_Datediff"])
                             });
                         }
                     }
@@ -102,7 +103,8 @@ namespace DATA___LAYER
                                 Exit_Month = Convert.ToInt32(Obj_SqlDataReader["Exit_Month"]),
                                 Exit_Month_Name = Obj_SqlDataReader["Exit_Month_Name"].ToString(),
                                 Exit_Sum = Convert.ToDecimal(Obj_SqlDataReader["Exit_Sum"]),
-                                Exit_Number = Convert.ToInt32(Obj_SqlDataReader["Exit_Number"])
+                                Exit_Number = Convert.ToInt32(Obj_SqlDataReader["Exit_Number"]),
+                                Exit_Datediff = Convert.ToInt32(Obj_SqlDataReader["Exit_Datediff"])
                             });
                         }
                     }

@@ -670,7 +670,8 @@ SELECT
 	MONTH(Fecha_Movimiento_Inventario) AS [Income_Month],
 	DATENAME(MONTH, Fecha_Movimiento_Inventario) AS [Income_Month_Name],
 	SUM(Monto_Total_Movimiento_Inventario) AS [Income_Sum],
-	COUNT(*) AS [Income_Number]
+	COUNT(*) AS [Income_Number],
+	DATEDIFF(DAY, @Min_Date, @Max_Date) AS [Income_Datediff]
 FROM
 	Tabla_Movimiento_Inventario
 WHERE
@@ -719,7 +720,8 @@ SELECT
 	MONTH(Fecha_Movimiento_Inventario) AS [Exit_Month],
 	DATENAME(MONTH, Fecha_Movimiento_Inventario) AS [Exit_Month_Name],
 	SUM(Monto_Total_Movimiento_Inventario) AS [Exit_Sum],
-	COUNT(*) AS [Exit_Number]
+	COUNT(*) AS [Exit_Number],
+	DATEDIFF(DAY, @Min_Date, @Max_Date) AS [Exit_Datediff]
 FROM
 	Tabla_Movimiento_Inventario
 WHERE

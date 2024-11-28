@@ -146,7 +146,7 @@ namespace PROJECT___LAYER.Controllers
 
                         Column_01.Item().Background(Colors.Grey.Lighten3).Padding(10).Column(Column =>
                         {
-                            Column.Item().Text("Pérdidas Generadas: S/. " + Total).FontSize(15).FontColor("#FF0000");
+                            Column.Item().Text("Posibles Pérdidas: S/. " + Total).FontSize(15).FontColor("#FF0000");
                             Column.Item().Text("Número de Insumos por Expirar: " + Obj_List_Class_Entity_Dashboard_Size).FontSize(15).FontColor("#FF0000");
                             Column.Item().Text("Recomendaciones: ").FontSize(14);
                             Column.Item().Text("- Realiza promociones como 'compra uno y lleva otro' para productos en riesgo.").FontSize(12);
@@ -257,17 +257,28 @@ namespace PROJECT___LAYER.Controllers
 
         public IActionResult Report_02()
         {
-            List<Class_Entity_Dashboard> Obj_List_Class_Entity_Dashboard = new Class_Business_Dashboard().Class_Business_Dashboard_Chart_01();
+            List<Class_Entity_Dashboard> Obj_List_Class_Entity_Dashboard_01 = new Class_Business_Dashboard().Class_Business_Dashboard_Chart_01();
 
-            decimal Total = Obj_List_Class_Entity_Dashboard.Sum(Value_01 => Convert.ToDecimal(Value_01.Income_Sum, new CultureInfo("es-PE")));
+            List<Class_Entity_Dashboard> Obj_List_Class_Entity_Dashboard_02 = new Class_Business_Dashboard().Class_Business_Dashboard_Chart_02();
+
+            decimal Total_01 = Obj_List_Class_Entity_Dashboard_01.Sum(Value_01 => Convert.ToDecimal(Value_01.Income_Sum, new CultureInfo("es-PE")));
+
+            int Total_02 = Obj_List_Class_Entity_Dashboard_01.Sum(Value_02 => Convert.ToInt32(Value_02.Income_Number));
+
+            int Total_03 = Obj_List_Class_Entity_Dashboard_02.Sum(Value_03 => Convert.ToInt32(Value_03.Exit_Number));
 
             string Current_Day = DateTime.Now.Day.ToString();
             string Current_Month = DateTime.Now.Month.ToString();
             string Current_Year = DateTime.Now.Year.ToString();
 
+            int Obj_List_Class_Entity_Dashboard_Size_01 = Obj_List_Class_Entity_Dashboard_01.Count;
+            int Obj_List_Class_Entity_Dashboard_Size_02 = Obj_List_Class_Entity_Dashboard_02.Count;
+
             string ID_Usuario_String = HttpContext.Session.GetString("ID_Usuario_String");
             string Nombre_Apellido_Usuario_String = HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
             string E_Mail_Usuario_String = HttpContext.Session.GetString("E_Mail_Usuario_String");
+
+            decimal Result_01 = Convert.ToDecimal((Total_03 / Total_02) * 100, new CultureInfo("es-PE"));
 
             var Document_Alternative = Document.Create(Document =>
             {
@@ -340,21 +351,22 @@ namespace PROJECT___LAYER.Controllers
                                 Header.Cell().Background("#094293").Padding(2).Text("Año").FontColor("#FFFFFF");
                                 Header.Cell().Background("#094293").Padding(2).Text("Mes").FontColor("#FFFFFF");
                                 Header.Cell().Background("#094293").Padding(2).Text("Costo").FontColor("#FFFFFF");
-                                Header.Cell().Background("#094293").Padding(2).Text("Número de Transacciones").FontColor("#FFFFFF");
+                                Header.Cell().Background("#094293").Padding(2).Text("N° - Entradas").FontColor("#FFFFFF");
                             });
 
-                            foreach (var Value_02 in Obj_List_Class_Entity_Dashboard)
+                            foreach (var Value_02 in Obj_List_Class_Entity_Dashboard_01)
                             {
                                 Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Income_Year.ToString()).FontSize(10);
                                 Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Income_Month_Name.ToString()).FontSize(10);
                                 Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text($"S/. {Value_02.Income_Sum}").FontSize(10);
-                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Income_Number.ToString()).FontSize(10).FontColor("#094293");
+                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Income_Number.ToString()).FontSize(10).FontColor("#FF0000");
                             }
                         });
 
                         Column_01.Item().Background(Colors.Grey.Lighten3).Padding(10).Column(Column =>
                         {
-                            Column.Item().Text("Costos Generados: S/. " + Total).FontSize(15).FontColor("#FF0000");
+                            Column.Item().Text("Costos Generados: S/. " + Total_01).FontSize(15).FontColor("#FF0000");
+                            Column.Item().Text("Índice de Satisfacción: " + Result_01 + "%").FontSize(15).FontColor("#0000FF");
                             Column.Spacing(5);
                         });
 
@@ -378,9 +390,18 @@ namespace PROJECT___LAYER.Controllers
 
         public IActionResult Report_03()
         {
-            List<Class_Entity_Dashboard> Obj_List_Class_Entity_Dashboard = new Class_Business_Dashboard().Class_Business_Dashboard_Chart_02();
+            List<Class_Entity_Dashboard> Obj_List_Class_Entity_Dashboard_01 = new Class_Business_Dashboard().Class_Business_Dashboard_Chart_02();
 
-            decimal Total = Obj_List_Class_Entity_Dashboard.Sum(Value_01 => Convert.ToDecimal(Value_01.Exit_Sum, new CultureInfo("es-PE")));
+            List<Class_Entity_Dashboard> Obj_List_Class_Entity_Dashboard_02 = new Class_Business_Dashboard().Class_Business_Dashboard_Chart_01();
+
+            decimal Total_01 = Obj_List_Class_Entity_Dashboard_01.Sum(Value_01 => Convert.ToDecimal(Value_01.Exit_Sum, new CultureInfo("es-PE")));
+
+            int Total_02 = Obj_List_Class_Entity_Dashboard_01.Sum(Value_02 => Convert.ToInt32(Value_02.Exit_Number));
+
+            int Total_03 = Obj_List_Class_Entity_Dashboard_02.Sum(Value_03 => Convert.ToInt32(Value_03.Income_Number));
+
+            List<int> Exit_Datediff_List = Obj_List_Class_Entity_Dashboard_01.Select(Value_04 => Value_04.Exit_Datediff).ToList();
+            int Total_04 = Exit_Datediff_List[0];
 
             string Current_Day = DateTime.Now.Day.ToString();
             string Current_Month = DateTime.Now.Month.ToString();
@@ -389,6 +410,9 @@ namespace PROJECT___LAYER.Controllers
             string ID_Usuario_String = HttpContext.Session.GetString("ID_Usuario_String");
             string Nombre_Apellido_Usuario_String = HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
             string E_Mail_Usuario_String = HttpContext.Session.GetString("E_Mail_Usuario_String");
+
+            decimal Result_01 = Convert.ToDecimal((Total_02 / Total_03) * 100, new CultureInfo("es-PE"));
+            decimal Result_02 = Convert.ToDecimal((Total_02 / Total_04), new CultureInfo("es-PE"));
 
             var Document_Alternative = Document.Create(Document =>
             {
@@ -461,21 +485,23 @@ namespace PROJECT___LAYER.Controllers
                                 Header.Cell().Background("#094293").Padding(2).Text("Año").FontColor("#FFFFFF");
                                 Header.Cell().Background("#094293").Padding(2).Text("Mes").FontColor("#FFFFFF");
                                 Header.Cell().Background("#094293").Padding(2).Text("Costo").FontColor("#FFFFFF");
-                                Header.Cell().Background("#094293").Padding(2).Text("Número de Transacciones").FontColor("#FFFFFF");
+                                Header.Cell().Background("#094293").Padding(2).Text("N° - Salidas").FontColor("#FFFFFF");
                             });
 
-                            foreach (var Value_02 in Obj_List_Class_Entity_Dashboard)
+                            foreach (var Value_02 in Obj_List_Class_Entity_Dashboard_01)
                             {
                                 Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Exit_Year.ToString()).FontSize(10);
                                 Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Exit_Month_Name.ToString()).FontSize(10);
                                 Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text($"S/. {Value_02.Exit_Sum}").FontSize(10);
-                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Exit_Number.ToString()).FontSize(10).FontColor("#094293");
+                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Exit_Number.ToString()).FontSize(10).FontColor("#008000");
                             }
                         });
 
                         Column_01.Item().Background(Colors.Grey.Lighten3).Padding(10).Column(Column =>
                         {
-                            Column.Item().Text("Ganancias Generadas: S/. " + Total).FontSize(15).FontColor("#008000");
+                            Column.Item().Text("Ganancias Generadas: S/. " + Total_01).FontSize(15).FontColor("#008000");
+                            Column.Item().Text("Índice de Satisfacción: " + Result_01 + "%").FontSize(15).FontColor("#0000FF");
+                            Column.Item().Text("Tasa de Consumo: " + Result_02).FontSize(15).FontColor("#0000FF");
                             Column.Spacing(5);
                         });
 
