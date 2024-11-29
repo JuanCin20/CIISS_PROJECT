@@ -774,13 +774,13 @@ VALUES
 	(
 		'Masas',
 		'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad voluptates aspernatur reprehenderit porro fuga, temporibus mollitia ipsam quis nesciunt ut optio pariatur excepturi adipisci, magni quam deserunt accusantium. Ratione, culpa.',
-		1,
+		0,
 		'2022-10-06 11:00:00.000'
 	),
 	(
 		'Salsas',
 		'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad voluptates aspernatur reprehenderit porro fuga, temporibus mollitia ipsam quis nesciunt ut optio pariatur excepturi adipisci, magni quam deserunt accusantium. Ratione, culpa.',
-		1,
+		0,
 		'2022-10-06 11:00:00.000'
 	),
 	(
@@ -1072,84 +1072,6 @@ INSERT INTO
 		Nombre_Imagen_Insumo
 	)
 VALUES
-	(
-		1,
-		1,
-		'Masa para Pizza LA FLORENCIA 1un',
-		'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident similique dolorem aut inventore repudiandae molestias, quas reiciendis quisquam doloremque explicabo aliquam unde veniam laboriosam et voluptatum repellendus. Delectus, eveniet distinctio.',
-		'Un.',
-		4.70,
-		1000,
-		'2022-14-06 13:00:00.00',
-		'2024-12-20',
-		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images',
-		'1.png'
-	),
-	(
-		1,
-		2,
-		'Masa Pre Pizza UNIÓN Siciliana con Pasta de Tomate Bolsa 270g',
-		'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident similique dolorem aut inventore repudiandae molestias, quas reiciendis quisquam doloremque explicabo aliquam unde veniam laboriosam et voluptatum repellendus. Delectus, eveniet distinctio.',
-		'Un.',
-		10.89,
-		1000,
-		'2022-14-06 13:00:00.00',
-		'2024-12-20',
-		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images',
-		'2.png'
-	),
-	(
-		1,
-		3,
-		'Masa para Pizza EL CEDRO Paquete 2un',
-		'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident similique dolorem aut inventore repudiandae molestias, quas reiciendis quisquam doloremque explicabo aliquam unde veniam laboriosam et voluptatum repellendus. Delectus, eveniet distinctio.',
-		'Un.',
-		12.90,
-		1000,
-		'2022-14-06 13:00:00.00',
-		'2024-12-20',
-		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images',
-		'3.png'
-	),
-	(
-		2,
-		4,
-		'Salsa Lista para Pizza ARCOR Doypack 340g',
-		'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident similique dolorem aut inventore repudiandae molestias, quas reiciendis quisquam doloremque explicabo aliquam unde veniam laboriosam et voluptatum repellendus. Delectus, eveniet distinctio.',
-		'Un.',
-		5.70,
-		1000,
-		'2022-14-06 13:00:00.00',
-		'2024-12-20',
-		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images',
-		'4.png'
-	),
-	(
-		2,
-		5,
-		'Salsa Pizza HELIOS sin Gluten Frasco 300g',
-		'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident similique dolorem aut inventore repudiandae molestias, quas reiciendis quisquam doloremque explicabo aliquam unde veniam laboriosam et voluptatum repellendus. Delectus, eveniet distinctio.',
-		'Un.',
-		14.40,
-		1000,
-		'2022-14-06 13:00:00.00',
-		'2024-12-20',
-		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images',
-		'5.png'
-	),
-	(
-		2,
-		6,
-		'Salsa de Pizza MUTTI Pizza Sauce Aromatizzata Lata 210g',
-		'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident similique dolorem aut inventore repudiandae molestias, quas reiciendis quisquam doloremque explicabo aliquam unde veniam laboriosam et voluptatum repellendus. Delectus, eveniet distinctio.',
-		'Un.',
-		12.90,
-		1000,
-		'2022-14-06 13:00:00.00',
-		'2024-12-20',
-		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images',
-		'6.png'
-	),
 	(
 		3,
 		7,
@@ -3664,6 +3586,90 @@ INSERT INTO
 		Nombre_Imagen_Insumo
 	)
 VALUES
+	(
+		1,
+		1,
+		'Masa para Pizza LA FLORENCIA 1un',
+		'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident similique dolorem aut inventore repudiandae molestias, quas reiciendis quisquam doloremque explicabo aliquam unde veniam laboriosam et voluptatum repellendus. Delectus, eveniet distinctio.',
+		'Un.',
+		4.70,
+		500,
+		0,
+		'2022-14-06 13:00:00.00',
+		'2024-12-01',
+		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images',
+		'1.png'
+	),
+	(
+		1,
+		2,
+		'Masa Pre Pizza UNIÓN Siciliana con Pasta de Tomate Bolsa 270g',
+		'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident similique dolorem aut inventore repudiandae molestias, quas reiciendis quisquam doloremque explicabo aliquam unde veniam laboriosam et voluptatum repellendus. Delectus, eveniet distinctio.',
+		'Un.',
+		10.89,
+		500,
+		0,
+		'2022-14-06 13:00:00.00',
+		'2024-12-01',
+		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images',
+		'2.png'
+	),
+	(
+		1,
+		3,
+		'Masa para Pizza EL CEDRO Paquete 2un',
+		'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident similique dolorem aut inventore repudiandae molestias, quas reiciendis quisquam doloremque explicabo aliquam unde veniam laboriosam et voluptatum repellendus. Delectus, eveniet distinctio.',
+		'Un.',
+		12.90,
+		500,
+		0,
+		'2022-14-06 13:00:00.00',
+		'2024-12-01',
+		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images',
+		'3.png'
+	),
+	(
+		2,
+		4,
+		'Salsa Lista para Pizza ARCOR Doypack 340g',
+		'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident similique dolorem aut inventore repudiandae molestias, quas reiciendis quisquam doloremque explicabo aliquam unde veniam laboriosam et voluptatum repellendus. Delectus, eveniet distinctio.',
+		'Un.',
+		5.70,
+		500,
+		0,
+		'2022-14-06 13:00:00.00',
+		'2024-12-01',
+		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images',
+		'4.png'
+	),
+	(
+		2,
+		5,
+		'Salsa Pizza HELIOS sin Gluten Frasco 300g',
+		'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident similique dolorem aut inventore repudiandae molestias, quas reiciendis quisquam doloremque explicabo aliquam unde veniam laboriosam et voluptatum repellendus. Delectus, eveniet distinctio.',
+		'Un.',
+		14.40,
+		500,
+		0,
+		'2022-14-06 13:00:00.00',
+		'2024-12-01',
+		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images',
+		'5.png'
+	),
+	(
+		2,
+		6,
+		'Salsa de Pizza MUTTI Pizza Sauce Aromatizzata Lata 210g',
+		'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident similique dolorem aut inventore repudiandae molestias, quas reiciendis quisquam doloremque explicabo aliquam unde veniam laboriosam et voluptatum repellendus. Delectus, eveniet distinctio.',
+		'Un.',
+		12.90,
+		500,
+		0,
+		'2022-14-06 13:00:00.00',
+		'2024-12-01',
+		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\Supply_Images',
+		'6.png'
+	),
 	(
 		4,
 		10,

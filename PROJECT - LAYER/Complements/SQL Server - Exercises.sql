@@ -451,7 +451,8 @@ SELECT
 		103
 	) AS [Fecha_Vencimiento_Insumo],
 	TI.Ruta_Imagen_Insumo,
-	TI.Nombre_Imagen_Insumo
+	TI.Nombre_Imagen_Insumo,
+	DATEDIFF(DAY, GETDATE(), TI.Fecha_Vencimiento_Insumo) AS [Deadline]
 FROM
 	Tabla_Insumo TI
 	INNER JOIN Tabla_Categoria_Insumo TCI ON TI.ID_Categoria_Insumo = TCI.ID_Categoria_Insumo
@@ -461,7 +462,7 @@ WHERE
 
 END;
 
-----DECLARE @Estado_Insumo BIT = 1;
+----DECLARE @Estado_Insumo BIT = 0;
 ----EXECUTE SP_SUPPLY_LIST @Estado_Insumo;
 GO
 	CREATE

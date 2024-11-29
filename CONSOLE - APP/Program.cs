@@ -7,15 +7,19 @@ using QuestPDF.Infrastructure;
 using System.Globalization;
 QuestPDF.Settings.License = LicenseType.Community;
 
-List<Class_Entity_Dashboard> Obj_List_Class_Entity_Dashboard = new Class_Business_Dashboard().Class_Business_Dashboard_Chart_02();
+List<Class_Entity_Insumo> Obj_List_Class_Entity_Insumo = new Class_Business_Insumo().Class_Business_Insumo_Listar(false);
 
-decimal Total = Obj_List_Class_Entity_Dashboard.Sum(Value_01 => Convert.ToDecimal(Value_01.Exit_Sum, new CultureInfo("es-PE")));
+List<Class_Entity_Categoria_Insumo> Obj_List_Class_Entity_Categoria_Insumo_01 = new Class_Business_Categoria_Insumo().Class_Business_Categoria_Insumo_Listar(false);
+
+List<Class_Entity_Categoria_Insumo> Obj_List_Class_Entity_Categoria_Insumo_02 = new Class_Business_Categoria_Insumo().Class_Business_Categoria_Insumo_Listar(true);
+
+decimal Total = Obj_List_Class_Entity_Insumo.Sum(Value_01 => Convert.ToDecimal(Value_01.Precio_Insumo * Value_01.Stock_Insumo, new CultureInfo("es-PE")));
 
 string Current_Day = DateTime.Now.Day.ToString();
 string Current_Month = DateTime.Now.Month.ToString();
 string Current_Year = DateTime.Now.Year.ToString();
 
-int Obj_List_Class_Entity_Dashboard_Size = Obj_List_Class_Entity_Dashboard.Count;
+int Obj_List_Class_Entity_Insumo_Size = Obj_List_Class_Entity_Insumo.Count;
 
 string ID_Usuario_String = "53";
 string Nombre_Apellido_Usuario_String = "Juan Carlos Aronés Peña";
@@ -26,7 +30,7 @@ Document.Create(Document =>
 {
     Document.Page(Page =>
     {
-        Page.Margin(30);
+        Page.Margin(10);
 
         Page.Header().ShowOnce().Row(Row =>
         {
@@ -59,7 +63,7 @@ Document.Create(Document =>
                 Column_02.Item().Text("Datos del Usuario").Underline().Bold();
                 Column_02.Item().Text(Text =>
                 {
-                    Text.Span("Identificador: ").SemiBold().FontSize(10);
+                    Text.Span("ID: ").SemiBold().FontSize(10);
                     Text.Span(ID_Usuario_String).FontSize(10);
                 });
 
@@ -86,28 +90,55 @@ Document.Create(Document =>
                     Columns.RelativeColumn();
                     Columns.RelativeColumn();
                     Columns.RelativeColumn();
+                    Columns.RelativeColumn();
+                    Columns.RelativeColumn();
+                    Columns.RelativeColumn();
+                    Columns.RelativeColumn();
                 });
 
                 Table.Header(Header =>
                 {
-                    Header.Cell().Background("#094293").Padding(2).Text("Año").FontColor("#FFFFFF");
-                    Header.Cell().Background("#094293").Padding(2).Text("Mes").FontColor("#FFFFFF");
-                    Header.Cell().Background("#094293").Padding(2).Text("Costo").FontColor("#FFFFFF");
-                    Header.Cell().Background("#094293").Padding(2).Text("Número de Transacciones").FontColor("#FFFFFF");
+                    Header.Cell().Background("#094293").Padding(2).Text("ID").FontColor("#FFFFFF");
+                    Header.Cell().Background("#094293").Padding(2).Text("Categoría").FontColor("#FFFFFF");
+                    Header.Cell().Background("#094293").Padding(2).Text("Proveedor").FontColor("#FFFFFF");
+                    Header.Cell().Background("#094293").Padding(2).Text("Nombre").FontColor("#FFFFFF");
+                    Header.Cell().Background("#094293").Padding(2).Text("Precio").FontColor("#FFFFFF");
+                    Header.Cell().Background("#094293").Padding(2).Text("Stock").FontColor("#FFFFFF");
+                    Header.Cell().Background("#094293").Padding(2).Text("Fecha de Vencimiento").FontColor("#FFFFFF");
+                    Header.Cell().Background("#094293").Padding(2).Text("Días Restantes").FontColor("#FFFFFF");
+
                 });
 
-                foreach (var Value_02 in Obj_List_Class_Entity_Dashboard)
+                foreach (var Value_02 in Obj_List_Class_Entity_Insumo)
                 {
-                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Exit_Year.ToString()).FontSize(10);
-                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Exit_Month_Name.ToString()).FontSize(10);
-                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text($"S/. {Value_02.Exit_Sum}").FontSize(10);
-                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Exit_Number.ToString()).FontSize(10).FontColor("#094293");
+                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.ID_Insumo.ToString()).FontSize(10);
+                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Obj_Class_Entity_Categoria_Insumo.Nombre_Categoria_Insumo.ToString()).FontSize(10);
+                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Obj_Class_Entity_Proveedor_Insumo.Nombre_Proveedor_Insumo.ToString()).FontSize(10);
+                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Nombre_Insumo.ToString()).FontSize(10);
+                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text($"S/. {Value_02.Precio_Insumo}").FontSize(10);
+                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Stock_Insumo.ToString()).FontSize(10);
+                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Fecha_Vencimiento_Insumo.ToString());
+                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Deadline.ToString()).FontSize(10).FontColor("#094293");
                 }
             });
 
             Column_01.Item().Background(Colors.Grey.Lighten3).Padding(10).Column(Column =>
             {
-                Column.Item().Text("Ganancias Generadas: S/. " + Total).FontSize(15).FontColor("#008000");
+                Column.Item().Text("Pérdidas Generadas: S/. " + Total).FontSize(15).FontColor("#FF0000");
+                Column.Item().Text("Número de Insumos Eliminados: " + Obj_List_Class_Entity_Insumo_Size).FontSize(15).FontColor("#FF0000");
+
+                Column.Item().Text("Número de Insumos por Categorías: ").FontSize(15);
+
+                foreach (var Value_03 in Obj_List_Class_Entity_Categoria_Insumo_01)
+                {
+                    Column.Item().Text("- " + Value_03.Nombre_Categoria_Insumo + ": " + Value_03.Supply_Number).FontSize(15).FontColor("#FF0000");
+                }
+
+                foreach (var Value_04 in Obj_List_Class_Entity_Categoria_Insumo_02)
+                {
+                    Column.Item().Text("- " + Value_04.Nombre_Categoria_Insumo + ": " + Value_04.Supply_Number).FontSize(15).FontColor("#008000 ");
+                }
+
                 Column.Spacing(5);
             });
 
