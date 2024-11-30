@@ -531,7 +531,7 @@ namespace PROJECT___LAYER.Controllers
 
             List<Class_Entity_Categoria_Insumo> Obj_List_Class_Entity_Categoria_Insumo_02 = new Class_Business_Categoria_Insumo().Class_Business_Categoria_Insumo_Listar(true);
 
-            decimal Total = Obj_List_Class_Entity_Insumo.Sum(Value_01 => Convert.ToDecimal(Value_01.Precio_Insumo, new CultureInfo("es-PE")));
+            decimal Total = Obj_List_Class_Entity_Insumo.Sum(Value_01 => Convert.ToDecimal(Value_01.Precio_Insumo * Value_01.Stock_Insumo, new CultureInfo("es-PE")));
 
             string Current_Day = DateTime.Now.Day.ToString();
             string Current_Month = DateTime.Now.Month.ToString();
@@ -547,7 +547,7 @@ namespace PROJECT___LAYER.Controllers
             {
                 Document.Page(Page =>
                 {
-                    Page.Margin(30);
+                    Page.Margin(20);
 
                     Page.Header().ShowOnce().Row(Row =>
                     {
@@ -610,7 +610,6 @@ namespace PROJECT___LAYER.Controllers
                                 Columns.RelativeColumn();
                                 Columns.RelativeColumn();
                                 Columns.RelativeColumn();
-                                Columns.RelativeColumn();
                             });
 
                             Table.Header(Header =>
@@ -622,7 +621,6 @@ namespace PROJECT___LAYER.Controllers
                                 Header.Cell().Background("#094293").Padding(2).Text("Precio").FontColor("#FFFFFF");
                                 Header.Cell().Background("#094293").Padding(2).Text("Stock").FontColor("#FFFFFF");
                                 Header.Cell().Background("#094293").Padding(2).Text("Fecha de Vencimiento").FontColor("#FFFFFF");
-                                Header.Cell().Background("#094293").Padding(2).Text("Días Restantes").FontColor("#FFFFFF");
 
                             });
 
@@ -634,8 +632,7 @@ namespace PROJECT___LAYER.Controllers
                                 Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Nombre_Insumo.ToString()).FontSize(10);
                                 Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text($"S/. {Value_02.Precio_Insumo}").FontSize(10);
                                 Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Stock_Insumo.ToString()).FontSize(10);
-                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Fecha_Vencimiento_Insumo.ToString());
-                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Deadline.ToString()).FontSize(10).FontColor("#094293");
+                                Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Fecha_Vencimiento_Insumo.ToString()).FontSize(10).FontColor("#094293");
                             }
                         });
 

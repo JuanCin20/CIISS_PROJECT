@@ -451,8 +451,7 @@ SELECT
 		103
 	) AS [Fecha_Vencimiento_Insumo],
 	TI.Ruta_Imagen_Insumo,
-	TI.Nombre_Imagen_Insumo,
-	DATEDIFF(DAY, GETDATE(), TI.Fecha_Vencimiento_Insumo) AS [Deadline]
+	TI.Nombre_Imagen_Insumo
 FROM
 	Tabla_Insumo TI
 	INNER JOIN Tabla_Categoria_Insumo TCI ON TI.ID_Categoria_Insumo = TCI.ID_Categoria_Insumo
@@ -462,7 +461,7 @@ WHERE
 
 END;
 
-----DECLARE @Estado_Insumo BIT = 0;
+----DECLARE @Estado_Insumo BIT = 1;
 ----EXECUTE SP_SUPPLY_LIST @Estado_Insumo;
 GO
 	CREATE
@@ -617,6 +616,8 @@ SELECT
 			COUNT(*)
 		FROM
 			Tabla_Movimiento_Inventario
+		WHERE
+			Tipo_Movimiento_Inventario = 'Salida'
 	) AS [Tabla_Movimiento_Inventario],
 	(
 		SELECT
@@ -666,7 +667,6 @@ SET
 	);
 
 SELECT
-	Fecha_Movimiento_Inventario,
 	YEAR(Fecha_Movimiento_Inventario) AS [Income_Year],
 	MONTH(Fecha_Movimiento_Inventario) AS [Income_Month],
 	DATENAME(MONTH, Fecha_Movimiento_Inventario) AS [Income_Month_Name],
@@ -680,12 +680,11 @@ WHERE
 	AND Fecha_Movimiento_Inventario BETWEEN @Min_Date
 	AND @Max_Date
 GROUP BY
-	Fecha_Movimiento_Inventario,
 	YEAR(Fecha_Movimiento_Inventario),
 	MONTH(Fecha_Movimiento_Inventario),
 	DATENAME(MONTH, Fecha_Movimiento_Inventario)
 ORDER BY
-	Fecha_Movimiento_Inventario ASC
+	YEAR(Fecha_Movimiento_Inventario) ASC
 END;
 
 ----EXECUTE SP_CHART_01;
@@ -716,7 +715,6 @@ SET
 	);
 
 SELECT
-	Fecha_Movimiento_Inventario,
 	YEAR(Fecha_Movimiento_Inventario) AS [Exit_Year],
 	MONTH(Fecha_Movimiento_Inventario) AS [Exit_Month],
 	DATENAME(MONTH, Fecha_Movimiento_Inventario) AS [Exit_Month_Name],
@@ -730,12 +728,11 @@ WHERE
 	AND Fecha_Movimiento_Inventario BETWEEN @Min_Date
 	AND @Max_Date
 GROUP BY
-	Fecha_Movimiento_Inventario,
 	YEAR(Fecha_Movimiento_Inventario),
 	MONTH(Fecha_Movimiento_Inventario),
 	DATENAME(MONTH, Fecha_Movimiento_Inventario)
 ORDER BY
-	Fecha_Movimiento_Inventario ASC
+	YEAR(Fecha_Movimiento_Inventario) ASC
 END;
 
 ----EXECUTE SP_CHART_02;
@@ -904,8 +901,8 @@ WHERE
 	)
 END;
 
-----DECLARE @Initial_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-11-25';
-----DECLARE @Final_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-11-25';
+----DECLARE @Initial_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-11-29';
+----DECLARE @Final_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-11-29';
 ----DECLARE @ID_Movimiento_Inventario INT = 0;
 ----EXECUTE SP_TRANSACTION_REPORT @Initial_Fecha_Movimiento_Inventario, @Final_Fecha_Movimiento_Inventario, @ID_Movimiento_Inventario;
 GO

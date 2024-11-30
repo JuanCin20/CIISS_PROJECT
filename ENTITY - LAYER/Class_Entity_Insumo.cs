@@ -18,6 +18,5 @@
         public string Nombre_Imagen_Insumo { get; set; }
         public string Base_64_Imagen_Insumo { get; set; } // ?
         public string Extension_Imagen_Insumo { get; set; } // ?
-        public int Deadline { get; set; } // ?
     }
 }

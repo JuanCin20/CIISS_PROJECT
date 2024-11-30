@@ -30,7 +30,7 @@ Document.Create(Document =>
 {
     Document.Page(Page =>
     {
-        Page.Margin(10);
+        Page.Margin(20);
 
         Page.Header().ShowOnce().Row(Row =>
         {
@@ -93,7 +93,6 @@ Document.Create(Document =>
                     Columns.RelativeColumn();
                     Columns.RelativeColumn();
                     Columns.RelativeColumn();
-                    Columns.RelativeColumn();
                 });
 
                 Table.Header(Header =>
@@ -105,7 +104,6 @@ Document.Create(Document =>
                     Header.Cell().Background("#094293").Padding(2).Text("Precio").FontColor("#FFFFFF");
                     Header.Cell().Background("#094293").Padding(2).Text("Stock").FontColor("#FFFFFF");
                     Header.Cell().Background("#094293").Padding(2).Text("Fecha de Vencimiento").FontColor("#FFFFFF");
-                    Header.Cell().Background("#094293").Padding(2).Text("Días Restantes").FontColor("#FFFFFF");
 
                 });
 
@@ -117,8 +115,7 @@ Document.Create(Document =>
                     Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Nombre_Insumo.ToString()).FontSize(10);
                     Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text($"S/. {Value_02.Precio_Insumo}").FontSize(10);
                     Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Stock_Insumo.ToString()).FontSize(10);
-                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Fecha_Vencimiento_Insumo.ToString());
-                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Deadline.ToString()).FontSize(10).FontColor("#094293");
+                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Fecha_Vencimiento_Insumo.ToString()).FontSize(10).FontColor("#094293");
                 }
             });
 

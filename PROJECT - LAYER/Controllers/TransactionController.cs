@@ -85,7 +85,7 @@ namespace PROJECT___LAYER.Controllers
 
             if (Result_01)
             {
-                Message = "El Insumo ya se Ecuentra Agregado a Middle";
+                Message = "El Insumo ya se Encuentra Agregado a Middle";
             }
             else
             {
