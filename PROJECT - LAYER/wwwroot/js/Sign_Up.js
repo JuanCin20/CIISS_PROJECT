@@ -109,60 +109,81 @@ function Procesar() {
   if (!$("#Form_User").valid()) {
     return;
   } else {
-    var Imagen_Usuario_Input = $("#Imagen_Usuario_Input")[0].files[0];
-
-    var Usuario = {
-      nombre_Usuario: $("#Nombre_Usuario").val(),
-      apellido_Usuario: $("#Apellido_Usuario").val(),
-      e_Mail_Usuario: $.trim($("#E_Mail_Usuario").val()),
-      obj_Class_Entity_Tipo_Usuario: {
-        iD_Tipo_Usuario: 1,
-      },
-    };
-
-    var Request = new FormData();
-    Request.append("Obj_Class_Entity_Usuario", JSON.stringify(Usuario));
-    Request.append("Obj_IFormFile", Imagen_Usuario_Input);
-
+    var E_Mail_Usuario = $.trim($("#E_Mail_Usuario").val());
     jQuery.ajax({
-      // ? url: "@Url.Action("Access_Controller_Sign_Up", "Access")",
-      url: "https://localhost:44381/Access/Access_Controller_Sign_Up",
-      type: "POST",
-      data: Request,
-      processData: false,
-      contentType: false,
+      url:
+        "https://emailvalidation.abstractapi.com/v1/?api_key=b4e60d1d263944809648ac5b6aa14ec8&email=" +
+        E_Mail_Usuario +
+        "",
+      type: "GET",
+      dataType: "json",
       success: function (data) {
-        // debugger; // TODO: Punto de Depuración
+        debugger; // TODO: Punto de Depuración
 
-        $("body").LoadingOverlay("hide");
+        if (data.deliverability == "DELIVERABLE") {
+          var Imagen_Usuario_Input = $("#Imagen_Usuario_Input")[0].files[0];
 
-        if (data.iD_Auto_Generated != 0) {
-          window.location.replace("/Access/Log_In");
+          var Usuario = {
+            nombre_Usuario: $("#Nombre_Usuario").val(),
+            apellido_Usuario: $("#Apellido_Usuario").val(),
+            e_Mail_Usuario: $.trim($("#E_Mail_Usuario").val()),
+            obj_Class_Entity_Tipo_Usuario: {
+              iD_Tipo_Usuario: 1,
+            },
+          };
+
+          var Request = new FormData();
+          Request.append("Obj_Class_Entity_Usuario", JSON.stringify(Usuario));
+          Request.append("Obj_IFormFile", Imagen_Usuario_Input);
+
+          jQuery.ajax({
+            // ? url: "@Url.Action("Access_Controller_Sign_Up", "Access")",
+            url: "https://localhost:44381/Access/Access_Controller_Sign_Up",
+            type: "POST",
+            data: Request,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+              // debugger; // TODO: Punto de Depuración
+
+              $("body").LoadingOverlay("hide");
+
+              if (data.iD_Auto_Generated != 0) {
+                window.location.replace("/Access/Log_In");
+              } else {
+                $("#Alert_Container").html("");
+                $("<div>")
+                  .addClass("alert alert-danger")
+                  .attr({ role: "alert" })
+                  .append(
+                    $("<i>").addClass("fa-solid fa-triangle-exclamation"),
+                    $("<label>").html("&nbsp;&nbsp;" + data.message)
+                  )
+                  .appendTo("#Alert_Container");
+              }
+            },
+            error: function (xhr, status, error) {
+              $("body").LoadingOverlay("hide");
+              alert(xhr.responseText);
+            },
+            beforeSend: function () {
+              $("body").LoadingOverlay("show", {
+                background: "rgba(0, 0, 0, 0.5)",
+                image: "../img/clock-regular.svg",
+                imageAnimation: "1.5s fadein",
+                imageAutoResize: true,
+                imageResizeFactor: 1,
+                imageColor: "#FFD43B",
+              });
+            },
+          });
         } else {
-          $("#Alert_Container").html("");
-          $("<div>")
-            .addClass("alert alert-danger")
-            .attr({ role: "alert" })
-            .append(
-              $("<i>").addClass("fa-solid fa-triangle-exclamation"),
-              $("<label>").html("&nbsp;&nbsp;" + data.message)
-            )
-            .appendTo("#Alert_Container");
+          Swal.fire({
+            title: "Error",
+            text: "El Correo Electrónico Ingresado No Existe",
+            icon: "error",
+          });
         }
-      },
-      error: function (xhr, status, error) {
-        $("body").LoadingOverlay("hide");
-        alert(xhr.responseText);
-      },
-      beforeSend: function () {
-        $("body").LoadingOverlay("show", {
-          background: "rgba(0, 0, 0, 0.5)",
-          image: "../img/clock-regular.svg",
-          imageAnimation: "1.5s fadein",
-          imageAutoResize: true,
-          imageResizeFactor: 1,
-          imageColor: "#FFD43B",
-        });
       },
     });
   }

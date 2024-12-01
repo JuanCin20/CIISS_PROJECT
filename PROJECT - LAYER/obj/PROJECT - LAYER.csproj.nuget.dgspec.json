@@ -15,8 +15,8 @@
               "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\DATA - LAYER\\DATA - LAYER.csproj": {
                 "projectPath": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\DATA - LAYER\\DATA - LAYER.csproj"
               },
-              "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\ENTITY - LAYER\\ENTITY - LAYER.csproj": {
-                "projectPath": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\ENTITY - LAYER\\ENTITY - LAYER.csproj"
+              "e:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\ENTITY - LAYER\\ENTITY - LAYER.csproj": {
+                "projectPath": "e:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\ENTITY - LAYER\\ENTITY - LAYER.csproj"
               }
             }
           }
@@ -34,8 +34,8 @@
         "frameworks": {
           "net472": {
             "projectReferences": {
-              "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\ENTITY - LAYER\\ENTITY - LAYER.csproj": {
-                "projectPath": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\ENTITY - LAYER\\ENTITY - LAYER.csproj"
+              "e:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\ENTITY - LAYER\\ENTITY - LAYER.csproj": {
+                "projectPath": "e:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\ENTITY - LAYER\\ENTITY - LAYER.csproj"
               }
             }
           }
@@ -45,11 +45,11 @@
         "net472": {}
       }
     },
-    "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\ENTITY - LAYER\\ENTITY - LAYER.csproj": {
+    "e:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\ENTITY - LAYER\\ENTITY - LAYER.csproj": {
       "restore": {
-        "projectUniqueName": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\ENTITY - LAYER\\ENTITY - LAYER.csproj",
+        "projectUniqueName": "e:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\ENTITY - LAYER\\ENTITY - LAYER.csproj",
         "projectName": "ENTITY - LAYER",
-        "projectPath": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\ENTITY - LAYER\\ENTITY - LAYER.csproj",
+        "projectPath": "e:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\ENTITY - LAYER\\ENTITY - LAYER.csproj",
         "frameworks": {
           "net472": {
             "projectReferences": {}
@@ -92,8 +92,8 @@
               "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\BUSINESS - LAYER\\BUSINESS - LAYER.csproj": {
                 "projectPath": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\BUSINESS - LAYER\\BUSINESS - LAYER.csproj"
               },
-              "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\ENTITY - LAYER\\ENTITY - LAYER.csproj": {
-                "projectPath": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\ENTITY - LAYER\\ENTITY - LAYER.csproj"
+              "e:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\ENTITY - LAYER\\ENTITY - LAYER.csproj": {
+                "projectPath": "e:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\ENTITY - LAYER\\ENTITY - LAYER.csproj"
               }
             }
           }
