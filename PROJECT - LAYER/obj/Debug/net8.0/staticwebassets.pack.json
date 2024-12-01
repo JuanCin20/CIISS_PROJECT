@@ -1121,54 +1121,6 @@
       "PackagePath": "staticwebassets\\lib\\Real_Use\\Chart.js_v3.7.1\\3.7.1\\content\\Scripts\\chart.min.js"
     },
     {
-      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\.nupkg.metadata",
-      "PackagePath": "staticwebassets\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\.nupkg.metadata"
-    },
-    {
-      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\.signature.p7s",
-      "PackagePath": "staticwebassets\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\.signature.p7s"
-    },
-    {
-      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\closedxml.0.104.1.nupkg",
-      "PackagePath": "staticwebassets\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\closedxml.0.104.1.nupkg"
-    },
-    {
-      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\closedxml.0.104.1.nupkg.sha512",
-      "PackagePath": "staticwebassets\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\closedxml.0.104.1.nupkg.sha512"
-    },
-    {
-      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\closedxml.nuspec",
-      "PackagePath": "staticwebassets\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\closedxml.nuspec"
-    },
-    {
-      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\lib\\netstandard2.0\\ClosedXML.dll",
-      "PackagePath": "staticwebassets\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\lib\\netstandard2.0\\ClosedXML.dll"
-    },
-    {
-      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\lib\\netstandard2.0\\ClosedXML.pdb",
-      "PackagePath": "staticwebassets\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\lib\\netstandard2.0\\ClosedXML.pdb"
-    },
-    {
-      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\lib\\netstandard2.0\\ClosedXML.xml",
-      "PackagePath": "staticwebassets\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\lib\\netstandard2.0\\ClosedXML.xml"
-    },
-    {
-      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\lib\\netstandard2.1\\ClosedXML.dll",
-      "PackagePath": "staticwebassets\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\lib\\netstandard2.1\\ClosedXML.dll"
-    },
-    {
-      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\lib\\netstandard2.1\\ClosedXML.pdb",
-      "PackagePath": "staticwebassets\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\lib\\netstandard2.1\\ClosedXML.pdb"
-    },
-    {
-      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\lib\\netstandard2.1\\ClosedXML.xml",
-      "PackagePath": "staticwebassets\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\lib\\netstandard2.1\\ClosedXML.xml"
-    },
-    {
-      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\nuget-logo.png",
-      "PackagePath": "staticwebassets\\lib\\Real_Use\\ClosedXML_v0.104.1\\0.104.1\\nuget-logo.png"
-    },
-    {
       "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\lib\\Real_Use\\Fontawesome_v6.6.0\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\Real_Use\\Fontawesome_v6.6.0\\LICENSE.txt"
     },

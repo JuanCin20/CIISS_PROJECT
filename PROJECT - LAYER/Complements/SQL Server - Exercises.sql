@@ -565,7 +565,7 @@ SET
 		FROM
 			Tabla_Insumo
 		WHERE
-			Stock_Insumo <= 10
+			Stock_Insumo <= 100
 			AND ID_Insumo = @ID_Insumo
 	) BEGIN
 UPDATE
@@ -922,7 +922,7 @@ SELECT
 FROM
 	Tabla_Insumo
 WHERE
-	ID_Insumo = @ID_Insumo IF (@Stock_Insumo > 10) BEGIN
+	ID_Insumo = @ID_Insumo IF (@Stock_Insumo > 100) BEGIN
 UPDATE
 	Tabla_Categoria_Insumo
 SET
@@ -1131,7 +1131,7 @@ UPDATE
 SET
 	Stock_Insumo = Stock_Insumo - 100
 WHERE
-	ID_Insumo = @ID_Insumo IF(@Stock_Insumo <= 2000)
+	ID_Insumo = @ID_Insumo IF(@Stock_Insumo <= 1000)
 SET
 	@Message = 'Stock Restante: ' + CAST(@Stock_Insumo - 100 AS VARCHAR(20)) + ' Unidades'
 END

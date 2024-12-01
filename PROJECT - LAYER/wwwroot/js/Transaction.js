@@ -431,7 +431,7 @@ function List_Middle() {
                                 "form-control Input_Quantity p-1 text-center rounded-0"
                               )
                               .attr({ disabled: "disabled" })
-                              .css({ width: "40px" })
+                              .css({ width: "60px" })
                               .data(
                                 "Obj_Class_Entity_Insumo",
                                 element.obj_Class_Entity_Insumo
