@@ -351,6 +351,7 @@ namespace DATA___LAYER
                                 Cantidad_Movimiento_Inventario = Convert.ToInt32(Obj_SqlDataReader["Cantidad_Movimiento_Inventario"].ToString()),
                                 Total_Transaction = Convert.ToDecimal(Obj_SqlDataReader["Total_Transaction"], new CultureInfo("es-PE")),
                                 Fecha_Movimiento_Inventario = Obj_SqlDataReader["Fecha_Movimiento_Inventario"].ToString(),
+                                ID_Usuario = Convert.ToInt32(Obj_SqlDataReader["ID_Usuario"].ToString()),
                                 Usuario_Transaction = Obj_SqlDataReader["Usuario_Transaction"].ToString()
                             });
                         }

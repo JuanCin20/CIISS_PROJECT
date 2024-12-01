@@ -7,19 +7,18 @@ using QuestPDF.Infrastructure;
 using System.Globalization;
 QuestPDF.Settings.License = LicenseType.Community;
 
-List<Class_Entity_Insumo> Obj_List_Class_Entity_Insumo = new Class_Business_Insumo().Class_Business_Insumo_Listar(false);
+string Initial_Fecha_Movimiento_Inventario = "2024-01-01";
+string Final_Fecha_Movimiento_Inventario = "2024-11-30";
+int ID_Movimiento_Inventario = 0;
 
-List<Class_Entity_Categoria_Insumo> Obj_List_Class_Entity_Categoria_Insumo_01 = new Class_Business_Categoria_Insumo().Class_Business_Categoria_Insumo_Listar(false);
+List<Class_Entity_Dashboard> Obj_List_Class_Entity_Dashboard = new Class_Business_Dashboard().Class_Business_Dashboard_Transaction_Report(Initial_Fecha_Movimiento_Inventario, Final_Fecha_Movimiento_Inventario, ID_Movimiento_Inventario);
 
-List<Class_Entity_Categoria_Insumo> Obj_List_Class_Entity_Categoria_Insumo_02 = new Class_Business_Categoria_Insumo().Class_Business_Categoria_Insumo_Listar(true);
-
-decimal Total = Obj_List_Class_Entity_Insumo.Sum(Value_01 => Convert.ToDecimal(Value_01.Precio_Insumo * Value_01.Stock_Insumo, new CultureInfo("es-PE")));
+decimal Total_01 = 0;
+decimal Total_02 = 0;
 
 string Current_Day = DateTime.Now.Day.ToString();
 string Current_Month = DateTime.Now.Month.ToString();
 string Current_Year = DateTime.Now.Year.ToString();
-
-int Obj_List_Class_Entity_Insumo_Size = Obj_List_Class_Entity_Insumo.Count;
 
 string ID_Usuario_String = "53";
 string Nombre_Apellido_Usuario_String = "Juan Carlos Aronés Peña";
@@ -30,7 +29,7 @@ Document.Create(Document =>
 {
     Document.Page(Page =>
     {
-        Page.Margin(20);
+        Page.Margin(10);
 
         Page.Header().ShowOnce().Row(Row =>
         {
@@ -58,28 +57,6 @@ Document.Create(Document =>
 
         Page.Content().PaddingVertical(10).Column(Column_01 =>
         {
-            Column_01.Item().Column(Column_02 =>
-            {
-                Column_02.Item().Text("Datos del Usuario").Underline().Bold();
-                Column_02.Item().Text(Text =>
-                {
-                    Text.Span("ID: ").SemiBold().FontSize(10);
-                    Text.Span(ID_Usuario_String).FontSize(10);
-                });
-
-                Column_02.Item().Text(Text =>
-                {
-                    Text.Span("Nombres y Apellidos: ").SemiBold().FontSize(10);
-                    Text.Span(Nombre_Apellido_Usuario_String).FontSize(10);
-                });
-
-                Column_02.Item().Text(Text =>
-                {
-                    Text.Span("Correo Electrónico: ").SemiBold().FontSize(10);
-                    Text.Span(E_Mail_Usuario_String).FontSize(10);
-                });
-            });
-
             Column_01.Item().LineHorizontal(0.5f);
 
             Column_01.Item().Table(Table =>
@@ -93,53 +70,106 @@ Document.Create(Document =>
                     Columns.RelativeColumn();
                     Columns.RelativeColumn();
                     Columns.RelativeColumn();
+                    Columns.RelativeColumn();
+                    Columns.RelativeColumn();
                 });
 
                 Table.Header(Header =>
                 {
-                    Header.Cell().Background("#094293").Padding(2).Text("ID").FontColor("#FFFFFF");
-                    Header.Cell().Background("#094293").Padding(2).Text("Categoría").FontColor("#FFFFFF");
-                    Header.Cell().Background("#094293").Padding(2).Text("Proveedor").FontColor("#FFFFFF");
-                    Header.Cell().Background("#094293").Padding(2).Text("Nombre").FontColor("#FFFFFF");
-                    Header.Cell().Background("#094293").Padding(2).Text("Precio").FontColor("#FFFFFF");
-                    Header.Cell().Background("#094293").Padding(2).Text("Stock").FontColor("#FFFFFF");
-                    Header.Cell().Background("#094293").Padding(2).Text("Fecha de Vencimiento").FontColor("#FFFFFF");
+                    Header.Cell().Background("#FF0000").Padding(2).Text("Tipo").FontColor("#FFFFFF");
+                    Header.Cell().Background("#FF0000").Padding(2).Text("ID Usuario").FontColor("#FFFFFF");
+                    Header.Cell().Background("#FF0000").Padding(2).Text("Categoría").FontColor("#FFFFFF");
+                    Header.Cell().Background("#FF0000").Padding(2).Text("Proveedor").FontColor("#FFFFFF");
+                    Header.Cell().Background("#FF0000").Padding(2).Text("Insumo").FontColor("#FFFFFF");
+                    Header.Cell().Background("#FF0000").Padding(2).Text("Precio").FontColor("#FFFFFF");
+                    Header.Cell().Background("#FF0000").Padding(2).Text("Cantidad").FontColor("#FFFFFF");
+                    Header.Cell().Background("#FF0000").Padding(2).Text("Subtotal").FontColor("#FFFFFF");
+                    Header.Cell().Background("#FF0000").Padding(2).Text("Fecha").FontColor("#FFFFFF");
 
                 });
 
-                foreach (var Value_02 in Obj_List_Class_Entity_Insumo)
+                foreach (var Value_01 in Obj_List_Class_Entity_Dashboard)
                 {
-                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.ID_Insumo.ToString()).FontSize(10);
-                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Obj_Class_Entity_Categoria_Insumo.Nombre_Categoria_Insumo.ToString()).FontSize(10);
-                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Obj_Class_Entity_Proveedor_Insumo.Nombre_Proveedor_Insumo.ToString()).FontSize(10);
-                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Nombre_Insumo.ToString()).FontSize(10);
-                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text($"S/. {Value_02.Precio_Insumo}").FontSize(10);
-                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Stock_Insumo.ToString()).FontSize(10);
-                    Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Fecha_Vencimiento_Insumo.ToString()).FontSize(10).FontColor("#094293");
-                }
-            });
+                    if (Value_01.Tipo_Movimiento_Inventario == "Entrada")
+                    {
+                        Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_01.Tipo_Movimiento_Inventario.ToString()).FontSize(10);
+                        Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_01.ID_Usuario.ToString()).FontSize(10);
+                        Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_01.Nombre_Categoria_Insumo_02.ToString()).FontSize(10);
+                        Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_01.Nombre_Proveedor_Insumo_02.ToString()).FontSize(10);
+                        Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_01.Nombre_Insumo_02.ToString()).FontSize(10);
+                        Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text($"S/. {Value_01.Precio_Insumo_02}").FontSize(10);
+                        Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_01.Cantidad_Movimiento_Inventario.ToString()).FontSize(10);
+                        Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_01.Total_Transaction.ToString()).FontSize(10).FontColor("#FF0000");
+                        Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_01.Fecha_Movimiento_Inventario.ToString()).FontSize(10).FontColor("#094293");
 
-            Column_01.Item().Background(Colors.Grey.Lighten3).Padding(10).Column(Column =>
-            {
-                Column.Item().Text("Pérdidas Generadas: S/. " + Total).FontSize(15).FontColor("#FF0000");
-                Column.Item().Text("Número de Insumos Eliminados: " + Obj_List_Class_Entity_Insumo_Size).FontSize(15).FontColor("#FF0000");
-
-                Column.Item().Text("Número de Insumos por Categorías: ").FontSize(15);
-
-                foreach (var Value_03 in Obj_List_Class_Entity_Categoria_Insumo_01)
-                {
-                    Column.Item().Text("- " + Value_03.Nombre_Categoria_Insumo + ": " + Value_03.Supply_Number).FontSize(15).FontColor("#FF0000");
+                        Total_01 += Convert.ToDecimal(Value_01.Total_Transaction, new CultureInfo("es-PE"));
+                    }
                 }
 
-                foreach (var Value_04 in Obj_List_Class_Entity_Categoria_Insumo_02)
+                Column_01.Item().Background(Colors.Grey.Lighten3).Padding(10).Column(Column =>
                 {
-                    Column.Item().Text("- " + Value_04.Nombre_Categoria_Insumo + ": " + Value_04.Supply_Number).FontSize(15).FontColor("#008000 ");
-                }
+                    Column.Item().Text("Consumo Generado: S/. " + Total_01).FontSize(15).FontColor("#FF0000");
 
-                Column.Spacing(5);
+                    Column.Spacing(5);
+                });
             });
 
             Column_01.Spacing(10);
+
+            Column_01.Item().Table(Table =>
+            {
+                Table.ColumnsDefinition(Columns =>
+                {
+                    Columns.RelativeColumn();
+                    Columns.RelativeColumn();
+                    Columns.RelativeColumn();
+                    Columns.RelativeColumn();
+                    Columns.RelativeColumn();
+                    Columns.RelativeColumn();
+                    Columns.RelativeColumn();
+                    Columns.RelativeColumn();
+                    Columns.RelativeColumn();
+                });
+
+                Table.Header(Header =>
+                {
+                    Header.Cell().Background("#008000").Padding(2).Text("Tipo").FontColor("#FFFFFF");
+                    Header.Cell().Background("#008000").Padding(2).Text("ID Usuario").FontColor("#FFFFFF");
+                    Header.Cell().Background("#008000").Padding(2).Text("Categoría").FontColor("#FFFFFF");
+                    Header.Cell().Background("#008000").Padding(2).Text("Proveedor").FontColor("#FFFFFF");
+                    Header.Cell().Background("#008000").Padding(2).Text("Insumo").FontColor("#FFFFFF");
+                    Header.Cell().Background("#008000").Padding(2).Text("Precio").FontColor("#FFFFFF");
+                    Header.Cell().Background("#008000").Padding(2).Text("Cantidad").FontColor("#FFFFFF");
+                    Header.Cell().Background("#008000").Padding(2).Text("Subtotal").FontColor("#FFFFFF");
+                    Header.Cell().Background("#008000").Padding(2).Text("Fecha").FontColor("#FFFFFF");
+
+                });
+
+                foreach (var Value_02 in Obj_List_Class_Entity_Dashboard)
+                {
+                    if (Value_02.Tipo_Movimiento_Inventario == "Salida")
+                    {
+                        Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Tipo_Movimiento_Inventario.ToString()).FontSize(10);
+                        Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.ID_Usuario.ToString()).FontSize(10);
+                        Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Nombre_Categoria_Insumo_02.ToString()).FontSize(10);
+                        Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Nombre_Proveedor_Insumo_02.ToString()).FontSize(10);
+                        Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Nombre_Insumo_02.ToString()).FontSize(10);
+                        Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text($"S/. {Value_02.Precio_Insumo_02}").FontSize(10);
+                        Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Cantidad_Movimiento_Inventario.ToString()).FontSize(10);
+                        Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Total_Transaction.ToString()).FontSize(10).FontColor("#008000");
+                        Table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(Value_02.Fecha_Movimiento_Inventario.ToString()).FontSize(10).FontColor("#094293");
+
+                        Total_02 += Convert.ToDecimal(Value_02.Total_Transaction, new CultureInfo("es-PE"));
+                    }
+                }
+
+                Column_01.Item().Background(Colors.Grey.Lighten3).Padding(10).Column(Column =>
+                {
+                    Column.Item().Text("Ganancia Generada: S/. " + Total_02).FontSize(15).FontColor("#008000");
+
+                    Column.Spacing(5);
+                });
+            });
         });
 
         Page.Footer().AlignRight().Text(Text =>

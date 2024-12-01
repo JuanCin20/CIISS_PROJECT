@@ -760,6 +760,16 @@ VALUES
 		'2022-08-06 10:00:00.000',
 		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
 		'53.png'
+	),
+	(
+		'2',
+		'Arthur',
+		'Morgan',
+		'paviri1655@confmin.com',
+		'4f0a58250fcc6e16e71c42988710d8278b9e98fd3b4ac56073d0a01bd49699ed',
+		'2022-08-06 10:00:00.000',
+		'E:\JuanCin20\DATA\CIISS - INVENTORY MANAGEMENT\CIISS - INVENTORY MANAGEMENT\PROJECT - LAYER\wwwroot\User_Images',
+		'54.png'
 	);
 
 GO

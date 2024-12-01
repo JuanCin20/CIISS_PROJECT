@@ -66,6 +66,7 @@
         public int Cantidad_Movimiento_Inventario { get; set; }
         public decimal Total_Transaction { get; set; }
         public string Fecha_Movimiento_Inventario { get; set; }
+        public int ID_Usuario { get; set; }
         public string Usuario_Transaction { get; set; }
     }
 }

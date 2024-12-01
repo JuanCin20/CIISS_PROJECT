@@ -871,6 +871,7 @@ SET
 SELECT
 	TMI.ID_Movimiento_Inventario,
 	TMI.Tipo_Movimiento_Inventario,
+	TU.ID_Usuario AS [ID_Usuario],
 	CONCAT (TU.Nombre_Usuario, ' ', TU.Apellido_Usuario) AS [Usuario_Transaction],
 	TCI.Nombre_Categoria_Insumo AS [Nombre_Categoria_Insumo_02],
 	TPI.Nombre_Proveedor_Insumo AS [Nombre_Proveedor_Insumo_02],
@@ -901,8 +902,8 @@ WHERE
 	)
 END;
 
-----DECLARE @Initial_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-11-29';
-----DECLARE @Final_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-11-29';
+----DECLARE @Initial_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-01-01';
+----DECLARE @Final_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-11-30';
 ----DECLARE @ID_Movimiento_Inventario INT = 0;
 ----EXECUTE SP_TRANSACTION_REPORT @Initial_Fecha_Movimiento_Inventario, @Final_Fecha_Movimiento_Inventario, @ID_Movimiento_Inventario;
 GO
