@@ -1,12 +1,54 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FA3D52A5-9BBC-4D3C-861A-213421AF8210}|PROJECT - LAYER\\PROJECT - LAYER.csproj|e:\\juancin20\\data\\ciiss - inventory management\\ciiss - inventory management\\project - layer\\views\\management\\supply.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FA3D52A5-9BBC-4D3C-861A-213421AF8210}|PROJECT - LAYER\\PROJECT - LAYER.csproj|solutionrelative:project - layer\\views\\management\\supply.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FA3D52A5-9BBC-4D3C-861A-213421AF8210}|PROJECT - LAYER\\PROJECT - LAYER.csproj|e:\\juancin20\\data\\ciiss - inventory management\\ciiss - inventory management\\project - layer\\wwwroot\\js\\supply.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{FA3D52A5-9BBC-4D3C-861A-213421AF8210}|PROJECT - LAYER\\PROJECT - LAYER.csproj|solutionrelative:project - layer\\wwwroot\\js\\supply.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Supply.js",
+              "DocumentMoniker": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\Supply.js",
+              "RelativeDocumentMoniker": "PROJECT - LAYER\\wwwroot\\js\\Supply.js",
+              "ToolTip": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\Supply.js",
+              "RelativeToolTip": "PROJECT - LAYER\\wwwroot\\js\\Supply.js",
+              "ViewState": "AgIAAPMAAAAAAAAAAAAmwAoBAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-12-01T19:51:09.488Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Supply.cshtml",
+              "DocumentMoniker": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\Views\\Management\\Supply.cshtml",
+              "RelativeDocumentMoniker": "PROJECT - LAYER\\Views\\Management\\Supply.cshtml",
+              "ToolTip": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\Views\\Management\\Supply.cshtml*",
+              "RelativeToolTip": "PROJECT - LAYER\\Views\\Management\\Supply.cshtml*",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAAAGQAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-01T19:46:29.744Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

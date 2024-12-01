@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "WBzEE9Z5mBfI0ltZx8c75llD441THFOtLLKPGap/66E=",
+  "Hash": "olucNAEJlONx1BOyA2nft0we0UciMYFGDQzlUdIoiQU=",
   "Source": "PROJECT - LAYER",
   "BasePath": "_content/PROJECT - LAYER",
   "Mode": "Default",
@@ -60321,6 +60321,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\User_Images\\55.png"
+    },
+    {
+      "Identity": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\User_Images\\56.png",
+      "SourceId": "PROJECT - LAYER",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\",
+      "BasePath": "_content/PROJECT - LAYER",
+      "RelativePath": "User_Images/56.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\User_Images\\56.png"
     },
     {
       "Identity": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\User_Images\\Image_Error.png",

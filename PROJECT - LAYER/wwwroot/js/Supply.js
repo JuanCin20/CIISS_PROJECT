@@ -1,6 +1,24 @@
 $(document).ready(function () {
   Function_Table_Insumo();
   Function_Table_Insumo_Alternative();
+  $("#Stock_Insumo").prop("disabled", true);
+});
+
+$("#Button_Less").click(function (event) {
+  var Stock_Insumo_Value = $("#Stock_Insumo").val();
+  if (Stock_Insumo_Value == "0") {
+    event.preventDefault();
+  } else {
+    var Stock_Insumo_New_Value = parseInt($("#Stock_Insumo").val(), 10) - 100;
+    $("#Stock_Insumo").val(Stock_Insumo_New_Value);
+    event.preventDefault();
+  }
+});
+
+$("#Button_Plus").click(function (event) {
+  var Stock_Insumo_New_Value = parseInt($("#Stock_Insumo").val(), 10) + 100;
+  $("#Stock_Insumo").val(Stock_Insumo_New_Value);
+  event.preventDefault();
 });
 
 var Table_Insumo;
@@ -233,6 +251,8 @@ function Function_Table_Insumo_Alternative() {
 
 function Open_Form_Modal(data) {
   if (data == null) {
+    $("#Button_Less").prop("disabled", false);
+    $("#Button_Plus").prop("disabled", false);
     $("#Categoria_Insumo").removeClass("is-valid");
     $("#Categoria_Insumo").removeClass("is-invalid");
     $("#Categoria_Insumo").prop("disabled", false);
@@ -249,9 +269,6 @@ function Open_Form_Modal(data) {
     $("#Unidad_Medida_Insumo").prop("disabled", false);
     $("#Precio_Insumo").removeClass("is-valid");
     $("#Precio_Insumo").removeClass("is-invalid");
-    $("#Stock_Insumo").removeClass("is-valid");
-    $("#Stock_Insumo").removeClass("is-invalid");
-    $("#Stock_Insumo").prop("disabled", false);
     $("#Fecha_Vencimiento_Insumo").removeClass("is-valid");
     $("#Fecha_Vencimiento_Insumo").removeClass("is-invalid");
     $("#Fecha_Vencimiento_Insumo").prop("disabled", false);
@@ -264,7 +281,7 @@ function Open_Form_Modal(data) {
     $("#Descripcion_Insumo").val("");
     $("#Unidad_Medida_Insumo").val("");
     $("#Precio_Insumo").val("");
-    $("#Stock_Insumo").val("");
+    $("#Stock_Insumo").val(0);
     $("#Fecha_Vencimiento_Insumo")
       .datepicker({ dateFormat: "dd/mm/yy", minDate: "+8D" })
       .datepicker("setDate", "");
@@ -272,6 +289,8 @@ function Open_Form_Modal(data) {
     $("#Imagen_Insumo").removeAttr("src");
   } else {
     if (data != null) {
+      $("#Button_Less").prop("disabled", true);
+      $("#Button_Plus").prop("disabled", true);
       $("#Categoria_Insumo").removeClass("is-valid");
       $("#Categoria_Insumo").removeClass("is-invalid");
       $("#Categoria_Insumo").prop("disabled", true);
@@ -288,9 +307,6 @@ function Open_Form_Modal(data) {
       $("#Unidad_Medida_Insumo").prop("disabled", true);
       $("#Precio_Insumo").removeClass("is-valid");
       $("#Precio_Insumo").removeClass("is-invalid");
-      $("#Stock_Insumo").removeClass("is-valid");
-      $("#Stock_Insumo").removeClass("is-invalid");
-      $("#Stock_Insumo").prop("disabled", true);
       $("#Fecha_Vencimiento_Insumo").removeClass("is-valid");
       $("#Fecha_Vencimiento_Insumo").removeClass("is-invalid");
       $("#Fecha_Vencimiento_Insumo").prop("disabled", true);
@@ -476,11 +492,6 @@ $(document).ready(function () {
         Valid_Precio_Insumo: true,
         number: true,
       },
-      Stock_Insumo: {
-        required: true,
-        number: true,
-        digits: true,
-      },
       Fecha_Vencimiento_Insumo: {
         required: true,
         Valid_Fecha_Vencimiento_Insumo: true,
@@ -516,11 +527,6 @@ $(document).ready(function () {
         required: "Campo Requerido: Precio del Insumo",
         Valid_Precio_Insumo: "Ingrese un Precio V\xe1lido",
         number: "Ingrese un Precio V\xe1lido",
-      },
-      Stock_Insumo: {
-        required: "Campo Requerido: Stock del Insumo",
-        number: "Ingrese un Stock V\xe1lido",
-        digits: "El Stock del Insumo debe ser un N\xfamero Entero",
       },
       Fecha_Vencimiento_Insumo: {
         required: "Campo Requerido: Fecha de Vencimiento del Insumo",

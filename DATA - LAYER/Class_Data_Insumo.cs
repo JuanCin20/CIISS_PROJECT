@@ -251,7 +251,7 @@ namespace DATA___LAYER
             {
                 using (SqlConnection Obj_SqlConnection = new SqlConnection(Class_Data_Connection.Connection_String))
                 {
-                    string SQL_Server_Query_String = "UPDATE Tabla_Insumo SET Estado_Insumo = 1, Fecha_Vencimiento_Insumo = @Fecha_Vencimiento_Insumo WHERE ID_Insumo = @ID_Insumo;";
+                    string SQL_Server_Query_String = "UPDATE Tabla_Insumo SET Estado_Insumo = 1, Stock_Insumo = 0, Fecha_Vencimiento_Insumo = @Fecha_Vencimiento_Insumo WHERE ID_Insumo = @ID_Insumo;";
 
                     SqlCommand Obj_SqlCommand = new SqlCommand(SQL_Server_Query_String, Obj_SqlConnection);
                     Obj_SqlCommand.Parameters.AddWithValue("@Fecha_Vencimiento_Insumo", Fecha_Vencimiento_Insumo);

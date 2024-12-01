@@ -118,7 +118,7 @@ function Procesar() {
       type: "GET",
       dataType: "json",
       success: function (data) {
-        debugger; // TODO: Punto de Depuración
+        // debugger; // TODO: Punto de Depuración
 
         if (data.deliverability == "DELIVERABLE") {
           var Imagen_Usuario_Input = $("#Imagen_Usuario_Input")[0].files[0];

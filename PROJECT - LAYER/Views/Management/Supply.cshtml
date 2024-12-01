@@ -94,8 +94,14 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="Stock_Insumo" class="form-label">Stock:</label>
-                            <input type="number" class="form-control" id="Stock_Insumo" name="Stock_Insumo"
-                                placeholder="Stock" autocomplete="off">
+                            <div class="d-flex flex-row justify-content-center gap-2">
+                                <button id="Button_Less" class="btn btn-outline-success"><i
+                                        class="fa-solid fa-minus"></i></button>
+                                <input type="number" class="form-control" id="Stock_Insumo" name="Stock_Insumo"
+                                    placeholder="Stock" autocomplete="off">
+                                <button id="Button_Plus" class="btn btn-outline-danger"><i
+                                        class="fa-solid fa-plus"></i></button>
+                            </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="Fecha_Vencimiento_Insumo" class="form-label">Fecha de Vencimiento:</label>

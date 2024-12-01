@@ -387,76 +387,100 @@ function Procesar() {
     };
 
     if (ID_Usuario == 0) {
-      var Request = new FormData();
-      Request.append("Obj_Class_Entity_Usuario", JSON.stringify(Usuario));
-      Request.append("Obj_IFormFile", Imagen_Usuario_Input);
-
+      var E_Mail_Usuario_Alternative = $.trim($("#E_Mail_Usuario").val());
       jQuery.ajax({
-        // ? url: "@Url.Action("Staff_Controller_Usuario_Registrar", "Staff")",
-        url: "https://localhost:44381/Staff/Staff_Controller_Usuario_Registrar",
-        type: "POST",
-        data: Request,
-        processData: false,
-        contentType: false,
+        url:
+          "https://emailvalidation.abstractapi.com/v1/?api_key=b4e60d1d263944809648ac5b6aa14ec8&email=" +
+          E_Mail_Usuario_Alternative +
+          "",
+        type: "GET",
+        dataType: "json",
         success: function (data) {
           // debugger; // TODO: Punto de Depuración
 
-          $(".modal-body").LoadingOverlay("hide");
+          if (data.deliverability == "DELIVERABLE") {
+            var Request = new FormData();
+            Request.append("Obj_Class_Entity_Usuario", JSON.stringify(Usuario));
+            Request.append("Obj_IFormFile", Imagen_Usuario_Input);
 
-          if (data.iD_Auto_Generated != 0) {
-            $("#Form_Modal").modal("hide");
-            Table_Usuario.ajax.url(Url_01).load();
-            toastr.options = {
-              closeButton: true,
-              debug: false,
-              newestOnTop: true,
-              progressBar: true,
-              positionClass: "toast-bottom-center",
-              preventDuplicates: false,
-              onclick: null,
-              showDuration: "300",
-              hideDuration: "1000",
-              timeOut: "5000",
-              extendedTimeOut: "1000",
-              showEasing: "swing",
-              hideEasing: "linear",
-              showMethod: "fadeIn",
-              hideMethod: "fadeOut",
-            };
-            toastr["success"]("El Usuario ha sido Registrado", "\xc9xito:");
+            jQuery.ajax({
+              // ? url: "@Url.Action("Staff_Controller_Usuario_Registrar", "Staff")",
+              url: "https://localhost:44381/Staff/Staff_Controller_Usuario_Registrar",
+              type: "POST",
+              data: Request,
+              processData: false,
+              contentType: false,
+              success: function (data) {
+                // debugger; // TODO: Punto de Depuración
+
+                $(".modal-body").LoadingOverlay("hide");
+
+                if (data.iD_Auto_Generated != 0) {
+                  $("#Form_Modal").modal("hide");
+                  Table_Usuario.ajax.url(Url_01).load();
+                  toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    newestOnTop: true,
+                    progressBar: true,
+                    positionClass: "toast-bottom-center",
+                    preventDuplicates: false,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    timeOut: "5000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                  };
+                  toastr["success"](
+                    "El Usuario ha sido Registrado",
+                    "\xc9xito:"
+                  );
+                } else {
+                  toastr.options = {
+                    closeButton: true,
+                    debug: false,
+                    newestOnTop: true,
+                    progressBar: true,
+                    positionClass: "toast-bottom-center",
+                    preventDuplicates: false,
+                    onclick: null,
+                    showDuration: "300",
+                    hideDuration: "1000",
+                    timeOut: "5000",
+                    extendedTimeOut: "1000",
+                    showEasing: "swing",
+                    hideEasing: "linear",
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                  };
+                  toastr["error"](data.message, "Error:");
+                }
+              },
+              error: function (xhr, status, error) {
+                $(".modal-body").LoadingOverlay("hide");
+                alert(xhr.responseText);
+              },
+              beforeSend: function () {
+                $(".modal-body").LoadingOverlay("show", {
+                  background: "rgba(0, 0, 0, 0.5)",
+                  image: "../img/clock-regular.svg",
+                  imageAnimation: "1.5s fadein",
+                  imageAutoResize: true,
+                  imageResizeFactor: 1,
+                });
+              },
+            });
           } else {
-            toastr.options = {
-              closeButton: true,
-              debug: false,
-              newestOnTop: true,
-              progressBar: true,
-              positionClass: "toast-bottom-center",
-              preventDuplicates: false,
-              onclick: null,
-              showDuration: "300",
-              hideDuration: "1000",
-              timeOut: "5000",
-              extendedTimeOut: "1000",
-              showEasing: "swing",
-              hideEasing: "linear",
-              showMethod: "fadeIn",
-              hideMethod: "fadeOut",
-            };
-            toastr["error"](data.message, "Error:");
+            Swal.fire({
+              title: "Error",
+              text: "El Correo Electrónico Ingresado No Existe",
+              icon: "error",
+            });
           }
-        },
-        error: function (xhr, status, error) {
-          $(".modal-body").LoadingOverlay("hide");
-          alert(xhr.responseText);
-        },
-        beforeSend: function () {
-          $(".modal-body").LoadingOverlay("show", {
-            background: "rgba(0, 0, 0, 0.5)",
-            image: "../img/clock-regular.svg",
-            imageAnimation: "1.5s fadein",
-            imageAutoResize: true,
-            imageResizeFactor: 1,
-          });
         },
       });
     } else {
