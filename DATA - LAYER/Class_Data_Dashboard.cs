@@ -65,7 +65,9 @@ namespace DATA___LAYER
                                 Income_Year = Convert.ToInt32(Obj_SqlDataReader["Income_Year"]),
                                 Income_Month = Convert.ToInt32(Obj_SqlDataReader["Income_Month"]),
                                 Income_Month_Name = Obj_SqlDataReader["Income_Month_Name"].ToString(),
-                                Income_Number = Convert.ToInt32(Obj_SqlDataReader["Income_Number"])
+                                Income_Sum = Convert.ToDecimal(Obj_SqlDataReader["Income_Sum"]),
+                                Income_Number = Convert.ToInt32(Obj_SqlDataReader["Income_Number"]),
+                                Income_Datediff = Convert.ToInt32(Obj_SqlDataReader["Income_Datediff"])
                             });
                         }
                     }
@@ -100,7 +102,9 @@ namespace DATA___LAYER
                                 Exit_Year = Convert.ToInt32(Obj_SqlDataReader["Exit_Year"]),
                                 Exit_Month = Convert.ToInt32(Obj_SqlDataReader["Exit_Month"]),
                                 Exit_Month_Name = Obj_SqlDataReader["Exit_Month_Name"].ToString(),
-                                Exit_Number = Convert.ToInt32(Obj_SqlDataReader["Exit_Number"])
+                                Exit_Sum = Convert.ToDecimal(Obj_SqlDataReader["Exit_Sum"]),
+                                Exit_Number = Convert.ToInt32(Obj_SqlDataReader["Exit_Number"]),
+                                Exit_Datediff = Convert.ToInt32(Obj_SqlDataReader["Exit_Datediff"])
                             });
                         }
                     }
@@ -347,6 +351,7 @@ namespace DATA___LAYER
                                 Cantidad_Movimiento_Inventario = Convert.ToInt32(Obj_SqlDataReader["Cantidad_Movimiento_Inventario"].ToString()),
                                 Total_Transaction = Convert.ToDecimal(Obj_SqlDataReader["Total_Transaction"], new CultureInfo("es-PE")),
                                 Fecha_Movimiento_Inventario = Obj_SqlDataReader["Fecha_Movimiento_Inventario"].ToString(),
+                                ID_Usuario = Convert.ToInt32(Obj_SqlDataReader["ID_Usuario"].ToString()),
                                 Usuario_Transaction = Obj_SqlDataReader["Usuario_Transaction"].ToString()
                             });
                         }

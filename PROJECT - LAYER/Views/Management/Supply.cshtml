@@ -1,5 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Supply";
+    ViewData["ID_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("ID_Usuario_String");
+    ViewData["ID_Tipo_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("ID_Tipo_Usuario_String");
     ViewData["Nombre_Apellido_Usuario_String"] =
     this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
     ViewData["E_Mail_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("E_Mail_Usuario_String");
@@ -8,7 +10,7 @@
 
 <div class="card">
     <div class="card-header">
-        <i class="fa-solid fa-a fa-2xl"></i>&nbsp;&nbsp;Insumos Registrados
+        <i class="fa-solid fa-utensils fa-2xl"></i>&nbsp;&nbsp;Insumos Registrados
     </div>
     <div class="card-body">
         <div class="row align-items-end">
@@ -151,6 +153,10 @@
                 </table>
             </div>
             <div class="modal-footer">
+                <form asp-area="" asp-controller="Home" asp-action="Report_04">
+                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-file-pdf"></i>&nbsp;&nbsp;Generar
+                        Reporte</button>
+                </form>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>

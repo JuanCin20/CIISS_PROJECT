@@ -195,9 +195,7 @@ function Show_Supply(ID_Categoria_Insumo, ID_Proveedor_Insumo) {
                           .text(element.nombre_Insumo),
                         $("<p>")
                           .addClass("card-text")
-                          .text(
-                            "S/. " + element.precio_Insumo.toFixed(2)
-                          )
+                          .text("S/. " + element.precio_Insumo.toFixed(2))
                       )
                   ),
                 $("<div>")
@@ -505,7 +503,15 @@ $(document).on("click", ".Button_Plus", function () {
       $(Button_Plus).LoadingOverlay("hide");
 
       if (data.result) {
-        var Input_Quantity_Alternative = parseInt($(Input_Quantity).val()) + 1;
+        if (data.message != "") {
+          Swal.fire({
+            title: "Advertencia",
+            text: data.message,
+            icon: "warning",
+          });
+        }
+        var Input_Quantity_Alternative =
+          parseInt($(Input_Quantity).val()) + 100;
         $(Input_Quantity).val(Input_Quantity_Alternative);
         Monto_Total_Movimiento_Inventario();
       } else {
@@ -527,7 +533,7 @@ $(document).on("click", ".Button_Less", function () {
   var Input_Quantity = $(Display_Flex).find("input.Input_Quantity");
   var Button_Plus = $(this);
   var ID_Insumo = $(Input_Quantity).data("Obj_Class_Entity_Insumo").iD_Insumo;
-  var Input_Quantity_Alternative = parseInt($(Input_Quantity).val()) - 1;
+  var Input_Quantity_Alternative = parseInt($(Input_Quantity).val()) - 100;
 
   if (Input_Quantity_Alternative >= 1) {
     jQuery.ajax({
@@ -729,9 +735,7 @@ function Confirm() {
         direccion_Movimiento_Inventario: $(
           "#Direccion_Movimiento_Inventario"
         ).val(),
-        obj_Class_Entity_Distrito: {
-          iD_Distrito: $("#ID_Distrito").val(),
-        },
+        iD_Distrito: $("#ID_Distrito").val(),
       };
 
       var Obj_List_Class_Entity_Middle = [];
@@ -757,7 +761,7 @@ function Confirm() {
         },
         success: function (data) {
           $("body").LoadingOverlay("hide");
-          if (data.result) { 
+          if (data.result) {
             Swal.fire({
               allowOutsideClick: false,
               title: "Confirmaci\xf3n",

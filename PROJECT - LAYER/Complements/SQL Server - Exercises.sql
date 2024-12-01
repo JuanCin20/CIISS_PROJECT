@@ -616,6 +616,8 @@ SELECT
 			COUNT(*)
 		FROM
 			Tabla_Movimiento_Inventario
+		WHERE
+			Tipo_Movimiento_Inventario = 'Salida'
 	) AS [Tabla_Movimiento_Inventario],
 	(
 		SELECT
@@ -665,28 +667,24 @@ SET
 	);
 
 SELECT
-	*
+	YEAR(Fecha_Movimiento_Inventario) AS [Income_Year],
+	MONTH(Fecha_Movimiento_Inventario) AS [Income_Month],
+	DATENAME(MONTH, Fecha_Movimiento_Inventario) AS [Income_Month_Name],
+	SUM(Monto_Total_Movimiento_Inventario) AS [Income_Sum],
+	COUNT(*) AS [Income_Number],
+	DATEDIFF(DAY, @Min_Date, @Max_Date) AS [Income_Datediff]
 FROM
-	(
-		SELECT
-			TOP 6 Fecha_Movimiento_Inventario AS [Fecha_Movimiento_Inventario],
-			YEAR(Fecha_Movimiento_Inventario) AS [Income_Year],
-			MONTH(Fecha_Movimiento_Inventario) AS [Income_Month],
-			DATENAME(MONTH, Fecha_Movimiento_Inventario) AS [Income_Month_Name],
-			COUNT(*) AS [Income_Number]
-		FROM
-			Tabla_Movimiento_Inventario
-		WHERE
-			Tipo_Movimiento_Inventario = 'Entrada'
-			AND Fecha_Movimiento_Inventario BETWEEN @Min_Date
-			AND @Max_Date
-		GROUP BY
-			Fecha_Movimiento_Inventario
-		ORDER BY
-			Fecha_Movimiento_Inventario DESC
-	) TMI
+	Tabla_Movimiento_Inventario
+WHERE
+	Tipo_Movimiento_Inventario = 'Entrada'
+	AND Fecha_Movimiento_Inventario BETWEEN @Min_Date
+	AND @Max_Date
+GROUP BY
+	YEAR(Fecha_Movimiento_Inventario),
+	MONTH(Fecha_Movimiento_Inventario),
+	DATENAME(MONTH, Fecha_Movimiento_Inventario)
 ORDER BY
-	[Fecha_Movimiento_Inventario] ASC
+	YEAR(Fecha_Movimiento_Inventario) ASC
 END;
 
 ----EXECUTE SP_CHART_01;
@@ -717,28 +715,24 @@ SET
 	);
 
 SELECT
-	*
+	YEAR(Fecha_Movimiento_Inventario) AS [Exit_Year],
+	MONTH(Fecha_Movimiento_Inventario) AS [Exit_Month],
+	DATENAME(MONTH, Fecha_Movimiento_Inventario) AS [Exit_Month_Name],
+	SUM(Monto_Total_Movimiento_Inventario) AS [Exit_Sum],
+	COUNT(*) AS [Exit_Number],
+	DATEDIFF(DAY, @Min_Date, @Max_Date) AS [Exit_Datediff]
 FROM
-	(
-		SELECT
-			TOP 6 Fecha_Movimiento_Inventario AS [Fecha_Movimiento_Inventario],
-			YEAR(Fecha_Movimiento_Inventario) AS [Exit_Year],
-			MONTH(Fecha_Movimiento_Inventario) AS [Exit_Month],
-			DATENAME(MONTH, Fecha_Movimiento_Inventario) AS [Exit_Month_Name],
-			COUNT(*) AS [Exit_Number]
-		FROM
-			Tabla_Movimiento_Inventario
-		WHERE
-			Tipo_Movimiento_Inventario = 'Salida'
-			AND Fecha_Movimiento_Inventario BETWEEN @Min_Date
-			AND @Max_Date
-		GROUP BY
-			Fecha_Movimiento_Inventario
-		ORDER BY
-			Fecha_Movimiento_Inventario DESC
-	) TMI
+	Tabla_Movimiento_Inventario
+WHERE
+	Tipo_Movimiento_Inventario = 'Salida'
+	AND Fecha_Movimiento_Inventario BETWEEN @Min_Date
+	AND @Max_Date
+GROUP BY
+	YEAR(Fecha_Movimiento_Inventario),
+	MONTH(Fecha_Movimiento_Inventario),
+	DATENAME(MONTH, Fecha_Movimiento_Inventario)
 ORDER BY
-	[Fecha_Movimiento_Inventario] ASC
+	YEAR(Fecha_Movimiento_Inventario) ASC
 END;
 
 ----EXECUTE SP_CHART_02;
@@ -877,6 +871,7 @@ SET
 SELECT
 	TMI.ID_Movimiento_Inventario,
 	TMI.Tipo_Movimiento_Inventario,
+	TU.ID_Usuario AS [ID_Usuario],
 	CONCAT (TU.Nombre_Usuario, ' ', TU.Apellido_Usuario) AS [Usuario_Transaction],
 	TCI.Nombre_Categoria_Insumo AS [Nombre_Categoria_Insumo_02],
 	TPI.Nombre_Proveedor_Insumo AS [Nombre_Proveedor_Insumo_02],
@@ -907,8 +902,8 @@ WHERE
 	)
 END;
 
-----DECLARE @Initial_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-11-23';
-----DECLARE @Final_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-11-23';
+----DECLARE @Initial_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-01-01';
+----DECLARE @Final_Fecha_Movimiento_Inventario VARCHAR(10) = '2024-11-30';
 ----DECLARE @ID_Movimiento_Inventario INT = 0;
 ----EXECUTE SP_TRANSACTION_REPORT @Initial_Fecha_Movimiento_Inventario, @Final_Fecha_Movimiento_Inventario, @ID_Movimiento_Inventario;
 GO
@@ -1118,11 +1113,11 @@ SET
 			Tabla_Insumo
 		WHERE
 			ID_Insumo = @ID_Insumo
-	) BEGIN TRY BEGIN TRANSACTION OPERATION IF(@Boolean_Operation = 1) BEGIN IF(@Stock_Insumo > 0) BEGIN IF(@Exists_Middle = 1)
+	) BEGIN TRY BEGIN TRANSACTION OPERATION_01 IF(@Boolean_Operation = 1) BEGIN IF(@Stock_Insumo > 0) BEGIN IF(@Exists_Middle = 1)
 UPDATE
 	Tabla_Middle
 SET
-	Cantidad_Insumo_Middle = Cantidad_Insumo_Middle + 1
+	Cantidad_Insumo_Middle = Cantidad_Insumo_Middle + 100
 WHERE
 	ID_Usuario = @ID_Usuario
 	AND ID_Insumo = @ID_Insumo
@@ -1130,13 +1125,15 @@ WHERE
 INSERT INTO
 	Tabla_Middle(ID_Usuario, ID_Insumo, Cantidad_Insumo_Middle)
 VALUES
-	(@ID_Usuario, @ID_Insumo, 1)
+	(@ID_Usuario, @ID_Insumo, 100)
 UPDATE
 	Tabla_Insumo
 SET
-	Stock_Insumo = Stock_Insumo - 1
+	Stock_Insumo = Stock_Insumo - 100
 WHERE
-	ID_Insumo = @ID_Insumo
+	ID_Insumo = @ID_Insumo IF(@Stock_Insumo <= 2000)
+SET
+	@Message = 'Stock Restante: ' + CAST(@Stock_Insumo - 100 AS VARCHAR(20)) + ' Unidades'
 END
 ELSE BEGIN
 SET
@@ -1149,22 +1146,89 @@ ELSE BEGIN
 UPDATE
 	Tabla_Middle
 SET
-	Cantidad_Insumo_Middle = Cantidad_Insumo_Middle - 1
+	Cantidad_Insumo_Middle = Cantidad_Insumo_Middle - 100
 WHERE
 	ID_Usuario = @ID_Usuario
 	AND ID_Insumo = @ID_Insumo
 UPDATE
 	Tabla_Insumo
 SET
-	Stock_Insumo = Stock_Insumo + 1
+	Stock_Insumo = Stock_Insumo + 100
 WHERE
 	ID_Insumo = @ID_Insumo
-END COMMIT TRANSACTION OPERATION
+END COMMIT TRANSACTION OPERATION_01
 END TRY BEGIN CATCH
 SET
 	@Result = 0
 SET
-	@Message = ERROR_MESSAGE() ROLLBACK TRANSACTION OPERATION
+	@Message = ERROR_MESSAGE() ROLLBACK TRANSACTION OPERATION_01
+END CATCH
+END;
+
+GO
+	CREATE
+	OR ALTER PROCEDURE SP_MIDDLE_CREATE_UPDATE_ALTERNATIVE(
+		@ID_Usuario INT,
+		@ID_Insumo INT,
+		@Boolean_Operation BIT,
+		@Message VARCHAR (500) OUTPUT,
+		@Result BIT OUTPUT
+	) AS BEGIN
+SET
+	@Result = 1
+SET
+	@Message = '' DECLARE @Exists_Middle BIT = IIF(
+		EXISTS(
+			SELECT
+				*
+			FROM
+				Tabla_Middle
+			WHERE
+				ID_Usuario = @ID_Usuario
+				AND ID_Insumo = @ID_Insumo
+		),
+		1,
+		0
+	) BEGIN TRY BEGIN TRANSACTION OPERATION_02 IF(@Boolean_Operation = 1) BEGIN IF(@Exists_Middle = 1)
+UPDATE
+	Tabla_Middle
+SET
+	Cantidad_Insumo_Middle = Cantidad_Insumo_Middle + 100
+WHERE
+	ID_Usuario = @ID_Usuario
+	AND ID_Insumo = @ID_Insumo
+	ELSE
+INSERT INTO
+	Tabla_Middle(ID_Usuario, ID_Insumo, Cantidad_Insumo_Middle)
+VALUES
+	(@ID_Usuario, @ID_Insumo, 100)
+UPDATE
+	Tabla_Insumo
+SET
+	Stock_Insumo = Stock_Insumo + 100
+WHERE
+	ID_Insumo = @ID_Insumo
+END
+ELSE BEGIN
+UPDATE
+	Tabla_Middle
+SET
+	Cantidad_Insumo_Middle = Cantidad_Insumo_Middle - 100
+WHERE
+	ID_Usuario = @ID_Usuario
+	AND ID_Insumo = @ID_Insumo
+UPDATE
+	Tabla_Insumo
+SET
+	Stock_Insumo = Stock_Insumo - 100
+WHERE
+	ID_Insumo = @ID_Insumo
+END COMMIT TRANSACTION OPERATION_02
+END TRY BEGIN CATCH
+SET
+	@Result = 0
+SET
+	@Message = ERROR_MESSAGE() ROLLBACK TRANSACTION OPERATION_02
 END CATCH
 END;
 
@@ -1185,7 +1249,7 @@ GO
 			INNER JOIN Tabla_Proveedor_Insumo TPI ON TPI.ID_Proveedor_Insumo = TI.ID_Proveedor_Insumo
 		WHERE
 			TM.ID_Usuario = @ID_Usuario
-	) ----SELECT * FROM FN_MIDDLE_LIST(1)
+	) ----SELECT * FROM FN_MIDDLE_LIST(53)
 GO
 	CREATE
 	OR ALTER PROCEDURE SP_MIDDLE_DELETE(
@@ -1202,7 +1266,7 @@ SET
 		WHERE
 			ID_Usuario = @ID_Usuario
 			AND ID_Insumo = @ID_Insumo
-	) BEGIN TRY BEGIN TRANSACTION OPERATION
+	) BEGIN TRY BEGIN TRANSACTION OPERATION_01
 UPDATE
 	Tabla_Insumo
 SET
@@ -1213,89 +1277,123 @@ FROM
 	Tabla_Middle
 WHERE
 	ID_Usuario = @ID_Usuario
-	AND ID_Insumo = @ID_Insumo COMMIT TRANSACTION OPERATION
+	AND ID_Insumo = @ID_Insumo COMMIT TRANSACTION OPERATION_01
 END TRY BEGIN CATCH
 SET
-	@Result = 0 ROLLBACK TRANSACTION OPERATION
+	@Result = 0 ROLLBACK TRANSACTION OPERATION_01
 END CATCH
 END;
-
-/**/
-/**/
-/**/
-/**/
-/**/
-CREATE TYPE Tabla_Detalle_Movimiento_Inventario AS TABLE (
-	ID_Insumo INT NULL,
-	Cantidad_Insumo_Detalle_Movimiento_Inventario INT NULL,
-	Monto_Total_Detalle_Movimiento_Inventario DECIMAL (10, 2) NULL
-);
 
 GO
 	CREATE
-	OR ALTER PROCEDURE SP_TRANSACTION_CREATE(
+	OR ALTER PROCEDURE SP_MIDDLE_DELETE_ALTERNATIVE(
 		@ID_Usuario INT,
-		@Tipo_Movimiento_Inventario VARCHAR (10),
-		@Cantidad_Insumo_Movimiento_Inventario INT,
-		@Monto_Total_Movimiento_Inventario DECIMAL (10, 2),
-		@Restaurante_Movimiento_Inventario VARCHAR (50),
-		@Telefono_Movimiento_Inventario INT,
-		@Direccion_Movimiento_Inventario VARCHAR (150),
-		@ID_Distrito INT,
-		@Tabla_Detalle_Movimiento_Inventario Tabla_Detalle_Movimiento_Inventario READONLY,
-		@Message VARCHAR (500) OUTPUT,
+		@ID_Insumo INT,
 		@Result BIT OUTPUT
-	) AS BEGIN BEGIN TRY DECLARE @ID_Movimiento_Inventario INT = 0
+	) AS BEGIN
 SET
-	@Message = ''
+	@Result = 1 DECLARE @Cantidad_Insumo_Middle INT = (
+		SELECT
+			Cantidad_Insumo_Middle
+		FROM
+			Tabla_Middle
+		WHERE
+			ID_Usuario = @ID_Usuario
+			AND ID_Insumo = @ID_Insumo
+	) BEGIN TRY BEGIN TRANSACTION OPERATION_02
+UPDATE
+	Tabla_Insumo
 SET
-	@Result = 1 BEGIN TRANSACTION REGISTER
-INSERT INTO
-	Tabla_Movimiento_Inventario (
-		ID_Usuario,
-		Tipo_Movimiento_Inventario,
-		Cantidad_Insumo_Movimiento_Inventario,
-		Monto_Total_Movimiento_Inventario,
-		Restaurante_Movimiento_Inventario,
-		Telefono_Movimiento_Inventario,
-		Direccion_Movimiento_Inventario,
-		ID_Distrito
-	)
-VALUES
-	(
-		@ID_Usuario,
-		@Tipo_Movimiento_Inventario,
-		@Cantidad_Insumo_Movimiento_Inventario,
-		@Monto_Total_Movimiento_Inventario,
-		@Restaurante_Movimiento_Inventario,
-		@Telefono_Movimiento_Inventario,
-		@Direccion_Movimiento_Inventario,
-		@ID_Distrito
-	)
-SET
-	@ID_Movimiento_Inventario = SCOPE_IDENTITY()
-INSERT INTO
-	Tabla_Detalle_Movimiento_Inventario(
-		ID_Movimiento_Inventario,
-		ID_Insumo,
-		Cantidad_Insumo_Detalle_Movimiento_Inventario,
-		Monto_Total_Detalle_Movimiento_Inventario
-	)
-SELECT
-	@ID_Movimiento_Inventario,
-	ID_Insumo,
-	Cantidad_Insumo_Detalle_Movimiento_Inventario,
-	Monto_Total_Detalle_Movimiento_Inventario
+	Stock_Insumo = Stock_Insumo - @Cantidad_Insumo_Middle
+WHERE
+	ID_Insumo = @ID_Insumo DELETE TOP (1)
 FROM
-	@Tabla_Detalle_Movimiento_Inventario
-DELETE FROM
 	Tabla_Middle
 WHERE
-	ID_Usuario = @ID_Usuario COMMIT TRANSACTION REGISTER
+	ID_Usuario = @ID_Usuario
+	AND ID_Insumo = @ID_Insumo COMMIT TRANSACTION OPERATION_02
 END TRY BEGIN CATCH
 SET
-	@Message = ERROR_MESSAGE()
-SET
-	@Result = 0 ROLLBACK TRANSACTION REGISTER
+	@Result = 0 ROLLBACK TRANSACTION OPERATION_02
 END CATCH
 END;
+
+/**/
+/**/
+/**/
+/**/
+/**/
+/*CREATE TYPE Tabla_Detalle_Movimiento_Inventario AS TABLE (
+ ID_Insumo INT NULL,
+ Cantidad_Insumo_Detalle_Movimiento_Inventario INT NULL,
+ Monto_Total_Detalle_Movimiento_Inventario DECIMAL (10, 2) NULL
+ );
+ 
+ GO
+ CREATE
+ OR ALTER PROCEDURE SP_TRANSACTION_CREATE(
+ @ID_Usuario INT,
+ @Tipo_Movimiento_Inventario VARCHAR (10),
+ @Cantidad_Insumo_Movimiento_Inventario INT,
+ @Monto_Total_Movimiento_Inventario DECIMAL (10, 2),
+ @Restaurante_Movimiento_Inventario VARCHAR (50),
+ @Telefono_Movimiento_Inventario INT,
+ @Direccion_Movimiento_Inventario VARCHAR (150),
+ @ID_Distrito INT,
+ @Tabla_Detalle_Movimiento_Inventario Tabla_Detalle_Movimiento_Inventario READONLY,
+ @Message VARCHAR (500) OUTPUT,
+ @Result BIT OUTPUT
+ ) AS BEGIN BEGIN TRY DECLARE @ID_Movimiento_Inventario INT = 0
+ SET
+ @Message = ''
+ SET
+ @Result = 1 BEGIN TRANSACTION REGISTER
+ INSERT INTO
+ Tabla_Movimiento_Inventario (
+ ID_Usuario,
+ Tipo_Movimiento_Inventario,
+ Cantidad_Insumo_Movimiento_Inventario,
+ Monto_Total_Movimiento_Inventario,
+ Restaurante_Movimiento_Inventario,
+ Telefono_Movimiento_Inventario,
+ Direccion_Movimiento_Inventario,
+ ID_Distrito
+ )
+ VALUES
+ (
+ @ID_Usuario,
+ @Tipo_Movimiento_Inventario,
+ @Cantidad_Insumo_Movimiento_Inventario,
+ @Monto_Total_Movimiento_Inventario,
+ @Restaurante_Movimiento_Inventario,
+ @Telefono_Movimiento_Inventario,
+ @Direccion_Movimiento_Inventario,
+ @ID_Distrito
+ )
+ SET
+ @ID_Movimiento_Inventario = SCOPE_IDENTITY()
+ INSERT INTO
+ Tabla_Detalle_Movimiento_Inventario(
+ ID_Movimiento_Inventario,
+ ID_Insumo,
+ Cantidad_Insumo_Detalle_Movimiento_Inventario,
+ Monto_Total_Detalle_Movimiento_Inventario
+ )
+ SELECT
+ @ID_Movimiento_Inventario,
+ ID_Insumo,
+ Cantidad_Insumo_Detalle_Movimiento_Inventario,
+ Monto_Total_Detalle_Movimiento_Inventario
+ FROM
+ @Tabla_Detalle_Movimiento_Inventario
+ DELETE FROM
+ Tabla_Middle
+ WHERE
+ ID_Usuario = @ID_Usuario COMMIT TRANSACTION REGISTER
+ END TRY BEGIN CATCH
+ SET
+ @Message = ERROR_MESSAGE()
+ SET
+ @Result = 0 ROLLBACK TRANSACTION REGISTER
+ END CATCH
+ END;*/

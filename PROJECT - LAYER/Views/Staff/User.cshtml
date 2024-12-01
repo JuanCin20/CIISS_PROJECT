@@ -1,5 +1,7 @@
 ﻿@{
     ViewData["Title"] = "User";
+    ViewData["ID_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("ID_Usuario_String");
+    ViewData["ID_Tipo_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("ID_Tipo_Usuario_String");
     ViewData["Nombre_Apellido_Usuario_String"] =
     this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
     ViewData["E_Mail_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("E_Mail_Usuario_String");
@@ -8,7 +10,7 @@
 
 <div class="card">
     <div class="card-header">
-        <i class="fa-solid fa-x fa-2xl"></i>&nbsp;&nbsp;Usuarios Registrados
+        <i class="fa-solid fa-users fa-2xl"></i>&nbsp;&nbsp;Usuarios Registrados
     </div>
     <div class="card-body">
         <div class="row align-items-end">

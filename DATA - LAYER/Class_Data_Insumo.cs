@@ -50,7 +50,7 @@ namespace DATA___LAYER
                                 Fecha_Registro_Insumo = Obj_SqlDataReader["Fecha_Registro_Insumo"].ToString(),
                                 Fecha_Vencimiento_Insumo = Obj_SqlDataReader["Fecha_Vencimiento_Insumo"].ToString(),
                                 Ruta_Imagen_Insumo = Obj_SqlDataReader["Ruta_Imagen_Insumo"].ToString(),
-                                Nombre_Imagen_Insumo = Obj_SqlDataReader["Nombre_Imagen_Insumo"].ToString()
+                                Nombre_Imagen_Insumo = Obj_SqlDataReader["Nombre_Imagen_Insumo"].ToString(),
                             });
                         }
                     }

@@ -489,10 +489,6 @@
       "PackagePath": "staticwebassets\\Supply_Images\\212.png"
     },
     {
-      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\Supply_Images\\213.png",
-      "PackagePath": "staticwebassets\\Supply_Images\\213.png"
-    },
-    {
       "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\Supply_Images\\22.png",
       "PackagePath": "staticwebassets\\Supply_Images\\22.png"
     },
@@ -853,16 +849,16 @@
       "PackagePath": "staticwebassets\\css\\Extra.css"
     },
     {
-      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\css\\Style.css",
-      "PackagePath": "staticwebassets\\css\\Style.css"
-    },
-    {
       "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\img\\Report_Image.png",
+      "PackagePath": "staticwebassets\\img\\Report_Image.png"
     },
     {
       "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\img\\clock-regular.svg",
@@ -907,6 +903,10 @@
     {
       "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\Transaction.js",
       "PackagePath": "staticwebassets\\js\\Transaction.js"
+    },
+    {
+      "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\Transaction_Alternative.js",
+      "PackagePath": "staticwebassets\\js\\Transaction_Alternative.js"
     },
     {
       "Id": "E:\\JuanCin20\\DATA\\CIISS - INVENTORY MANAGEMENT\\CIISS - INVENTORY MANAGEMENT\\PROJECT - LAYER\\wwwroot\\js\\User.js",

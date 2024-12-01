@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Index";
     ViewData["ID_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("ID_Usuario_String");
+    ViewData["ID_Tipo_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("ID_Tipo_Usuario_String");
     ViewData["Nombre_Apellido_Usuario_String"] =
     this.ViewContext.HttpContext.Session.GetString("Nombre_Apellido_Usuario_String");
     ViewData["E_Mail_Usuario_String"] = this.ViewContext.HttpContext.Session.GetString("E_Mail_Usuario_String");
@@ -31,67 +32,138 @@
                             </div>
                         </div>
 
-                        <!-- Delivery Detail -->
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body bg-light">
-                                    <h5 class="card-title">Detalles del Envío</h5>
-                                    <form id="Form_Delivery" class="needs-validation" novalidate>
-                                        <div class="mb-2">
-                                            <label for="ID_Departamento" class="form-label">Departamento:</label>
-                                            <select class="form-select form-select-sm" id="ID_Departamento"
-                                                name="ID_Departamento"></select>
-                                        </div>
-                                        <div class="mb-2">
-                                            <label for="ID_Provincia" class="form-label">Provincia:</label>
-                                            <select class="form-select form-select-sm" id="ID_Provincia"
-                                                name="ID_Provincia"></select>
-                                        </div>
-                                        <div class="mb-2">
-                                            <label for="ID_Distrito" class="form-label">Distrito:</label>
-                                            <select class="form-select form-select-sm" id="ID_Distrito"
-                                                name="ID_Distrito"></select>
-                                        </div>
-                                        <div class="mb-2">
-                                            <label for="Restaurante_Movimiento_Inventario"
-                                                class="form-label">Restaurante:</label>
-                                            <input type="text" class="form-control form-control-sm"
-                                                id="Restaurante_Movimiento_Inventario"
-                                                name="Restaurante_Movimiento_Inventario" placeholder="Nombre Completo"
-                                                autocomplete="off" />
-                                        </div>
-                                        <div class="mb-2">
-                                            <label for="Direccion_Movimiento_Inventario"
-                                                class="form-label">Dirección:</label>
-                                            <input type="text" class="form-control form-control-sm"
-                                                id="Direccion_Movimiento_Inventario"
-                                                name="Direccion_Movimiento_Inventario" placeholder="Dirección"
-                                                autocomplete="off" />
-                                        </div>
-                                        <div class="mb-2">
-                                            <label for="Telefono_Movimiento_Inventario"
-                                                class="form-label">Teléfono:</label>
-                                            <input type="number" class="form-control form-control-sm"
-                                                id="Telefono_Movimiento_Inventario"
-                                                name="Telefono_Movimiento_Inventario" placeholder="Teléfono"
-                                                autocomplete="off" />
-                                        </div>
-                                        <div class="d-grid">
-                                            <button class="btn btn-success" type="submit" onclick="Confirm()">
-                                                <i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;Confirmar
-                                            </button>
-                                        </div>
-                                    </form>
+                        @if (User.IsInRole("Empleado"))
+                        {
+                            <!-- Delivery Detail -->
+                            <div class="col-sm-3">
+                                <div class="card">
+                                    <div class="card-body bg-light">
+                                        <h5 class="card-title">Detalles del Envío</h5>
+                                        <form id="Form_Delivery" class="needs-validation" novalidate>
+                                            <div class="mb-2">
+                                                <label for="ID_Departamento" class="form-label">Departamento:</label>
+                                                <select class="form-select form-select-sm" id="ID_Departamento"
+                                                    name="ID_Departamento"></select>
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="ID_Provincia" class="form-label">Provincia:</label>
+                                                <select class="form-select form-select-sm" id="ID_Provincia"
+                                                    name="ID_Provincia"></select>
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="ID_Distrito" class="form-label">Distrito:</label>
+                                                <select class="form-select form-select-sm" id="ID_Distrito"
+                                                    name="ID_Distrito"></select>
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="Restaurante_Movimiento_Inventario"
+                                                    class="form-label">Restaurante:</label>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    id="Restaurante_Movimiento_Inventario"
+                                                    name="Restaurante_Movimiento_Inventario" placeholder="Nombre Completo"
+                                                    autocomplete="off" />
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="Direccion_Movimiento_Inventario"
+                                                    class="form-label">Dirección:</label>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    id="Direccion_Movimiento_Inventario"
+                                                    name="Direccion_Movimiento_Inventario" placeholder="Dirección"
+                                                    autocomplete="off" />
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="Telefono_Movimiento_Inventario"
+                                                    class="form-label">Teléfono:</label>
+                                                <input type="number" class="form-control form-control-sm"
+                                                    id="Telefono_Movimiento_Inventario"
+                                                    name="Telefono_Movimiento_Inventario" placeholder="Teléfono"
+                                                    autocomplete="off" />
+                                            </div>
+                                            <div class="d-grid">
+                                                <button class="btn btn-success" type="submit" onclick="Confirm()">
+                                                    <i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;Confirmar
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
+
+                        @if (User.IsInRole("Administrador"))
+                        {
+                            <!-- Delivery Detail -->
+                            <div class="col-sm-3">
+                                <div class="card">
+                                    <div class="card-body bg-light">
+                                        <h5 class="card-title">Detalles del Envío</h5>
+                                        <form id="Form_Delivery" class="needs-validation" novalidate>
+                                            <div class="mb-2">
+                                                <label for="ID_Departamento" class="form-label">Departamento:</label>
+                                                <select class="form-select form-select-sm" id="ID_Departamento"
+                                                    name="ID_Departamento" disabled>
+                                                </select>
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="ID_Provincia" class="form-label">Provincia:</label>
+                                                <select class="form-select form-select-sm" id="ID_Provincia"
+                                                    name="ID_Provincia" disabled>
+                                                </select>
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="ID_Distrito" class="form-label">Distrito:</label>
+                                                <select class="form-select form-select-sm" id="ID_Distrito"
+                                                    name="ID_Distrito" disabled>
+                                                </select>
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="Restaurante_Movimiento_Inventario"
+                                                    class="form-label">Restaurante:</label>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    id="Restaurante_Movimiento_Inventario"
+                                                    name="Restaurante_Movimiento_Inventario" placeholder="Nombre Completo"
+                                                    autocomplete="off" disabled />
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="Direccion_Movimiento_Inventario"
+                                                    class="form-label">Dirección:</label>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    id="Direccion_Movimiento_Inventario"
+                                                    name="Direccion_Movimiento_Inventario" placeholder="Dirección"
+                                                    autocomplete="off" disabled />
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="Telefono_Movimiento_Inventario"
+                                                    class="form-label">Teléfono:</label>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    id="Telefono_Movimiento_Inventario"
+                                                    name="Telefono_Movimiento_Inventario" placeholder="Teléfono"
+                                                    autocomplete="off" disabled />
+                                            </div>
+                                            <div class="d-grid">
+                                                <button class="btn btn-success" type="submit" onclick="Confirm()">
+                                                    <i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;Confirmar
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 @section Java_Script {
-    <script src="~/js/Transaction.js" asp-append-version="true"></script>
+    @if ((string)ViewData["ID_Tipo_Usuario_String"] == "2")
+    {
+        <script src="~/js/Transaction.js" asp-append-version="true"></script>
+    }
+
+    @if ((string)ViewData["ID_Tipo_Usuario_String"] == "1")
+    {
+        <script src="~/js/Transaction_Alternative.js" asp-append-version="true"></script>
+    }
 }

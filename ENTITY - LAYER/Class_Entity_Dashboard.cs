@@ -12,13 +12,17 @@
         public int Income_Year { get; set; }
         public int Income_Month { get; set; }
         public string Income_Month_Name { get; set; }
+        public decimal Income_Sum { get; set; }
         public int Income_Number { get; set; }
+        public int Income_Datediff { get; set; }
 
         /*SP_CHART_02*/
         public int Exit_Year { get; set; }
         public int Exit_Month { get; set; }
         public string Exit_Month_Name { get; set; }
+        public decimal Exit_Sum { get; set; }
         public int Exit_Number { get; set; }
+        public int Exit_Datediff { get; set; }
 
         /*SP_CHART_03*/
         public string Nombre_Categoria_Insumo { get; set; }
@@ -62,6 +66,7 @@
         public int Cantidad_Movimiento_Inventario { get; set; }
         public decimal Total_Transaction { get; set; }
         public string Fecha_Movimiento_Inventario { get; set; }
+        public int ID_Usuario { get; set; }
         public string Usuario_Transaction { get; set; }
     }
 }
